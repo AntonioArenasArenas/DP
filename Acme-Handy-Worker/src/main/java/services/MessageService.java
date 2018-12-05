@@ -119,7 +119,7 @@ public class MessageService {
 
 		if (box.getName() == TrashBox.getName()) {
 
-			if (boxService.findBoxesWhithMessage(message).isEmpty()) {
+			if (boxService.findBoxesWithMessage(message).isEmpty()) {
 
 				messageRepository.delete(message);
 			}
