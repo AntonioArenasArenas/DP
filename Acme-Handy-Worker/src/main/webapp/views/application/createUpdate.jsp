@@ -1,5 +1,5 @@
 <%--
- * action-1.jsp
+ * action-2.jsp
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -18,23 +18,27 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<!-- Otros taglib utiles son tiles para textos en tiles y fmt para fechas -->
 
 <p>
-	<spring:message code="application.list.1" />
-	${ticker}
+	<spring:message code="applications.update.1" />
+	${id}
 </p>
-<display:table name="applications" id="row"
-	requestURI="application/customer/list.do?taskId=${taskId}"
-	pagesize="${pagination}" class="displaytag">
 
-	<display:column property="worker" titleKey="applications.list.worker" />
-	<display:column property="offeredPrize"
-		titleKey="applications.list.price" />
-	<display:column titleKey="applications.list.edit">
-		<a href="application/customer/edit.do?applicationId=${row.id}"> <spring:message
-				code="application.list.update" />
-		</a>
-	</display:column>
+<p>
+	<spring:message code="applications.update.date" />
+	${moment}
+</p>
+<p>
+	<spring:message code="applications.list.price" />
+	${offeredPrize}
+</p>
+<p>
+	<spring:message code="applications.update.comments" />
+	${comments}
+</p>
+<form:form modelAttribute="application" action="application/customer/edit.do"></form:form>
+<p>
+	<spring:message code="applications.update.status" />
+</p>
 
-</display:table>
+
