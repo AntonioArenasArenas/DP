@@ -1,24 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- 
- * tiles.xml
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * tiles.xml * * Copyright (C) 2018 Universidad de Sevilla * * The use 
+	of this project is hereby constrained to the conditions of the * TDG Licence, 
+	a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-       
+
 <tiles-definitions>
 
-	<definition name="application/list" extends="master.page">	
+	<definition name="application/list" extends="master.page">
 		<put-attribute name="title" value="Application list" />
-		<put-attribute name="body" value="/views/application/applications-list.jsp" />
+		<put-attribute name="body" value="/views/application/list.jsp" />
 	</definition>
-	
+
+	<definition name="application/show" extends="master.page">
+		<put-attribute name="title" value="Application details" />
+		<put-attribute name="body" value="/views/application/showUpdate.jsp" />
+	</definition>
+
+	<definition name="application/update" extends="master.page">
+		<put-attribute name="title" value="Application update" />
+		<put-attribute name="body" value="/views/application/showUpdate.jsp" />
+	</definition>
+
+	<definition name="application/updateCreditCard" extends="master.page">
+		<put-attribute name="title" value="Insert CreditCard" />
+		<put-attribute name="body"
+			value="/views/application/updateCreditCard.jsp" />
+	</definition>
+
+	<definition name="application/listWorker" extends="master.page">
+		<put-attribute name="title" value="Application list" />
+		<put-attribute name="body" value="/views/application/list-worker.jsp" />
+	</definition>
+
+
+	<definition name="application/create" extends="master.page">
+		<put-attribute name="title" value="Create application" />
+		<put-attribute name="body" value="/views/application/create.jsp" />
+	</definition>
+
+	<definition name="application/adminStatistics" extends="master.page">
+		<put-attribute name="title" value="Statistics" />
+		<put-attribute name="body"
+			value="/views/application/adminStatistics.jsp" />
+	</definition>
+
 </tiles-definitions>

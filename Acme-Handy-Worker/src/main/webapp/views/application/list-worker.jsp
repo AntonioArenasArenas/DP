@@ -21,22 +21,27 @@
 <!-- Otros taglib utiles son tiles para textos en tiles y fmt para fechas -->
 
 <p>
-	<spring:message code="application.list.1" />
-	${ticker}
+	<spring:message code="applications.list.worker.app" />
 </p>
 
 <!-- Ver el tema de los colores (hay una opcion con el background color)-->
 <display:table name="applications" id="row"
-	requestURI="application/customer/list.do?taskId=${taskId}"
+	requestURI="application/worker/list.do?workerId=${workerId}"
 	pagesize="${pagination}" class="displaytag">
 
-	<display:column property="worker" titleKey="applications.list.worker" />
+	<display:column titleKey="applications.list.worker.1">
+		${row.task.ticker}
+	</display:column>
+	<display:column property="${row.task.endDate }"
+		titleKey="applications.list.worker.2" />
 	<display:column property="offeredPrize"
 		titleKey="applications.list.price" />
 	<display:column titleKey="applications.list.edit">
-		<a href="application/customer/edit.do?applicationId=${row.id}"> <spring:message
-				code="application.list.update" />
+		<a href="application/worker/show.do?applicationId=${row.id}"> <spring:message
+				code="applications.list.worker.3" />
 		</a>
 	</display:column>
-
 </display:table>
+<a href="application/worker/create.do"> <spring:message
+		code="applications.list.worker.create" />
+</a>
