@@ -13,6 +13,8 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="ticker" />
+	<form:hidden path="moment" />
 	
 	<form:hidden path="applications" />
 	<form:hidden path="phases" />
@@ -25,14 +27,14 @@
 	<form:errors cssClass="error" path="description" />
 	<br />
 
-	<form:label path="startDate" placeholder="DD/MM/YY HH:MM">
+	<form:label path="startDate" placeholder="DD/MM/YYYY">
 		<spring:message code="task.startDate" />:
 	</form:label>
 	<form:input path="startDate" />
 	<form:errors cssClass="error" path="startDate" />
 	<br />
 
-	<form:label path="endDate" placeholder="DD/MM/YY HH:MM">
+	<form:label path="endDate" placeholder="DD/MM/YYYY">
 		<spring:message code="task.endDate" />:
 	</form:label>
 	<form:input path="endDate" />
@@ -60,7 +62,7 @@
 		<spring:message code="task.warranty" />:
 	</form:label>
 	<form:select id="warranties" path="warranty">
-		<form:options items="${warranties}" itemLabel="title" itemValue="id" />
+		<form:options items="${warranties}" itemLabel="title" itemValue="id" /> <!--  TODO: Don't know how to not show the warranties that are drafts -->
 		<form:option value="0" label="----" />
 	</form:select>
 	<form:errors cssClass="error" path="category" />
@@ -89,7 +91,7 @@
 	</jstl:if>
 	<input type="button" name="cancel"
 		value="<spring:message code="task.cancel" />"
-		onclick="javascript: relativeRedir('task/list.do');" />
+		onclick="javascript: relativeRedir('task/customer/list.do');" />
 	<br />
 	
 </form:form>
