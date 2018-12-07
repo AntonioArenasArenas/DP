@@ -19,6 +19,7 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -32,7 +33,6 @@ public class Task extends DomainEntity {
 	private String					ticker;
 	private Date					moment;
 	private Date					startDate;
-
 	private Date					endDate;
 	private String					description;
 	private String					address;
@@ -84,6 +84,7 @@ public class Task extends DomainEntity {
 
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return this.moment;
 	}
@@ -92,10 +93,12 @@ public class Task extends DomainEntity {
 		this.moment = moment;
 	}
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getStartDate() {
 		return this.startDate;
 	}
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public void setStartDate(final Date startDate) {
 		this.startDate = startDate;
 	}
