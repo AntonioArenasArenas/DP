@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -15,7 +14,6 @@ import repositories.ComplaintRepository;
 import domain.Complaint;
 import domain.Customer;
 import domain.Referee;
-import domain.Report;
 import domain.Task;
 import domain.Worker;
 
@@ -36,7 +34,7 @@ public class ComplaintService {
 
 	@Autowired
 	private TaskService taskService;
-	
+
 	@Autowired
 	private RefereeService refereeService;
 
@@ -93,11 +91,11 @@ public class ComplaintService {
 
 		Assert.notNull(complaint);
 		Complaint result;
-		
+
 		result = complaintRepository.save(complaint);
-		
+
 		task.getComplaints().add(result);
-		
+
 		taskService.save(task);
 
 		return result;
@@ -116,13 +114,13 @@ public class ComplaintService {
 	}
 
 	// Other business methods -------------------------------------------------
-	
+
 	public Collection<Complaint> findCustomerComplaints() {
 
 		Customer c = customerService.findByPrincipal();
 
 		return complaintRepository.getComplaintsByCustomerId(c.getId());
-		
+
 	}
 
 	public Collection<Complaint> findWorkerComplaints() {
@@ -132,33 +130,27 @@ public class ComplaintService {
 		return complaintRepository.getComplaintsByWorkerId(worker.getId());
 
 	}
-	
+
 	public Collection<Complaint> getComplaintsWithNoReferee() {
-		
+
 		return complaintRepository.getComplaintsWithNoReferee();
-		
+
 	}
-	
+
 	// Currently, according to our UML, the only way to assign a referee to a
 	// complaint is creating a report. As that is the purpose of the methods
 	// createReport and save in the reportService, I didn't create the method
 	// to fulfill the requirement 36.1b here.
-	
-	
+
+
 	public Collection<Complaint> getSelfAssignedComplaints() {
-		
+
 		Referee referee = refereeService.findByPrincipal();
-		
-		Collection<Complaint> res = new ArrayList<>();
-		for(Report r : referee.getReports()){
-			res.add(r.getComplaint());
-		}
-		return res;
-		
-//		return complaintRepository.getComplaintsByRefereeId(referee.getId());
-		
+
+		return complaintRepository.getComplaintsByRefereeId(referee.getId());
+
 	}
-	
+
 	public Double[] getComplaintsPerTaskStatistics() {
 
 		Double[] result = complaintRepository.getComplaintsPerTaskStatistics();
@@ -166,7 +158,7 @@ public class ComplaintService {
 		return result;
 
 	}
-	
+
 	public Double ratioOfTasksWithComplaint() {
 
 		Double result = complaintRepository.ratioOfTasksWithComplaint();
@@ -174,23 +166,23 @@ public class ComplaintService {
 		return result;
 
 	}
-	
+
 	public List<Customer> topThreeCustomers() {
 
 		List<Customer> result = complaintRepository.customersOrderedByComplaints();
-		
+
 		result = result.subList(0, Math.min(result.size(), 3));
-		
+
 		return result;
 
 	}
-	
+
 	public List<Worker> topThreeWorkers() {
 
 		List<Worker> result = complaintRepository.workersOrderedByComplaints();
-		
+
 		result = result.subList(0, Math.min(result.size(), 3));
-		
+
 		return result;
 
 	}

@@ -17,36 +17,56 @@ import repositories.CategoryRepository;
 @Transactional
 public class CategoryService {
 
-	
+
 	// Managed repository -----------------------------------------------------
 	@Autowired
 	private CategoryRepository		categoryRepository;
-	
+
 	// Supporting services ----------------------------------------------------
-	
-	
+
+
 	// Constructors -----------------------------------------------------------
 
-			public CategoryService() {
-				super();
-			}
+	public CategoryService() {
+		super();
+	}
 
-			// Simple CRUD methods ----------------------------------------------------
+	// Simple CRUD methods ----------------------------------------------------
 
-			public Collection<Category> findAll() {
-				
-				
-				return categoryRepository.findAll();
-			}
-			
-			public Category findOne(int categoryId) {
-				Assert.isTrue(categoryId != 0);
+	public Collection<Category> findAll() {
 
-				Category result;
+		return categoryRepository.findAll();
 
-				result = categoryRepository.findOne(categoryId);
-				Assert.notNull(result);
+	}
 
-				return result;
-			}
+	public Category findOne(int categoryId) {
+		Assert.isTrue(categoryId != 0);
+
+		Category result;
+
+		result = categoryRepository.findOne(categoryId);
+		Assert.notNull(result);
+
+		return result;
+	}
+
+	public Category createCategory() {
+
+		Category result;
+
+		result = new Category();
+
+		return result;
+	}
+
+	public Category save(Category category) {
+
+		Assert.notNull(category);
+
+		Category result;
+
+		result = categoryRepository.save(category);
+
+		return result;
+	}
 }

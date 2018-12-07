@@ -28,10 +28,10 @@ public class ComplaintServiceTest extends AbstractTest {
 
 	@Autowired
 	private ComplaintService complaintService;
-	
+
 	@Autowired
 	private TaskService taskService;
-	
+
 	@Test
 	public void testFindCustomerComplaints() {
 		Collection<Complaint> complaints;
@@ -41,7 +41,7 @@ public class ComplaintServiceTest extends AbstractTest {
 		super.authenticate(null);
 
 	}
-	
+
 	@Test
 	public void testFindWorkerComplaints() {
 
@@ -50,7 +50,7 @@ public class ComplaintServiceTest extends AbstractTest {
 		complaints = complaintService.findWorkerComplaints();
 		Assert.isTrue(complaints.size() == 0);
 		super.authenticate(null);
-		
+
 	}
 
 	@Test
@@ -59,9 +59,9 @@ public class ComplaintServiceTest extends AbstractTest {
 		Collection<Complaint> complaints;
 		complaints = complaintService.getComplaintsWithNoReferee();
 		Assert.isTrue(complaints.size() == 1);
-		
+
 	}
-	
+
 	@Test
 	public void testGetSelfAssignedComplaints() {
 
@@ -70,7 +70,7 @@ public class ComplaintServiceTest extends AbstractTest {
 		Assert.isTrue(complaints.size() == 1);
 		super.authenticate(null);
 	}
-	
+
 	@Test
 	public void testGetComplaintsPerTaskStatistics() {
 
@@ -81,7 +81,7 @@ public class ComplaintServiceTest extends AbstractTest {
 		Assert.isTrue(statistics[2].equals(2.));
 		Assert.isTrue(statistics[3].equals(0.8165));
 	}
-	
+
 	@Test
 	public void testRatioOfTasksWithComplaint() {
 
@@ -89,7 +89,7 @@ public class ComplaintServiceTest extends AbstractTest {
 		ratio = complaintService.ratioOfTasksWithComplaint();
 		Assert.isTrue(ratio.equals(0.333333));
 	}
-	
+
 	@Test
 	public void testTopThreeCustomers() {
 
@@ -97,7 +97,7 @@ public class ComplaintServiceTest extends AbstractTest {
 		Assert.isTrue(complaints.size() == 3);
 
 	}
-	
+
 	@Test
 	public void testTopThreeWorkers() {
 
@@ -105,7 +105,7 @@ public class ComplaintServiceTest extends AbstractTest {
 		Assert.isTrue(complaints.size() == 1);
 
 	}
-	
+
 	@Test
 	public void testCreateComplaint() {
 
@@ -115,16 +115,16 @@ public class ComplaintServiceTest extends AbstractTest {
 		LinkedList<Task> taskslist = new LinkedList<Task>(tasks);
 		Task task = taskslist.getFirst();
 		complaint = complaintService.createComplaint(task);
-		
-		complaint.setDescription("Descripción de complaint de prueba");
+
+		complaint.setDescription("Descripciï¿½n de complaint de prueba");
 		Collection<String> attachments = new HashSet<String>();
 		complaint.setAttachments(attachments);
 
 		saved = complaintService.save(complaint, task);
-		Collection<Complaint> reports = complaintService.findAll();
-		Assert.isTrue(reports.contains(saved));
+		Collection<Complaint> complaints = complaintService.findAll();
+		Assert.isTrue(complaints.contains(saved));
 		super.authenticate(null);
 
 	}
-	
+
 }

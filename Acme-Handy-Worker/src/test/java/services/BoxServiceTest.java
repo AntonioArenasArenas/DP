@@ -82,7 +82,7 @@ public class BoxServiceTest extends AbstractTest {
 			Assert.isTrue(!boxessaved.contains(box));
 		}
 
-		// No se debe borrar la caja si es la única que hay en ese momento en el
+		// No se debe borrar la caja si es la ï¿½nica que hay en ese momento en el
 		// actor
 
 	}
@@ -103,16 +103,11 @@ public class BoxServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void testFindBoxesWhithMessage() {
+	public void testFindBoxesWithMessage() {
 
-		Collection<Message> messages = messageService.findAll();
-		LinkedList<Message> messageslist = new LinkedList<Message>(messages);
-		Message message = messageslist.getFirst();
+		Message message = messageService.findOne(448);
 
-		// En este momento cualquier mensaje estará en dos carpetas así
-		// que cualquier mensaje vale para estas pruebas
-
-		Collection<Box> containers = boxService.findBoxesWhithMessage(message);
+		Collection<Box> containers = boxService.findBoxesWithMessage(message);
 
 		Assert.isTrue(containers.size() == 2);
 	}

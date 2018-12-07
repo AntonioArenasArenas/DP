@@ -23,9 +23,9 @@ public class SystemData extends DomainEntity {
 	private String vatPercentage;
 	private int cache;
 	private int maxPrice;
-	
-	
-	
+
+
+
 
 	public int getMaxPrice() {
 		return maxPrice;

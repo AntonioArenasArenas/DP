@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
-	* * The use of this project is hereby constrained to the conditions of the 
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla
+	* * The use of this project is hereby constrained to the conditions of the
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -704,7 +704,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="boxes">
@@ -782,7 +782,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount2" />
@@ -860,7 +860,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount3" />
@@ -938,7 +938,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Mesa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount4" />
@@ -1017,7 +1017,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount5" />
@@ -1088,7 +1088,7 @@
 		<property name="phoneNumber" value="+34 654 653 841" />
 
 		<property name="address" value="Calle Luis Montoto" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount6" />
@@ -1142,7 +1142,7 @@
 		<property name="phoneNumber" value="+34 696 696 666" />
 
 		<property name="address" value="El puente triana wi pasa la reina" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount7" />
@@ -1196,7 +1196,7 @@
 		<property name="phoneNumber" value="+34 696 696 666" />
 
 		<property name="address" value="El puente triana wi pasa la reina" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount8" />
@@ -1252,7 +1252,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount9" />
@@ -1322,7 +1322,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount10" />
@@ -1374,7 +1374,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount11" />
@@ -1983,7 +1983,7 @@
 
 
 	</bean>
-	
+
 	<!-- Finder -->
 
 
@@ -2004,12 +2004,12 @@
 		<property name="lastUpdate" value="2018/8/10 00:42" />
 
 	</bean>
-	
+
 	<!--  SystemData -->
 
 
  	<bean id="systemData" class="domain.SystemData">
-		
+
 		<property name="name" value="nombre"/>
 		<property name="banner" value="hola"/>
 		<property name="bannerHeader" value="hola2"/>
@@ -2019,7 +2019,7 @@
 		<property name="vatPercentage" value="22%"/>
 		<property name="cache" value="3"/>
 		<property name="maxPrice" value="22"/>
-	</bean> 
+	</bean>
 
 
 </beans>
