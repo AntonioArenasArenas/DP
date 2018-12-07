@@ -32,11 +32,11 @@
 	<display:column titleKey="applications.list.worker.1">
 		${row.task.ticker}
 	</display:column>
-	<display:column property="${row.task.endDate }"
+	<display:column property="${row.task.endDate}"
 		titleKey="applications.list.worker.2" />
 	<display:column property="offeredPrize"
 		titleKey="applications.list.price" />
-	<display:column titleKey="applications.list.edit">
+	<display:column>
 		<a href="application/worker/show.do?applicationId=${row.id}"> <spring:message
 				code="applications.list.worker.3" />
 		</a>

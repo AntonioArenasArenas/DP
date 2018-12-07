@@ -56,7 +56,7 @@
 	<form:label path="expirationDate">
 		<spring:message code="applications.update.creditcard.expdate" />
 	</form:label>
-	<form:input path="expirationDate" placeholder="MM/yy" />
+	<form:input path="expirationDate" placeholder="MM/yy" format="MM/yy" />
 	<form:errors cssClass="error" path="expirationDate" />
 
 	<input type="submit" name="save"

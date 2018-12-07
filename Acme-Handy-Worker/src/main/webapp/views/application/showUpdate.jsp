@@ -35,7 +35,7 @@
 	${offeredPrize}
 </p>
 <p>
-	<spring:message code="applications.update.comments" />
+	<spring:message code="applications.update.comments" /> <!-- Mejor con un forEach -->
 	${comments}
 </p>
 
@@ -47,6 +47,8 @@
 			<form:hidden path="version" />
 			<form:hidden path="moment" />
 			<form:hidden path="offeredPrize" />
+			<form:hidden path="task" />
+			<form:hidden path="worker" />
 
 			<form:label path="status">
 				<spring:message code="applications.update.status" />

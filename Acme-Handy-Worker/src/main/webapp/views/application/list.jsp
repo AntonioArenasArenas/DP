@@ -26,14 +26,21 @@
 </p>
 
 <!-- Ver el tema de los colores (hay una opcion con el background color)-->
+
+<jsp:useBean id="date" class="java.util.Date" />
+
 <display:table name="applications" id="row"
 	requestURI="application/customer/list.do?taskId=${taskId}"
 	pagesize="${pagination}" class="displaytag">
-
-	<display:column property="worker" titleKey="applications.list.worker" />
+	<display:column property="worker" titleKey="applications.list.worker"
+		style="<jstl:choose>
+		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
+		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
+		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
+		</jstl:choose>" />
 	<display:column property="offeredPrize"
 		titleKey="applications.list.price" />
-	<display:column titleKey="applications.list.edit">
+	<display:column>
 		<a href="application/customer/edit.do?applicationId=${row.id}"> <spring:message
 				code="application.list.update" />
 		</a>
