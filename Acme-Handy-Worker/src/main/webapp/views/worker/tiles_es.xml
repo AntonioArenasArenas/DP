@@ -18,9 +18,14 @@
 
 	
 	
-	<definition name="worker/create" extends="master.page">	
-		<put-attribute name="title" value="Crear trabajador" />
-		<put-attribute name="body" value="/views/worker/create.jsp" />
+	<definition name="worker/edit" extends="master.page">
+		<put-attribute name="title" value="Crear" />
+		<put-attribute name="body" value="/views/endorser/edit.jsp" />
+	</definition>
+	
+	<definition name="worker/edit" extends="master.page">
+		<put-attribute name="title" value="Editar" />
+		<put-attribute name="body" value="/views/endorser/edit.jsp" />
 	</definition>
 	
 </tiles-definitions>

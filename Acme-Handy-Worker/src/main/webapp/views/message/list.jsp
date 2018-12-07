@@ -35,6 +35,22 @@
 		</strong>
 		 <br/>	
 	</display:column>
+	<display:column >
+				<jstl:out value="${row.subject}" />
+		 <br/>	
+	</display:column>
+	<display:column >
+				<jstl:out value="${row.momment}" />
+		 <br/>	
+	</display:column>
+	<display:column >
+		<strong>
+			<a href="message/delete.do?messageId=${row.id}" >
+				<jstl:out value="<spring:message code="message.delete" />" />
+			</a>
+		</strong>
+		 <br/>	
+	</display:column>
 	
 	
 	
