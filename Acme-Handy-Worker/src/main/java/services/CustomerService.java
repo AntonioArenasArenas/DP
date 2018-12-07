@@ -126,25 +126,5 @@ public class CustomerService {
 
 		return result;
 	}
-	public void actualizarTasks(Task task){
-		
-		Customer c= findByPrincipal();
-		if(c.getTasks().contains(task)){
-			c.getTasks().remove(task);
-		}else{
-			c.getTasks().add(task);
-		}
-		
-	}
-	
-	public Boolean contineneTask( Integer id, Task task){ //Metodo de utilidad que comprueba si dado una id de customer y una task, dicho customer tiene esa task
-		Boolean r = false;
-		if(customerRepository.findOne(id).getTasks().contains(task)){
-			r = true;
-		}
-		
-		return r;
-	}
-	
 
 }

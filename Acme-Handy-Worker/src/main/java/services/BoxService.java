@@ -119,7 +119,9 @@ public class BoxService {
 		boxRepository.delete(box);
 	}
 
-	public Collection<Box> findBoxesWhithMessage(Message message) {
+
+	public Collection<Box> findBoxesWithMessage(Message message) {
+
 
 		return boxRepository.getBoxesWithMessage(message.getId());
 
