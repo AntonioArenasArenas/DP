@@ -24,7 +24,7 @@
 	</security:authorize>
 	<security:authorize access="hasRole('WORKER')">
 		<display:column>
-			<a href="customer/profile.do?id=${row.id}">
+			<a href="customer/profile.do?id=${row.id}"> <!--  TODO: No sé cómo llamar a un método de un servicio aquí -->
 				<spring:message code="task.edit" />
 			</a>
 		</display:column>
