@@ -31,9 +31,9 @@
 		<put-attribute name="body" value="/views/waranty/list.jsp" />
 	</definition>
 	
-	<definition name="waranty/display" extends="master.page">	
-		<put-attribute name="title" value="Information of this waranty" />
-		<put-attribute name="body" value="/views/waranty/display.jsp" />
+	<definition name="waranty/show" extends="master.page">	
+		<put-attribute name="title" value="Information of the waranty" />
+		<put-attribute name="body" value="/views/waranty/show.jsp" />
 	</definition>
 	
 </tiles-definitions>

@@ -38,7 +38,7 @@
 	<form:label path="draftMode">
 		<spring:message code="warranty.draftMode" />:
 	</form:label>
-	<form:checkbox path="draftMode" /> <!-- TODO: No sé si esto está bien -->
+	<form:checkbox path="draftMode" />
 	<form:errors cssClass="error" path="draftMode" />
 	<br />
 	

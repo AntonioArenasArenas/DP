@@ -62,7 +62,7 @@
 		<spring:message code="task.warranty" />:
 	</form:label>
 	<form:select id="warranties" path="warranty">
-		<form:options items="${warranties}" itemLabel="title" itemValue="id" /> <!--  TODO: Don't know how to not show the warranties that are drafts -->
+		<form:options items="${warranties}" itemLabel="title" itemValue="id" />
 		<form:option value="0" label="----" />
 	</form:select>
 	<form:errors cssClass="error" path="category" />

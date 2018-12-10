@@ -31,9 +31,9 @@
 		<put-attribute name="body" value="/views/warranty/list.jsp" />
 	</definition>
 	
-	<definition name="warranty/display" extends="master.page">	
-		<put-attribute name="title" value="Información de esta garantía" />
-		<put-attribute name="body" value="/views/warranty/display.jsp" />
+	<definition name="warranty/show" extends="master.page">	
+		<put-attribute name="title" value="Información de la garantía" />
+		<put-attribute name="body" value="/views/warranty/show.jsp" />
 	</definition>
 	
 </tiles-definitions>

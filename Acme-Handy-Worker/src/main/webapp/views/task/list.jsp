@@ -15,23 +15,25 @@
 	<display:column property="maxPrice" titleKey="task.maxPrice" sortable="true" />
 	<display:column property="startDate" titleKey="task.startDate" sortable="true" format="{0,date,dd/MM/yyyy}" />
 	<display:column property="endDate" titleKey="task.endDate" sortable="true" format="{0,date,dd/MM/yyyy}" />
+	<display:column>
+		<a href="task/customer/show.do?id=${row.id}">
+			<spring:message code="task.show" />
+		</a>
+	</display:column>
 	<security:authorize access="hasRole('CUSTOMER')">
 		<display:column>
-			<a href="task/customer/edit.do?taskId=${row.id}">
+			<a href="task/customer/edit.do?id=${row.id}">
 				<spring:message code="task.edit" />
 			</a>
 		</display:column>
 	</security:authorize>
 	<security:authorize access="hasRole('WORKER')">
 		<display:column>
-			<a href="customer/profile.do?id=${row.id}"> <!--  TODO: No sé cómo llamar a un método de un servicio aquí -->
-				<spring:message code="task.edit" />
+			<a href="customer/profile.do?id=${row.customer.id}"> <!--  TODO: Cambiar el UML para que se pueda navegar de task a customer -->
+				<spring:message code="task.viewCustomer" />
 			</a>
 		</display:column>
 	</security:authorize>
 	
 </display:table>
 	
-
-</body>
-</html>

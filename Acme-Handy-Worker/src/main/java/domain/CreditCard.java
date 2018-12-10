@@ -61,7 +61,7 @@ public class CreditCard extends DomainEntity {
 	}
 
 	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+	@DateTimeFormat(pattern = "MM/yy")
 	public Date getExpirationDate() {
 		return expirationDate;
 	}
