@@ -1,29 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
-<!-- 
- * tiles_es.xml
- *
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
- * http://www.tdg-seville.info/License.html
- -->
+<!-- * tiles_es.xml * * Copyright (C) 2018 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
+	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+
 <tiles-definitions>
 
-	<definition name="customer/action-1" extends="master.page">	
-		<put-attribute name="title" value="Cliente: Acción 1" />
-		<put-attribute name="body" value="/views/customer/action-1.jsp" />
+	<definition name="application/list" extends="master.page">
+		<put-attribute name="title" value="Lista de aplicaciones" />
+		<put-attribute name="body"
+			value="/views/application/applications-list.jsp" />
 	</definition>
-	
-	<definition name="customer/action-2" extends="master.page">	
-		<put-attribute name="title" value="Cliente: Acción 2" />
-		<put-attribute name="body" value="/views/customer/action-2.jsp" />
+
+	<definition name="application/show" extends="master.page">
+		<put-attribute name="title" value="Detalles de aplicación" />
+		<put-attribute name="body" value="/views/application/showUpdate.jsp" />
 	</definition>
-	
+
+	<definition name="application/update" extends="master.page">
+		<put-attribute name="title" value="Actualizar aplicación" />
+		<put-attribute name="body" value="/views/application/showUpdate.jsp" />
+	</definition>
+
+	<definition name="application/updateCreditCard" extends="master.page">
+		<put-attribute name="title" value="Proporcionar tarjeta de crédito" />
+		<put-attribute name="body"
+			value="/views/application/updateCreditCard.jsp" />
+	</definition>
+
+	<definition name="application/listWorker" extends="master.page">
+		<put-attribute name="title" value="Lista de aplicaciones" />
+		<put-attribute name="body" value="/views/application/list-worker.jsp" />
+	</definition>
+
+	<definition name="application/create" extends="master.page">
+		<put-attribute name="title" value="Crear aplicación" />
+		<put-attribute name="body" value="/views/application/create.jsp" />
+	</definition>
+
+	<definition name="application/adminStatistics" extends="master.page">
+		<put-attribute name="title" value="Estadísticas" />
+		<put-attribute name="body"
+			value="/views/application/adminStatistics.jsp" />
+	</definition>
+
 </tiles-definitions>
