@@ -23,7 +23,7 @@ import org.hibernate.validator.constraints.NotBlank;
 public class Message extends DomainEntity {
 
 	private Actor				sender;
-	private Collection<Actor>	recipients;
+	private Actor			recipient;
 	private Date				moment;
 	private String				subject;
 	private String				body;
@@ -38,9 +38,9 @@ public class Message extends DomainEntity {
 	
 	@Valid
 	@NotNull
-	@ManyToMany
-	public Collection<Actor> getRecipients() {
-		return this.recipients;
+	@ManyToOne
+	public Actor getRecipient() {
+		return this.recipient;
 	}
 
 	@Past
@@ -92,8 +92,8 @@ public class Message extends DomainEntity {
 		this.sender = sender;
 	}
 
-	public void setRecipients(final Collection<Actor> recipients) {
-		this.recipients = recipients;
+	public void setRecipient(final Actor recipient) {
+		this.recipient = recipient;
 	}
 
 }

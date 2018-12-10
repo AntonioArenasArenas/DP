@@ -20,11 +20,11 @@
 	
 	
 	
-	<form:label path="message.recipients">
-		<spring:message code="message.recipients" />:
+	<form:label path="message.recipient">
+		<spring:message code="message.recipient" />:
 	</form:label>
-	<form:input path="message.recipients" type="textarea" />
-	<form:errors cssClass="error" path="message.recipients" />
+	<form:input path="message.recipient"  />
+	<form:errors cssClass="error" path="message.recipient" />
 	<br />
 	
 	

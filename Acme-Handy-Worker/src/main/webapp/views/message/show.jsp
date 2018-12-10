@@ -11,10 +11,15 @@
 
 <!-- Listing grid -->
 <p><spring:message code="customer.action.1" /></p>
+
+<jstl:set var="recipents" value="${row.recipents}" />
 	
-	<p><spring:message code="message.sender" />:<strong><jstl:out value="${row.sender}" /></strong></p>
+	<p><spring:message code="message.sender" />:<strong><jstl:out value="${row.sender.name}" /></strong></p>
 	
-	<p><spring:message code="message.recipients" />:<strong><jstl:out value="${row.recipents}" /></strong></p>
+	<p><spring:message code="message.recipients" />:
+	<jstl:forEach var="recipient"  items="recipents" >
+	 <jstl:out value="${recipient.name}" />
+	</jstl:forEach></p>
 	
 	<p><spring:message code="message.subject" />:<strong><jstl:out value="${row.subject}" /></strong></p>
 	
