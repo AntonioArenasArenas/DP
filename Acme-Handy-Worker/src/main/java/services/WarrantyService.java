@@ -11,6 +11,7 @@ import org.springframework.util.Assert;
 
 
 import domain.Admin;
+import domain.Task;
 import domain.Warranty;
 
 
@@ -25,6 +26,9 @@ public class WarrantyService {
 
 	@Autowired
 	private WarrantyRepository warrantyRepository;
+	
+	@Autowired
+	private TaskService taskService;
 
 //	
 //	@Autowired
@@ -82,9 +86,18 @@ public class WarrantyService {
 			return result;
 		}
 		
-		public void deleteWarranty(Warranty warranty){
+		public void delete(Warranty warranty){
 			
 			Assert.notNull(warranty);
+			
+			Boolean warrantyIsInTask = false;
+			for(Task task : taskService.findAll()) {
+				if(task.getWarranty().equals(warranty)){
+					warrantyIsInTask = true;
+					break;
+				}
+			}
+			Assert.isTrue(!warrantyIsInTask);
 			
 			Assert.isTrue(warranty.getDraftMode()==true);
 			

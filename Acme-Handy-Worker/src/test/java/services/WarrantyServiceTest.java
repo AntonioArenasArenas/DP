@@ -27,14 +27,17 @@ public class WarrantyServiceTest extends AbstractTest{
 	private WarrantyService warrantyService;
 	
 	@Test
-	public void testCreateWarranty(){
-		
+	public void testCreateWarranty() {
+
+		Warranty warranty, saved;
+		warranty = warrantyService.createWarranty();
+		warranty.setTitle("Título 1");
+		warranty.setTerms("Términos y condiciones del servicio");
+		warranty.setLaws("Leyes leyes leyes");
+		saved = warrantyService.save(warranty);
 		Collection<Warranty> warranties = warrantyService.findAll();
-		LinkedList<Warranty> listaWarranties = new LinkedList<Warranty>(warranties);
-		Warranty warranty = listaWarranties.getFirst();
-		Assert.notNull(warranty);
-		Assert.isTrue(warranty.getDraftMode()==true);
-		warrantyService.save(warranty);
+		Assert.isTrue(warranties.contains(saved));
+
 	}
 	
 	@Test
@@ -44,8 +47,8 @@ public class WarrantyServiceTest extends AbstractTest{
 		Warranty warranty = listaWarranties.getFirst();
 		Assert.notNull(warranty);
 		Assert.isTrue(warranty.getDraftMode()==true);
-		warrantyService.deleteWarranty(warranty);
-	//	Assert.isTrue(!(warrantyService.findAll().contains(warranty)));
+		warrantyService.delete(warranty);
+		Assert.isTrue(!(warrantyService.findAll().contains(warranty)));
 		
 	}
 

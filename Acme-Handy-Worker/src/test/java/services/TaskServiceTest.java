@@ -47,7 +47,7 @@ public class TaskServiceTest extends AbstractTest {
 		super.authenticate("superguay");
 		task = taskService.createTask();
 		task.setStartDate(new Date(System.currentTimeMillis() + 360000));
-		task.setStartDate(new Date(System.currentTimeMillis() + 7200000));
+		task.setEndDate(new Date(System.currentTimeMillis() + 7200000));
 		task.setDescription("Hola");
 		task.setMaxPrice(288.);
 		task.setComments("Comment sfkjshodgjf");
