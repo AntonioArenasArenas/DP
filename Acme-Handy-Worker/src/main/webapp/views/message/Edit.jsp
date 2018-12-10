@@ -28,11 +28,11 @@
 	<br />
 	
 	
-	<form:label path="message.subjet">
-		<spring:message code="message.subjet" />:
+	<form:label path="message.subject">
+		<spring:message code="message.subject" />:
 	</form:label>
-	<form:input path="message.subjet" />
-	<form:errors cssClass="error" path="message.subjet" />
+	<form:input path="message.subject" />
+	<form:errors cssClass="error" path="message.subject" />
 	<br />
 	
 	<form:label path="message.priority">

@@ -30,7 +30,7 @@
 	<display:column >
 		<strong>
 			<a href="message/list.do?messageId=${row.id}" >
-				<jstl:out value="${row.name}" />
+				<jstl:out value="<spring:message code="message.open" />" />
 			</a>
 		</strong>
 		 <br/>	

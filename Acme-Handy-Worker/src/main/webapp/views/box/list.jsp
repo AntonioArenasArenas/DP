@@ -45,3 +45,5 @@
 	</display:column>
 	
 </display:table>
+
+<input type="button" value="<spring:message code="box.newMessage" />" name="button" onClick="javascript: relativeRedir('box/create.do');"/>
