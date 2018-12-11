@@ -32,11 +32,6 @@
 			value="/views/application/updateCreditCard.jsp" />
 	</definition>
 
-	<definition name="application/listWorker" extends="master.page">
-		<put-attribute name="title" value="Lista de aplicaciones" />
-		<put-attribute name="body" value="/views/application/list-worker.jsp" />
-	</definition>
-
 	<definition name="application/create" extends="master.page">
 		<put-attribute name="title" value="Crear aplicación" />
 		<put-attribute name="body" value="/views/application/create.jsp" />

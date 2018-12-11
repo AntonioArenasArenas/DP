@@ -40,7 +40,6 @@ public class MessageServiceTest extends AbstractTest {
 		// Al no estar las beans completas nos easeguraremos de probarlo con un
 		// usuario que tenga OUTBOX y el receptor INBOX
 
-		Collection<Actor> recipients = new ArrayList<>();
 		Collection<Customer> customers = customerService.findAll();
 		Iterator<Customer> it = customers.iterator();
 		boolean exit = false;
@@ -80,10 +79,9 @@ public class MessageServiceTest extends AbstractTest {
 		}
 		recipient = c;
 
-		recipients.add(recipient);
 		super.authenticate(sender.getUserAccount().getUsername());
 		Message message = messageService.createMessage();
-		message.setRecipients(recipients);
+		message.setRecipient(recipient);
 		message.setBody("cuerpo");
 		message.setSubject("asunto");
 		message.setPriority("HIGH");

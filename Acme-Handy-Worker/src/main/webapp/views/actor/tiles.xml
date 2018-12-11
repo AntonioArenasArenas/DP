@@ -16,19 +16,22 @@
 
 <tiles-definitions>
 
-	<definition name="customer/action-1" extends="master.page">
-		<put-attribute name="title" value="Customer: Action 1" />
-		<put-attribute name="body" value="/views/customer/action-1.jsp" />
-	</definition>
-
-	<definition name="customer/action-2" extends="master.page">
-		<put-attribute name="title" value="Customer: Action 2" />
-		<put-attribute name="body" value="/views/customer/action-2.jsp" />
-	</definition>
 
 	<definition name="customer/create" extends="master.page">
-		<put-attribute name="title" value="Create customer" />
-		<put-attribute name="body" value="/views/customer/create.jsp" />
+		<put-attribute name="title" value="new customer" />
+		<put-attribute name="body" value="/views/actor/edit.jsp" />
 	</definition>
+	
+	<definition name="worker/create" extends="master.page">
+		<put-attribute name="title" value="new worker" />
+		<put-attribute name="body" value="/views/actor/edit.jsp" />
+	</definition>
+	
+	<definition name="sponsor/create" extends="master.page">
+		<put-attribute name="title" value="new sponsor" />
+		<put-attribute name="body" value="/views/actor/edit.jsp" />
+	</definition>
+	
+	
 
 </tiles-definitions>

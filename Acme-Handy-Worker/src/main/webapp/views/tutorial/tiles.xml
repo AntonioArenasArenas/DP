@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <!-- 
- * tiles_es.xml
+ * tiles.xml
  *
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -13,14 +13,17 @@
 <!DOCTYPE tiles-definitions PUBLIC
        "-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
-      
+       
 <tiles-definitions>
 
+		<definition name="profile/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit Profiles" />
+		<put-attribute name="body" value="/views/profile/edit.jsp" />
+	</definition>
 	
-	
-	<definition name="worker/create" extends="master.page">	
-		<put-attribute name="title" value="Crear trabajador" />
-		<put-attribute name="body" value="/views/worker/create.jsp" />
+	<definition name="profile/list" extends="master.page">	
+		<put-attribute name="title" value="List Profiles" />
+		<put-attribute name="body" value="/views/profile/list.jsp" />
 	</definition>
 	
 </tiles-definitions>

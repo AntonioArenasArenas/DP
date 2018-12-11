@@ -20,27 +20,29 @@
 	
 	
 	
-	<form:label path="message.recipients">
-		<spring:message code="message.recipients" />:
+	<form:label path="message.recipient">
+		<spring:message code="message.recipient" />:
 	</form:label>
-	<form:input path="message.recipients" type="textarea" />
-	<form:errors cssClass="error" path="message.recipients" />
+	<form:input path="message.recipient"  />
+	<form:errors cssClass="error" path="message.recipient" />
 	<br />
 	
 	
-	<form:label path="message.subjet">
-		<spring:message code="message.subjet" />:
+	<form:label path="message.subject">
+		<spring:message code="message.subject" />:
 	</form:label>
-	<form:input path="message.subjet" />
-	<form:errors cssClass="error" path="message.subjet" />
+	<form:input path="message.subject" />
+	<form:errors cssClass="error" path="message.subject" />
 	<br />
 	
 	<form:label path="message.priority">
 		<spring:message code="message.priority" />:
 	</form:label>      
-    <input type="radio" name="gender" value="HIGH" />
-    <input type="radio" name="gender" value="NEUTRAL" /> 
-    <input type="radio" name="gender" value="LOW" />
+    <select>
+  		<option value="HIGH">HIGH</option>
+  		<option value="NEUTRAL">NEUTRAL</option>
+  		<option value="LOW">LOW</option>
+	</select>
  	<br />
 	
 	<form:label path="message.body">

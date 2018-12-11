@@ -20,30 +20,37 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <!-- Listing grid -->
-<p><spring:message code="box.list" /></p>
+
 
 <display:table
-	pagesize="5" name="boxes" id="row"
-	requestURI="box/list.do" >
-	
+	pagesize="5" name="profiles" id="row"
+	requestURI="profile/list.do" >
 	
 	<display:column >
 		<strong>
-			<a href="message/list.do?boxId=${row.id}" >
-				<jstl:out value="${row.name}" />
+			<a href="profile/edit.do?profileId=${row.id}" >
+				<jstl:out value="<spring:message code="profile.nick" />" />
+			</a>
+		</strong>
+		 <br/>	
+	</display:column>
+	<display:column >
+				<jstl:out value="${row.socialNetwork}" />
+		 <br/>	
+	</display:column>
+	<display:column >
+				<jstl:out value="${row.link}" />
+		 <br/>	
+	</display:column>
+	<display:column >
+		<strong>
+			<a href="profile/delete.do?porfileId=${row.id}" >
+				<jstl:out value="<spring:message code="profile.delete" />" />
 			</a>
 		</strong>
 		 <br/>	
 	</display:column>
 	
-	<display:column >
-	<jstl:if test="${!rox.isDefault}">
-			<a href="box/actor/edit.do?boxId=${row.id}" >
-				<jstl:out value="<spring:message code="box.delete" />" />
-			</a>
-		</jstl:if>
-	</display:column>
-	
 </display:table>
 
-<input type="button" value="<spring:message code="box.newBox" />" name="button" onClick="javascript: relativeRedir('box/create.do');"/>
+<input type="button" value="<spring:message code="profile.newProfile" />" name="button" onClick="javascript: relativeRedir('profile/create.do');"/>
