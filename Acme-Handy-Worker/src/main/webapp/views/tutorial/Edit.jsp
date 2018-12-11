@@ -15,6 +15,7 @@
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	<form:hidden path="sections" />
 	
 
 
@@ -26,19 +27,19 @@
 	<br />
 	
 	
-	<form:label path="tutorial.socialNetwork">
-		<spring:message code="tutorial.socialNetwork" />:
+	<form:label path="tutorial.summary">
+		<spring:message code="tutorial.summary" />:
 	</form:label>
-	<form:input path="tutorial.socialNetwork" />
-	<form:errors cssClass="error" path="tutorial.socialNetwork" />
+	<form:input path="tutorial.summary" />
+	<form:errors cssClass="error" path="tutorial.summary" />
 	<br />
 	
 
-	<form:label path="tutorial.link">
-		<spring:message  code="tutorial.link" />:
+	<form:label path="tutorial.photo">
+		<spring:message  code="tutorial.photo" />:
 	</form:label>
 	<form:input path="tutorial.link" />
-	<form:errors cssClass="error" path="tutorial.link" />
+	<form:errors cssClass="error" path="tutorial.photo" />
 	<br />
 	
 	
