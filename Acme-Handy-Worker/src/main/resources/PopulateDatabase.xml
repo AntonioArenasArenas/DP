@@ -707,8 +707,10 @@
 
 		<property name="suspicious" value="False" />
 
-		<property name="boxes">
+		<property name="finder" ref="finder1" />
 
+		<property name="boxes">
+		
 			<list>
 
 				<ref bean="box5" />

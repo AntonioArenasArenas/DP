@@ -91,6 +91,7 @@ public class FinderService {
         Worker logged;
         logged = workerService.findByPrincipal();
         result = finderRepository.getFinderByWorkerId(logged.getId());
+        Assert.notNull(result);
         return result;
     }
     public void setCache(int cache){
@@ -98,21 +99,5 @@ public class FinderService {
         s = this.systemDataService.getSystemData();
         s.setCache(cache);
 
-    }
-    public void changeFinderFilters(String keyWord, String category,
-                                    String warranty, Double maxPrice, Double minPrice,
-                                    Date startDate, Date endDate, Date lastUpdate){
-
-        
-        Finder finder;
-        finder = findOne();
-        Assert.notNull(finder);
-        finder.setKeyWord(keyWord);
-        finder.setCategory(category);
-        finder.setWarranty(warranty);
-        finder.setMaxPrice(maxPrice);
-        finder.setMinPrice(minPrice);
-        finder.setStartDate(startDate);
-        finder.setEndDate(endDate);
     }
 }

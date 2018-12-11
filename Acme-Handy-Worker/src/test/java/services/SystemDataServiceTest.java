@@ -18,51 +18,41 @@ import java.util.Date;
 @ContextConfiguration(locations = { "classpath:spring/datasource.xml",
         "classpath:spring/config/packages.xml" })
 @Transactional
-public class FinderServiceTest extends AbstractTest {
-
-    @Autowired
-    private FinderService finderService;
+public class SystemDataServiceTest extends AbstractTest {
 
     @Autowired
     private SystemDataService systemDataService;
 
 
     @Test
-    public void testCreateFinder(){
+    public void testCreateSystemData(){
     	super.authenticate("admin");
-        Finder finder = finderService.create();
+       SystemData systemData = systemDataService.create();
         super.unauthenticate();
     }
 
     @Test
-    public void testGetFinderByWorkerId(){
+    public void testSaveSystemData(){
         super.authenticate("admin");
-        Finder finder;
-        finder = finderService.getFinderByWorkerId();
+        SystemData systemData = systemDataService.create();
+        SystemData systemData2 = systemDataService.save(systemData);
         super.unauthenticate();
 
     }
 
     @Test
-    public void testFindOne(){
+    public void testDeleteSystemData(){
         super.authenticate("admin");
-        Finder finder = finderService.findOne();
+        SystemData systemData = systemDataService.create();
+        systemDataService.delete(systemData);
         super.unauthenticate();
     }
 
     @Test
-    public void testCleanFinderCache(){
+    public void testGetSystemData(){
         super.authenticate("admin");
-        finderService.cleanFinderCache();
+        SystemData systemData = systemDataService.getSystemData();
         super.unauthenticate();
     }
-    
-    @Test
-    public void testSetCache(){
-    	super.authenticate("admin");
-    	finderService.setCache(5);
-    	super.unauthenticate();
-    }
-
 }
 

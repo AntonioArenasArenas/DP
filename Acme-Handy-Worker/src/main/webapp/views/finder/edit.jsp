@@ -7,12 +7,20 @@
 <%@taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>    
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
-	<form:form action="finder/edit.do"
+	<form:form action="worker/finder/edit.do"
 		modelAttribute="finder">
+		
+		<form:hidden path="finder.id" />
+		<form:hidden path="finder.version" />
+		<form:hidden path="finder.tasks" />
+		
+		<form:label path="keyWord">
+			<spring:message code="finder.keyWord" />
+		</form:label>
+		<form:input path="finder.keyWord" />
+		<form:errors cssClass="error" path="keyWord" />
+		<br/>
 		
 		<form:label path="category">
 			<spring:message code="finder.category.name" />
@@ -59,13 +67,6 @@
 		
 		<input type="submit" name="save"
 		value="<spring:message code="finder.save" />" />&nbsp;
-		<input type="submit" name="delete"
-			value="<spring:message code="finder.delete" />"
-			onclick="return confirm('<spring:message code="finder.confirm.delete" />')" />&nbsp;
 		
-		
-								
-	
 	</form:form>
 
-</html>

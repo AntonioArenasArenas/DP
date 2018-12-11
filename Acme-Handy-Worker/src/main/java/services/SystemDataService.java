@@ -1,6 +1,7 @@
 package services;
 
 import java.util.Collection;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -38,39 +39,33 @@ public class SystemDataService {
     // Simple CRUD methods ----------------------------------------------------
 
     public SystemData create() {
+    	
         SystemData result;
-
         result = new SystemData();
         return result;
     }
 
     public SystemData save(SystemData systemData) {
 
-
         Assert.notNull(systemData);
-
         SystemData result;
-
         result = systemDataRepository.save(systemData);
-
         return result;
     }
-
-
+    
     public void delete(SystemData systemData) {
-
-            systemDataRepository.delete(systemData);
+    	
+    	Assert.notNull(systemData);
+    	systemDataRepository.delete(systemData);
         
     }
-
     // Other business methods -------------------------------------------------
 
     public SystemData getSystemData(){
+    	
         SystemData result;
         result = systemDataRepository.getSystemData();
         return result;
     }
-
-
-
+   
 }

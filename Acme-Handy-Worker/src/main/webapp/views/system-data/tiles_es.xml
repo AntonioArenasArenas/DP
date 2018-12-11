@@ -16,14 +16,9 @@
        
 <tiles-definitions>
 
-	<definition name="finder/edit" extends="master.page">
-		<put-attribute name="title" value="Edit filters of the finder" />
-		<put-attribute name="body" value="/views/finder/edit.jsp" />
-	</definition>
-	
-	<definition name="finder/display" extends="master.page">
-		<put-attribute name="title" value="List of tasks" />
-		<put-attribute name="body" value="/views/finder/list.jsp" />
+	<definition name="systemData/edit" extends="master.page">
+		<put-attribute name="title" value="Configuración de la web" />
+		<put-attribute name="body" value="/views/system-data/edit.jsp" />
 	</definition>
 
 </tiles-definitions>

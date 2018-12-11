@@ -23,9 +23,18 @@ public class SystemData extends DomainEntity {
 	private String vatPercentage;
 	private int cache;
 	private int maxPrice;
+	private List<CreditCard> creditCards;
 
 
 
+	@ElementCollection
+	public List<CreditCard> getCreditCards() {
+		return creditCards;
+	}
+
+	public void setCreditCards(List<CreditCard> creditCards) {
+		this.creditCards = creditCards;
+	}
 
 	public int getMaxPrice() {
 		return maxPrice;
