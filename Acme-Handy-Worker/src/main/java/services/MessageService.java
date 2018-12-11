@@ -73,7 +73,7 @@ public class MessageService {
 		Actor actor = actorService.findByPrincipal();
 		Message result = message;
 		Box outBox = boxService.findBoxByActor("OUTBOX", actor.getId());
-		Collection<Actor> recipients = result.getRecipients();
+		Actor recipient = result.getRecipient();
 		moment = new Date(System.currentTimeMillis() - 1);
 
 		Assert.notNull(message);
@@ -89,15 +89,15 @@ public class MessageService {
 		boxService.save(outBox);
 		actorService.save(actor);
 
-		for (Actor a : recipients) {
 
-			Box InBox = boxService.findBoxByActor("INBOX", a.getId());
+
+			Box InBox = boxService.findBoxByActor("INBOX", recipient.getId());
 			InBox.getMessages().add(result);
-			a.getReceivedMessages().add(result);
+			recipient.getReceivedMessages().add(result);
 			boxService.save(InBox);
-			actorService.save(a);
+			actorService.save(recipient);
 
-		}
+	
 
 		return result;
 	}
@@ -112,7 +112,7 @@ public class MessageService {
 		// owner of the box
 		userAccount = LoginService.getPrincipal();
 		logged = actorService.findByUserAccount(userAccount);
-		Assert.isTrue(message.getRecipients().contains(logged)
+		Assert.isTrue(message.getRecipient().equals(logged)
 				|| message.getSender().equals(logged));
 		Box TrashBox = boxService.findBoxByActor("TRASHBOX", logged.getId());
 		box.getMessages().remove(message);
