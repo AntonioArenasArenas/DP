@@ -18,7 +18,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	@Query("select t.applications from Customer c join c.tasks t where c.id=?1")
 	public Collection<Application> getApplicationsByCustomerId(int CustomerId);
 	
-	@Query("select avg(c.tasks.size),min(c.tasks.size),max(c.tasks.size), stddev(c.tasks.size) from    Customer  c ")
+	@Query("select avg(t.applications.size), min(t.applications.size), max(t.applications.size), stddev(t.applications.size) from Task t; ")
 	public Double[] getApplicationPerTaskStatistics();
 	
 	@Query("select avg(a.offeredPrize),min(a.offeredPrize), max(a.offeredPrize), stddev(a.offeredPrize)   from  Application  a")
