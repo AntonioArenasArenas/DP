@@ -11,46 +11,47 @@
 
 
 
-<form:form action="profile/create.do" modelAttribute="profile">
+<form:form action="tutorial/create.do" modelAttribute="tutorial">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
+	
 
 
-	<form:label path="profile.nick">
-		<spring:message code="profile.nick" />:
+	<form:label path="tutorial.title">
+		<spring:message code="tutorial.title" />:
 	</form:label>
-	<form:input path="profile.nick"  />
-	<form:errors cssClass="error" path="profile.nick" />
+	<form:input path="tutorial.title"  />
+	<form:errors cssClass="error" path="tutorial.title" />
 	<br />
 	
 	
-	<form:label path="profile.socialNetwork">
-		<spring:message code="profile.socialNetwork" />:
+	<form:label path="tutorial.socialNetwork">
+		<spring:message code="tutorial.socialNetwork" />:
 	</form:label>
-	<form:input path="profile.socialNetwork" />
-	<form:errors cssClass="error" path="profile.socialNetwork" />
+	<form:input path="tutorial.socialNetwork" />
+	<form:errors cssClass="error" path="tutorial.socialNetwork" />
 	<br />
 	
 
-	<form:label path="profile.link">
-		<spring:message  code="profile.link" />:
+	<form:label path="tutorial.link">
+		<spring:message  code="tutorial.link" />:
 	</form:label>
-	<form:input path="profile.link" />
-	<form:errors cssClass="error" path="profile.link" />
+	<form:input path="tutorial.link" />
+	<form:errors cssClass="error" path="tutorial.link" />
 	<br />
 	
 	
 
 	<input type="submit" name="save"
-		value="<spring:message  code="profile.save" />" />&nbsp; 
-	<jstl:if test="${profile.id != 0}">
+		value="<spring:message  code="tutorial.save" />" />&nbsp; 
+	<jstl:if test="${tutorial.id != 0}">
 		<input type="submit" name="delete"
-			value="<spring:message  code="profile.delete" />"
-			onclick="return confirm('<spring:pmessage  code="profile.confirm.delete" />')" />&nbsp;
+			value="<spring:message  code="tutorial.delete" />"
+			onclick="return confirm('<spring:pmessage  code="tutorial.confirm.delete" />')" />&nbsp;
 	</jstl:if>
 	<input type="button" name="cancel"
-		value="<spring:message  code="profile.cancel" />"
+		value="<spring:message  code="tutorial.cancel" />"
 		onclick="javascript: relativeRedir('welcome/back.do');" />
 	<br />
 

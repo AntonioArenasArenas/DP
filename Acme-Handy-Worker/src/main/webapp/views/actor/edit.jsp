@@ -17,14 +17,6 @@
 <spring:message code="actor.customer" />
 </security:authorize>
 
-<security:authorize access="hasRole('ADMIN')">
-<spring:message code="actor.admin" />
-</security:authorize>
-
-<security:authorize access="hasRole('REFEREE)">
-<spring:message code="actor.referee" />
-</security:authorize>
-
 <security:authorize access="hasRole('SPONSOR)">
 <spring:message code="actor.sponsor" />
 </security:authorize>
@@ -43,11 +35,6 @@
 	<security:authorize access="hasRole('SPONSOR')">
 	<form:hidden path="sponsorships" />
 	</security:authorize>
-	
-	<security:authorize access="hasRole('REFEREE')">
-	<form:hidden path="reports" />
-	</security:authorize>
-	
 
 	<security:authorize access="hasRole('CUSTOMER')">
 	<form:hidden path="tasks" />
@@ -155,5 +142,5 @@
 
 
 <jstl:if test="${actor.id !=0}">
-			<input type="button" value="<spring:message code="actor.newProfile" />" name="button" onClick="javascript: relativeRedir('profile/list.do');"/>
+			<input type="button" value="<spring:message code="actor.Profiles" />" name="button" onClick="javascript: relativeRedir('profile/list.do');"/>
 </jstl:if>
