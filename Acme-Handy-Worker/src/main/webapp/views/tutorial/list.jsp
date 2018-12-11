@@ -23,34 +23,29 @@
 
 
 <display:table
-	pagesize="5" name="profiles" id="row"
-	requestURI="profile/list.do" >
+	pagesize="5" name="tutorials" id="row"
+	requestURI="tutorial/list.do" >
 	
 	<display:column >
 		<strong>
-			<a href="profile/edit.do?profileId=${row.id}" >
-				<jstl:out value="<spring:message code="profile.nick" />" />
+			<a href="tutorial/edit.do?tutorialId=${row.id}" >
+				<jstl:out value="<spring:message code="tutorial.title" />" />
 			</a>
 		</strong>
 		 <br/>	
 	</display:column>
 	<display:column >
-				<jstl:out value="${row.socialNetwork}" />
+				<jstl:out value="${row.lastUpdate}" />
 		 <br/>	
 	</display:column>
 	<display:column >
-				<jstl:out value="${row.link}" />
-		 <br/>	
-	</display:column>
-	<display:column >
-		<strong>
-			<a href="profile/delete.do?porfileId=${row.id}" >
-				<jstl:out value="<spring:message code="profile.delete" />" />
+			<a href="tutorial/delete.do?tutorialId=${row.id}" >
+				<jstl:out value="<spring:message code="tutorial.delete" />" />
 			</a>
-		</strong>
 		 <br/>	
 	</display:column>
+	
 	
 </display:table>
 
-<input type="button" value="<spring:message code="profile.newProfile" />" name="button" onClick="javascript: relativeRedir('profile/create.do');"/>
+<input type="button" value="<spring:message code="tutorial.newProfile" />" name="button" onClick="javascript: relativeRedir('tutorial/create.do');"/>
