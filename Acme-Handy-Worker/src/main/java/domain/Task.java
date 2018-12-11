@@ -25,6 +25,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 @Access(AccessType.PROPERTY)
 public class Task extends DomainEntity {
 
+	private Customer				customer;
 	private Collection<Complaint>	complaints;
 	private Collection<Phase>		phases;
 	private Warranty				warranty;
@@ -39,6 +40,14 @@ public class Task extends DomainEntity {
 	private double					maxPrice;
 	private String					comments;
 
+	@ManyToOne(optional = false)
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 	@OneToMany
 	@Valid

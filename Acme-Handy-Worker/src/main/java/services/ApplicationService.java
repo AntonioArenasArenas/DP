@@ -27,6 +27,9 @@ public class ApplicationService {
 
 	@Autowired
 	private WorkerService workerService;
+	
+	@Autowired
+	private TaskService taskService;
 
 	@Autowired
 	private CustomerService customerService;
@@ -96,7 +99,7 @@ public class ApplicationService {
 
 		Worker worker = workerService.findByPrincipal();
 
-		return applicationRepository.getApplicationsByWorkerId(worker.getId());
+		return worker.getApplications();
 
 	}
 
@@ -120,7 +123,7 @@ public class ApplicationService {
 		// Dependiendo de la implementación se puede hacer con Ajax el
 		// updateStatus o no
 
-		Assert.isTrue(c.getTasks().contains(t));
+		Assert.isTrue(taskService.getTasksByCustomerId(c.getId()).contains(t));
 
 		if (application.getStatus().equals("ACCEPTED")) {
 			Assert.notNull(creditcard);
@@ -163,7 +166,7 @@ public class ApplicationService {
 	public Double[] getAdminStatisticsMaximumPrice() {
 
 		Double[] result = applicationRepository
-				.getApplicationMaximuxPriceStatistics();
+				.getApplicationMaximumPriceStatistics();
 		return result;
 	}
 

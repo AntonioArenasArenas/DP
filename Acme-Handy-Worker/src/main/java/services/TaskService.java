@@ -1,6 +1,5 @@
 package services;
 
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Random;
@@ -12,8 +11,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.TaskRepository;
-import domain.Task;
 import domain.Customer;
+import domain.Task;
 
 @Service
 @Transactional
@@ -61,46 +60,41 @@ public class TaskService {
 		Task result;
 
 		result = new Task();
+		
+		Customer customer = customerService.findByPrincipal();
+		result.setCustomer(customer);
 
-		result.setTicker("288288-1ROTO2");
+		result.setTicker(tickerGenerator());
 
 		return result;
 	}
 
 	public Task save(Task task) {
 
-		Customer customer = customerService.findByPrincipal();
-
 		Assert.notNull(task);
 
 		Task result;
 
 		task.setMoment(new Date(System.currentTimeMillis() - 1));
+		
 		result = taskRepository.save(task);
-
-		customer.getTasks().add(result);
-		customerService.save(customer);
-
+		
 		return result;
 	}
 
 	public void delete(Task task) {
 		Customer c = customerService.findByPrincipal();
 		Assert.notNull(task);
-		Assert.isTrue(c.getTasks().contains(task));
-		c.getTasks().remove(task);
-		customerService.save(c);
+		Assert.isTrue(getTasksByCustomerId(c.getId()).contains(task));
 		taskRepository.delete(task);
 
 	}
 
 	// Other business methods -------------------------------------------------
 
-	public Collection<Task> listTasksCustomer(Integer id){
-
-		Customer c = customerService.findByPrincipal();
-
-		return c.getTasks();
+	public Collection<Task> getTasksByCustomerId(Integer id){
+		
+		return taskRepository.getTasksByCustomerId(id);
 
 	}
 
@@ -135,40 +129,17 @@ public class TaskService {
 
 	}
 
-	public Collection<Task> activeTasks(Collection<Task> tasks){ //Para mostrarle al customer las task activas que puede elegir
-		Collection<Task> result ;
-		result = taskRepository.findAll();
-		Date now = Calendar.getInstance().getTime();
-		for (Task t: result){
-			if(t.getEndDate().after(now)){
-				result.remove(t);
-			}
-		}
-		return result;
-
-	}
-
-//	public void updateTasks(Task task){
-//
-//		Customer c = customerService.findByPrincipal();
-//
-//		if(c.getTasks().contains(task)) {
-//			c.getTasks().remove(task);
-//		} else {
-//			c.getTasks().add(task);
+//	public Collection<Task> activeTasks(Collection<Task> tasks){ //Para mostrarle al customer las task activas que puede elegir
+//		Collection<Task> result ;
+//		result = taskRepository.findAll();
+//		Date now = Calendar.getInstance().getTime();
+//		for (Task t: result){
+//			if(t.getEndDate().after(now)){
+//				result.remove(t);
+//			}
 //		}
+//		return result;
 //
-//		customerService.save(c);
-//
-//	}
-
-//	public Boolean containsTask( Integer id, Task task){ //M�todo de utilidad que comprueba si dado una id de customer y una task, dicho customer tiene esa task
-//		Boolean r = false;
-//		if(customerService.findOne(id).getTasks().contains(task)){
-//			r = true;
-//		}
-//
-//		return r;
 //	}
 
 }

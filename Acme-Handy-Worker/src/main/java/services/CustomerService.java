@@ -17,7 +17,6 @@ import domain.Box;
 import domain.Customer;
 import domain.Message;
 import domain.Profile;
-import domain.Task;
 
 @Service
 @Transactional
@@ -55,9 +54,6 @@ public class CustomerService {
 
 		userAccount.setAuthorities(authorities);
 		Collection<Profile> profiles = new ArrayList<>();
-		Collection<Task> tasks = new ArrayList<>();
-
-		result.setTasks(tasks);
 		result.setProfiles(profiles);
 		result.setUserAccount(userAccount);
 		result.setBoxes(box);

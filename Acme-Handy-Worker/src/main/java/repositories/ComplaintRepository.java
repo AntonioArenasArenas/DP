@@ -13,7 +13,7 @@ import domain.Worker;
 @Repository
 public interface ComplaintRepository extends JpaRepository<Complaint, Integer>{
 
-	@Query("select t.complaints from Customer c join c.tasks t where c.id=?1")
+	@Query("select t.complaints from Task t where t.customer.id=?1")
 	public Collection<Complaint> getComplaintsByCustomerId(int customerId);
 
 	@Query("select a.task.complaints from Worker w join w.applications a where w.id=?1")
@@ -31,7 +31,8 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Integer>{
 	@Query("select count(t)*1.00 / ( select count(t) from Task t ) from Task t where t.complaints.size=1")
 	public Double ratioOfTasksWithComplaint();
 
-	@Query("select c from Customer c join c.tasks t order by t.complaints.size")
+//	@Query("select c from Customer c join c.tasks t order by t.complaints.size")
+	@Query("select t.customer from Task t order by t.complaints.size")
 	public List<Customer> customersOrderedByComplaints();
 
 	@Query("select w from Worker w join w.applications a join a.task t where a.status='ACCEPTED' order by t.complaints.size")

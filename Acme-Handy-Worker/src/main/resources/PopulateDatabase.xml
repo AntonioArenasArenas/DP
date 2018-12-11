@@ -1052,23 +1052,11 @@
 
 		</property>
 
-		<property name="tasks">
-
-			<list>
-				<ref bean="task2" />
-			</list>
-
-		</property>
-
 		<property name="endorsements">
 
 			<list></list>
 
 		</property>
-
-
-
-
 
 	</bean>
 
@@ -1116,14 +1104,6 @@
 			<list></list>
 		</property>
 
-		<property name="tasks">
-			<list>
-				<ref bean="task1" />
-			</list>
-		</property>
-
-
-
 	</bean>
 
 
@@ -1170,14 +1150,6 @@
 			<list></list>
 		</property>
 
-		<property name="tasks">
-			<list>
-				<ref bean="task3" />
-			</list>
-		</property>
-
-
-
 	</bean>
 
 
@@ -1223,12 +1195,6 @@
 		<property name="endorsements">
 			<list></list>
 		</property>
-
-		<property name="tasks">
-			<list></list>
-		</property>
-
-
 
 	</bean>
 
@@ -1409,6 +1375,8 @@
 
 
 	<bean id="task1" class="domain.Task">
+	
+		<property name="customer" ref="customer2" />
 
 		<property name="complaints">
 			<list>
@@ -1451,6 +1419,8 @@
 
 
 	<bean id="task2" class="domain.Task">
+	
+		<property name="customer" ref="customer1" />
 
 		<property name="complaints">
 			<list></list>
@@ -1493,6 +1463,8 @@
 
 
 	<bean id="task3" class="domain.Task">
+		
+		<property name="customer" ref="customer3" />
 
 		<property name="complaints">
 			<list>
