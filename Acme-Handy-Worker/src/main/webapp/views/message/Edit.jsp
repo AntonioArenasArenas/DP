@@ -38,9 +38,11 @@
 	<form:label path="message.priority">
 		<spring:message code="message.priority" />:
 	</form:label>      
-    <input type="radio" name="gender" value="HIGH" />
-    <input type="radio" name="gender" value="NEUTRAL" /> 
-    <input type="radio" name="gender" value="LOW" />
+    <select>
+  		<option value="HIGH">HIGH</option>
+  		<option value="NEUTRAL">NEUTRAL</option>
+  		<option value="LOW">LOW</option>
+	</select>
  	<br />
 	
 	<form:label path="message.body">
