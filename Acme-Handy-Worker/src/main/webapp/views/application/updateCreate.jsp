@@ -25,16 +25,16 @@
 
 <security:authorize access="hasRole('CUSTOMER')">
 
-		<p>
-			<spring:message code="applications.update.1" />
-		</p>
+	<p>
+		<spring:message code="applications.update.1" />
+	</p>
 
 </security:authorize>
 
 <security:authorize access="hasRole('WORKER')">
-		<p>
-			<spring:message code="applications.create" />
-		</p>
+	<p>
+		<spring:message code="applications.create" />
+	</p>
 </security:authorize>
 
 <!-- Actualizar -->
@@ -129,8 +129,11 @@
 						}
 
 						if (val === "ACCEPTED") {
+							var text = '<p id="texto">Por favor inserte una tarjeta de crédito</p';
+							$(text).insertAfter($("#comentarios"));
+
 							var holderName = '<form:label path="holderName"><spring:message code="applications.update.creditcard.name" /></form:label><form:input path="holderName" id="hName"/><form:errors cssClass="error" path="holderName" />';
-							$(holderName).insertAfter($("#comentarios"));
+							$(holderName).insertAfter($("#texto"));
 
 							var brandName = '<form:label path="brandName"><spring:message code="applications.update.creditcard.brandname" /></form:label><form:select id="bName" path="brandName"><form:options items="${brandnames}" itemValue="id" /><form:option value="0" label="----" /></form:select>';
 							$(brandName).insertAfter($("#hName"));
@@ -144,6 +147,7 @@
 							var expDate = '<form:label path="expirationDate"><spring:message code="applications.update.creditcard.expdate" /></form:label><form:input path="expirationDate" placeholder="MM/yy" format="MM/yy" id="expDat" /><form:errors cssClass="error" path="expirationDate" />';
 							$(expDate).insertAfter($("#cv"));
 						} else {
+							$("#texto").remove();
 							$("#hName").remove();
 							$("#bName").remove();
 							$("#num").remove();
