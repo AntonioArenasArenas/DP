@@ -11,15 +11,22 @@
 
 <!-- Listing grid -->
 <p><spring:message code="customer.action.1" /></p>
+
+
 	
-	<p><spring:message code="message.sender" />:<strong><jstl:out value="${row.sender}" /></strong></p>
+	<p><spring:message code="message.sender" />:<jstl:out value="${row.sender.name}" />
 	
-	<p><spring:message code="message.recipients" />:<strong><jstl:out value="${row.recipents}" /></strong></p>
-	
-	<p><spring:message code="message.subject" />:<strong><jstl:out value="${row.subject}" /></strong></p>
-	
+	<spring:message code="message.recipient" />:<jstl:out value="${row.recipient.name}" /></p>
+	<br>
+	<spring:message code="message.priority" />:<strong><jstl:out value="${row.priority}" /></strong>
+	<br>
+	<p><spring:message code="message.subject" />:<jstl:out value="${row.subject}" /></p>
+	<br>
 	<p><spring:message code="message.cuerpo" />:<jstl:out value="${row.body}" /></p>
-	
+	<br>
 	<p><spring:message code="message.tag" />:<jstl:out value="${row.tag}" /></p>
+	
+	
+	<input type="button" value="<spring:message code="message.cancel" />" name="button" onClick="javascript: relativeRedir('message/list.do');"/>
 		
 	

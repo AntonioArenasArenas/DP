@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -14,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Actor;
 import domain.Box;
 import domain.Customer;
 import domain.Message;
@@ -40,7 +38,6 @@ public class MessageServiceTest extends AbstractTest {
 		// Al no estar las beans completas nos easeguraremos de probarlo con un
 		// usuario que tenga OUTBOX y el receptor INBOX
 
-		Collection<Actor> recipients = new ArrayList<>();
 		Collection<Customer> customers = customerService.findAll();
 		Iterator<Customer> it = customers.iterator();
 		boolean exit = false;
@@ -80,10 +77,9 @@ public class MessageServiceTest extends AbstractTest {
 		}
 		recipient = c;
 
-		recipients.add(recipient);
 		super.authenticate(sender.getUserAccount().getUsername());
 		Message message = messageService.createMessage();
-		message.setRecipients(recipients);
+		message.setRecipient(recipient);
 		message.setBody("cuerpo");
 		message.setSubject("asunto");
 		message.setPriority("HIGH");
@@ -109,10 +105,10 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void testFindRecievedMessagesById() {
+	public void testFindReceivedMessagesById() {
 		// El actor superguay ha recibido mensajes
 		super.authenticate("superguay");
-		Collection<Message> result = messageService.findRecievedMessagesById();
+		Collection<Message> result = messageService.findReceivedMessagesById();
 		super.unauthenticate();
 
 		Assert.notEmpty(result);

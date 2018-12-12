@@ -17,14 +17,19 @@
 <tiles-definitions>
 
 
-	<definition name="endorser/edit" extends="master.page">
-		<put-attribute name="title" value="Create" />
-		<put-attribute name="body" value="/views/endorser/edit.jsp" />
+	<definition name="customer/create" extends="master.page">
+		<put-attribute name="title" value="new customer" />
+		<put-attribute name="body" value="/views/actor/edit.jsp" />
 	</definition>
 	
-	<definition name="endorser/edit" extends="master.page">
-		<put-attribute name="title" value="Edit" />
-		<put-attribute name="body" value="/views/endorser/edit.jsp" />
+	<definition name="worker/create" extends="master.page">
+		<put-attribute name="title" value="new worker" />
+		<put-attribute name="body" value="/views/actor/edit.jsp" />
+	</definition>
+	
+	<definition name="sponsor/create" extends="master.page">
+		<put-attribute name="title" value="new sponsor" />
+		<put-attribute name="body" value="/views/actor/edit.jsp" />
 	</definition>
 	
 	

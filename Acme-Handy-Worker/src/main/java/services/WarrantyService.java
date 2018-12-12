@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.WarrantyRepository;
-import domain.Task;
 import domain.Warranty;
 
 @Service
@@ -18,9 +17,6 @@ public class WarrantyService {
 
 	@Autowired
 	private WarrantyRepository warrantyRepository;
-	
-	@Autowired
-	private TaskService taskService;
 
 
 //Constructors -----------------------------------------------------------
@@ -76,15 +72,6 @@ public class WarrantyService {
 		public void delete(Warranty warranty){
 			
 			Assert.notNull(warranty);
-			
-			Boolean warrantyIsInTask = false;
-			for(Task task : taskService.findAll()) {
-				if(task.getWarranty().equals(warranty)){
-					warrantyIsInTask = true;
-					break;
-				}
-			}
-			Assert.isTrue(!warrantyIsInTask);
 			
 			Assert.isTrue(warranty.getDraftMode()==true);
 			

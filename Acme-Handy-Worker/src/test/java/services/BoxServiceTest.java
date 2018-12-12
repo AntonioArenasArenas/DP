@@ -105,7 +105,7 @@ public class BoxServiceTest extends AbstractTest {
 	@Test
 	public void testFindBoxesWithMessage() {
 
-		Message message = messageService.findOne(448);
+		Message message = messageService.findOne(453);
 
 		Collection<Box> containers = boxService.findBoxesWithMessage(message);
 
