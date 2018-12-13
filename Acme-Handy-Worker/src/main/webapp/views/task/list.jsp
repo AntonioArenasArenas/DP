@@ -29,7 +29,7 @@
 	</security:authorize>
 	<security:authorize access="hasRole('WORKER')">
 		<display:column>
-			<a href="customer/profile.do?id=${row.customer.id}"> <!--  TODO: Cambiar el UML para que se pueda navegar de task a customer -->
+			<a href="customer/profile.do?id=${row.customer.id}">
 				<spring:message code="task.viewCustomer" />
 			</a>
 		</display:column>
