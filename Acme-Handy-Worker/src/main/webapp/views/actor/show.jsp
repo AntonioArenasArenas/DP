@@ -14,10 +14,6 @@
 <jstl:out value="${userAccount.username}"/>
 <br />
 
-<b><spring:message code="userAccount.password" />:</b>
-<jstl:out value="${actor.password}"/>
-<br />
-
 <b><spring:message code="actor.name" />:</b>
 <jstl:out value="${actor.name}"/>
 <br />
