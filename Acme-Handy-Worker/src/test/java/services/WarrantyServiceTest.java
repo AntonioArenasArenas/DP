@@ -43,7 +43,7 @@ public class WarrantyServiceTest extends AbstractTest{
 //		Collection<Warranty> warranties = warrantyService.findAll();
 //		LinkedList<Warranty> listaWarranties = new LinkedList<Warranty>(warranties);
 //		Warranty warranty = listaWarranties.getFirst();
-		Warranty warranty = warrantyService.findOne(439); // This is a warranty with no task
+		Warranty warranty = warrantyService.findOne(441); // This is a warranty with no task
 		Assert.notNull(warranty);
 		Assert.isTrue(warranty.getDraftMode()==true);
 		warrantyService.delete(warranty);

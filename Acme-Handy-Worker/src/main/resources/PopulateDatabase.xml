@@ -1965,7 +1965,7 @@
 
 		<property name="tasks">
 			<list>
-				<ref bean="task1" />
+				<ref bean="task2" />
 			</list></property>
 		<property name="keyWord" value= "Patata"/>
 		<property name="category" value="category1"/>
