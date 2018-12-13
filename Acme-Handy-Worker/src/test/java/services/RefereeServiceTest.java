@@ -1,7 +1,6 @@
 package services;
 
 import java.util.Collection;
-import java.util.LinkedList;
 
 import javax.transaction.Transactional;
 
@@ -60,20 +59,6 @@ public class RefereeServiceTest extends AbstractTest {
 				.toArray()[0];
 		Assert.isTrue(auth.getAuthority().equals("REFEREE"));
 
-	}
-
-	@Test
-	public void testDelete() {
-
-		Collection<Referee> referees = refereeService.findAll();
-		LinkedList<Referee> refereeslist = new LinkedList<Referee>(referees);
-		Referee c = refereeslist.getFirst();
-
-		refereeService.delete(c);
-
-		Collection<Referee> refereessaved = refereeService.findAll();
-
-		Assert.isTrue(!refereessaved.contains(c));
 	}
 
 	@Test
