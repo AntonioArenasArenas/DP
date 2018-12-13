@@ -69,20 +69,6 @@ public class ActorService {
 		return result;
 	}
 
-	public void delete(Actor actor) {
-		
-		UserAccount userAccount;
-		
-		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(actor.getUserAccount().equals(userAccount));
-		
-		Assert.notNull(actor);
-		Assert.isTrue(actor.getId() != 0);
-		Assert.isTrue(actorRepository.exists(actor.getId()));
-
-		actorRepository.delete(actor);
-	}
-
 	// Other business methods -------------------------------------------------
 	
 	public Actor findByPrincipal() {

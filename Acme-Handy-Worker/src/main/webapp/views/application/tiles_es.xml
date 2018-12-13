@@ -12,29 +12,18 @@
 
 	<definition name="application/list" extends="master.page">
 		<put-attribute name="title" value="Lista de aplicaciones" />
-		<put-attribute name="body"
-			value="/views/application/applications-list.jsp" />
+		<put-attribute name="body" value="/views/application/list.jsp" />
 	</definition>
 
 	<definition name="application/show" extends="master.page">
-		<put-attribute name="title" value="Detalles de aplicación" />
-		<put-attribute name="body" value="/views/application/showUpdate.jsp" />
+		<put-attribute name="title" value="Detalles de la aplicación" />
+		<put-attribute name="body" value="/views/application/show.jsp" />
 	</definition>
 
-	<definition name="application/update" extends="master.page">
-		<put-attribute name="title" value="Actualizar aplicación" />
-		<put-attribute name="body" value="/views/application/showUpdate.jsp" />
-	</definition>
-
-	<definition name="application/updateCreditCard" extends="master.page">
-		<put-attribute name="title" value="Proporcionar tarjeta de crédito" />
+	<definition name="application/updateCreate" extends="master.page">
+		<put-attribute name="title" value="Aplicación" />
 		<put-attribute name="body"
-			value="/views/application/updateCreditCard.jsp" />
-	</definition>
-
-	<definition name="application/create" extends="master.page">
-		<put-attribute name="title" value="Crear aplicación" />
-		<put-attribute name="body" value="/views/application/create.jsp" />
+			value="/views/application/updateCreate.jsp" />
 	</definition>
 
 	<definition name="application/adminStatistics" extends="master.page">

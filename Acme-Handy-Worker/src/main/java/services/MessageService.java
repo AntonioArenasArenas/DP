@@ -143,11 +143,11 @@ public class MessageService {
 
 	}
 
-	public Collection<Message> findRecievedMessagesById() {
+	public Collection<Message> findReceivedMessagesById() {
 		UserAccount userAccount = LoginService.getPrincipal();
 		Actor logged = actorService.findByUserAccount(userAccount);
 
-		return messageRepository.getRecievedMessagesById(logged.getId());
+		return messageRepository.getReceivedMessagesById(logged.getId());
 	}
 
 }

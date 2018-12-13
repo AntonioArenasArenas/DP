@@ -1,7 +1,6 @@
 package services;
 
 import java.util.Collection;
-import java.util.LinkedList;
 
 import javax.transaction.Transactional;
 
@@ -60,20 +59,6 @@ public class CustomerServiceTest extends AbstractTest {
 				.toArray()[0];
 		Assert.isTrue(auth.getAuthority().equals("CUSTOMER"));
 
-	}
-
-	@Test
-	public void testDelete() {
-
-		Collection<Customer> customers = customerService.findAll();
-		LinkedList<Customer> customerslist = new LinkedList<Customer>(customers);
-		Customer c = customerslist.getFirst();
-
-		customerService.delete(c);
-
-		Collection<Customer> customerssaved = customerService.findAll();
-
-		Assert.isTrue(!customerssaved.contains(c));
 	}
 
 	@Test

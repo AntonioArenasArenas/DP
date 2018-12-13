@@ -11,8 +11,7 @@ import domain.Task;
 @Repository
 public interface TaskRepository extends JpaRepository<Task, Integer>{
 
-	// Para probarlo con la base de datos esta query y ver que funciona(select c.tasks from Customer c where c.id=426;)
-	@Query("select c.tasks from Customer c where c.id=?1")
+	@Query("select t from Task t where t.customer.id=?1")
 	public Collection<Task> getTasksByCustomerId(int customerId);
 	
 }

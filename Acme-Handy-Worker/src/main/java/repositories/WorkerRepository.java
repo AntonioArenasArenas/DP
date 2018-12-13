@@ -12,6 +12,4 @@ public interface WorkerRepository extends JpaRepository<Worker, Integer>{
 	@Query("select w from Worker w where w.userAccount.id = ?1")
 	Worker findByUserAccountId(int userAccountId);
 	
-	
-	
 }

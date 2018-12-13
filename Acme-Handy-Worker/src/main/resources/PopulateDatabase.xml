@@ -1053,23 +1053,11 @@
 
 		</property>
 
-		<property name="tasks">
-
-			<list>
-				<ref bean="task2" />
-			</list>
-
-		</property>
-
 		<property name="endorsements">
 
 			<list></list>
 
 		</property>
-
-
-
-
 
 	</bean>
 
@@ -1117,14 +1105,6 @@
 			<list></list>
 		</property>
 
-		<property name="tasks">
-			<list>
-				<ref bean="task1" />
-			</list>
-		</property>
-
-
-
 	</bean>
 
 
@@ -1171,14 +1151,6 @@
 			<list></list>
 		</property>
 
-		<property name="tasks">
-			<list>
-				<ref bean="task3" />
-			</list>
-		</property>
-
-
-
 	</bean>
 
 
@@ -1224,12 +1196,6 @@
 		<property name="endorsements">
 			<list></list>
 		</property>
-
-		<property name="tasks">
-			<list></list>
-		</property>
-
-
 
 	</bean>
 
@@ -1410,6 +1376,8 @@
 
 
 	<bean id="task1" class="domain.Task">
+	
+		<property name="customer" ref="customer2" />
 
 		<property name="complaints">
 			<list>
@@ -1452,6 +1420,8 @@
 
 
 	<bean id="task2" class="domain.Task">
+	
+		<property name="customer" ref="customer1" />
 
 		<property name="complaints">
 			<list></list>
@@ -1494,6 +1464,8 @@
 
 
 	<bean id="task3" class="domain.Task">
+		
+		<property name="customer" ref="customer3" />
 
 		<property name="complaints">
 			<list>
@@ -1553,11 +1525,7 @@
 
 		<property name="draftMode" value="True" />
 
-
-
 	</bean>
-
-
 
 	<bean id="warranty2" class="domain.Warranty">
 
@@ -1570,11 +1538,7 @@
 
 		<property name="draftMode" value="True" />
 
-
-
 	</bean>
-
-
 
 	<bean id="warranty3" class="domain.Warranty">
 
@@ -1585,9 +1549,20 @@
 		<property name="laws"
 			value="leyes escritas separadas por algun simbolo para la garantia 3" />
 
-		<property name="draftMode" value="False" />
+		<property name="draftMode" value="True" />
 
+	</bean>
+	
+	<bean id="warranty4" class="domain.Warranty">
 
+		<property name="title" value="Titulo de la garantia 4" />
+
+		<property name="terms" value="Terminos de la garantia 4" />
+
+		<property name="laws"
+			value="leyes escritas separadas por algun simbolo para la garantia 4" />
+
+		<property name="draftMode" value="True" />
 
 	</bean>
 
@@ -1964,11 +1939,7 @@
 
 		<property name="sender" ref="customer1" />
 
-		<property name="recipients">
-			<list>
-				<ref bean="customer2" />
-			</list>
-		</property>
+		<property name="recipient" ref="customer2" />
 
 		<property name="moment" value="2016/12/22 08:41" />
 

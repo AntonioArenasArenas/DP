@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -14,7 +13,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
-import domain.Actor;
 import domain.Box;
 import domain.Customer;
 import domain.Message;
@@ -107,10 +105,10 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void testFindRecievedMessagesById() {
+	public void testFindReceivedMessagesById() {
 		// El actor superguay ha recibido mensajes
 		super.authenticate("superguay");
-		Collection<Message> result = messageService.findRecievedMessagesById();
+		Collection<Message> result = messageService.findReceivedMessagesById();
 		super.unauthenticate();
 
 		Assert.notEmpty(result);
