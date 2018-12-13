@@ -42,7 +42,7 @@ public abstract class Actor extends DomainEntity {
 	private String				phoneNumber;
 	private String				address;
 	private boolean				suspicious;
-	private UserAccount       userAccount;
+	private UserAccount       	userAccount;
 	
 
 	
