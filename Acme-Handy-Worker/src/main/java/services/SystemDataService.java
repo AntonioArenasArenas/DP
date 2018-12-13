@@ -1,8 +1,5 @@
 package services;
 
-import java.util.Collection;
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.SystemDataRepository;
-
-import domain.Actor;
-import domain.Admin;
-
 import domain.SystemData;
 
 
@@ -24,11 +17,6 @@ public class SystemDataService {
 
     @Autowired
     private SystemDataRepository		systemDataRepository;
-
-    // Supporting services ----------------------------------------------------
-
-    @Autowired
-    private ActorService actorService;
 
     // Constructors -----------------------------------------------------------
 

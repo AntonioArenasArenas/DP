@@ -6,16 +6,15 @@ import java.util.Date;
 
 import javax.transaction.Transactional;
 
-
-import domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.FinderRepository;
-import security.Authority;
-import security.LoginService;
-import security.UserAccount;
+import domain.Finder;
+import domain.SystemData;
+import domain.Task;
+import domain.Worker;
 
 @Service
 @Transactional
