@@ -38,6 +38,7 @@ public class SystemDataService {
         Assert.notNull(systemData);
         SystemData result;
         result = systemDataRepository.save(systemData);
+        Assert.notNull(result);
         return result;
     }
     

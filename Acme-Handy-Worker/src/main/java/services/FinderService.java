@@ -51,18 +51,21 @@ public class FinderService {
         Finder result;
         finder.setLastUpdate(now);
         result = finderRepository.save(finder);
+        Assert.isTrue(findOne() == finder);
         return result;
     }
     public void delete(Finder finder){
     	
     	Assert.notNull(finder);
         finderRepository.delete(finder);
+        Assert.isNull(finder);
 
     }
     public Finder findOne() {
 
         Finder result;
         result = getFinderByWorkerId();
+        Assert.notNull(result);
         cleanFinderCache();
         return result;
     }
@@ -82,7 +85,9 @@ public class FinderService {
         Collection<Task> cleaned = new ArrayList<>();
         if (passedTime >= s.getCache()){
             finder.setTasks(cleaned);
+            Assert.isTrue(finder.getTasks() == cleaned);
         }
+        
     }
     public Finder getFinderByWorkerId(){
     	
@@ -97,6 +102,7 @@ public class FinderService {
         SystemData s;
         s = this.systemDataService.getSystemData();
         s.setCache(cache);
+        Assert.isTrue(s.getCache() == cache);
 
     }
 }
