@@ -93,6 +93,13 @@ public class RefereeService {
 		return result;
 	}
 
+	public void delete(Referee referee) {
+		Assert.notNull(referee);
+		Assert.isTrue(referee.getId() != 0);
+
+		refereeRepository.delete(referee);
+	}
+
 	// Other business methods -------------------------------------------------
 
 	public Referee findByPrincipal() {
