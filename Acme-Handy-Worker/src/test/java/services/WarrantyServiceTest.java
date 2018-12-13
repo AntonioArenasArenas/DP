@@ -1,7 +1,6 @@
 package services;
 
 import java.util.Collection;
-import java.util.LinkedList;
 
 import javax.transaction.Transactional;
 
@@ -12,9 +11,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
-import domain.Warranty;
-
 import utilities.AbstractTest;
+import domain.Warranty;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations = { "classpath:spring/datasource.xml",
@@ -42,9 +40,10 @@ public class WarrantyServiceTest extends AbstractTest{
 	
 	@Test
 	public void testDeleteWarranty(){
-		Collection<Warranty> warranties = warrantyService.findAll();
-		LinkedList<Warranty> listaWarranties = new LinkedList<Warranty>(warranties);
-		Warranty warranty = listaWarranties.getFirst();
+//		Collection<Warranty> warranties = warrantyService.findAll();
+//		LinkedList<Warranty> listaWarranties = new LinkedList<Warranty>(warranties);
+//		Warranty warranty = listaWarranties.getFirst();
+		Warranty warranty = warrantyService.findOne(439); // This is a warranty with no task
 		Assert.notNull(warranty);
 		Assert.isTrue(warranty.getDraftMode()==true);
 		warrantyService.delete(warranty);

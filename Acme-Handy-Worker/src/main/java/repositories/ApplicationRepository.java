@@ -15,10 +15,10 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	@Query("select w.applications from Worker w where w.id=?1")
 	public Collection<Application> getApplicationsByWorkerId(int WorkerId);
 
-	@Query("select t.applications from Customer c join c.tasks t where c.id=?1")
+	@Query("select t.applications from Task t where t.customer.id=?1")
 	public Collection<Application> getApplicationsByCustomerId(int CustomerId);
 
-	@Query("select avg(t.applications.size), min(t.applications.size), max(t.applications.size), stddev(t.applications.size) from Task t; ")
+	@Query("select avg(t.applications.size), min(t.applications.size), max(t.applications.size), stddev(t.applications.size) from Task t")
 	public Double[] getApplicationPerTaskStatistics();
 
 	@Query("select avg(a.offeredPrize),min(a.offeredPrize), max(a.offeredPrize), stddev(a.offeredPrize) from Application a")
