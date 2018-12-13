@@ -29,7 +29,8 @@ public class Message extends DomainEntity {
 	private String				priority;
 	private String				tags;
 
-
+	@Valid
+	@NotNull
 	@ManyToOne(optional = false)
 	public Actor getSender() {
 		return this.sender;
@@ -37,7 +38,7 @@ public class Message extends DomainEntity {
 	
 	@Valid
 	@NotNull
-	@ManyToOne
+	@ManyToOne(optional = false)
 	public Actor getRecipient() {
 		return this.recipient;
 	}

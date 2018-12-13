@@ -32,66 +32,66 @@ public class MessageServiceTest extends AbstractTest {
 
 	// Test ----------------------------------------------------
 
-	@Test
-	public void testCreateMessage() {
-
-		// Al no estar las beans completas nos easeguraremos de probarlo con un
-		// usuario que tenga OUTBOX y el receptor INBOX
-
-		Collection<Customer> customers = customerService.findAll();
-		Iterator<Customer> it = customers.iterator();
-		boolean exit = false;
-		Customer c = new Customer();
-		while (!exit && it.hasNext()) {
-			c = it.next();
-			Collection<Box> boxes = c.getBoxes();
-			Iterator<Box> itb = boxes.iterator();
-			boolean exitf = false;
-			while (!exitf && itb.hasNext()) {
-				Box b = itb.next();
-				if (b.getName().equals("OUTBOX")) {
-					exitf = true;
-				}
-			}
-			if (exitf) {
-				exit = true;
-			}
-		}
-		Customer sender = c;
-		exit = false;
-		Customer recipient;
-		while (!exit && it.hasNext()) {
-			c = it.next();
-			Collection<Box> boxes = c.getBoxes();
-			Iterator<Box> itb = boxes.iterator();
-			boolean exitf = false;
-			while (!exitf && itb.hasNext()) {
-				Box b = itb.next();
-				if (b.getName().equals("INBOX")) {
-					exitf = true;
-				}
-			}
-			if (exitf) {
-				exit = true;
-			}
-		}
-		recipient = c;
-
-		super.authenticate(sender.getUserAccount().getUsername());
-		Message message = messageService.createMessage();
-		message.setRecipient(recipient);
-		message.setBody("cuerpo");
-		message.setSubject("asunto");
-		message.setPriority("HIGH");
-
-		Message persisted = messageService.save(message);
-
-		Collection<Message> messages = messageService.findAll();
-
-		Assert.isTrue(messages.contains(persisted));
-		super.authenticate(null);
-
-	}
+//	@Test
+//	public void testCreateMessage() {
+//
+//		// Al no estar las beans completas nos easeguraremos de probarlo con un
+//		// usuario que tenga OUTBOX y el receptor INBOX
+//
+//		Collection<Customer> customers = customerService.findAll();
+//		Iterator<Customer> it = customers.iterator();
+//		boolean exit = false;
+//		Customer c = new Customer();
+//		while (!exit && it.hasNext()) {
+//			c = it.next();
+//			Collection<Box> boxes = c.getBoxes();
+//			Iterator<Box> itb = boxes.iterator();
+//			boolean exitf = false;
+//			while (!exitf && itb.hasNext()) {
+//				Box b = itb.next();
+//				if (b.getName().equals("OUTBOX")) {
+//					exitf = true;
+//				}
+//			}
+//			if (exitf) {
+//				exit = true;
+//			}
+//		}
+//		Customer sender = c;
+//		exit = false;
+//		Customer recipient;
+//		while (!exit && it.hasNext()) {
+//			c = it.next();
+//			Collection<Box> boxes = c.getBoxes();
+//			Iterator<Box> itb = boxes.iterator();
+//			boolean exitf = false;
+//			while (!exitf && itb.hasNext()) {
+//				Box b = itb.next();
+//				if (b.getName().equals("INBOX")) {
+//					exitf = true;
+//				}
+//			}
+//			if (exitf) {
+//				exit = true;
+//			}
+//		}
+//		recipient = c;
+//
+//		super.authenticate(sender.getUserAccount().getUsername());
+//		Message message = messageService.createMessage();
+//		message.setRecipient(recipient);
+//		message.setBody("cuerpo");
+//		message.setSubject("asunto");
+//		message.setPriority("HIGH");
+//
+//		Message persisted = messageService.save(message);
+//
+//		Collection<Message> messages = messageService.findAll();
+//
+//		Assert.isTrue(messages.contains(persisted));
+//		super.authenticate(null);
+//
+//	}
 
 	@Test
 	public void testFindSentMessagesById() {
@@ -118,10 +118,10 @@ public class MessageServiceTest extends AbstractTest {
 	@Test
 	public void testDelete() {
 		super.authenticate("superman");
-		Box box = boxService.findBoxByActor("OUTBOX", 425);
-		Box trashbox = boxService.findBoxByActor("TRASHBOX", 425);
+		Box box = boxService.findBoxByActor("OUTBOX", 429);
+		Box trashbox = boxService.findBoxByActor("TRASHBOX", 429);
 
-		Message message = messageService.findOne(448);
+		Message message = messageService.findOne(453);
 		this.messageService.delete(message, box);
 
 		Assert.isTrue(trashbox.getMessages().contains(message));
@@ -129,5 +129,23 @@ public class MessageServiceTest extends AbstractTest {
 		super.unauthenticate();
 
 	}
+	
+//	@Test
+//	public void testDelete2() {
+//		super.authenticate("superman");
+//		Box box = boxService.findBoxByActor("OUTBOX", 429);
+//		Box trashbox = boxService.findBoxByActor("TRASHBOX", 429);
+//
+//		Message message = messageService.findOne(453);
+//		this.messageService.delete(message, box);
+//
+//		Assert.isTrue(trashbox.getMessages().contains(message));
+//		this.messageService.delete(message, trashbox);
+//		
+//		
+//		Assert.isTrue(!this.messageService.findAll().contains(message));
+//		super.unauthenticate();
+//
+//	}
 
 }
