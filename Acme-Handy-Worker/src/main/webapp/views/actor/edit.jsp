@@ -46,7 +46,7 @@
 	
 	<form:hidden path="boxes" />
 	<form:hidden path="sentMessages" />
-	<form:hidden path="receivedtMessages" />
+	<form:hidden path="receivedMessages" />
 	
 	
 	<form:label path="userAccount.username">

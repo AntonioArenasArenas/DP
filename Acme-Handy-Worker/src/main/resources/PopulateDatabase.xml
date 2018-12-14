@@ -1,14 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
-	* * The use of this project is hereby constrained to the conditions of the 
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla
+	* * The use of this project is hereby constrained to the conditions of the
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="
-		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
-	">
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<!-- User accounts -->
 
@@ -705,8 +704,10 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
+
+		<property name="finder" ref="finder1" />
 
 		<property name="boxes">
 
@@ -783,7 +784,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount2" />
@@ -861,7 +862,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount3" />
@@ -939,7 +940,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Mesa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount4" />
@@ -1018,7 +1019,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount5" />
@@ -1077,7 +1078,7 @@
 		<property name="phoneNumber" value="+34 654 653 841" />
 
 		<property name="address" value="Calle Luis Montoto" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount6" />
@@ -1123,7 +1124,7 @@
 		<property name="phoneNumber" value="+34 696 696 666" />
 
 		<property name="address" value="El puente triana wi pasa la reina" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount7" />
@@ -1169,7 +1170,7 @@
 		<property name="phoneNumber" value="+34 696 696 666" />
 
 		<property name="address" value="El puente triana wi pasa la reina" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount8" />
@@ -1219,7 +1220,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount9" />
@@ -1289,7 +1290,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount10" />
@@ -1341,7 +1342,7 @@
 		<property name="phoneNumber" value="+34 344 654 843" />
 
 		<property name="address" value="Avenida Ramon Resa" />
-		
+
 		<property name="suspicious" value="False" />
 
 		<property name="userAccount" ref="userAccount11" />
@@ -1375,7 +1376,7 @@
 
 
 	<bean id="task1" class="domain.Task">
-	
+
 		<property name="customer" ref="customer2" />
 
 		<property name="complaints">
@@ -1419,7 +1420,7 @@
 
 
 	<bean id="task2" class="domain.Task">
-	
+
 		<property name="customer" ref="customer1" />
 
 		<property name="complaints">
@@ -1463,7 +1464,7 @@
 
 
 	<bean id="task3" class="domain.Task">
-		
+
 		<property name="customer" ref="customer3" />
 
 		<property name="complaints">
@@ -1551,7 +1552,7 @@
 		<property name="draftMode" value="True" />
 
 	</bean>
-	
+
 	<bean id="warranty4" class="domain.Warranty">
 
 		<property name="title" value="Titulo de la garantia 4" />
@@ -1962,13 +1963,42 @@
 
 		<property name="subject" value="IMPORTANTE" />
 
-		<property name="body" value="Esto es importante" />
+	<!-- Finder -->
 
-		<property name="priority" value="HIGH" />
 
-		<property name="tags" value="important" />
+
+	<bean id="finder1" class="domain.Finder">
+
+		<property name="tasks">
+			<list>
+				<ref bean="task2" />
+			</list></property>
+		<property name="keyWord" value= "Patata"/>
+		<property name="category" value="category1"/>
+		<property name="warranty" value="warranty1"/>
+		<property name="maxPrice" value="5.0" />
+		<property name="minPrice" value="2.0"/>
+		<property name="startDate" value="2017/07/10 01:41" />
+		<property name="endDate" value="2018/08/10 01:41" />
+		<property name="lastUpdate" value="2018/8/10 00:42" />
+
 	</bean>
 
+	<!--  SystemData -->
+
+
+ 	<bean id="systemData" class="domain.SystemData">
+
+		<property name="name" value="nombre"/>
+		<property name="banner" value="hola"/>
+		<property name="bannerHeader" value="hola2"/>
+		<property name="welcomePageMsg" value="bienvenido de veulta"/>
+		<property name="phoneCode" ><list></list></property>
+		<property name="spamWords" ><list></list></property>
+		<property name="vatPercentage" value="22%"/>
+		<property name="cache" value="3"/>
+		<property name="maxPrice" value="22"/>
+	</bean>
 
 
 </beans>
