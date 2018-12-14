@@ -13,6 +13,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.util.Assert;
 
 import utilities.AbstractTest;
+import domain.Actor;
 import domain.Box;
 import domain.Customer;
 import domain.Message;
@@ -26,72 +27,36 @@ public class MessageServiceTest extends AbstractTest {
 	@Autowired
 	private MessageService messageService;
 	@Autowired
+	private ActorService actorService;
+	@Autowired
 	private CustomerService customerService;
 	@Autowired
 	private BoxService boxService;
 
 	// Test ----------------------------------------------------
 
-//	@Test
-//	public void testCreateMessage() {
-//
-//		// Al no estar las beans completas nos easeguraremos de probarlo con un
-//		// usuario que tenga OUTBOX y el receptor INBOX
-//
-//		Collection<Customer> customers = customerService.findAll();
-//		Iterator<Customer> it = customers.iterator();
-//		boolean exit = false;
-//		Customer c = new Customer();
-//		while (!exit && it.hasNext()) {
-//			c = it.next();
-//			Collection<Box> boxes = c.getBoxes();
-//			Iterator<Box> itb = boxes.iterator();
-//			boolean exitf = false;
-//			while (!exitf && itb.hasNext()) {
-//				Box b = itb.next();
-//				if (b.getName().equals("OUTBOX")) {
-//					exitf = true;
-//				}
-//			}
-//			if (exitf) {
-//				exit = true;
-//			}
-//		}
-//		Customer sender = c;
-//		exit = false;
-//		Customer recipient;
-//		while (!exit && it.hasNext()) {
-//			c = it.next();
-//			Collection<Box> boxes = c.getBoxes();
-//			Iterator<Box> itb = boxes.iterator();
-//			boolean exitf = false;
-//			while (!exitf && itb.hasNext()) {
-//				Box b = itb.next();
-//				if (b.getName().equals("INBOX")) {
-//					exitf = true;
-//				}
-//			}
-//			if (exitf) {
-//				exit = true;
-//			}
-//		}
-//		recipient = c;
-//
-//		super.authenticate(sender.getUserAccount().getUsername());
-//		Message message = messageService.createMessage();
-//		message.setRecipient(recipient);
-//		message.setBody("cuerpo");
-//		message.setSubject("asunto");
-//		message.setPriority("HIGH");
-//
-//		Message persisted = messageService.save(message);
-//
-//		Collection<Message> messages = messageService.findAll();
-//
-//		Assert.isTrue(messages.contains(persisted));
-//		super.authenticate(null);
-//
-//	}
+	
+	@Test
+	public void testCreateMessage(){
+		super.authenticate("superman");
+		Message message = messageService.createMessage();
+		Actor recipient = actorService.findOne(431);
+		message.setRecipient(recipient);
+		message.setSubject("subjetc");
+		message.setBody("Body");
+		message.setTags("#tag");
+		message.setPriority("HIGH");
+		Message saved = messageService.save(message);
+		
+		Assert.isTrue(messageService.findAll().contains(saved));
+		
+		Box Inbox = boxService.findOne(404);
+		Box Outbox = boxService.findOne(410);
+		
+		Assert.isTrue(Inbox.getMessages().contains(saved));
+		Assert.isTrue(Outbox.getMessages().contains(saved));
+		
+	}
 
 	@Test
 	public void testFindSentMessagesById() {
@@ -118,10 +83,10 @@ public class MessageServiceTest extends AbstractTest {
 	@Test
 	public void testDelete() {
 		super.authenticate("superman");
-		Box box = boxService.findBoxByActor("OUTBOX", 429);
-		Box trashbox = boxService.findBoxByActor("TRASHBOX", 429);
+		Box box = boxService.findBoxByActor("OUTBOX", 430);
+		Box trashbox = boxService.findBoxByActor("TRASHBOX", 430);
 
-		Message message = messageService.findOne(453);
+		Message message = messageService.findOne(454);
 		this.messageService.delete(message, box);
 
 		Assert.isTrue(trashbox.getMessages().contains(message));
@@ -130,22 +95,19 @@ public class MessageServiceTest extends AbstractTest {
 
 	}
 	
-//	@Test
-//	public void testDelete2() {
-//		super.authenticate("superman");
-//		Box box = boxService.findBoxByActor("OUTBOX", 429);
-//		Box trashbox = boxService.findBoxByActor("TRASHBOX", 429);
-//
-//		Message message = messageService.findOne(453);
-//		this.messageService.delete(message, box);
-//
-//		Assert.isTrue(trashbox.getMessages().contains(message));
-//		this.messageService.delete(message, trashbox);
-//		
-//		
-//		Assert.isTrue(!this.messageService.findAll().contains(message));
-//		super.unauthenticate();
-//
-//	}
+	@Test
+	public void testDelete2() {
+		super.authenticate("superman");
+		Box trashbox = boxService.findBoxByActor("TRASHBOX", 430);
+
+		Message message = messageService.findOne(455);
+		Assert.isTrue(trashbox.getMessages().contains(message));
+		this.messageService.delete(message, trashbox);
+
+		
+		Assert.isTrue(trashbox.getMessages().isEmpty());
+		super.unauthenticate();
+
+	}
 
 }

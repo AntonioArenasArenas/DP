@@ -308,7 +308,7 @@
 
 		<property name="messages">
 
-			<list></list>
+			<list><ref bean="message2"/></list>
 
 		</property>
 
@@ -1949,13 +1949,25 @@
 		<property name="priority" value="HIGH" />
 
 		<property name="tags" value="important" />
-
-
-
-
-
 	</bean>
 
+
+	<bean id="message2" class="domain.Message">
+
+		<property name="sender" ref="customer1" />
+
+		<property name="recipient" ref="customer2" />
+
+		<property name="moment" value="2016/12/22 08:42" />
+
+		<property name="subject" value="IMPORTANTE" />
+
+		<property name="body" value="Esto es importante" />
+
+		<property name="priority" value="HIGH" />
+
+		<property name="tags" value="important" />
+	</bean>
 
 
 

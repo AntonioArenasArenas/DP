@@ -116,13 +116,14 @@ public class MessageService {
 				|| message.getSender().equals(logged));
 		Box TrashBox = boxService.findBoxByActor("TRASHBOX", logged.getId());
 		box.getMessages().remove(message);
+		boxService.save(box);
 
 		if (box.getName() == TrashBox.getName()) {
 
-			//if (boxService.findBoxesWithMessage(message).isEmpty()) {
+			if (boxService.findBoxesWithMessage(message).isEmpty()) {
 
 				messageRepository.delete(message);
-			//}
+			}
 
 		} else {
 
