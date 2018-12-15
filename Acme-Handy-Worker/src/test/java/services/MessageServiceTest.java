@@ -81,7 +81,7 @@ public class MessageServiceTest extends AbstractTest {
 
 		super.authenticate(sender.getUserAccount().getUsername());
 		Message message = messageService.createMessage();
-		message.setRecipient(recipient);
+		message.setRecipients(recipients);
 		message.setBody("cuerpo");
 		message.setSubject("asunto");
 		message.setPriority("HIGH");
