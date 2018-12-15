@@ -1037,13 +1037,13 @@
 
 		<property name="sentMessages">
 
-			<list></list>
+			<list><ref bean="message1" /></list>
 
 		</property>
 
 		<property name="receivedMessages">
 
-			<list></list>
+			<list><ref bean="message2" /></list>
 
 		</property>
 
@@ -1090,11 +1090,15 @@
 		</property>
 
 		<property name="sentMessages">
-			<list></list>
+
+			<list><ref bean="message2" /></list>
+
 		</property>
 
 		<property name="receivedMessages">
-			<list></list>
+
+			<list><ref bean="message1" /></list>
+
 		</property>
 
 		<property name="profiles">
@@ -1939,7 +1943,11 @@
 
 		<property name="sender" ref="customer1" />
 
-		<property name="recipient" ref="customer2" />
+		<property name="recipients">
+			<list>
+				<ref bean="customer2" />
+			</list>
+		</property>
 
 		<property name="moment" value="2016/12/22 08:41" />
 
@@ -1955,13 +1963,25 @@
 
 	<bean id="message2" class="domain.Message">
 
-		<property name="sender" ref="customer1" />
+		<property name="sender" ref="customer2" />
 
-		<property name="recipient" ref="customer2" />
+		<property name="recipients">
+			<list>
+				<ref bean="customer1" />
+			</list>
+		</property>
 
 		<property name="moment" value="2016/12/22 08:42" />
 
 		<property name="subject" value="IMPORTANTE" />
+		
+		<property name="body" value="Esto es importante" />
+
+		<property name="priority" value="HIGH" />
+
+		<property name="tags" value="important" />
+		
+		</bean>
 
 	<!-- Finder -->
 

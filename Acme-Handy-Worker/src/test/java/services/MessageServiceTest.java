@@ -1,5 +1,6 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -40,8 +41,9 @@ public class MessageServiceTest extends AbstractTest {
 	public void testCreateMessage(){
 		super.authenticate("superman");
 		Message message = messageService.createMessage();
-		Actor recipient = actorService.findOne(431);
-		message.setRecipient(recipient);
+		Collection<Actor> recipients = new ArrayList<Actor>();
+		recipients.add(actorService.findOne(433));
+		message.setRecipients(recipients);
 		message.setSubject("subjetc");
 		message.setBody("Body");
 		message.setTags("#tag");
@@ -50,8 +52,8 @@ public class MessageServiceTest extends AbstractTest {
 
 		Assert.isTrue(messageService.findAll().contains(saved));
 
-		Box Inbox = boxService.findOne(404);
-		Box Outbox = boxService.findOne(410);
+		Box Inbox = boxService.findOne(406);
+		Box Outbox = boxService.findOne(412);
 
 		Assert.isTrue(Inbox.getMessages().contains(saved));
 		Assert.isTrue(Outbox.getMessages().contains(saved));
@@ -72,7 +74,7 @@ public class MessageServiceTest extends AbstractTest {
 	@Test
 	public void testFindReceivedMessagesById() {
 		// El actor superguay ha recibido mensajes
-		super.authenticate("superguay");
+		super.authenticate("superman");
 		Collection<Message> result = messageService.findReceivedMessagesById();
 		super.unauthenticate();
 
@@ -83,10 +85,10 @@ public class MessageServiceTest extends AbstractTest {
 	@Test
 	public void testDelete() {
 		super.authenticate("superman");
-		Box box = boxService.findBoxByActor("OUTBOX", 430);
-		Box trashbox = boxService.findBoxByActor("TRASHBOX", 430);
+		Box box = boxService.findBoxByActor("OUTBOX", 432);
+		Box trashbox = boxService.findBoxByActor("TRASHBOX", 432);
 
-		Message message = messageService.findOne(454);
+		Message message = messageService.findOne(456);
 		this.messageService.delete(message, box);
 
 		Assert.isTrue(trashbox.getMessages().contains(message));
@@ -98,9 +100,9 @@ public class MessageServiceTest extends AbstractTest {
 	@Test
 	public void testDelete2() {
 		super.authenticate("superman");
-		Box trashbox = boxService.findBoxByActor("TRASHBOX", 430);
+		Box trashbox = boxService.findBoxByActor("TRASHBOX", 432);
 
-		Message message = messageService.findOne(455);
+		Message message = messageService.findOne(457);
 		Assert.isTrue(trashbox.getMessages().contains(message));
 		this.messageService.delete(message, trashbox);
 

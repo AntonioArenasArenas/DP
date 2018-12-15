@@ -2,6 +2,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 
 import javax.transaction.Transactional;
 
@@ -112,8 +113,9 @@ public class MessageService {
 		// owner of the box
 		userAccount = LoginService.getPrincipal();
 		logged = actorService.findByUserAccount(userAccount);
-		Assert.isTrue(message.getRecipients().equals(logged)
-				|| message.getSender().equals(logged));
+		LinkedList<Actor> recipients = new LinkedList<Actor>(message.getRecipients());
+		Actor recipient = recipients.getFirst();
+		Assert.isTrue( recipient.equals(logged) || message.getSender().equals(logged));
 		Box TrashBox = boxService.findBoxByActor("TRASHBOX", logged.getId());
 		box.getMessages().remove(message);
 		boxService.save(box);
