@@ -20,23 +20,95 @@
 
 <!-- Otros taglib utiles son tiles para textos en tiles y fmt para fechas -->
 
-<p>
-	<spring:message code="application.list.1" />
-	${ticker}
-</p>
+<security:authorize access="hasRole('CUSTOMER')">
 
-<!-- Ver el tema de los colores (hay una opcion con el background color)-->
+	<p>
+		<spring:message code="application.list.1" />
+		${ticker}
+	</p>
+
+</security:authorize>
+
+<security:authorize access="hasRole('WORKER')">
+
+
+	<p>
+		<spring:message code="applications.list.worker.app" />
+	</p>
+
+</security:authorize>
+
+<jsp:useBean id="date" class="java.util.Date" />
+
 <display:table name="applications" id="row"
-	requestURI="application/customer/list.do?taskId=${taskId}"
+	requestURI="<security:authorize access="hasRole('CUSTOMER')">application/customer/list.do?taskId=${taskId}
+	</security:authorize>
+	<security:authorize access="hasRole('WORKER')">application/worker/list.do?workerId=${workerId}</security:authorize>"
 	pagesize="${pagination}" class="displaytag">
 
-	<display:column property="worker" titleKey="applications.list.worker" />
+	<!-- Columna customer-->
+	<security:authorize access="hasRole('CUSTOMER')">
+		<display:column property="worker" titleKey="applications.list.worker"
+			style="<jstl:choose>
+		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
+		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
+		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
+		</jstl:choose>" />
+	</security:authorize>
+
+	<!-- Columnas worker -->
+
+	<security:authorize access="hasRole('WORKER')">
+
+		<display:column property="task.ticker"
+			titleKey="applications.list.worker.1"
+			style="<jstl:choose>
+		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
+		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
+		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
+		</jstl:choose>" />
+
+		<display:column property="task.endDate"
+			titleKey="applications.list.worker.2"
+			format="{0,date,dd/MM/yyyy HH:mm}"
+			style="<jstl:choose>
+		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
+		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
+		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
+		</jstl:choose>" />
+	</security:authorize>
+
 	<display:column property="offeredPrize"
-		titleKey="applications.list.price" />
-	<display:column titleKey="applications.list.edit">
-		<a href="application/customer/edit.do?applicationId=${row.id}"> <spring:message
-				code="application.list.update" />
+		titleKey="applications.list.price"
+		style="<jstl:choose>
+		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
+		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
+		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
+		</jstl:choose>" />
+	<security:authorize access="hasRole('CUSTOMER')">
+		<display:column
+			style="<jstl:choose>
+		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
+		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
+		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
+		</jstl:choose>">
+			<a href="application/customer/edit.do?applicationId=${row.id}"> <spring:message
+					code="application.list.update" />
+			</a>
+		</display:column>
+	</security:authorize>
+	<display:column>
+		<a
+			href="application/<security:authorize access="hasRole('WORKER')">worker</security:authorize><security:authorize access="hasRole('CUSTOMER')">customer</security:authorize>/show.do?applicationId=${row.id}">
+			<spring:message code="applications.list.worker.3" />
 		</a>
 	</display:column>
 
 </display:table>
+
+<security:authorize access="hasRole('WORKER')">
+	<a href="application/worker/create.do"> <spring:message
+			code="applications.list.worker.create" />
+	</a>
+
+</security:authorize>

@@ -2,22 +2,14 @@ package services;
 
 import java.util.Collection;
 
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-
-import domain.Admin;
-import domain.Warranty;
-
-
 import repositories.WarrantyRepository;
-
-
-
+import domain.Warranty;
 
 @Service
 @Transactional
@@ -25,10 +17,6 @@ public class WarrantyService {
 
 	@Autowired
 	private WarrantyRepository warrantyRepository;
-
-//	
-//	@Autowired
-//	private AdminService adminService;
 
 
 //Constructors -----------------------------------------------------------
@@ -62,7 +50,6 @@ public class WarrantyService {
 
 		public Warranty createWarranty() {
 			
-		//	Admin admin = adminService.findByPrincipal(); Si el contro de quien crea una warranty lo lleva el controller no hace falta aqui?
 			Warranty warranty = new Warranty();
 			warranty.setDraftMode(true);
 			return warranty;
@@ -82,7 +69,7 @@ public class WarrantyService {
 			return result;
 		}
 		
-		public void deleteWarranty(Warranty warranty){
+		public void delete(Warranty warranty){
 			
 			Assert.notNull(warranty);
 			

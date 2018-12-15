@@ -10,8 +10,8 @@ import domain.Tutorial;
 
 @Repository
 public interface TutorialRepository extends JpaRepository<Tutorial, Integer>{
-	
-	@Query("select w.tasks from Worker w where w.id=?1")
+
+	@Query("select w.tutorials from Worker w where w.id=?1")
 	public Collection<Tutorial> getTutorialsByWorkerId(int workerId);
 
 }

@@ -88,9 +88,9 @@ public class ApplicationServiceTest extends AbstractTest {
 		creditcard.setNumber("3234235233253");
 		creditcard.setCvv(101);
 		Date date = new Date();
-		SimpleDateFormat simpledataformat = new SimpleDateFormat("yyyy-MM");
+		SimpleDateFormat simpledataformat = new SimpleDateFormat("yy-MM");
 		try {
-			date = simpledataformat.parse("2019-12");
+			date = simpledataformat.parse("19-12");
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,10 +136,10 @@ public class ApplicationServiceTest extends AbstractTest {
 
 		Double[] statistics;
 		statistics = applicationService.getAdminStatisticsPerTask();
-		Assert.isTrue(statistics[0].equals(0.75));
+		Assert.isTrue(statistics[0].equals(1.0));
 		Assert.isTrue(statistics[1].equals(0.));
-		Assert.isTrue(statistics[2].equals(1.));
-		Assert.isTrue(statistics[3].equals(0.433));
+		Assert.isTrue(statistics[2].equals(2.));
+		Assert.isTrue(statistics[3].equals(0.8165));
 	}
 
 	@Test

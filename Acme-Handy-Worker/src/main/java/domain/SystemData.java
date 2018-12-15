@@ -6,7 +6,6 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.validation.constraints.NotNull;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -23,9 +22,18 @@ public class SystemData extends DomainEntity {
 	private String vatPercentage;
 	private int cache;
 	private int maxPrice;
-	
-	
-	
+	private List<CreditCard> creditCards;
+
+
+
+	@ElementCollection
+	public List<CreditCard> getCreditCards() {
+		return creditCards;
+	}
+
+	public void setCreditCards(List<CreditCard> creditCards) {
+		this.creditCards = creditCards;
+	}
 
 	public int getMaxPrice() {
 		return maxPrice;
@@ -79,7 +87,6 @@ public class SystemData extends DomainEntity {
 		this.welcomePageMsg = welcomePageMsg;
 	}
 
-	@NotBlank
 	@ElementCollection
 	public List<String> getPhoneCode() {
 		return this.phoneCode;
@@ -89,7 +96,6 @@ public class SystemData extends DomainEntity {
 		this.phoneCode = phoneCode;
 	}
 
-	@NotNull
 	@ElementCollection
 	public List<String> getSpamWords() {
 		return this.spamWords;

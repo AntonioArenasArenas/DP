@@ -16,7 +16,7 @@
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="sections" />
-	
+
 
 
 	<form:label path="tutorial.title">
@@ -25,15 +25,15 @@
 	<form:input path="tutorial.title"  />
 	<form:errors cssClass="error" path="tutorial.title" />
 	<br />
-	
-	
+
+
 	<form:label path="tutorial.summary">
 		<spring:message code="tutorial.summary" />:
 	</form:label>
 	<form:input path="tutorial.summary" />
 	<form:errors cssClass="error" path="tutorial.summary" />
 	<br />
-	
+
 
 	<form:label path="tutorial.photo">
 		<spring:message  code="tutorial.photo" />:
@@ -41,11 +41,11 @@
 	<form:input path="tutorial.link" />
 	<form:errors cssClass="error" path="tutorial.photo" />
 	<br />
-	
-	
+
+
 
 	<input type="submit" name="save"
-		value="<spring:message  code="tutorial.save" />" />&nbsp; 
+		value="<spring:message  code="tutorial.save" />" />&nbsp;
 	<jstl:if test="${tutorial.id != 0}">
 		<input type="submit" name="delete"
 			value="<spring:message  code="tutorial.delete" />"

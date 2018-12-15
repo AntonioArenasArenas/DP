@@ -2,9 +2,9 @@
  * list.jsp
  *
  * Copyright (C) 2017 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the 
- * TDG Licence, a copy of which you may download from 
+ *
+ * The use of this project is hereby constrained to the conditions of the
+ * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
  --%>
 
@@ -25,27 +25,27 @@
 <display:table
 	pagesize="5" name="tutorials" id="row"
 	requestURI="tutorial/list.do" >
-	
+
 	<display:column >
 		<strong>
 			<a href="tutorial/edit.do?tutorialId=${row.id}" >
 				<jstl:out value="<spring:message code="tutorial.title" />" />
 			</a>
 		</strong>
-		 <br/>	
+		 <br/>
 	</display:column>
 	<display:column >
 				<jstl:out value="${row.lastUpdate}" />
-		 <br/>	
+		 <br/>
 	</display:column>
 	<display:column >
 			<a href="tutorial/delete.do?tutorialId=${row.id}" >
 				<jstl:out value="<spring:message code="tutorial.delete" />" />
 			</a>
-		 <br/>	
+		 <br/>
 	</display:column>
-	
-	
+
+
 </display:table>
 
 <input type="button" value="<spring:message code="tutorial.newProfile" />" name="button" onClick="javascript: relativeRedir('tutorial/create.do');"/>

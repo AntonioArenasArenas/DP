@@ -19,11 +19,13 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Task extends DomainEntity {
 
+	private Customer				customer;
 	private Collection<Complaint>	complaints;
 	private Collection<Phase>		phases;
 	private Warranty				warranty;
@@ -32,13 +34,20 @@ public class Task extends DomainEntity {
 	private String					ticker;
 	private Date					moment;
 	private Date					startDate;
-
 	private Date					endDate;
 	private String					description;
 	private String					address;
 	private double					maxPrice;
 	private String					comments;
 
+	@ManyToOne(optional = false)
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
 
 	@OneToMany
 	@Valid
@@ -84,6 +93,7 @@ public class Task extends DomainEntity {
 
 	@Past
 	@Temporal(TemporalType.TIMESTAMP)
+	@DateTimeFormat(pattern = "dd/MM/yyyy HH:mm")
 	public Date getMoment() {
 		return this.moment;
 	}
@@ -92,10 +102,12 @@ public class Task extends DomainEntity {
 		this.moment = moment;
 	}
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getStartDate() {
 		return this.startDate;
 	}
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public void setStartDate(final Date startDate) {
 		this.startDate = startDate;
 	}

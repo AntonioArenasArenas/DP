@@ -116,6 +116,7 @@ public class MessageService {
 				|| message.getSender().equals(logged));
 		Box TrashBox = boxService.findBoxByActor("TRASHBOX", logged.getId());
 		box.getMessages().remove(message);
+		boxService.save(box);
 
 		if (box.getName() == TrashBox.getName()) {
 
@@ -143,11 +144,11 @@ public class MessageService {
 
 	}
 
-	public Collection<Message> findRecievedMessagesById() {
+	public Collection<Message> findReceivedMessagesById() {
 		UserAccount userAccount = LoginService.getPrincipal();
 		Actor logged = actorService.findByUserAccount(userAccount);
 
-		return messageRepository.getRecievedMessagesById(logged.getId());
+		return messageRepository.getReceivedMessagesById(logged.getId());
 	}
 
 }

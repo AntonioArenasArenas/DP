@@ -11,6 +11,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.springframework.format.annotation.DateTimeFormat;
 
 @Entity
 @Access(AccessType.PROPERTY)
@@ -60,6 +61,7 @@ public class CreditCard extends DomainEntity {
 	}
 
 	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "MM/yy")
 	public Date getExpirationDate() {
 		return expirationDate;
 	}

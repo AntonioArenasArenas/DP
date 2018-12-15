@@ -69,7 +69,7 @@ public class ComplaintService {
 	public Complaint createComplaint(Task task) {
 
 		Customer customer = customerService.findByPrincipal();
-		Assert.isTrue(customer.getTasks().contains(task));
+		Assert.isTrue(taskService.getTasksByCustomerId(customer.getId()).contains(task));
 
 		Complaint result;
 		Date moment;
@@ -87,7 +87,7 @@ public class ComplaintService {
 	public Complaint save(Complaint complaint, Task task) {
 
 		Customer customer = customerService.findByPrincipal();
-		Assert.isTrue(customer.getTasks().contains(task));
+		Assert.isTrue(taskService.getTasksByCustomerId(customer.getId()).contains(task));
 
 		Assert.notNull(complaint);
 		Complaint result;
@@ -104,7 +104,7 @@ public class ComplaintService {
 	public void delete(Complaint complaint, Task task) {
 
 		Customer customer = customerService.findByPrincipal();
-		Assert.isTrue(customer.getTasks().contains(task));
+		Assert.isTrue(taskService.getTasksByCustomerId(customer.getId()).contains(task));
 
 		Assert.notNull(complaint);
 		Assert.isTrue(complaint.getId() != 0);

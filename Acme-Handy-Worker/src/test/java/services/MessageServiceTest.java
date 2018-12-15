@@ -1,6 +1,5 @@
 package services;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
@@ -28,70 +27,34 @@ public class MessageServiceTest extends AbstractTest {
 	@Autowired
 	private MessageService messageService;
 	@Autowired
+	private ActorService actorService;
+	@Autowired
 	private CustomerService customerService;
 	@Autowired
 	private BoxService boxService;
 
 	// Test ----------------------------------------------------
 
+
 	@Test
-	public void testCreateMessage() {
-
-		// Al no estar las beans completas nos easeguraremos de probarlo con un
-		// usuario que tenga OUTBOX y el receptor INBOX
-
-		Collection<Customer> customers = customerService.findAll();
-		Iterator<Customer> it = customers.iterator();
-		boolean exit = false;
-		Customer c = new Customer();
-		while (!exit && it.hasNext()) {
-			c = it.next();
-			Collection<Box> boxes = c.getBoxes();
-			Iterator<Box> itb = boxes.iterator();
-			boolean exitf = false;
-			while (!exitf && itb.hasNext()) {
-				Box b = itb.next();
-				if (b.getName().equals("OUTBOX")) {
-					exitf = true;
-				}
-			}
-			if (exitf) {
-				exit = true;
-			}
-		}
-		Customer sender = c;
-		exit = false;
-		Customer recipient;
-		while (!exit && it.hasNext()) {
-			c = it.next();
-			Collection<Box> boxes = c.getBoxes();
-			Iterator<Box> itb = boxes.iterator();
-			boolean exitf = false;
-			while (!exitf && itb.hasNext()) {
-				Box b = itb.next();
-				if (b.getName().equals("INBOX")) {
-					exitf = true;
-				}
-			}
-			if (exitf) {
-				exit = true;
-			}
-		}
-		recipient = c;
-
-		super.authenticate(sender.getUserAccount().getUsername());
+	public void testCreateMessage(){
+		super.authenticate("superman");
 		Message message = messageService.createMessage();
-		message.setRecipients(recipients);
-		message.setBody("cuerpo");
-		message.setSubject("asunto");
+		Actor recipient = actorService.findOne(431);
+		message.setRecipient(recipient);
+		message.setSubject("subjetc");
+		message.setBody("Body");
+		message.setTags("#tag");
 		message.setPriority("HIGH");
+		Message saved = messageService.save(message);
 
-		Message persisted = messageService.save(message);
+		Assert.isTrue(messageService.findAll().contains(saved));
 
-		Collection<Message> messages = messageService.findAll();
+		Box Inbox = boxService.findOne(404);
+		Box Outbox = boxService.findOne(410);
 
-		Assert.isTrue(messages.contains(persisted));
-		super.authenticate(null);
+		Assert.isTrue(Inbox.getMessages().contains(saved));
+		Assert.isTrue(Outbox.getMessages().contains(saved));
 
 	}
 
@@ -107,10 +70,10 @@ public class MessageServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void testFindRecievedMessagesById() {
+	public void testFindReceivedMessagesById() {
 		// El actor superguay ha recibido mensajes
 		super.authenticate("superguay");
-		Collection<Message> result = messageService.findRecievedMessagesById();
+		Collection<Message> result = messageService.findReceivedMessagesById();
 		super.unauthenticate();
 
 		Assert.notEmpty(result);
@@ -120,14 +83,29 @@ public class MessageServiceTest extends AbstractTest {
 	@Test
 	public void testDelete() {
 		super.authenticate("superman");
-		Box box = boxService.findBoxByActor("OUTBOX", 425);
-		Box trashbox = boxService.findBoxByActor("TRASHBOX", 425);
+		Box box = boxService.findBoxByActor("OUTBOX", 430);
+		Box trashbox = boxService.findBoxByActor("TRASHBOX", 430);
 
-		Message message = messageService.findOne(448);
+		Message message = messageService.findOne(454);
 		this.messageService.delete(message, box);
 
 		Assert.isTrue(trashbox.getMessages().contains(message));
 		Assert.isTrue(!box.getMessages().contains(message));
+		super.unauthenticate();
+
+	}
+
+	@Test
+	public void testDelete2() {
+		super.authenticate("superman");
+		Box trashbox = boxService.findBoxByActor("TRASHBOX", 430);
+
+		Message message = messageService.findOne(455);
+		Assert.isTrue(trashbox.getMessages().contains(message));
+		this.messageService.delete(message, trashbox);
+
+
+		Assert.isTrue(trashbox.getMessages().isEmpty());
 		super.unauthenticate();
 
 	}
