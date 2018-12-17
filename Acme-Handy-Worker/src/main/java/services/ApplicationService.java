@@ -27,7 +27,7 @@ public class ApplicationService {
 
 	@Autowired
 	private WorkerService workerService;
-	
+
 	@Autowired
 	private TaskService taskService;
 
@@ -58,8 +58,7 @@ public class ApplicationService {
 
 		result = applicationRepository.findOne(applicationId);
 		Assert.notNull(result);
-		
-		
+
 		return result;
 	}
 
@@ -187,8 +186,5 @@ public class ApplicationService {
 		Double result = applicationRepository.getRejectedApplications();
 		return result;
 	}
-	
-	
-	
 
 }

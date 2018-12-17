@@ -20,31 +20,23 @@
 
 <!-- Otros taglib utiles son tiles para textos en tiles y fmt para fechas -->
 
-<security:authorize access="hasRole('CUSTOMER')">
 
-	<p>
-		<spring:message code="application.list.1" />
-		${ticker}
-	</p>
-
-</security:authorize>
-
-<security:authorize access="hasRole('WORKER')">
-
-
-	<p>
-		<spring:message code="applications.list.worker.app" />
-	</p>
-
-</security:authorize>
+<p>
+	<spring:message code="application.list.1" />
+</p>
 
 <jsp:useBean id="date" class="java.util.Date" />
 
-<display:table name="applications" id="row"
-	requestURI="<security:authorize access="hasRole('CUSTOMER')">application/customer/list.do?taskId=${taskId}
-	</security:authorize>
-	<security:authorize access="hasRole('WORKER')">application/worker/list.do?workerId=${workerId}</security:authorize>"
-	pagesize="${pagination}" class="displaytag">
+<display:table name="applications" id="row" requestURI="${requestURI}"
+	pagesize="5" class="displaytag">
+
+	<display:column property="task.ticker"
+		titleKey="applications.list.worker.1"
+		style="<jstl:choose>
+		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
+		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
+		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
+		</jstl:choose>" />
 
 	<!-- Columna customer-->
 	<security:authorize access="hasRole('CUSTOMER')">
@@ -59,14 +51,6 @@
 	<!-- Columnas worker -->
 
 	<security:authorize access="hasRole('WORKER')">
-
-		<display:column property="task.ticker"
-			titleKey="applications.list.worker.1"
-			style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" />
 
 		<display:column property="task.endDate"
 			titleKey="applications.list.worker.2"
