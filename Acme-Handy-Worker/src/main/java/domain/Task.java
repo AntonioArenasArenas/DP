@@ -112,6 +112,8 @@ public class Task extends DomainEntity {
 		this.startDate = startDate;
 	}
 
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getEndDate() {
 		return this.endDate;
 	}

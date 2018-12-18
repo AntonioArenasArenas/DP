@@ -17,10 +17,12 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- Otros taglib utiles son tiles para textos en tiles y fmt para fechas -->
 
 <jsp:useBean id="date" class="java.util.Date" />
+<fmt:formatDate value="${date}" pattern="dd/MM/yyyy" />
 
 <display:table name="applications" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
@@ -41,12 +43,8 @@
 
 	<!-- Columnas worker -->
 
-	<security:authorize access="hasRole('WORKER')">
-
-		<display:column property="task.endDate"
-			titleKey="applications.list.worker.2"
-			format="{0,date,dd/MM/yyyy HH:mm}" />
-	</security:authorize>
+	<display:column property="task.endDate"
+		titleKey="applications.list.worker.2" format="{0,date,dd/MM/yyyy}" />
 
 	<display:column property="offeredPrize"
 		titleKey="applications.list.price" />
@@ -83,7 +81,10 @@
 
 		$("table td:contains(REJECTED)").parents("tr").css("background-color",
 				"orange");
-		
+
+		var table = $("table td");
+
+		// var dateCell = $(this).find("td:contains(PENDING)").
 
 	});
 </script>
