@@ -20,32 +20,23 @@
 
 <!-- Otros taglib utiles son tiles para textos en tiles y fmt para fechas -->
 
-
-<p>
-	<spring:message code="application.list.1" />
-</p>
-
 <jsp:useBean id="date" class="java.util.Date" />
 
 <display:table name="applications" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">
 
 	<display:column property="task.ticker"
-		titleKey="applications.list.worker.1"
-		style="<jstl:choose>
+		titleKey="applications.list.worker.1" />
+	<!-- 	style="<jstl:choose>
 		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
 		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
 		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" />
+		</jstl:choose>" -->
 
 	<!-- Columna customer-->
 	<security:authorize access="hasRole('CUSTOMER')">
-		<display:column property="worker" titleKey="applications.list.worker"
-			style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" />
+		<display:column property="worker.name"
+			titleKey="applications.list.worker" />
 	</security:authorize>
 
 	<!-- Columnas worker -->
@@ -54,30 +45,18 @@
 
 		<display:column property="task.endDate"
 			titleKey="applications.list.worker.2"
-			format="{0,date,dd/MM/yyyy HH:mm}"
-			style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" />
+			format="{0,date,dd/MM/yyyy HH:mm}" />
 	</security:authorize>
 
 	<display:column property="offeredPrize"
-		titleKey="applications.list.price"
-		style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" />
+		titleKey="applications.list.price" />
+
+	<display:column property="status" titleKey="applications.update.status" />
+
 	<security:authorize access="hasRole('CUSTOMER')">
-		<display:column
-			style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>">
+		<display:column>
 			<a href="application/customer/edit.do?applicationId=${row.id}"> <spring:message
-					code="application.list.update" />
+					code="applications.list.update" />
 			</a>
 		</display:column>
 	</security:authorize>
@@ -96,3 +75,15 @@
 	</a>
 
 </security:authorize>
+
+<script>
+	$(function() {
+		$("table td:contains(ACCEPTED)").parents("tr").css("background-color",
+				"palegreen");
+
+		$("table td:contains(REJECTED)").parents("tr").css("background-color",
+				"orange");
+		
+
+	});
+</script>

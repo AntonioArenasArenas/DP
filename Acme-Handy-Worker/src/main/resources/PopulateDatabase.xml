@@ -44,10 +44,7 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="WORKER" />
 				</bean>
 			</list>
 		</property>
@@ -55,7 +52,7 @@
 
 	<bean id="userAccount4" class="security.UserAccount">
 		<property name="username" value="supertroll" />
-		<property name="password" value="0b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="cd087133969fbbc72f10354904bdda60" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -71,7 +68,7 @@
 
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="superman" />
-		<property name="password" value="2b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="84d961568a65073a3bcf0eb216b2a576" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -87,7 +84,7 @@
 
 	<bean id="userAccount6" class="security.UserAccount">
 		<property name="username" value="superguay" />
-		<property name="password" value="3b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="f6964b92d99ed26c4c2115da7e4d816a" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -103,7 +100,7 @@
 
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="superfuerte" />
-		<property name="password" value="4b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="6eacff0ba4ceba28f90525930bcf0e80" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -119,7 +116,7 @@
 
 	<bean id="userAccount8" class="security.UserAccount">
 		<property name="username" value="supercoool" />
-		<property name="password" value="5b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="f3209d2047b8b8700fbf566bf5614533" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -135,7 +132,7 @@
 
 	<bean id="userAccount9" class="security.UserAccount">
 		<property name="username" value="TEGOCABEZON" />
-		<property name="password" value="6b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="c317174b7f9dba1c139c1f2468139439" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -151,7 +148,7 @@
 
 	<bean id="userAccount10" class="security.UserAccount">
 		<property name="username" value="brawls" />
-		<property name="password" value="7b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="8e504d56fe58f40de679f058c14d0107" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -167,7 +164,7 @@
 
 	<bean id="userAccount11" class="security.UserAccount">
 		<property name="username" value="maximo" />
-		<property name="password" value="8b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="d822eb65cbd84945f427dc08f4571694" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -183,7 +180,7 @@
 
 	<bean id="userAccount12" class="security.UserAccount">
 		<property name="username" value="corchuelo" />
-		<property name="password" value="9b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="927efc84d9371bee98c6e6cf8b3e2f48" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -199,7 +196,7 @@
 
 	<bean id="userAccount13" class="security.UserAccount">
 		<property name="username" value="daniel" />
-		<property name="password" value="4r3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="aa47f8215c6f30a0dcdb2a36a9f4168e" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -215,7 +212,7 @@
 
 	<bean id="userAccount14" class="security.UserAccount">
 		<property name="username" value="patricia" />
-		<property name="password" value="1a3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="823fec7a2632ea7b498c1d0d11c11377" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -231,7 +228,7 @@
 
 	<bean id="userAccount15" class="security.UserAccount">
 		<property name="username" value="antonio" />
-		<property name="password" value="553231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="4a181673429f0b6abbfd452f0f3b5950" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
