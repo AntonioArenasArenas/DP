@@ -28,7 +28,7 @@ public class WarrantyServiceTest extends AbstractTest{
 	public void testCreateWarranty() {
 
 		Warranty warranty, saved;
-		warranty = warrantyService.createWarranty();
+		warranty = warrantyService.create();
 		warranty.setTitle("Título 1");
 		warranty.setTerms("Términos y condiciones del servicio");
 		warranty.setLaws("Leyes leyes leyes");

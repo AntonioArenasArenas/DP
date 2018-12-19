@@ -48,7 +48,7 @@ public class WarrantyService {
 			return result;
 		}
 
-		public Warranty createWarranty() {
+		public Warranty create() {
 			
 			Warranty warranty = new Warranty();
 			warranty.setDraftMode(true);

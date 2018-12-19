@@ -7,20 +7,24 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="warranties" id="row" requestURI="warranty/list.do" pagesize="5" class="displaytag" >
+<display:table name="warranties" id="row" requestURI="warranty/administrator/list.do" pagesize="10" class="displaytag" >
 	
 	<display:column property="title" titleKey="warranty.title" sortable="true" />
 	<display:column>
-		<a href="warranty/admin/show.do?id=${row.id}">
+		<a href="warranty/administrator/show.do?id=${row.id}">
 			<spring:message code="warranty.show" />
 		</a>
 	</display:column>
 	<display:column>
 		<jstl:if test="${warranty.draftMode == True}" >
-			<a href="warranty/admin/edit.do?id=${row.id}">
+			<a href="warranty/administrator/edit.do?id=${row.id}">
 				<spring:message code="warranty.edit" />
 			</a>
 		</jstl:if>
 	</display:column>
 	
 </display:table>
+
+<input type="button" name="cancel"
+		value="<spring:message code="warranty.create" />"
+		onclick="javascript: relativeRedir('warranty/administrator/create.do');" />

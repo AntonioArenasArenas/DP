@@ -50,6 +50,12 @@
 		<security:intercept-url pattern="/profile/action-1.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-2.do" access="isAuthenticated()" /> 
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
+		
+		<security:intercept-url pattern="/warranty/administrator/list.do" access="hasRole('ADMIN')" />
+		
+		<security:intercept-url pattern="/warranty/administrator/create.do" access="hasRole('ADMIN')" />
+		
+		<security:intercept-url pattern="/warranty/administrator/edit.do" access="hasRole('ADMIN')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
