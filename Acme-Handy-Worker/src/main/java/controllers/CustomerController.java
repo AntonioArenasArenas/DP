@@ -10,14 +10,21 @@
 
 package controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+
+import services.CustomerService;
 
 @Controller
 @RequestMapping("/customer")
 public class CustomerController extends AbstractController {
 
+	
+	@Autowired
+	private CustomerService customerService;
+	
 	// Constructors -----------------------------------------------------------
 
 	public CustomerController() {
@@ -26,7 +33,7 @@ public class CustomerController extends AbstractController {
 
 	// Action-1 ---------------------------------------------------------------		
 
-	@RequestMapping("/action-1")
+	@RequestMapping("/create")
 	public ModelAndView action1() {
 		ModelAndView result;
 

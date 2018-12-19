@@ -41,7 +41,22 @@
 		</security:authorize>
 
 		<security:authorize access="isAnonymous()">
-			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a></li>
+			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a>
+			<li>
+				<a class="fNiv">
+					<spring:message code="master.page.register" />
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="profile/action-1.do"><spring:message code="master.page.register.customer" /></a></li>
+					<li><a href="profile/action-2.do"><spring:message code="master.page.register.worker" /></a></li>
+				</ul>
+				</li>	
+			
+			
+			
+			</li>
+			
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
@@ -57,7 +72,19 @@
 					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
-			</li>
+				</li>
+				<li>
+				<a class="fNiv">
+				<spring:message code="master.page.mail" />
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="box/list.do"><spring:message code="master.page.box.list" /></a></li>
+					<li><a href="box/create.do"><spring:message code="master.page.box.create" /></a></li>
+					<li><a href="message/create.do"><spring:message code="master.page.message.create" /></a></li>
+					
+				</ul>
+				</li>
 		</security:authorize>
 	</ul>
 </div>

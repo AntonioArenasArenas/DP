@@ -20,17 +20,18 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <!-- Listing grid -->
-<p><spring:message code="customer.action.1" /></p>
+
 
 <display:table
 	pagesize="5" name="maessage" id="row"
-	requestURI="box/list.do" >
+	requestURI="message/list.do" >
 	
 	
 	<display:column >
 		<strong>
 			<a href="message/list.do?messageId=${row.id}" >
-				<jstl:out value="<spring:message code="message.open" />" />
+				<spring:message code="message.open" />
+				
 			</a>
 		</strong>
 		 <br/>	
@@ -46,7 +47,7 @@
 	<display:column >
 		<strong>
 			<a href="message/delete.do?messageId=${row.id}" >
-				<jstl:out value="<spring:message code="message.delete" />" />
+				<spring:message code="message.delete" />
 			</a>
 		</strong>
 		 <br/>	

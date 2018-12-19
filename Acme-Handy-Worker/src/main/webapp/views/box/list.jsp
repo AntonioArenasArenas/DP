@@ -39,7 +39,7 @@
 	<display:column >
 	<jstl:if test="${!rox.isDefault}">
 			<a href="box/actor/edit.do?boxId=${row.id}" >
-				<jstl:out value="<spring:message code="box.delete" />" />
+				<spring:message code="box.delete" />
 			</a>
 		</jstl:if>
 	</display:column>

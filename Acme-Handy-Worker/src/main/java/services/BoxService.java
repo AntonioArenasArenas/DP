@@ -136,4 +136,15 @@ public class BoxService {
 		return result;
 
 	}
+	
+	public Collection<Box> findBoxesByPrincipal() {
+		Collection<Box> result;
+		Actor logged = actorService.findByPrincipal();
+
+		result = this.boxRepository.getBoxesByPrincipal(logged.getId());
+		Assert.notNull(result);
+
+		return result;
+
+	}
 }
