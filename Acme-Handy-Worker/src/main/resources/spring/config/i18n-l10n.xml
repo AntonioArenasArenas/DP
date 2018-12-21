@@ -29,6 +29,7 @@
 		<value>/views/finder/messages</value>
 		
 		<value>/views/warranty/messages</value>
+		<value>/views/task/messages</value>
 	</util:list>
 
 </beans>

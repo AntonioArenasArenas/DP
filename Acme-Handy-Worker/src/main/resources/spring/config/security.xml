@@ -52,10 +52,17 @@
 		<security:intercept-url pattern="/profile/action-3.do" access="isAuthenticated()" /> 
 		
 		<security:intercept-url pattern="/warranty/administrator/list.do" access="hasRole('ADMIN')" />
-		
 		<security:intercept-url pattern="/warranty/administrator/create.do" access="hasRole('ADMIN')" />
-		
 		<security:intercept-url pattern="/warranty/administrator/edit.do" access="hasRole('ADMIN')" />
+		<security:intercept-url pattern="/warranty/administrator/show.do" access="hasRole('ADMIN')" />
+		
+		<security:intercept-url pattern="/task/customer/list.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/task/customer/create.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/task/customer/edit.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/task/customer/show.do" access="hasRole('CUSTOMER')" />
+		
+		<security:intercept-url pattern="/task/worker/list.do" access="hasRole('WORKER')" />
+		<security:intercept-url pattern="/task/worker/show.do" access="hasRole('WORKER')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

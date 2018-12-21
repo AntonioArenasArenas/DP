@@ -1,4 +1,4 @@
-package controllers.administrator;
+package controllers.customer;
 
 import java.util.Collection;
 
@@ -13,23 +13,32 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.CategoryService;
+import services.TaskService;
 import services.WarrantyService;
 import controllers.AbstractController;
+import domain.Category;
+import domain.Task;
 import domain.Warranty;
 
 @Controller
-@RequestMapping("/warranty/administrator")
-public class WarrantyAdministratorController extends AbstractController {
+@RequestMapping("/task/customer")
+public class TaskCustomerController extends AbstractController {
 
 	// Services ---------------------------------------------------------------
 
 	@Autowired
-	private WarrantyService		warrantyService;
-
+	private TaskService taskService;
+	
+	@Autowired
+	private WarrantyService warrantyService;
+	
+	@Autowired
+	private CategoryService categoryService;
 
 	// Constructors -----------------------------------------------------------
 
-	public WarrantyAdministratorController() {
+	public TaskCustomerController() {
 		super();
 	}
 
@@ -38,12 +47,12 @@ public class WarrantyAdministratorController extends AbstractController {
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
-		Collection<Warranty> warranties;
+		Collection<Task> tasks;
 
-		warranties = this.warrantyService.findAll();
-		result = new ModelAndView("warranty/list");
-		result.addObject("requestURI", "warranty/administrator/list.do");
-		result.addObject("warranties", warranties);
+		tasks = this.taskService.getTasksByLogged();
+		result = new ModelAndView("task/list");
+		result.addObject("requestURI", "task/customer/list.do");
+		result.addObject("tasks", tasks);
 
 		return result;
 	}
@@ -53,10 +62,10 @@ public class WarrantyAdministratorController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Warranty warranty;
+		Task task;
 
-		warranty = this.warrantyService.create();
-		result = this.createEditModelAndView(warranty);
+		task = this.taskService.create();
+		result = this.createEditModelAndView(task);
 
 		return result;
 	}
@@ -66,41 +75,41 @@ public class WarrantyAdministratorController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int id) {
 		ModelAndView result;
-		Warranty warranty;
+		Task task;
 
-		warranty = this.warrantyService.findOne(id);
-		Assert.notNull(warranty);
-		result = this.createEditModelAndView(warranty);
+		task = this.taskService.findOne(id);
+		Assert.notNull(task);
+		result = this.createEditModelAndView(task);
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Warranty warranty, final BindingResult binding) {
+	public ModelAndView save(@Valid final Task task, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors())
-			result = this.createEditModelAndView(warranty);
+			result = this.createEditModelAndView(task);
 		else
 			try {
-				this.warrantyService.save(warranty);
+				this.taskService.save(task);
 				result = new ModelAndView("redirect:list.do");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(warranty, "warranty.commit.error");
+				result = this.createEditModelAndView(task, "task.commit.error");
 			}
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Warranty warranty, final BindingResult binding) {
+	public ModelAndView delete(final Task task, final BindingResult binding) {
 		ModelAndView result;
 
 		try {
-			this.warrantyService.delete(warranty);
+			this.taskService.delete(task);
 			result = new ModelAndView("redirect:list.do");
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(warranty, "warranty.commit.error");
+			result = this.createEditModelAndView(task, "task.commit.error");
 		}
 
 		return result;
@@ -111,42 +120,46 @@ public class WarrantyAdministratorController extends AbstractController {
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int id) {
 		ModelAndView result;
-		Warranty warranty;
+		Task task;
 
-		warranty = this.warrantyService.findOne(id);
-		Assert.notNull(warranty);
-		result = this.showModelAndView(warranty);
+		task = this.taskService.findOne(id);
+		Assert.notNull(task);
+		result = this.showModelAndView(task);
 
 		return result;
 	}
 
 	// Ancillary methods ------------------------------------------------------
 
-	protected ModelAndView createEditModelAndView(final Warranty warranty) {
+	protected ModelAndView createEditModelAndView(final Task task) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(warranty, null);
+		result = this.createEditModelAndView(task, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Warranty warranty, final String message) {
+	protected ModelAndView createEditModelAndView(final Task task, final String message) {
 		ModelAndView result;
-		if(warranty.getId() == 0) {
-			result = new ModelAndView("warranty/create");
+		if(task.getId() == 0) {
+			result = new ModelAndView("task/create");
 		} else {
-			result = new ModelAndView("warranty/edit");
+			result = new ModelAndView("task/edit");
 		}
-		result.addObject("warranty", warranty);
+		Collection<Warranty> warranties = this.warrantyService.getFinalWarranties();
+		Collection<Category> categories = this.categoryService.findAll();
+		result.addObject("warranties", warranties);
+		result.addObject("categories", categories);
+		result.addObject("task", task);
 		result.addObject("message", message);
 
 		return result;
 	}
 	
-	protected ModelAndView showModelAndView(final Warranty warranty) {
+	protected ModelAndView showModelAndView(final Task task) {
 		ModelAndView result;
-		result = new ModelAndView("warranty/show");
-		result.addObject("warranty", warranty);
+		result = new ModelAndView("task/show");
+		result.addObject("task", task);
 
 		return result;
 	}

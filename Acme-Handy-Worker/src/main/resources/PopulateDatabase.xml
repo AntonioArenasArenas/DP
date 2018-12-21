@@ -71,7 +71,7 @@
 
 	<bean id="userAccount5" class="security.UserAccount">
 		<property name="username" value="superman" />
-		<property name="password" value="2b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="84d961568a65073a3bcf0eb216b2a576" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
@@ -167,15 +167,12 @@
 
 	<bean id="userAccount11" class="security.UserAccount">
 		<property name="username" value="maximo" />
-		<property name="password" value="8b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="d822eb65cbd84945f427dc08f4571694" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="WORKER" />
 				</bean>
 			</list>
 		</property>

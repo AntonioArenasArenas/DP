@@ -55,13 +55,14 @@ public class TaskService {
 		return result;
 	}
 
-	public Task createTask() {
+	public Task create() {
 
 		Task result;
 
 		result = new Task();
 		
 		Customer customer = customerService.findByPrincipal();
+		
 		result.setCustomer(customer);
 
 		result.setTicker(tickerGenerator());
@@ -95,6 +96,14 @@ public class TaskService {
 	public Collection<Task> getTasksByCustomerId(Integer id){
 		
 		return taskRepository.getTasksByCustomerId(id);
+
+	}
+	
+	public Collection<Task> getTasksByLogged(){
+		
+		Customer customer = customerService.findByPrincipal();
+		
+		return taskRepository.getTasksByCustomerId(customer.getId());
 
 	}
 

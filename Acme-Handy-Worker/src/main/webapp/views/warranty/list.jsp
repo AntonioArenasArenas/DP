@@ -16,7 +16,7 @@
 		</a>
 	</display:column>
 	<display:column>
-		<jstl:if test="${warranty.draftMode == True}" >
+		<jstl:if test="${row.draftMode}" >
 			<a href="warranty/administrator/edit.do?id=${row.id}">
 				<spring:message code="warranty.edit" />
 			</a>
@@ -25,6 +25,6 @@
 	
 </display:table>
 
-<input type="button" name="cancel"
+<input type="button" name="create"
 		value="<spring:message code="warranty.create" />"
 		onclick="javascript: relativeRedir('warranty/administrator/create.do');" />

@@ -22,6 +22,18 @@
 			Add your own converters using entries of the following form: 
 			<bean class="converters.Class1ToClass2" /> 
 		-->
+		<bean class="converters.StringToWarrantyConverter" />
+		<bean class="converters.WarrantyToStringConverter" />
+		<bean class="converters.StringToCategoryConverter" />
+		<bean class="converters.CategoryToStringConverter" />
+		<bean class="converters.StringToApplicationConverter" />
+		<bean class="converters.ApplicationToStringConverter" />
+		<bean class="converters.StringToComplaintConverter" />
+		<bean class="converters.ComplaintToStringConverter" />
+		<bean class="converters.StringToPhaseConverter" />
+		<bean class="converters.PhaseToStringConverter" />
+		<bean class="converters.StringToCustomerConverter" />
+		<bean class="converters.CustomerToStringConverter" />
 	</util:list>
 	
 </beans>
