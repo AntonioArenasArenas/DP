@@ -29,22 +29,17 @@
 
 	<display:column property="task.ticker"
 		titleKey="applications.list.worker.1" />
-	<!-- 	style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" -->
+
+	<!-- Columnas worker -->
+
+	<display:column property="task.endDate"
+		titleKey="applications.list.worker.2" format="{0,date,dd/MM/yyyy}" />
 
 	<!-- Columna customer-->
 	<security:authorize access="hasRole('CUSTOMER')">
 		<display:column property="worker.name"
 			titleKey="applications.list.worker" />
 	</security:authorize>
-
-	<!-- Columnas worker -->
-
-	<display:column property="task.endDate"
-		titleKey="applications.list.worker.2" format="{0,date,dd/MM/yyyy}" />
 
 	<display:column property="offeredPrize"
 		titleKey="applications.list.price" />
@@ -82,9 +77,15 @@
 		$("table td:contains(REJECTED)").parents("tr").css("background-color",
 				"orange");
 
-		var table = $("table td");
+		var dateCell = $(this).find("td:contains(PENDING)").parents("tr").find(
+				"td:eq(1)").html();
+		var date = new Date(dateCell);
+		var actual = new Date();
 
-		// var dateCell = $(this).find("td:contains(PENDING)").
+		if (date < actual) {
+			$("table td:contains(PENDING)").parents("tr").css(
+					"background-color", "gainsboro");
+		}
 
 	});
 </script>
