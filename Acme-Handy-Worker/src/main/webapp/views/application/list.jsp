@@ -44,13 +44,25 @@
 	<display:column property="offeredPrize"
 		titleKey="applications.list.price" />
 
-	<display:column property="status" titleKey="applications.update.status" />
+	<display:column titleKey="applications.update.status">
+		<jstl:if test="${row.status=='ACCEPTED'}">
+			<spring:message code="applications.accepted" />
+		</jstl:if>
+		<jstl:if test="${row.status=='REJECTED'}">
+			<spring:message code="applications.rejected" />
+		</jstl:if>
+		<jstl:if test="${row.status=='PENDING'}">
+			<spring:message code="applications.pending" />
+		</jstl:if>
+	</display:column>
 
 	<security:authorize access="hasRole('CUSTOMER')">
 		<display:column>
+		<jstl:if test="${row.status=='PENDING'}">
 			<a href="application/customer/edit.do?applicationId=${row.id}"> <spring:message
 					code="applications.list.update" />
 			</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 	<display:column>
@@ -61,6 +73,8 @@
 	</display:column>
 
 </display:table>
+
+<!-- El boton esta ahora mismo por tener un acceso a crear pero realmente se hara desde una task -->
 
 <security:authorize access="hasRole('WORKER')">
 	<a href="application/worker/create.do"> <spring:message
@@ -74,7 +88,13 @@
 		$("table td:contains(ACCEPTED)").parents("tr").css("background-color",
 				"palegreen");
 
+		$("table td:contains(ACEPTADA)").parents("tr").css("background-color",
+				"palegreen");
+
 		$("table td:contains(REJECTED)").parents("tr").css("background-color",
+				"orange");
+
+		$("table td:contains(RECHAZADA)").parents("tr").css("background-color",
 				"orange");
 
 		var dateCell = $(this).find("td:contains(PENDING)").parents("tr").find(
@@ -84,6 +104,16 @@
 
 		if (date < actual) {
 			$("table td:contains(PENDING)").parents("tr").css(
+					"background-color", "gainsboro");
+		}
+
+		dateCell = $(this).find("td:contains(PENDIENTE)").parents("tr").find(
+				"td:eq(1)").html();
+		date = new Date(dateCell);
+		actual = new Date();
+
+		if (date < actual) {
+			$("table td:contains(PENDIENTE)").parents("tr").css(
 					"background-color", "gainsboro");
 		}
 

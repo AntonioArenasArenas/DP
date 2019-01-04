@@ -11,7 +11,6 @@ import org.springframework.util.Assert;
 
 import repositories.ApplicationRepository;
 import domain.Application;
-import domain.CreditCard;
 import domain.Customer;
 import domain.Task;
 import domain.Worker;
@@ -109,8 +108,9 @@ public class ApplicationService {
 		return applicationRepository.getApplicationsByCustomerId(c.getId());
 	}
 
-	public Application updateStatus(Application application,
-			CreditCard creditcard, String comments) {
+	// Los comentarios pasados son los comentarios ya existentes en la
+	// application
+	public Application updateStatus(Application application, String comments) {
 		Application result;
 		Task t = application.getTask();
 		Customer c = customerService.findByPrincipal();
@@ -124,12 +124,9 @@ public class ApplicationService {
 
 		Assert.isTrue(taskService.getTasksByCustomerId(c.getId()).contains(t));
 
-		if (application.getStatus().equals("ACCEPTED")) {
-			Assert.notNull(creditcard);
-			application.setCreditCard(creditcard);
-		}
-
-		if (comments != null) {
+		if (application.getComments() != null) {
+			application.setComments(comments + ";" + application.getComments());
+		} else {
 			application.setComments(comments);
 		}
 

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla
-	* * The use of this project is hereby constrained to the conditions of the
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
+	* * The use of this project is hereby constrained to the conditions of the 
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
                     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
 	<!-- User accounts -->
@@ -253,7 +253,9 @@
 
 		<property name="messages">
 
-			<list><ref bean="message1"/></list>
+			<list>
+				<ref bean="message1" />
+			</list>
 
 		</property>
 
@@ -349,7 +351,9 @@
 
 		<property name="messages">
 
-			<list><ref bean="message1"/></list>
+			<list>
+				<ref bean="message1" />
+			</list>
 
 		</property>
 
@@ -704,7 +708,7 @@
 		<property name="finder" ref="finder1" />
 
 		<property name="boxes">
-		
+
 			<list>
 
 				<ref bean="box5" />
@@ -901,6 +905,7 @@
 
 			<list>
 				<ref bean="application3" />
+				<ref bean="application1" />
 			</list>
 
 		</property>
@@ -1370,7 +1375,7 @@
 
 
 	<bean id="task1" class="domain.Task">
-	
+
 		<property name="customer" ref="customer2" />
 
 		<property name="complaints">
@@ -1388,7 +1393,8 @@
 		<property name="category" ref="category1" />
 
 		<property name="applications">
-			<list></list>
+			<list>
+			</list>
 		</property>
 
 		<property name="ticker" value="181112-KHY698" />
@@ -1414,7 +1420,7 @@
 
 
 	<bean id="task2" class="domain.Task">
-	
+
 		<property name="customer" ref="customer1" />
 
 		<property name="complaints">
@@ -1458,7 +1464,7 @@
 
 
 	<bean id="task3" class="domain.Task">
-		
+
 		<property name="customer" ref="customer3" />
 
 		<property name="complaints">
@@ -1480,6 +1486,7 @@
 			<list>
 				<ref bean="application2" />
 				<ref bean="application3" />
+				<ref bean="application4" />
 			</list>
 		</property>
 
@@ -1546,7 +1553,7 @@
 		<property name="draftMode" value="True" />
 
 	</bean>
-	
+
 	<bean id="warranty4" class="domain.Warranty">
 
 		<property name="title" value="Titulo de la garantia 4" />
@@ -1630,7 +1637,7 @@
 
 	<bean id="application1" class="domain.Application">
 
-		<property name="worker" ref="worker1" />
+		<property name="worker" ref="worker3" />
 
 		<property name="task" ref="task2" />
 
@@ -1641,6 +1648,7 @@
 		<property name="offeredPrize" value="151.23" />
 
 		<property name="comments" value="Comentario que se me ha ocurrido" />
+
 
 
 
@@ -1691,7 +1699,27 @@
 
 	</bean>
 
+	<bean id="application4" class="domain.Application">
 
+		<property name="worker" ref="worker4" />
+
+		<property name="task" ref="task3" />
+
+		<property name="moment" value="2015/02/10 10:00" />
+
+		<property name="status" value="PENDING" />
+
+		<property name="offeredPrize" value="151.23" />
+
+		<property name="comments" value="Comentario que se me ha ocurrido" />
+
+		<property name="creditCard">
+			<null />
+		</property>
+
+
+
+	</bean>
 
 
 
@@ -1960,32 +1988,37 @@
 		<property name="tasks">
 			<list>
 				<ref bean="task2" />
-			</list></property>
-		<property name="keyWord" value= "Patata"/>
-		<property name="category" value="category1"/>
-		<property name="warranty" value="warranty1"/>
+			</list>
+		</property>
+		<property name="keyWord" value="Patata" />
+		<property name="category" value="category1" />
+		<property name="warranty" value="warranty1" />
 		<property name="maxPrice" value="5.0" />
-		<property name="minPrice" value="2.0"/>
+		<property name="minPrice" value="2.0" />
 		<property name="startDate" value="2017/07/10 01:41" />
 		<property name="endDate" value="2018/08/10 01:41" />
 		<property name="lastUpdate" value="2018/8/10 00:42" />
 
 	</bean>
 
-	<!--  SystemData -->
+	<!-- SystemData -->
 
 
- 	<bean id="systemData" class="domain.SystemData">
+	<bean id="systemData" class="domain.SystemData">
 
-		<property name="name" value="nombre"/>
-		<property name="banner" value="hola"/>
-		<property name="bannerHeader" value="hola2"/>
-		<property name="welcomePageMsg" value="bienvenido de veulta"/>
-		<property name="phoneCode" ><list></list></property>
-		<property name="spamWords" ><list></list></property>
-		<property name="vatPercentage" value="22%"/>
-		<property name="cache" value="3"/>
-		<property name="maxPrice" value="22"/>
+		<property name="name" value="nombre" />
+		<property name="banner" value="hola" />
+		<property name="bannerHeader" value="hola2" />
+		<property name="welcomePageMsg" value="bienvenido de veulta" />
+		<property name="phoneCode">
+			<list></list>
+		</property>
+		<property name="spamWords">
+			<list></list>
+		</property>
+		<property name="vatPercentage" value="22%" />
+		<property name="cache" value="3" />
+		<property name="maxPrice" value="22" />
 	</bean>
 
 

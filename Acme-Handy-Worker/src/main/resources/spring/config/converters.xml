@@ -17,6 +17,15 @@
 	<util:list id="converters">
 		<bean class="converters.ApplicationToStringConverter" />
 		<bean class="converters.StringToApplicationConverter" />
+
+		<bean class="converters.CreditCardToStringConverter" />
+		<bean class="converters.StringToCreditCardConverter" />
+
+		<bean class="converters.TaskToStringConverter" />
+		<bean class="converters.StringToTaskConverter" />
+
+		<bean class="converters.WorkerToStringConverter" />
+		<bean class="converters.StringToWorkerConverter" />
 	</util:list>
 
 </beans>
