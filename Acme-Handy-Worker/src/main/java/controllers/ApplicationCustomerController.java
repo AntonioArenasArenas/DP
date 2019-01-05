@@ -46,6 +46,27 @@ public class ApplicationCustomerController extends AbstractController {
 
 	}
 
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam int applicationId) {
+		ModelAndView result;
+
+		Application application;
+
+		application = applicationService.findOne(applicationId);
+		Collection<String> comentarios = new LinkedList<String>();
+		if (application.getComments() != null) {
+			String[] spliteado = application.getComments().split(";");
+			comentarios = Arrays.asList(spliteado);
+		}
+
+		result = new ModelAndView("application/show");
+		result.addObject("application", application);
+		result.addObject("comentarios", comentarios);
+
+		return result;
+
+	}
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam int applicationId) {
 		ModelAndView result;

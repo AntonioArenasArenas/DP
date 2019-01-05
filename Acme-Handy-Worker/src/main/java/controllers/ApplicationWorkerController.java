@@ -1,6 +1,8 @@
 package controllers;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.LinkedList;
 
 import javax.validation.Valid;
 
@@ -15,9 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
 import services.TaskService;
-import services.WorkerService;
 import domain.Application;
-import domain.CreditCard;
 
 @Controller
 @RequestMapping("/application/worker")
@@ -28,9 +28,6 @@ public class ApplicationWorkerController extends AbstractController {
 
 	@Autowired
 	private TaskService taskService;
-
-	@Autowired
-	private WorkerService workerService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -43,6 +40,27 @@ public class ApplicationWorkerController extends AbstractController {
 		result = new ModelAndView("application/list");
 		result.addObject("applications", applications);
 		result.addObject("requestURI", "application/worker/list.do");
+
+		return result;
+
+	}
+
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam int applicationId) {
+		ModelAndView result;
+
+		Application application;
+
+		application = applicationService.findOne(applicationId);
+		Collection<String> comentarios = new LinkedList<String>();
+		if (application.getComments() != null) {
+			String[] spliteado = application.getComments().split(";");
+			comentarios = Arrays.asList(spliteado);
+		}
+
+		result = new ModelAndView("application/show");
+		result.addObject("application", application);
+		result.addObject("comentarios", comentarios);
 
 		return result;
 

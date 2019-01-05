@@ -71,7 +71,7 @@
 	</security:authorize>
 
 	<security:authorize access="hasRole('WORKER')">
-	<form:hidden path="status" />
+		<form:hidden path="status" />
 		<form:label path="comments">
 			<b><spring:message code="applications.update.comments" /></b>
 		</form:label>
