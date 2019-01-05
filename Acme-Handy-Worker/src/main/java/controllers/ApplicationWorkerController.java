@@ -2,9 +2,12 @@ package controllers;
 
 import java.util.Collection;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +17,7 @@ import services.ApplicationService;
 import services.TaskService;
 import services.WorkerService;
 import domain.Application;
+import domain.CreditCard;
 
 @Controller
 @RequestMapping("/application/worker")
@@ -53,9 +57,49 @@ public class ApplicationWorkerController extends AbstractController {
 				.findOne(taskId));
 		Assert.notNull(application);
 		result = null;
-		// result = createEditModelAndView(application);
+		result = this.createEditModelAndView(application);
 
 		return result;
 
+	}
+
+	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	public ModelAndView save(@Valid Application application,
+			BindingResult binding) {
+		ModelAndView result;
+		if (binding.hasErrors()) {
+			result = createEditModelAndView(application);
+		} else {
+			try {
+
+				applicationService.save(application);
+				result = new ModelAndView("redirect:list.do");
+			} catch (Throwable oops) {
+				result = createEditModelAndView(application,
+						"application.commit.error");
+
+			}
+		}
+
+		return result;
+
+	}
+
+	protected ModelAndView createEditModelAndView(Application application) {
+		ModelAndView result;
+		result = createEditModelAndView(application, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(Application application,
+			String messageCode) {
+		ModelAndView result;
+
+		result = new ModelAndView("application/updateCreate");
+		result.addObject("application", application);
+		result.addObject("message", messageCode);
+
+		return result;
 	}
 }

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ApplicationService;
 import services.CreditCardService;
 import domain.Application;
+import domain.CreditCard;
 
 @Controller
 @RequestMapping("/application/customer")
@@ -68,7 +69,9 @@ public class ApplicationCustomerController extends AbstractController {
 		} else {
 			try {
 				if (application.getStatus().equals("ACCEPTED")) {
-					creditCardService.save(application.getCreditCard());
+					CreditCard presisted = creditCardService.save(application
+							.getCreditCard());
+					application.setCreditCard(presisted);
 				}
 				Application actual = applicationService.findOne(application
 						.getId());
@@ -83,6 +86,7 @@ public class ApplicationCustomerController extends AbstractController {
 			} catch (Throwable oops) {
 				result = createEditModelAndView(application,
 						"application.commit.error");
+
 			}
 		}
 
@@ -97,7 +101,7 @@ public class ApplicationCustomerController extends AbstractController {
 		return result;
 	}
 
-	private ModelAndView createEditModelAndView(Application application,
+	protected ModelAndView createEditModelAndView(Application application,
 			String messageCode) {
 		ModelAndView result;
 		Collection<String> estados = new LinkedList<String>();
