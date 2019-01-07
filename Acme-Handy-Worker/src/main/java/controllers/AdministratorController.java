@@ -34,7 +34,7 @@ public class AdministratorController extends AbstractController {
 	// Action-1 ---------------------------------------------------------------
 
 	@RequestMapping(value = "/statistics", method = RequestMethod.GET)
-	public ModelAndView action1() {
+	public ModelAndView statistics() {
 		ModelAndView result;
 
 		Double[] sptask = applicationService.getAdminStatisticsPerTask();

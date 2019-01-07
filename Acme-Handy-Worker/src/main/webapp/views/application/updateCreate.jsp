@@ -102,7 +102,7 @@
 		<div id="creditCardFields">
 
 			<p id="texto">
-				<b>Por favor inserte una tarjeta de crédito</b>
+				<b><spring:message code="applications.update.creditcard" /></b>
 			</p>
 
 			<form:label path="creditCard.holderName">
@@ -147,6 +147,7 @@
 	<input type="submit" name="save"
 		value="<spring:message code="applications.update.save" />" />
 
+<!-- El botón de cancelar conectarlo con las task -->
 	<input type="button" name="cancel"
 		value="<spring:message code="applications.update.cancel" />"
 		<security:authorize access="hasRole('WORKER')">onclick="javascript: relativeRedir('task/worker/show.do?taskId=${id}');"</security:authorize>

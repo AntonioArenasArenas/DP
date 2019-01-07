@@ -18,53 +18,47 @@
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p>
-	<spring:message code="applications.statisticsPerTask" />
-</p>
+<h2>
+	<spring:message code="administrator.statisticsPerTask" />
+</h2>
 
 <p>
-	<spring:message code="applications.maximum" />
-	: ${maximumpt}
+	<b><spring:message code="administrator.maximum" /> :</b> ${maximumpt}
 </p>
 <p>
-	<spring:message code="applications.minimum" />
-	: ${minimumpt}
+	<b><spring:message code="administrator.minimum" /> :</b> ${minimumpt}
 </p>
 <p>
-	<spring:message code="applications.average" />
-	: ${averagept}
+	<b><spring:message code="administrator.average" /> :</b> ${averagept}
 </p>
 <p>
-	<spring:message code="applications.stdev" />
-	: ${stdevpt}
+	<b><spring:message code="administrator.stdev" /> :</b> ${stdevpt}
 </p>
 
 
-<p>
-	<spring:message code="applications.priceOfferedStatistics" />
-</p>
+<h2>
+	<spring:message code="administrator.priceOfferedStatistics" />
+</h2>
+
+
 
 <p>
-	<spring:message code="applications.maximum" />
-	: ${maximumpo}
+	<b><spring:message code="administrator.maximum" /> :</b> ${maximumpo}
 </p>
 <p>
-	<spring:message code="applications.minimum" />
-	: ${minimumpo}
+	<b><spring:message code="administrator.minimum" /> :</b> ${minimumpo}
 </p>
 <p>
-	<spring:message code="applications.average" />
-	: ${averagepo}
+	<b><spring:message code="administrator.average" /> :</b> ${averagepo}
 </p>
 <p>
-	<spring:message code="applications.stdev" />
-	: ${stdevpo}
+	<b><spring:message code="administrator.stdev" /> :</b> ${stdevpo}
 </p>
 
 
 <p>
-	<spring:message code="applications.pendingexpired" />
-	: ${ratio}
+	<h2><spring:message code="administrator.pendingexpired" /></h2>
+		${ratio}
 </p>
 
 

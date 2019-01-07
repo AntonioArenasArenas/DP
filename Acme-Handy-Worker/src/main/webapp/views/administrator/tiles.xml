@@ -17,7 +17,7 @@
 
 	<definition name="administrator/statistics" extends="master.page">
 		<put-attribute name="title" value="Statistics" />
-		<put-attribute name="body" value="/views/application/statistics.jsp" />
+		<put-attribute name="body" value="/views/administrator/statistics.jsp" />
 	</definition>
 
 
