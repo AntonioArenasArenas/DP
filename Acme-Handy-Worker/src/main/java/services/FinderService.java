@@ -57,6 +57,7 @@ public class FinderService {
     	
     	Assert.notNull(finder);
         finderRepository.delete(finder);
+        Assert.isNull(finder);
 
     }
     public Finder findOne() {
@@ -94,9 +95,11 @@ public class FinderService {
         return result;
     }
     public void setCache(int cache){
+    	
         SystemData s;
         s = this.systemDataService.getSystemData();
         s.setCache(cache);
+        Assert.isTrue(s.getCache() == cache);
 
     }
 }

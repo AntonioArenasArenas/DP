@@ -30,6 +30,7 @@ public class SystemDataService {
     	
         SystemData result;
         result = new SystemData();
+        Assert.notNull(result);
         return result;
     }
 
@@ -38,6 +39,7 @@ public class SystemDataService {
         Assert.notNull(systemData);
         SystemData result;
         result = systemDataRepository.save(systemData);
+        
         return result;
     }
     
