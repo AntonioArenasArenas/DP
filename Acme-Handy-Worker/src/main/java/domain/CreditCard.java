@@ -59,7 +59,7 @@ public class CreditCard extends DomainEntity {
 	public void setCvv(final int cvv) {
 		this.cvv = cvv;
 	}
-
+	
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "MM/yy")
 	public Date getExpirationDate() {

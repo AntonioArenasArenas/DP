@@ -10,13 +10,20 @@
 
 package controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import services.ApplicationService;
 
 @Controller
 @RequestMapping("/administrator")
 public class AdministratorController extends AbstractController {
+
+	@Autowired
+	private ApplicationService applicationService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -24,24 +31,31 @@ public class AdministratorController extends AbstractController {
 		super();
 	}
 
-	// Action-1 ---------------------------------------------------------------		
+	// Action-1 ---------------------------------------------------------------
 
-	@RequestMapping("/action-1")
+	@RequestMapping(value = "/statistics", method = RequestMethod.GET)
 	public ModelAndView action1() {
 		ModelAndView result;
 
-		result = new ModelAndView("administrator/action-1");
+		Double[] sptask = applicationService.getAdminStatisticsPerTask();
 
-		return result;
-	}
+		Double[] spoffered = applicationService
+				.getAdminStatisticsPriceOffered();
 
-	// Action-2 ---------------------------------------------------------------
+		Double cantChange = applicationService.getAppliCantChange();
 
-	@RequestMapping("/action-2")
-	public ModelAndView action2() {
-		ModelAndView result;
+		result = new ModelAndView("administrator/statistics");
+		result.addObject("maximumpt", sptask[2]);
+		result.addObject("minimumpt", sptask[1]);
+		result.addObject("averagept", sptask[0]);
+		result.addObject("stdevpt", sptask[3]);
 
-		result = new ModelAndView("administrator/action-2");
+		result.addObject("maximumpo", spoffered[2]);
+		result.addObject("minimumpo", spoffered[1]);
+		result.addObject("averagepo", spoffered[0]);
+		result.addObject("stdevpo", spoffered[3]);
+
+		result.addObject("ratio", cantChange);
 
 		return result;
 	}

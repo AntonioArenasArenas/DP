@@ -49,6 +49,7 @@
 	</form:label>
 	<input type="number" name="offeredPrize" step=".01"
 		<security:authorize access="hasRole('CUSTOMER')">readonly value="${application.offeredPrize}"</security:authorize> />
+	<form:errors cssClass="error" path="offeredPrize" />
 	<br>
 
 	<security:authorize access="hasRole('CUSTOMER')">
@@ -85,8 +86,8 @@
 		</form:label>
 		<form:select path="status" id="estados">
 			<form:options items="${estados}" />
-			<form:option value="0" label="----"></form:option>
 		</form:select>
+		<form:errors cssClass="error" path="status" />
 		<br>
 
 		<div id="commentsfield">
@@ -118,6 +119,7 @@
 				<form:options items="${brandnames}" />
 				<form:option value="0" label="----" />
 			</form:select>
+			<form:errors cssClass="error" path="creditCard.brandName" />
 			<br>
 
 			<form:label path="creditCard.number">
@@ -153,8 +155,11 @@
 </form:form>
 
 <script>
-	$("#creditCardFields").hide();
-	$("#commentsfield").hide();
+	var val = $("#estados").val();
+	if (val === "PENDING") {
+		$("#creditCardFields").hide();
+		$("#commentsfield").hide();
+	}
 
 	$("#formApplication").submit(function() {
 		var val = $("#estados").val();

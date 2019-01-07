@@ -22,7 +22,7 @@
 <!-- Otros taglib utiles son tiles para textos en tiles y fmt para fechas -->
 
 <jsp:useBean id="date" class="java.util.Date" />
-<fmt:formatDate value="${date}" pattern="dd/MM/yyyy" />
+<fmt:formatDate var="date" value="${date}" pattern="dd/MM/yyyy" />
 
 <display:table name="applications" id="row" requestURI="${requestURI}"
 	pagesize="5" class="displaytag">

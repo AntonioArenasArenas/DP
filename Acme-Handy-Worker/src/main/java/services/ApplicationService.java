@@ -86,7 +86,9 @@ public class ApplicationService {
 
 		Application result;
 
-		application.setMoment(new Date(System.currentTimeMillis() - 1));
+		if (application.getId() == 0) {
+			application.setMoment(new Date(System.currentTimeMillis() - 1));
+		}
 		result = applicationRepository.save(application);
 
 		return result;
