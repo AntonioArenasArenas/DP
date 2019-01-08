@@ -63,6 +63,8 @@
 		
 		<security:intercept-url pattern="/task/worker/list.do" access="hasRole('WORKER')" />
 		<security:intercept-url pattern="/task/worker/show.do" access="hasRole('WORKER')" />
+		
+		<security:intercept-url pattern="/customer/worker/show.do" access="hasRole('WORKER')" />
 	
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

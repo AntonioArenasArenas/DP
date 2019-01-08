@@ -34,7 +34,7 @@
 			</a>
 		</display:column>
 		<display:column>
-			<a href="customer/show.do?id=${row.customer.id}">
+			<a href="customer/worker/show.do?id=${row.customer.id}">
 				<spring:message code="task.viewCustomer" />
 			</a>
 		</display:column>
