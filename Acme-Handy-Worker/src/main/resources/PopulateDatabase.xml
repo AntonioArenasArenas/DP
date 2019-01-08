@@ -1383,7 +1383,7 @@
 			<list></list>
 		</property>
 
-		<property name="warranty" ref="warranty4" />
+		<property name="warranty" ref="warranty1" />
 
 		<property name="category" ref="category1" />
 
@@ -1426,7 +1426,7 @@
 			<list></list>
 		</property>
 
-		<property name="warranty" ref="warranty3" />
+		<property name="warranty" ref="warranty2" />
 
 		<property name="category" ref="category2" />
 
@@ -1545,7 +1545,7 @@
 		<property name="laws"
 			value="leyes escritas separadas por algun simbolo para la garantia 3" />
 
-		<property name="draftMode" value="False" />
+		<property name="draftMode" value="True" />
 
 	</bean>
 
@@ -1558,7 +1558,7 @@
 		<property name="laws"
 			value="leyes escritas separadas por algun simbolo para la garantia 4" />
 
-		<property name="draftMode" value="False" />
+		<property name="draftMode" value="True" />
 
 	</bean>
 
@@ -2009,7 +2009,7 @@
 		</property>
 		<property name="keyWord" value="Patata" />
 		<property name="category" value="category1" />
-		<property name="warranty" value="warranty4" />
+		<property name="warranty" value="warranty1" />
 		<property name="maxPrice" value="5.0" />
 		<property name="minPrice" value="2.0" />
 		<property name="startDate" value="2017/07/10 01:41" />
