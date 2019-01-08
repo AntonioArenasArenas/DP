@@ -14,18 +14,17 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Sample Co., Inc." /></a>
+	<a href="#"><img src="images/logo.png" alt="Acme Co., Inc." /></a>
 </div>
 
 <div>
-	<ul id="jMenu">		<!-- Actualizar aqu� el men�, preguntar a patricia por el enlace caido, NO OLVIDAR CAMBIAR MESSAGES Y TILES EN CONSENCUENCIA -->
+	<ul id="jMenu">		<!-- Actualizar aqu� el men�, preguntar a patricia por el enlace caido, NO OLVIDAR CAMBIAR MESSAGES Y TILES EN CONSECUENCIA -->
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>
+					<li><a href="administrator/statistics.do"><spring:message code="master.page.administrator.statistics" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -34,8 +33,16 @@
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="customer/action-1.do"><spring:message code="master.page.customer.action.1" /></a></li>
-					<li><a href="customer/action-2.do"><spring:message code="master.page.customer.action.2" /></a></li>
+					<li><a href="application/customer/list.do"><spring:message code="master.page.customer.action.1" /></a></li>
+				</ul>
+			</li>
+		</security:authorize>
+		
+		<security:authorize access="hasRole('WORKER')">
+			<li><a class="fNiv"><spring:message	code="master.page.worker" /></a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="application/worker/list.do"><spring:message code="master.page.customer.action.1" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -52,9 +59,6 @@
 				</a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="profile/action-1.do"><spring:message code="master.page.profile.action.1" /></a></li>
-					<li><a href="profile/action-2.do"><spring:message code="master.page.profile.action.2" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 			</li>

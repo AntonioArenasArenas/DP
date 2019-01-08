@@ -59,8 +59,7 @@ public class ApplicationServiceTest extends AbstractTest {
 			}
 		}
 		application.setStatus("REJECTED");
-		Application saved = applicationService.updateStatus(application, null,
-				null);
+		Application saved = applicationService.updateStatus(application, null);
 		Assert.isTrue(saved.getStatus().equals(application.getStatus()));
 		super.authenticate(null);
 	}
@@ -96,8 +95,9 @@ public class ApplicationServiceTest extends AbstractTest {
 			e.printStackTrace();
 		}
 		creditcard.setExpirationDate(date);
+		application.setCreditCard(creditcard);
 		Application saved = applicationService.updateStatus(application,
-				creditcard, "Comentarios varios");
+				"Comentarios varios");
 		Assert.isTrue(saved.getStatus().equals(application.getStatus()));
 		Assert.isTrue(saved.getCreditCard().equals(creditcard));
 		Assert.isTrue(saved.getComments().equals("Comentarios varios"));
