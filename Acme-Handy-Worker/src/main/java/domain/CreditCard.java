@@ -10,6 +10,7 @@ import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import org.hibernate.validator.constraints.CreditCardNumber;
 import org.hibernate.validator.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -42,6 +43,7 @@ public class CreditCard extends DomainEntity {
 	}
 
 	@NotBlank
+	@CreditCardNumber
 	public String getNumber() {
 		return this.number;
 	}

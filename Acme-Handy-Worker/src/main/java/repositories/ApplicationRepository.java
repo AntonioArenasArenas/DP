@@ -24,7 +24,7 @@ public interface ApplicationRepository extends
 	@Query("select avg(a.offeredPrize),min(a.offeredPrize), max(a.offeredPrize), stddev(a.offeredPrize) from Application a")
 	public Double[] getApplicationPriceStatistics();
 
-	@Query("select count(a)*1.00 / (select count(a) from Application a) from Application a where a.status='PENDING' AND a.task.endDate<CURRENT_DATE")
+	@Query("select count(a)*1.00 / (select count(a) from Application a where a.status='PENDING') from Application a where a.status='PENDING' AND a.task.endDate<CURRENT_DATE")
 	public Double getApplicationCantChange();
 
 	@Query("select avg(t.maxPrice), min(t.maxPrice), max(t.maxPrice), stddev(t.maxPrice) from Task t")

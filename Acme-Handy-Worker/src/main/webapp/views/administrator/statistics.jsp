@@ -55,10 +55,8 @@
 	<b><spring:message code="administrator.stdev" /> :</b> ${stdevpo}
 </p>
 
-
-<p>
 	<h2><spring:message code="administrator.pendingexpired" /></h2>
 		${ratio}
-</p>
+
 
 

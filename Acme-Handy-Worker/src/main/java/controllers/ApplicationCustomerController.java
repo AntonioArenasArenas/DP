@@ -8,7 +8,6 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,8 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
 import services.CreditCardService;
+import services.CustomerService;
+import services.TaskService;
 import domain.Application;
 import domain.CreditCard;
+import domain.Customer;
 
 @Controller
 @RequestMapping("/application/customer")
@@ -26,6 +28,12 @@ public class ApplicationCustomerController extends AbstractController {
 
 	@Autowired
 	private ApplicationService applicationService;
+
+	@Autowired
+	private CustomerService customerService;
+
+	@Autowired
+	private TaskService taskService;
 
 	@Autowired
 	private CreditCardService creditCardService;
@@ -52,7 +60,20 @@ public class ApplicationCustomerController extends AbstractController {
 
 		Application application;
 
-		application = applicationService.findOne(applicationId);
+		try {
+			application = applicationService.findOne(applicationId);
+
+		} catch (Exception e) {
+			return result = new ModelAndView("redirect:list.do");
+		}
+
+		Customer c = customerService.findByPrincipal();
+
+		if (!taskService.getTasksByCustomerId(c.getId()).contains(
+				application.getTask())) {
+			return result = new ModelAndView("redirect:list.do");
+		}
+
 		Collection<String> comentarios = new LinkedList<String>();
 		if (application.getComments() != null) {
 			String[] spliteado = application.getComments().split(";");
@@ -72,8 +93,18 @@ public class ApplicationCustomerController extends AbstractController {
 		ModelAndView result;
 		Application application;
 
-		application = applicationService.findOne(applicationId);
-		Assert.notNull(application);
+		try {
+			application = applicationService.findOne(applicationId);
+
+		} catch (Exception e) {
+			return result = new ModelAndView("redirect:list.do");
+		}
+		Customer c = customerService.findByPrincipal();
+
+		if (!taskService.getTasksByCustomerId(c.getId()).contains(
+				application.getTask())) {
+			return result = new ModelAndView("redirect:list.do");
+		}
 
 		result = createEditModelAndView(application);
 
@@ -90,9 +121,9 @@ public class ApplicationCustomerController extends AbstractController {
 		} else {
 			try {
 				if (application.getStatus().equals("ACCEPTED")) {
-					CreditCard presisted = creditCardService.save(application
+					CreditCard persisted = creditCardService.save(application
 							.getCreditCard());
-					application.setCreditCard(presisted);
+					application.setCreditCard(persisted);
 				}
 				Application actual = applicationService.findOne(application
 						.getId());

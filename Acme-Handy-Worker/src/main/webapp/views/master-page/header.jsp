@@ -33,7 +33,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="application/customer/list.do"><spring:message code="master.page.customer.action.1" /></a></li>
+					<li><a href="application/customer/list.do"><spring:message code="master.page.applications" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -42,7 +42,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.worker" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="application/worker/list.do"><spring:message code="master.page.customer.action.1" /></a></li>
+					<li><a href="application/worker/list.do"><spring:message code="master.page.applications" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

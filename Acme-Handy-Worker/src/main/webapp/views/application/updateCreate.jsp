@@ -147,10 +147,10 @@
 	<input type="submit" name="save"
 		value="<spring:message code="applications.update.save" />" />
 
-<!-- El botón de cancelar conectarlo con las task -->
+	<!-- El botón de cancelar conectarlo con las task -->
 	<input type="button" name="cancel"
 		value="<spring:message code="applications.update.cancel" />"
-		<security:authorize access="hasRole('WORKER')">onclick="javascript: relativeRedir('task/worker/show.do?taskId=${id}');"</security:authorize>
+		<security:authorize access="hasRole('WORKER')">onclick="javascript: relativeRedir('task/worker/list.do');"</security:authorize>
 		<security:authorize access="hasRole('CUSTOMER')">onclick="javascript: relativeRedir('application/customer/list.do');"</security:authorize> />
 
 </form:form>
@@ -160,6 +160,8 @@
 	if (val === "PENDING") {
 		$("#creditCardFields").hide();
 		$("#commentsfield").hide();
+	} else if (val === "REJECTED") {
+		$("#creditCardFields").hide();
 	}
 
 	$("#formApplication").submit(function() {

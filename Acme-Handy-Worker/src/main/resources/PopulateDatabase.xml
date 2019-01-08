@@ -57,10 +57,7 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="WORKER" />
 				</bean>
 			</list>
 		</property>
@@ -1910,7 +1907,7 @@
 
 		<property name="brandName" value="Tarjeta Master" />
 
-		<property name="number" value="3234235233253" />
+		<property name="number" value="ES0000000000000000000000" />
 
 		<property name="cvv" value="101" />
 
@@ -1928,7 +1925,7 @@
 
 		<property name="brandName" value="Tarjeta Paypal" />
 
-		<property name="number" value="534978833253" />
+		<property name="number" value="ES0000000000000000000000" />
 
 		<property name="cvv" value="198" />
 
@@ -1946,7 +1943,7 @@
 
 		<property name="brandName" value="Steam money" />
 
-		<property name="number" value="399830009" />
+		<property name="number" value="ES0000000000000000000000" />
 
 		<property name="cvv" value="100" />
 

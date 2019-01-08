@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
 import services.TaskService;
+import services.WorkerService;
 import domain.Application;
+import domain.Worker;
 
 @Controller
 @RequestMapping("/application/worker")
@@ -28,6 +30,9 @@ public class ApplicationWorkerController extends AbstractController {
 
 	@Autowired
 	private TaskService taskService;
+
+	@Autowired
+	private WorkerService workerService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -51,7 +56,16 @@ public class ApplicationWorkerController extends AbstractController {
 
 		Application application;
 
-		application = applicationService.findOne(applicationId);
+		try {
+			application = applicationService.findOne(applicationId);
+		} catch (Exception e) {
+			return result = new ModelAndView("redirect:list.do");
+		}
+		Worker worker = workerService.findByPrincipal();
+
+		if (!application.getWorker().equals(worker)) {
+			return result = new ModelAndView("redirect:list.do");
+		}
 		Collection<String> comentarios = new LinkedList<String>();
 		if (application.getComments() != null) {
 			String[] spliteado = application.getComments().split(";");
