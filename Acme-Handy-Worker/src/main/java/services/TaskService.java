@@ -78,6 +78,8 @@ public class TaskService {
 
 		task.setMoment(new Date(System.currentTimeMillis() - 1));
 		
+		Assert.isTrue(task.getStartDate().before(task.getEndDate()));
+		
 		result = taskRepository.save(task);
 		
 		return result;
@@ -96,6 +98,12 @@ public class TaskService {
 	public Collection<Task> getTasksByCustomerId(Integer id){
 		
 		return taskRepository.getTasksByCustomerId(id);
+
+	}
+	
+	public Collection<Task> getActiveTasks(){
+		
+		return taskRepository.getActiveTasks();
 
 	}
 	

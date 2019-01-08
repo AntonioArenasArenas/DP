@@ -7,7 +7,7 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<display:table name="warranties" id="row" requestURI="warranty/administrator/list.do" pagesize="10" class="displaytag" >
+<display:table name="warranties" id="row" requestURI="warranty/administrator/list.do" pagesize="5" class="displaytag" >
 	
 	<display:column property="title" titleKey="warranty.title" sortable="true" />
 	<display:column>

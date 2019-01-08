@@ -14,4 +14,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer>{
 	@Query("select t from Task t where t.customer.id=?1")
 	public Collection<Task> getTasksByCustomerId(int customerId);
 	
+	@Query("select t from Task t where t.endDate>CURRENT_DATE")
+	public Collection<Task> getActiveTasks();
+	
 }

@@ -38,6 +38,11 @@
 				<spring:message code="task.viewCustomer" />
 			</a>
 		</display:column>
+		<display:column>
+			<a href="application/worker/create.do?taskId=${row.customer.id}">
+				<spring:message code="task.createApplication" />
+			</a>
+		</display:column>
 	</security:authorize>
 	
 </display:table>

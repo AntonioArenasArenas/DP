@@ -36,7 +36,7 @@ public class TaskWorkerController extends AbstractController {
 		ModelAndView result;
 		Collection<Task> tasks;
 
-		tasks = this.taskService.findAll();
+		tasks = this.taskService.getActiveTasks();
 		result = new ModelAndView("task/list");
 		result.addObject("requestURI", "task/worker/list.do");
 		result.addObject("tasks", tasks);

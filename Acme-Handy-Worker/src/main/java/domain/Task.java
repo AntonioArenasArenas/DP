@@ -102,6 +102,7 @@ public class Task extends DomainEntity {
 		this.moment = moment;
 	}
 	
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getStartDate() {
@@ -113,6 +114,7 @@ public class Task extends DomainEntity {
 		this.startDate = startDate;
 	}
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getEndDate() {

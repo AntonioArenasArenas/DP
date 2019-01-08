@@ -103,7 +103,7 @@
 
 	<bean id="userAccount7" class="security.UserAccount">
 		<property name="username" value="superfuerte" />
-		<property name="password" value="4b3231655cebb7a1f783eddf27d254ca" />
+		<property name="password" value="6eacff0ba4ceba28f90525930bcf0e80" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
