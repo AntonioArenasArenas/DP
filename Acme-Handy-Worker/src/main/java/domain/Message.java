@@ -1,11 +1,13 @@
 
 package domain;
 
+import java.util.Collection;
 import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -22,7 +24,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Message extends DomainEntity {
 
 	private Actor				sender;
-	private Actor			recipient;
+	private Collection<Actor>	recipients;
 	private Date				moment;
 	private String				subject;
 	private String				body;
@@ -35,12 +37,12 @@ public class Message extends DomainEntity {
 	public Actor getSender() {
 		return this.sender;
 	}
-	
+
 	@Valid
 	@NotNull
-	@ManyToOne(optional = false)
-	public Actor getRecipient() {
-		return this.recipient;
+	@ManyToMany
+	public Collection<Actor> getRecipients() {
+		return this.recipients;
 	}
 
 	@Past
@@ -93,8 +95,8 @@ public class Message extends DomainEntity {
 		this.sender = sender;
 	}
 
-	public void setRecipient(final Actor recipient) {
-		this.recipient = recipient;
+	public void setRecipients(final Collection<Actor> recipients) {
+		this.recipients = recipients;
 	}
 
 }

@@ -7,21 +7,21 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import repositories.ApplicationRepository;
-import domain.Application;
+import repositories.CreditCardRepository;
+import domain.CreditCard;
 
 @Component
 @Transactional
-public class StringToApplicationConverter implements
-		Converter<String, Application> {
+public class StringToCreditCardConverter implements
+		Converter<String, CreditCard> {
 
 	@Autowired
-	ApplicationRepository applicationRepository;
+	CreditCardRepository creditCardRepository;
 
 	@Override
-	public Application convert(String text) {
+	public CreditCard convert(String text) {
 
-		Application result;
+		CreditCard result;
 		int id;
 
 		try {
@@ -29,7 +29,7 @@ public class StringToApplicationConverter implements
 				result = null;
 			} else {
 				id = Integer.valueOf(text);
-				result = applicationRepository.findOne(id);
+				result = creditCardRepository.findOne(id);
 			}
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);

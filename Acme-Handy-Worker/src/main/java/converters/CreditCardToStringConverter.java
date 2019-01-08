@@ -5,22 +5,22 @@ import javax.transaction.Transactional;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import domain.Application;
+import domain.CreditCard;
 
 @Component
 @Transactional
-public class ApplicationToStringConverter implements
-		Converter<Application, String> {
+public class CreditCardToStringConverter implements
+		Converter<CreditCard, String> {
 
 	@Override
-	public String convert(Application application) {
+	public String convert(CreditCard creditCard) {
 
 		String result;
 
-		if (application == null) {
+		if (creditCard == null) {
 			result = null;
 		} else {
-			result = String.valueOf(application.getId());
+			result = String.valueOf(creditCard.getId());
 		}
 
 		return result;

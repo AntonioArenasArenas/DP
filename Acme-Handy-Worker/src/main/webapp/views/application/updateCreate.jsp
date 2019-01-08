@@ -17,30 +17,15 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
-<script type="text/javascript" src="scripts/jquery.js"></script>
 
 <!-- Ver si falta algún import en la parte de script -->
 
-
-<security:authorize access="hasRole('CUSTOMER')">
-
-	<p>
-		<spring:message code="applications.update.1" />
-	</p>
-
-</security:authorize>
-
-<security:authorize access="hasRole('WORKER')">
-	<p>
-		<spring:message code="applications.create" />
-	</p>
-</security:authorize>
-
 <!-- Actualizar -->
 
-<form:form modelAttribute="application"
-	action="<security:authorize access="hasRole('CUSTOMER')">application/customer/edit.do</security:authorize><security:authorize access="hasRole('WORKER')">application/worker/create.do</security:authorize>">
+<form:form modelAttribute="application" action="${requestURI}"
+	id="formApplication">
 	<security:authorize access="hasRole('CUSTOMER')">
 		<form:hidden path="id" />
 		<form:hidden path="version" />
@@ -50,111 +35,174 @@
 
 
 	<security:authorize access="hasRole('CUSTOMER')">
+		<fmt:formatDate value="${application.moment}" var="dateString"
+			pattern="dd/MM/yyyy HH:mm" />
 		<form:label path="moment">
-			<spring:message code="applications.update.date" />
+			<b><spring:message code="applications.update.date" /></b>
 		</form:label>
-		<input type="text" name="moment" readonly
-			value="${application.moment}" />
-
+		<input type="text" name="moment" readonly value="${dateString}" />
+		<br>
 	</security:authorize>
 
 	<form:label path="offeredPrize">
-		<spring:message code="applications.list.price" />
+		<b><spring:message code="applications.list.price" /></b>
 	</form:label>
-	<input type="number" name="offeredPrize"
+	<input type="number" name="offeredPrize" step=".01"
 		<security:authorize access="hasRole('CUSTOMER')">readonly value="${application.offeredPrize}"</security:authorize> />
+	<form:errors cssClass="error" path="offeredPrize" />
+	<br>
 
 	<security:authorize access="hasRole('CUSTOMER')">
-		<p>
-			<spring:message code="applications.list.worker" />
-			:
-		</p>
-		<p>${application.worker.name} ${application.worker.surname}</p>
 
-		<p>
-			<spring:message code="applications.update.comments" />
+		<b><spring:message code="applications.list.worker" /></b>
+			: ${application.worker.name} ${application.worker.surname}
+			<br>
 
-			<!-- Al necesitar tratamiento, se pasará desde el controlador la lista de comentarios ya tratada , ver que hx darle a los p-->
+		<b> <spring:message code="applications.update.comments" />
+		</b>
+		<br>
 
-			<jstl:forEach var="comment" items="${comments}">
+		<!-- Al necesitar tratamiento, se pasará desde el controlador la lista de comentarios ya tratada , ver que hx darle a los p-->
 
-				<p>
-					<jstl:out value="${comment}"></jstl:out>
-				</p>
-			</jstl:forEach>
-		</p>
-	</security:authorize> />
+		<jstl:forEach var="comment" items="${comentarios}">
+
+			<jstl:out value="${comment}"></jstl:out>
+			<br>
+		</jstl:forEach>
+	</security:authorize>
 
 	<security:authorize access="hasRole('WORKER')">
+		<form:hidden path="status" />
 		<form:label path="comments">
-			<spring:message code="applications.update.comments" />
+			<b><spring:message code="applications.update.comments" /></b>
 		</form:label>
 		<form:textarea path="comments" />
-	</security:authorize> />
+		<br>
+	</security:authorize>
 
 	<security:authorize access="hasRole('CUSTOMER')">
 		<form:label path="status">
-			<spring:message code="applications.update.status" />
+			<b><spring:message code="applications.update.status" /></b>
 		</form:label>
-		<form:select path="status">
+		<form:select path="status" id="estados">
 			<form:options items="${estados}" />
-			<form:option value="0" label="----"></form:option>
 		</form:select>
-	</security:authorize> />
+		<form:errors cssClass="error" path="status" />
+		<br>
+
+		<div id="commentsfield">
+			<br>
+			<form:label path="comments" id="comentarioslabel">
+				<b><spring:message code="applications.update.comments" /></b>
+			</form:label>
+			<form:textarea path="comments" id="areaComentarios" />
+
+		</div>
+
+		<div id="creditCardFields">
+
+			<p id="texto">
+				<b><spring:message code="applications.update.creditcard" /></b>
+			</p>
+
+			<form:label path="creditCard.holderName">
+				<spring:message code="applications.update.creditcard.name" />
+			</form:label>
+			<form:input path="creditCard.holderName" id="hName" />
+			<form:errors cssClass="error" path="creditCard.holderName" />
+			<br>
+
+			<form:label path="creditCard.brandName">
+				<spring:message code="applications.update.creditcard.brandname" />
+			</form:label>
+			<form:select id="bName" path="creditCard.brandName">
+				<form:options items="${brandnames}" />
+				<form:option value="0" label="----" />
+			</form:select>
+			<form:errors cssClass="error" path="creditCard.brandName" />
+			<br>
+
+			<form:label path="creditCard.number">
+				<spring:message code="applications.update.creditcard.number" />
+			</form:label>
+			<form:input path="creditCard.number" id="num" />
+			<form:errors cssClass="error" path="creditCard.number" />
+			<br>
+
+			<form:label path="creditCard.cvv">CVV</form:label>
+			<form:input path="creditCard.cvv" id="cv" />
+			<form:errors cssClass="error" path="creditCard.cvv" />
+			<br>
+
+			<form:label path="creditCard.expirationDate">
+				<spring:message code="applications.update.creditcard.expdate" />
+			</form:label>
+			<form:input path="creditCard.expirationDate" placeholder="MM/yy"
+				format="MM/yy" id="expDat" />
+			<form:errors cssClass="error" path="creditCard.expirationDate" />
 
 
-
+		</div>
+	</security:authorize>
 	<input type="submit" name="save"
 		value="<spring:message code="applications.update.save" />" />
 
+	<!-- El botón de cancelar conectarlo con las task -->
 	<input type="button" name="cancel"
-		value="<spring:message code="task.cancel" />"
-		<security:authorize access="hasRole('WORKER')">onclick="javascript: relativeRedir('task/worker/show.do?taskId=${id}');"</security:authorize>
+		value="<spring:message code="applications.update.cancel" />"
+		<security:authorize access="hasRole('WORKER')">onclick="javascript: relativeRedir('task/worker/list.do');"</security:authorize>
 		<security:authorize access="hasRole('CUSTOMER')">onclick="javascript: relativeRedir('application/customer/list.do');"</security:authorize> />
 
 </form:form>
 
-
 <script>
-	$("select")
-			.change(
-					function() {
+	var val = $("#estados").val();
+	if (val === "PENDING") {
+		$("#creditCardFields").hide();
+		$("#commentsfield").hide();
+	} else if (val === "REJECTED") {
+		$("#creditCardFields").hide();
+	}
 
-						var val = $("select").val();
-						if (val === "ACCEPTED" || val === "REJECTED") {
-							var newElem = '<form:label path="comments"> <spring:message code="applications.update.comments" /> </form:label><form:textarea path="comments" id="comentarios"/>';
-							$(newElem).insertAfter($("select"));
-						} else {
-							$("#comentarios").remove();
-						}
+	$("#formApplication").submit(function() {
+		var val = $("#estados").val();
+		if (val === "REJECTED" || val === "PENDING") {
+			$("#creditCardFields").remove();
 
-						if (val === "ACCEPTED") {
-							var text = '<p id="texto">Por favor inserte una tarjeta de crédito</p';
-							$(text).insertAfter($("#comentarios"));
+		}
 
-							var holderName = '<form:label path="holderName"><spring:message code="applications.update.creditcard.name" /></form:label><form:input path="holderName" id="hName"/><form:errors cssClass="error" path="holderName" />';
-							$(holderName).insertAfter($("#texto"));
+		if (val === "PENDING") {
+			$("#commentsfield").remove();
+		}
+	});
 
-							var brandName = '<form:label path="brandName"><spring:message code="applications.update.creditcard.brandname" /></form:label><form:select id="bName" path="brandName"><form:options items="${brandnames}" itemValue="id" /><form:option value="0" label="----" /></form:select>';
-							$(brandName).insertAfter($("#hName"));
+	/*	Aquí se puede detectar el idioma pero no se puede traducir algo que no será estático en tiempo de ejecución porque si se cambia ya no valdrá
+	
+	window.onload = function() {
 
-							var number = '<form:label path="number"><spring:message code="applications.update.creditcard.number" /></form:label><form:input path="number" id="num" /><form:errors cssClass="error" path="number" />';
-							$(number).insertAfter($("#bName"));
+		var ln = x = window.navigator.language || navigator.browserLanguage;
+		if (ln == 'es') {
+			window.location.href = 'index_es.html'; // si es es va a español 
+		}
+	}; */
 
-							var cvv = '<form:label path="cvv">CVV</form:label><form:input path="cvv" id="cv"/><form:errors cssClass="error" path="cvv" />';
-							$(cvv).insertAfter($("#num"));
+	$("#estados").change(function() {
 
-							var expDate = '<form:label path="expirationDate"><spring:message code="applications.update.creditcard.expdate" /></form:label><form:input path="expirationDate" placeholder="MM/yy" format="MM/yy" id="expDat" /><form:errors cssClass="error" path="expirationDate" />';
-							$(expDate).insertAfter($("#cv"));
-						} else {
-							$("#texto").remove();
-							$("#hName").remove();
-							$("#bName").remove();
-							$("#num").remove();
-							$("#cv").remove();
-							$("#expDat").remove();
-						}
+		var val = $("#estados").val();
 
-					});
+		if (val === "ACCEPTED" || val === "REJECTED") {
+			document.getElementById("areaComentarios").value = "";
+			$("#commentsfield").show("slow");
+
+		} else {
+			$("#commentsfield").hide("slow");
+		}
+
+		if (val == "ACCEPTED") {
+			$("#creditCardFields").show("slow");
+
+		} else {
+			$("#creditCardFields").hide("slow");
+		}
+	});
 </script>
-

@@ -2,6 +2,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 
 import javax.transaction.Transactional;
 
@@ -73,7 +74,7 @@ public class MessageService {
 		Actor actor = actorService.findByPrincipal();
 		Message result = message;
 		Box outBox = boxService.findBoxByActor("OUTBOX", actor.getId());
-		Actor recipient = result.getRecipient();
+		Collection<Actor> recipients = result.getRecipients();
 		moment = new Date(System.currentTimeMillis() - 1);
 
 		Assert.notNull(message);
@@ -89,14 +90,14 @@ public class MessageService {
 		boxService.save(outBox);
 		actorService.save(actor);
 
+		for( Actor a : recipients){
 
-
-			Box InBox = boxService.findBoxByActor("INBOX", recipient.getId());
+			Box InBox = boxService.findBoxByActor("INBOX", a.getId());
 			InBox.getMessages().add(result);
-			recipient.getReceivedMessages().add(result);
+			a.getReceivedMessages().add(result);
 			boxService.save(InBox);
-			actorService.save(recipient);
-
+			actorService.save(a);
+		}
 	
 
 		return result;
@@ -112,17 +113,19 @@ public class MessageService {
 		// owner of the box
 		userAccount = LoginService.getPrincipal();
 		logged = actorService.findByUserAccount(userAccount);
-		Assert.isTrue(message.getRecipient().equals(logged)
-				|| message.getSender().equals(logged));
+		LinkedList<Actor> recipients = new LinkedList<Actor>(message.getRecipients());
+		Actor recipient = recipients.getFirst();
+		Assert.isTrue( recipient.equals(logged) || message.getSender().equals(logged));
 		Box TrashBox = boxService.findBoxByActor("TRASHBOX", logged.getId());
 		box.getMessages().remove(message);
+		boxService.save(box);
 
 		if (box.getName() == TrashBox.getName()) {
 
-			//if (boxService.findBoxesWithMessage(message).isEmpty()) {
+			if (boxService.findBoxesWithMessage(message).isEmpty()) {
 
 				messageRepository.delete(message);
-			//}
+			}
 
 		} else {
 

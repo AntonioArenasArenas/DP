@@ -7,21 +7,20 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import repositories.ApplicationRepository;
-import domain.Application;
+import repositories.TaskRepository;
+import domain.Task;
 
 @Component
 @Transactional
-public class StringToApplicationConverter implements
-		Converter<String, Application> {
+public class StringToTaskConverter implements Converter<String, Task> {
 
 	@Autowired
-	ApplicationRepository applicationRepository;
+	TaskRepository taskRepository;
 
 	@Override
-	public Application convert(String text) {
+	public Task convert(String text) {
 
-		Application result;
+		Task result;
 		int id;
 
 		try {
@@ -29,7 +28,7 @@ public class StringToApplicationConverter implements
 				result = null;
 			} else {
 				id = Integer.valueOf(text);
-				result = applicationRepository.findOne(id);
+				result = taskRepository.findOne(id);
 			}
 		} catch (Throwable oops) {
 			throw new IllegalArgumentException(oops);

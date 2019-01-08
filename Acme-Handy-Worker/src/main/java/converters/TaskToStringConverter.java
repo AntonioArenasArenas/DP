@@ -5,22 +5,22 @@ import javax.transaction.Transactional;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import domain.Application;
+import domain.Task;
 
 @Component
 @Transactional
-public class ApplicationToStringConverter implements
-		Converter<Application, String> {
+public class TaskToStringConverter implements
+		Converter<Task, String> {
 
 	@Override
-	public String convert(Application application) {
+	public String convert(Task task) {
 
 		String result;
 
-		if (application == null) {
+		if (task == null) {
 			result = null;
 		} else {
-			result = String.valueOf(application.getId());
+			result = String.valueOf(task.getId());
 		}
 
 		return result;

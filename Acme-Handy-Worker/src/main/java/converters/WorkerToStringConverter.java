@@ -5,22 +5,22 @@ import javax.transaction.Transactional;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
 
-import domain.Application;
+import domain.Worker;
 
 @Component
 @Transactional
-public class ApplicationToStringConverter implements
-		Converter<Application, String> {
+public class WorkerToStringConverter implements
+		Converter<Worker, String> {
 
 	@Override
-	public String convert(Application application) {
+	public String convert(Worker worker) {
 
 		String result;
 
-		if (application == null) {
+		if (worker == null) {
 			result = null;
 		} else {
-			result = String.valueOf(application.getId());
+			result = String.valueOf(worker.getId());
 		}
 
 		return result;
