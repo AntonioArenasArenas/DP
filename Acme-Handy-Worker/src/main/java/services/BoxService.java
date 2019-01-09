@@ -47,28 +47,37 @@ public class BoxService {
 	}
 
 	public Collection<Box> createDefault() {
-		Collection<Box> result;
-		Box box;
+		Collection<Box> result = new ArrayList<Box>();
 
-		result = new ArrayList<Box>();
-
-		box = new Box();
-		box.setName("TRASHBOX");
-		box.setIsDefault(true);
-		result.add(box);
-		box = new Box();
-		box.setName("INBOX");
-		box.setIsDefault(true);
-		result.add(box);
-		box = new Box();
-		box.setName("OUTBOX");
-		box.setIsDefault(true);
-		result.add(box);
-		box = new Box();
-		box.setName("SPAMBOX");
-		box.setIsDefault(true);
-		result.add(box);
-
+		Box box1 = new Box();
+		box1.setName("TRASHBOX");
+		box1.setMessages(new ArrayList<Message>());
+		box1.setIsDefault(true);
+		Box box1saved = boxRepository.save(box1);
+		result.add(box1saved);
+		
+		Box box2 = new Box();
+		box2.setName("INBOX");
+		box2.setMessages(new ArrayList<Message>());
+		box2.setIsDefault(true);
+		Box box2saved = boxRepository.save(box2);
+		result.add(box2saved);
+		
+		Box box3 = new Box();
+		box3.setName("OUTBOX");
+		box3.setMessages(new ArrayList<Message>());
+		box3.setIsDefault(true);
+		Box box3saved = boxRepository.save(box3);
+		result.add(box3saved);
+		
+		Box box4 = new Box();
+		box4.setName("SPAMBOX");
+		box4.setMessages(new ArrayList<Message>());
+		box4.setIsDefault(true);
+		Box box4saved = boxRepository.save(box4);
+		result.add(box4saved);
+		
+		
 		return result;
 	}
 
@@ -95,11 +104,18 @@ public class BoxService {
 	public Box save(Box box) {
 
 		Assert.notNull(box);
-
+		
+		Actor actor = actorService.findByPrincipal();
+		
 		Box result;
 
 		result = boxRepository.save(box);
-
+		
+		if(box.getId()==0){
+		Collection<Box> boxes = actor.getBoxes();
+		boxes.add(result);
+		actor.setBoxes(boxes);
+		}
 		return result;
 	}
 
@@ -113,8 +129,10 @@ public class BoxService {
 		actor = actorService.findByPrincipal();
 		Assert.isTrue(actor.getBoxes().contains(box));
 		Assert.isTrue(!box.getIsDefault());
-
-		Assert.isTrue(actor.getBoxes().size() > 1);
+		Assert.isTrue(actor.getBoxes().size() > 1); // >= 4
+		
+		box.getMessages().clear();
+		actor.getBoxes().remove(box);
 
 		boxRepository.delete(box);
 	}

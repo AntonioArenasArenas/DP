@@ -355,7 +355,7 @@
 
 		<property name="name" value="OUTBOX" />
 
-		<property name="isDefault" value="False" />
+		<property name="isDefault" value="True" />
 
 		<property name="messages">
 
@@ -387,9 +387,9 @@
 
 	<bean id="box9" class="domain.Box">
 
-		<property name="name" value="Box 9" />
+		<property name="name" value="INBOX" />
 
-		<property name="isDefault" value="False" />
+		<property name="isDefault" value="True" />
 
 		<property name="messages">
 
@@ -478,6 +478,36 @@
 		</property>
 
 	</bean>
+	
+	<bean id="box15" class="domain.Box">
+
+		<property name="name" value="TRASHBOX" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+	
+	<bean id="box16" class="domain.Box">
+
+		<property name="name" value="SPAMBOX" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+	
+	
 
 
 
@@ -1005,7 +1035,17 @@
 	</bean>
 
 
+	<!-- Profile -->
+	
+	<bean id="profile1" class="domain.Profile">
 
+		<property name="nick" value="AntonioGlobber" />
+		<property name="socialNetwork" value="Globoo" />
+		<property name="link" value="https://globoo.com" />
+		
+
+	</bean>
+	
 	<!-- Customer -->
 
 
@@ -1036,6 +1076,8 @@
 
 				<ref bean="box7" />
 				<ref bean="box4" />
+				<ref bean="box15" />
+				<ref bean="box16" />
 
 			</list>
 
@@ -1059,7 +1101,9 @@
 
 		<property name="profiles">
 
-			<list></list>
+			<list>
+				<ref bean="profile1" />
+			</list>
 
 		</property>
 
@@ -1083,7 +1127,7 @@
 
 		<property name="photo" value="https://tumblr.esdf43" />
 
-		<property name="email" value="david.loco@gmail.com" />
+		<property name="email" value="pruebaparamensajes1@gmail.com" />
 
 		<property name="phoneNumber" value="+34 654 653 841" />
 
@@ -1137,7 +1181,7 @@
 
 		<property name="photo" value="https://tumblr.kk69" />
 
-		<property name="email" value="dani.elpollo@gmail.com" />
+		<property name="email" value="pruebaparamensajes2@gmail.com" />
 
 		<property name="phoneNumber" value="+34 696 696 666" />
 

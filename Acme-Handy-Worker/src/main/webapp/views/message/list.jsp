@@ -23,14 +23,14 @@
 
 
 <display:table
-	pagesize="5" name="maessage" id="row"
+	pagesize="5" name="messages" id="row"
 	requestURI="message/list.do" >
 	
 	
 	<display:column >
 		<strong>
-			<a href="message/list.do?messageId=${row.id}" >
-				<spring:message code="message.open" />
+			<a href="message/show.do?messageId=${row.id}" >
+				<spring:message code="mensaje.open" />
 				
 			</a>
 		</strong>
@@ -41,13 +41,13 @@
 		 <br/>	
 	</display:column>
 	<display:column >
-				<jstl:out value="${row.momment}" />
+				<jstl:out value="${row.moment}" />
 		 <br/>	
 	</display:column>
 	<display:column >
 		<strong>
 			<a href="message/delete.do?messageId=${row.id}" >
-				<spring:message code="message.delete" />
+				<spring:message code="mensaje.delete" />
 			</a>
 		</strong>
 		 <br/>	

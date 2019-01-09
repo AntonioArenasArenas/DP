@@ -2,25 +2,28 @@ package controllers;
 
 import java.util.Collection;
 
+
 import javax.validation.Valid;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.ActorService;
 import services.MessageService;
 
 import controllers.AbstractController;
+import domain.Actor;
 import domain.Box;
-import domain.Customer;
+
 import domain.Message;
-import domain.Worker;
+
 
 @Controller
 @RequestMapping("/message")
@@ -30,6 +33,8 @@ public class MessageController extends AbstractController {
 
 	@Autowired
 	private MessageService messageService;
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -40,13 +45,25 @@ public class MessageController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView listFromBox(@RequestParam final Integer boxId) {
 		ModelAndView result;
-		Collection<Message> messages = this.messageService.findAll();
+		Collection<Message> messages = this.messageService.findMessagesByBoxId(boxId) ;
 
 		result = new ModelAndView("message/list");
 		result.addObject("requestURI", "message/list.do");
 		result.addObject("messages", messages);
+
+		return result;
+	}
+	
+	@RequestMapping(value = "/show", method = RequestMethod.GET)
+	public ModelAndView show(@RequestParam final Integer messageId) {
+		ModelAndView result;
+		Message mensaje = this.messageService.findOne(messageId) ;
+
+		result = new ModelAndView("message/show");
+		result.addObject("requestURI", "message/show.do");
+		result.addObject("mensaje", mensaje);
 
 		return result;
 	}
@@ -68,12 +85,15 @@ public class MessageController extends AbstractController {
 	public ModelAndView save(@Valid final Message message, final BindingResult binding) {
 		ModelAndView result;
 
-		if (binding.hasErrors())
+		if (binding.hasErrors()){
 			result = this.createEditModelAndView(message);
+			System.out.println(binding.getAllErrors());}
 		else
-			try {
+			try {	
+				
 				this.messageService.save(message) ;
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("redirect:welcome.do");
+				
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(message, "message.commit.error");
 			}
@@ -81,21 +101,20 @@ public class MessageController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Message message,final Box box, final BindingResult binding) {
+	@RequestMapping(value = "/delete", method = RequestMethod.GET )
+	public ModelAndView delete(@RequestParam int messageId) {
 		ModelAndView result;
-
-		try {
+		
+		Message message = this.messageService.findOne(messageId);
 			
-			this.messageService.delete(message,box);
+			this.messageService.delete(message);
 			
-			result = new ModelAndView("redirect:list.do");
-		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(message, "announcement.commit.error");
-		}
-
-		return result;
+			result = new ModelAndView("redirect:welcome.do");
+	
+			return result;
 	}
+	
+	
 
 	
 	// Ancillary methods ------------------------------------------------------
@@ -108,13 +127,15 @@ public class MessageController extends AbstractController {
 				return result;
 			}
 
-			protected ModelAndView createEditModelAndView(final Message message, final String messag) {
+			protected ModelAndView createEditModelAndView(final Message message, final String messageError) {
 				ModelAndView result;
-				
+				Collection<Actor> recipients = actorService.findAll();
 
 
 				result = new ModelAndView("message/edit");
-				result.addObject("message", message);
+				result.addObject("messaged", message);
+				result.addObject("recipients", recipients);
+				result.addObject("message", messageError);
 
 				return result;
 			}

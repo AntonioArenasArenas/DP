@@ -10,98 +10,142 @@
 
 package controllers;
 
+
+import java.util.Collection;
+
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import domain.Customer;
-import domain.Worker;
+import domain.Actor;
+import domain.Profile;
 
-import services.CustomerService;
-import services.WorkerService;
+import services.ActorService;
+import services.ProfileService;
+
+
+
+
 
 @Controller
 @RequestMapping("/profile")
 public class ProfileController extends AbstractController {
 
 	@Autowired
-	private CustomerService customerService;
+	private ProfileService profileService;
 	
 	@Autowired
-	private WorkerService workerService;
-	// Action-1 ---------------------------------------------------------------		
+	private ActorService actorService;
+	
+	// Constructors -----------------------------------------------------------
 
-	@RequestMapping(value = "createCustomer", method = RequestMethod.GET)
-	public ModelAndView createCustomer() {
+		public ProfileController() {
+			super();
+		}
+	
+	// Listing ---------------------------------------------------------------		
+
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
+	public ModelAndView list() {
 		ModelAndView result;
-		Customer customer = this.customerService.create();
-
-		result = this.createEditModelAndView(customer);
+		Collection<Profile> profiles = profileService.findProfiles(); ;
+		
+		result = new ModelAndView("profile/list");
+		result.addObject("requestURI", "profile/list.do");
+		result.addObject("profiles", profiles);
 
 		return result;
-	}
-
-	// Action-2 ---------------------------------------------------------------		
-
-	@RequestMapping(value = "createWorker", method = RequestMethod.GET)
-	public ModelAndView createWorker() {
-		ModelAndView result;
-
-		Worker worker = this.workerService.create();
-
-		result = this.createEditModelAndView(worker);
-
-		return result;
-	}
-
-	// Action-2 ---------------------------------------------------------------		
-
-	@RequestMapping("/action-3")
-	public ModelAndView action3() {
-		throw new RuntimeException("Oops! An *expected* exception was thrown. This is normal behaviour.");
 	}
 	
-	// Ancillary methods ------------------------------------------------------
-
-		protected ModelAndView createEditModelAndView(final Customer customer) {
-			ModelAndView result;
-
-			result = this.createEditModelAndView(customer, null);
-
-			return result;
-		}
-
-		protected ModelAndView createEditModelAndView(final Customer customer, final String message) {
-			ModelAndView result;
+	// Deleting ---------------------------------------------------------------
+	
+	@RequestMapping(value = "/delete", method = RequestMethod.GET )
+	public ModelAndView delete(@RequestParam int profileId) {
+		ModelAndView result;
+		
+		Profile profile = this.profileService.findOne(profileId);
 			
+			this.profileService.delete(profile);
+			
+			result = new ModelAndView("redirect:list.do");
+	
+			return result;
+	}
+	
+	// Edit
+	
+		@RequestMapping(value = "/create", method = RequestMethod.GET)
+		public ModelAndView create() {
+			ModelAndView result;
+			Profile profile;
 
-
-			result = new ModelAndView("customer/edit");
-			result.addObject("customer", customer);
+			profile = this.profileService.create() ;
+			result = this.createEditModelAndView(profile);
 
 			return result;
 		}
 		
-		protected ModelAndView createEditModelAndView(final Worker worker) {
-			ModelAndView result;
-
-			result = this.createEditModelAndView(worker, null);
-
-			return result;
-		}
-
-		protected ModelAndView createEditModelAndView(final Worker worker, final String message) {
+		@RequestMapping(value = "/edit", method = RequestMethod.GET)
+		public ModelAndView edit(@RequestParam final int profileId) {
 			ModelAndView result;
 			
+			Profile profile = this.profileService.findOne(profileId);
+			Assert.notNull(profile);
+			result = this.createEditModelAndView(profile);
 
+			return result;
+		}
+		
+		
+		@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
+		public ModelAndView save(@Valid final Profile profile, final BindingResult binding) {
+			ModelAndView result;
+			
+			if(profile.getId()!=0){
+				Actor logged = actorService.findByPrincipal();
+				Assert.isTrue(logged.getProfiles().contains(profile));
+			}
 
-			result = new ModelAndView("worker/edit");
-			result.addObject("worker", worker);
+			if (binding.hasErrors())
+				result = this.createEditModelAndView(profile);
+			else
+				try {
+					this.profileService.save(profile) ;
+					result = new ModelAndView("redirect:list.do");
+				} catch (final Throwable oops) {
+					result = this.createEditModelAndView(profile, "profile.commit.error");
+			}
 
 			return result;
 		}
 
+	// Ancillary methods ------------------------------------------------------
+
+	protected ModelAndView createEditModelAndView(final Profile profile) {
+		ModelAndView result;
+
+		result = this.createEditModelAndView(profile, null);
+
+		return result;
+	}
+
+	protected ModelAndView createEditModelAndView(final Profile profile, final String messageError) {
+		ModelAndView result;
+
+
+		result = new ModelAndView("profile/edit");
+		result.addObject("profile", profile);
+		result.addObject("message", messageError);
+
+		return result;
+	}
+	
 
 }

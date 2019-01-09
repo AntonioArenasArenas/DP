@@ -9,69 +9,75 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="message.edit" /></p>
+<p><spring:message code="mensaje.new" /></p>
 
-<form:form action="message/edit.do" modelAttribute="message">
+<form:form action="message/edit.do" modelAttribute="messaged">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
 	<form:hidden path="sender" />
+	<form:hidden path="moment" />
 	
 	
 	
 	
-	<form:label path="message.recipient">
-		<spring:message code="message.recipient" />:
+	<form:label path="recipients">
+		<spring:message code="mensaje.recipients" />:
 	</form:label>
-	<form:input path="message.recipient"  />
-	<form:errors cssClass="error" path="message.recipient" />
+	<form:select multiple="true" id="recipients" path="recipients">
+	<form:options items="${recipients}" itemLabel="email" itemValue="id" />
+	</form:select>
+	
 	<br />
 	
 	
-	<form:label path="message.subject">
-		<spring:message code="message.subject" />:
+	<form:label path="subject">
+		<spring:message code="mensaje.subject" />:
 	</form:label>
-	<form:input path="message.subject" />
-	<form:errors cssClass="error" path="message.subject" />
+	<form:input path="subject" />
+	<form:errors cssClass="error" path="subject" />
 	<br />
 	
-	<form:label path="message.priority">
-		<spring:message code="message.priority" />:
+	<form:label path="priority">
+		<spring:message code="mensaje.priority" />:
 	</form:label>      
-    <select>
-  		<option value="HIGH">HIGH</option>
-  		<option value="NEUTRAL">NEUTRAL</option>
-  		<option value="LOW">LOW</option>
-	</select>
+    <form:select path="priority" >
+   		<form:option value="HIGH" label="High" />
+   		<form:option value="LOW" label="Low" />
+   		<form:option value="NEUTRAL" label="Neutral" />
+   </form:select>
+	<form:errors cssClass="error" path="priority" />
  	<br />
 	
-	<form:label path="message.body">
-		<spring:message code="message.body" />:
+	<form:label path="body">
+		<spring:message code="mensaje.body" />:
 	</form:label>
-	<form:input path="message.body" type="textarea"/>
-	<form:errors cssClass="error" path="message.body" />
+	<form:textarea path="body" type="textarea"/>
+	<form:errors cssClass="error" path="body" />
 	<br />
 	
-	<form:label path="message.tag">
-		<spring:message code="message.tag" />:
+	<form:label path="tags">
+		<spring:message code="mensaje.tag" />:
 	</form:label>
-	<form:input path="message.tag" type="textarea"/>
-	<form:errors cssClass="error" path="message.tag" />
+	<form:input path="tags" type="textarea"/>
+	<form:errors cssClass="error" path="tags" />
 	<br />
 	
+
+
 
 
 
 
 	<input type="submit" name="save"
-		value="<spring:message code="message.save" />" />&nbsp; 
-	<jstl:if test="${message.id != 0}">
+		value="<spring:message code="mensaje.save" />" />&nbsp; 
+	<%-- <jstl:if test="${message.id != 0}">
 		<input type="submit" name="delete"
-			value="<spring:message code="message.delete" />"
-			onclick="return confirm('<spring:message code="message.confirm.delete" />')" />&nbsp;
-	</jstl:if>
+			value="<spring:message code="mensaje.delete" />"
+			onclick="return confirm('<spring:message code="mensaje.confirm.delete" />')" />&nbsp;
+	</jstl:if> --%>
 	<input type="button" name="cancel"
-		value="<spring:message code="message.cancel" />"
+		value="<spring:message code="mensaje.cancel" />"
 		onclick="javascript: relativeRedir('message/create.do');" />
 	<br />
 

@@ -37,13 +37,20 @@
 	</display:column>
 	
 	<display:column >
-	<jstl:if test="${!rox.isDefault}">
-			<a href="box/actor/edit.do?boxId=${row.id}" >
+	<jstl:if test="${!row.isDefault}">
+			<a href="box/delete.do?boxId=${row.id}" >
 				<spring:message code="box.delete" />
+			</a>
+		</jstl:if>
+	</display:column>
+	
+	<display:column >
+	<jstl:if test="${!row.isDefault}">
+			<a href="box/edit.do?boxId=${row.id}" >
+				<spring:message code="box.edit" />
 			</a>
 		</jstl:if>
 	</display:column>
 	
 </display:table>
 
-<input type="button" value="<spring:message code="box.newBox" />" name="button" onClick="javascript: relativeRedir('box/create.do');"/>

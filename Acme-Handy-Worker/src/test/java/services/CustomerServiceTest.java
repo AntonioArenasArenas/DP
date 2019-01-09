@@ -26,6 +26,9 @@ public class CustomerServiceTest extends AbstractTest {
 	private CustomerService customerService;
 	@Autowired
 	private UserAccountService userAccountService;
+	@Autowired
+	private BoxService boxService;
+	
 
 	// Test ----------------------------------------------------
 
@@ -33,17 +36,20 @@ public class CustomerServiceTest extends AbstractTest {
 	public void testCreateCustomer() {
 
 		Customer customer = customerService.create();
-		UserAccount acc = userAccountService.create();
-		Authority au = new Authority();
-		au.setAuthority(Authority.CUSTOMER);
-
-		acc.getAuthorities().add(au);
+		
+		UserAccount acc = customer.getUserAccount();
+		
 		acc.setPassword("password");
 		acc.setUsername("username");
 
 		UserAccount acc_saved = userAccountService.save(acc);
 		customer.setUserAccount(acc_saved);
-
+		customer.setName("MAui");
+		customer.setSurname("MK");
+		customer.setEmail("mendono@gmail.com");
+		customer.setPhoneNumber("+34234234233");
+		customer.setSuspicious(false);
+		
 		Customer saved = customerService.save(customer);
 
 		Assert.notNull(saved);
