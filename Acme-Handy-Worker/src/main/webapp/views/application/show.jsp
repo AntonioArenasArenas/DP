@@ -17,42 +17,47 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
-
-
-
-<p>
-	<spring:message code="applications.update.1" />
-</p>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- Mostrar -->
-
+<fmt:formatDate value="${application.moment}" var="dateString"
+	pattern="dd/MM/yyyy HH:mm" />
 
 <p>
-	<spring:message code="applications.update.date" />
-	${application.moment}
+	<b><spring:message code="applications.update.date" /></b>
+	${dateString}
 </p>
 
 <p>
-	<spring:message code="applications.list.price" />
+	<b><spring:message code="applications.list.price" /></b>
 	${application.offeredPrize}
 </p>
+<security:authorize access="hasRole('CUSTOMER')">
+	<p>
+		<b><spring:message code="applications.list.worker" /></b>
+		${application.worker.name} ${application.worker.surname}
+	</p>
+</security:authorize>
 
 <p>
-	<spring:message code="applications.list.worker" />
-	${application.worker.name} ${application.worker.surname}
+	<b><spring:message code="applications.update.status" /></b>
+	<jstl:if test="${application.status=='ACCEPTED'}">
+		<spring:message code="applications.accepted" />
+	</jstl:if>
+	<jstl:if test="${application.status=='REJECTED'}">
+		<spring:message code="applications.rejected" />
+	</jstl:if>
+	<jstl:if test="${application.status=='PENDING'}">
+		<spring:message code="applications.pending" />
+	</jstl:if>
 </p>
 
 <p>
-	<spring:message code="applications.update.status" />
-	${status}
-</p>
-
-<p>
-	<spring:message code="applications.update.comments" />
+	<b><spring:message code="applications.update.comments" /></b>
 
 	<!-- Al necesitar tratamiento, se pasará desde el controlador la lista de comentarios ya tratada , ver que hx darle a los p-->
 
-	<jstl:forEach var="comment" items="${comments}">
+	<jstl:forEach var="comment" items="${comentarios}">
 
 		<p>
 			<jstl:out value="${comment}"></jstl:out>

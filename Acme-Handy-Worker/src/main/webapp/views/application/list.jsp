@@ -17,84 +17,52 @@
 <%@taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!-- Otros taglib utiles son tiles para textos en tiles y fmt para fechas -->
 
-<security:authorize access="hasRole('CUSTOMER')">
-
-	<p>
-		<spring:message code="application.list.1" />
-		${ticker}
-	</p>
-
-</security:authorize>
-
-<security:authorize access="hasRole('WORKER')">
-
-
-	<p>
-		<spring:message code="applications.list.worker.app" />
-	</p>
-
-</security:authorize>
-
 <jsp:useBean id="date" class="java.util.Date" />
+<fmt:formatDate var="date" value="${date}" pattern="dd/MM/yyyy" />
 
-<display:table name="applications" id="row"
-	requestURI="<security:authorize access="hasRole('CUSTOMER')">application/customer/list.do?taskId=${taskId}
-	</security:authorize>
-	<security:authorize access="hasRole('WORKER')">application/worker/list.do?workerId=${workerId}</security:authorize>"
-	pagesize="${pagination}" class="displaytag">
+<display:table name="applications" id="row" requestURI="${requestURI}"
+	pagesize="5" class="displaytag">
 
-	<!-- Columna customer-->
-	<security:authorize access="hasRole('CUSTOMER')">
-		<display:column property="worker" titleKey="applications.list.worker"
-			style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" />
-	</security:authorize>
+	<display:column property="task.ticker"
+		titleKey="applications.list.worker.1" />
 
 	<!-- Columnas worker -->
 
-	<security:authorize access="hasRole('WORKER')">
+	<display:column property="task.endDate"
+		titleKey="applications.list.worker.2" format="{0,date,dd/MM/yyyy}" />
 
-		<display:column property="task.ticker"
-			titleKey="applications.list.worker.1"
-			style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" />
-
-		<display:column property="task.endDate"
-			titleKey="applications.list.worker.2"
-			format="{0,date,dd/MM/yyyy HH:mm}"
-			style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" />
+	<!-- Columna customer-->
+	<security:authorize access="hasRole('CUSTOMER')">
+		<display:column property="worker.name"
+			titleKey="applications.list.worker" />
 	</security:authorize>
 
 	<display:column property="offeredPrize"
-		titleKey="applications.list.price"
-		style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>" />
+		titleKey="applications.list.price" />
+
+	<display:column titleKey="applications.update.status">
+		<jstl:if test="${row.status=='ACCEPTED'}">
+			<spring:message code="applications.accepted" />
+		</jstl:if>
+		<jstl:if test="${row.status=='REJECTED'}">
+			<spring:message code="applications.rejected" />
+		</jstl:if>
+		<jstl:if test="${row.status=='PENDING'}">
+			<spring:message code="applications.pending" />
+		</jstl:if>
+	</display:column>
+
 	<security:authorize access="hasRole('CUSTOMER')">
-		<display:column
-			style="<jstl:choose>
-		<jstl:when test="${row.status==ACCEPTED}">background-color:palegreen;</jstl:when>
-		<jstl:when test="${row.status==REJECTED}">background-color:orange;</jstl:when>
-		<jstl:when test="${row.status==PENDING && row.task.endDate<date}">background-color:gainsboro;</jstl:when>
-		</jstl:choose>">
+		<display:column>
+		<jstl:if test="${row.status=='PENDING'}">
 			<a href="application/customer/edit.do?applicationId=${row.id}"> <spring:message
-					code="application.list.update" />
+					code="applications.list.update" />
 			</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 	<display:column>
@@ -106,9 +74,39 @@
 
 </display:table>
 
-<security:authorize access="hasRole('WORKER')">
-	<a href="application/worker/create.do"> <spring:message
-			code="applications.list.worker.create" />
-	</a>
+<script>
+	$(function() {
+		$("table td:contains(ACCEPTED)").parents("tr").css("background-color",
+				"palegreen");
 
-</security:authorize>
+		$("table td:contains(ACEPTADA)").parents("tr").css("background-color",
+				"palegreen");
+
+		$("table td:contains(REJECTED)").parents("tr").css("background-color",
+				"orange");
+
+		$("table td:contains(RECHAZADA)").parents("tr").css("background-color",
+				"orange");
+
+		var dateCell = $(this).find("td:contains(PENDING)").parents("tr").find(
+				"td:eq(1)").html();
+		var date = new Date(dateCell);
+		var actual = new Date();
+
+		if (date < actual) {
+			$("table td:contains(PENDING)").parents("tr").css(
+					"background-color", "gainsboro");
+		}
+
+		dateCell = $(this).find("td:contains(PENDIENTE)").parents("tr").find(
+				"td:eq(1)").html();
+		date = new Date(dateCell);
+		actual = new Date();
+
+		if (date < actual) {
+			$("table td:contains(PENDIENTE)").parents("tr").css(
+					"background-color", "gainsboro");
+		}
+
+	});
+</script>

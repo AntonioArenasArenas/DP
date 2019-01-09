@@ -26,29 +26,26 @@
 	pagesize="5" name="profiles" id="row"
 	requestURI="profile/list.do" >
 	
+	<display:column property="socialNetwork" titleKey="profile.socialNetwork" sortable="true" />
+	<display:column property="nick" titleKey="profile.nick" sortable="true" />
+	<display:column titleKey="profile.link">
+		<a href="${row.link}" >
+			${row.link}
+		</a>
+	</display:column>
 	<display:column >
 		<strong>
 			<a href="profile/edit.do?profileId=${row.id}" >
-				<jstl:out value="<spring:message code="profile.nick" />" />
+				<spring:message code="profile.edit" />
 			</a>
 		</strong>
-		 <br/>	
-	</display:column>
-	<display:column >
-				<jstl:out value="${row.socialNetwork}" />
-		 <br/>	
-	</display:column>
-	<display:column >
-				<jstl:out value="${row.link}" />
-		 <br/>	
 	</display:column>
 	<display:column >
 		<strong>
-			<a href="profile/delete.do?porfileId=${row.id}" >
-				<jstl:out value="<spring:message code="profile.delete" />" />
+			<a href="profile/delete.do?profileId=${row.id}" >
+				 <spring:message code="profile.delete" />
 			</a>
 		</strong>
-		 <br/>	
 	</display:column>
 	
 </display:table>

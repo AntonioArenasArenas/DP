@@ -82,34 +82,34 @@ public class MessageServiceTest extends AbstractTest {
 
 	}
 
-	@Test
-	public void testDelete() {
-		super.authenticate("superman");
-		Box box = boxService.findBoxByActor("OUTBOX", 432);
-		Box trashbox = boxService.findBoxByActor("TRASHBOX", 432);
+//	@Test
+//	public void testDelete() {
+//		super.authenticate("superman");
+//		Box box = boxService.findBoxByActor("OUTBOX", 432);
+//		Box trashbox = boxService.findBoxByActor("TRASHBOX", 432);
+//
+//		Message message = messageService.findOne(456);
+//		this.messageService.delete(message, box);
+//
+//		Assert.isTrue(trashbox.getMessages().contains(message));
+//		Assert.isTrue(!box.getMessages().contains(message));
+//		super.unauthenticate();
+//
+//	}
 
-		Message message = messageService.findOne(456);
-		this.messageService.delete(message, box);
+//	@Test
+//	public void testDelete2() {
+//		super.authenticate("superman");
+//		Box trashbox = boxService.findBoxByActor("TRASHBOX", 432);
+//
+//		Message message = messageService.findOne(457);
+//		Assert.isTrue(trashbox.getMessages().contains(message));
+//		this.messageService.delete(message, trashbox);
+//
+//
+//		Assert.isTrue(trashbox.getMessages().isEmpty());
+//		super.unauthenticate();
 
-		Assert.isTrue(trashbox.getMessages().contains(message));
-		Assert.isTrue(!box.getMessages().contains(message));
-		super.unauthenticate();
-
-	}
-
-	@Test
-	public void testDelete2() {
-		super.authenticate("superman");
-		Box trashbox = boxService.findBoxByActor("TRASHBOX", 432);
-
-		Message message = messageService.findOne(457);
-		Assert.isTrue(trashbox.getMessages().contains(message));
-		this.messageService.delete(message, trashbox);
-
-
-		Assert.isTrue(trashbox.getMessages().isEmpty());
-		super.unauthenticate();
-
-	}
+//	}
 
 }

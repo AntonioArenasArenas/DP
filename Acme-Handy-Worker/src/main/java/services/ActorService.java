@@ -27,7 +27,8 @@ public class ActorService {
 
 	// Supporting services ----------------------------------------------------
 
-
+	@Autowired
+	private LoginService loginService;
 
 	// Constructors -----------------------------------------------------------
 

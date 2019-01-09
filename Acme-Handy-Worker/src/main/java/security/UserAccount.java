@@ -11,6 +11,7 @@
 package security;
 
 import java.util.ArrayList;
+
 import java.util.Collection;
 
 import javax.persistence.Access;
@@ -20,9 +21,9 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.Transient;
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.Assert;
 
@@ -82,10 +83,10 @@ public class UserAccount extends DomainEntity implements UserDetails {
 	public void setActivated(boolean activated) {
 		this.activated = activated;
 	}
-
-	@NotEmpty
+	
 	@Valid
 	@ElementCollection
+	@NotNull
 	@Override
 	public Collection<Authority> getAuthorities() {
 		// WARNING: Should return an unmodifiable copy, but it's not possible with hibernate!

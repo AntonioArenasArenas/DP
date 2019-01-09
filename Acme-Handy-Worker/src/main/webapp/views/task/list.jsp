@@ -15,12 +15,12 @@
 	<display:column property="maxPrice" titleKey="task.maxPrice" sortable="true" />
 	<display:column property="startDate" titleKey="task.startDate" sortable="true" format="{0,date,dd/MM/yyyy}" />
 	<display:column property="endDate" titleKey="task.endDate" sortable="true" format="{0,date,dd/MM/yyyy}" />
-	<display:column>
-		<a href="task/customer/show.do?id=${row.id}">
-			<spring:message code="task.show" />
-		</a>
-	</display:column>
 	<security:authorize access="hasRole('CUSTOMER')">
+		<display:column>
+			<a href="task/customer/show.do?id=${row.id}">
+				<spring:message code="task.show" />
+			</a>
+		</display:column>
 		<display:column>
 			<a href="task/customer/edit.do?id=${row.id}">
 				<spring:message code="task.edit" />
@@ -29,11 +29,24 @@
 	</security:authorize>
 	<security:authorize access="hasRole('WORKER')">
 		<display:column>
-			<a href="customer/show.do?id=${row.customer.id}">
+			<a href="task/worker/show.do?id=${row.id}">
+				<spring:message code="task.show" />
+			</a>
+		</display:column>
+		<display:column>
+			<a href="customer/worker/show.do?id=${row.customer.id}">
 				<spring:message code="task.viewCustomer" />
+			</a>
+		</display:column>
+		<display:column>
+			<a href="application/worker/create.do?taskId=${row.id}">
+				<spring:message code="task.createApplication" />
 			</a>
 		</display:column>
 	</security:authorize>
 	
 </display:table>
 	
+<input type="button" name="create"
+		value="<spring:message code="task.create" />"
+		onclick="javascript: relativeRedir('task/customer/create.do');" />

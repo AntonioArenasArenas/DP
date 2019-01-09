@@ -16,24 +16,24 @@
        
 <tiles-definitions>
 
-	<definition name="waranty/create" extends="master.page">	
-		<put-attribute name="title" value="Register a new waranty" />
-		<put-attribute name="body" value="/views/waranty/edit.jsp" />
+	<definition name="warranty/create" extends="master.page">	
+		<put-attribute name="title" value="Register a new warranty" />
+		<put-attribute name="body" value="/views/warranty/edit.jsp" />
 	</definition>
 	
-	<definition name="waranty/edit" extends="master.page">	
-		<put-attribute name="title" value="Edit this waranty" />
-		<put-attribute name="body" value="/views/waranty/edit.jsp" />
+	<definition name="warranty/edit" extends="master.page">	
+		<put-attribute name="title" value="Edit this warranty" />
+		<put-attribute name="body" value="/views/warranty/edit.jsp" />
 	</definition>
 	
-	<definition name="waranty/list" extends="master.page">	
+	<definition name="warranty/list" extends="master.page">	
 		<put-attribute name="title" value="List of waranties" />
-		<put-attribute name="body" value="/views/waranty/list.jsp" />
+		<put-attribute name="body" value="/views/warranty/list.jsp" />
 	</definition>
 	
-	<definition name="waranty/show" extends="master.page">	
-		<put-attribute name="title" value="Information of the waranty" />
-		<put-attribute name="body" value="/views/waranty/show.jsp" />
+	<definition name="warranty/show" extends="master.page">	
+		<put-attribute name="title" value="Information of the warranty" />
+		<put-attribute name="body" value="/views/warranty/show.jsp" />
 	</definition>
 	
 </tiles-definitions>

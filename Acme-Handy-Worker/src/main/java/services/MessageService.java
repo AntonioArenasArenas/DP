@@ -70,12 +70,11 @@ public class MessageService {
 
 	public Message save(Message message) {
 		UserAccount userAccount;
-		Date moment;
+		Date moment = new Date(System.currentTimeMillis() - 1);
 		Actor actor = actorService.findByPrincipal();
 		Message result = message;
 		Box outBox = boxService.findBoxByActor("OUTBOX", actor.getId());
 		Collection<Actor> recipients = result.getRecipients();
-		moment = new Date(System.currentTimeMillis() - 1);
 
 		Assert.notNull(message);
 		userAccount = LoginService.getPrincipal();
@@ -103,40 +102,57 @@ public class MessageService {
 		return result;
 	}
 
-	public void delete(Message message, Box box) {
+	public void delete(Message message) {
 		Assert.notNull(message);
 		Assert.isTrue(message.getId() != 0);
 		Assert.isTrue(messageRepository.exists(message.getId()));
-
+	
 		UserAccount userAccount;
 		Actor logged;
-		// owner of the box
 		userAccount = LoginService.getPrincipal();
 		logged = actorService.findByUserAccount(userAccount);
-		LinkedList<Actor> recipients = new LinkedList<Actor>(message.getRecipients());
-		Actor recipient = recipients.getFirst();
-		Assert.isTrue( recipient.equals(logged) || message.getSender().equals(logged));
 		Box TrashBox = boxService.findBoxByActor("TRASHBOX", logged.getId());
-		box.getMessages().remove(message);
-		boxService.save(box);
-
-		if (box.getName() == TrashBox.getName()) {
-
-			if (boxService.findBoxesWithMessage(message).isEmpty()) {
-
-				messageRepository.delete(message);
+		
+		if( TrashBox.getMessages().contains(message)){
+			
+			Collection<Actor> actors = actorService.findAll();;
+			Collection<Box> all = boxService.findAll();
+			
+			for(Box b: all){
+				if(b.getMessages().contains(message)){
+					b.getMessages().remove(message);
+					boxService.save(b);
+				}
 			}
-
-		} else {
-
-			TrashBox.getMessages().add(message);
-			boxService.save(TrashBox);
-
-		}
-
-		boxService.save(box);
+				
+			for(Actor a: actors){
+				if(a.getSentMessages().contains(message)){
+					a.getSentMessages().remove(message);
+					actorService.save(a);
+				}
+				if(a.getReceivedMessages().contains(message)){
+					a.getReceivedMessages().remove(message);
+					actorService.save(a);
+					}
+				}
+			
+			messageRepository.delete(message);
+					
+			}else{
+				Collection<Box> loggedboxes = boxService.findBoxesByPrincipal();
+				for(Box b:loggedboxes){
+					if(b.getMessages().contains(message)){
+						b.getMessages().remove(message);
+						boxService.save(b);
+						TrashBox.getMessages().add(message);
+						boxService.save(TrashBox);
+					}
+				}
+			}	
 
 	}
+	
+	
 
 	public Collection<Message> findSentMessagesById() {
 		UserAccount userAccount = LoginService.getPrincipal();
@@ -152,5 +168,13 @@ public class MessageService {
 
 		return messageRepository.getReceivedMessagesById(logged.getId());
 	}
+	
+	public Collection<Message> findMessagesByBoxId( Integer boxId ) {
+		
+
+		return messageRepository.getMessagesByBoxId(boxId);
+	}
+	
+	
 
 }

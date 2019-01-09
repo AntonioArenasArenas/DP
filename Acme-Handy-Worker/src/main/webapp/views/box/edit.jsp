@@ -9,7 +9,6 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="box.edit" /></p>
 
 <form:form action="box/edit.do" modelAttribute="box">
 
@@ -20,11 +19,11 @@
 	
 	
 	
-	<form:label path="box.name">
+	<form:label path="name">
 		<spring:message code="box.name" />:
 	</form:label>
-	<form:input path="box.name" />
-	<form:errors cssClass="error" path="box.name" />
+	<form:input path="name" />
+	<form:errors cssClass="error" path="name" />
 	<br />
 	
 
@@ -33,14 +32,14 @@
 
 	<input type="submit" name="save"
 		value="<spring:message code="box.save" />" />&nbsp; 
-	<jstl:if test="${box.id != 0}">
+	<%-- <jstl:if test="${box.id != 0}">
 		<input type="submit" name="delete"
 			value="<spring:message code="box.delete" />"
 			onclick="return confirm('<spring:message code="box.confirm.delete" />')" />&nbsp;
-	</jstl:if>
+	</jstl:if> --%>
 	<input type="button" name="cancel"
 		value="<spring:message code="box.cancel" />"
-		onclick="javascript: relativeRedir('box/create.do');" />
+		onclick="javascript: relativeRedir('box/list.do');" />
 	<br />
 
 
