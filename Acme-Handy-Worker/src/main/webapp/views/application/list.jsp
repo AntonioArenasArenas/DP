@@ -74,15 +74,6 @@
 
 </display:table>
 
-<!-- El boton esta ahora mismo por tener un acceso a crear pero realmente se hara desde una task -->
-
-<security:authorize access="hasRole('WORKER')">
-	<a href="application/worker/create.do?taskId=515"> <spring:message
-			code="applications.list.worker.create" />
-	</a>
-
-</security:authorize>
-
 <script>
 	$(function() {
 		$("table td:contains(ACCEPTED)").parents("tr").css("background-color",
