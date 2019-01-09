@@ -74,17 +74,6 @@
 		<security:authorize access="isAuthenticated()">
 			<li>
 				<a class="fNiv">
-					<spring:message code="master.page.profile" />
-			        (<security:authentication property="principal.username" />)
-				</a>
-				<ul>
-					<li class="arrow"></li>
-					<li><a href="profile/list.do"><spring:message code="master.page.profiles" /></a></li>
-					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
-				</ul>
-				</li>
-				<li>
-				<a class="fNiv">
 				<spring:message code="master.page.mail" />
 				</a>
 				<ul>
@@ -94,7 +83,18 @@
 					<li><a href="message/create.do"><spring:message code="master.page.message.create" /></a></li>
 
 				</ul>
-				</li>
+			</li>
+			<li>
+				<a class="fNiv">
+					<spring:message code="master.page.profile" />
+			        (<security:authentication property="principal.username" />)
+				</a>
+				<ul>
+					<li class="arrow"></li>
+					<li><a href="profile/list.do"><spring:message code="master.page.profiles" /></a></li>
+					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
+				</ul>
+			</li>
 		</security:authorize>
 	</ul>
 </div>
