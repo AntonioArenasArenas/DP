@@ -41,6 +41,7 @@
 
 				</ul>
 			</li>
+		</security:authorize>
 
 		<security:authorize access="hasRole('WORKER')">
 			<li><a class="fNiv"><spring:message	code="master.page.worker" /></a>
