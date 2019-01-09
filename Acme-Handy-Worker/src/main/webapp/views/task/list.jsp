@@ -39,7 +39,7 @@
 			</a>
 		</display:column>
 		<display:column>
-			<a href="application/worker/create.do?taskId=${row.customer.id}">
+			<a href="application/worker/create.do?taskId=${row.id}">
 				<spring:message code="task.createApplication" />
 			</a>
 		</display:column>

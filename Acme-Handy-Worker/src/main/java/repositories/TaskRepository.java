@@ -17,4 +17,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer>{
 	@Query("select t from Task t where t.endDate>CURRENT_DATE")
 	public Collection<Task> getActiveTasks();
 	
+//	@Query("select avg(c.tasks.size), min(c.tasks.size), max(c.tasks.size), stddev(c.tasks.size) from Customer c")
+//	public Double[] tasksPerUserStatistics();
+	
 }

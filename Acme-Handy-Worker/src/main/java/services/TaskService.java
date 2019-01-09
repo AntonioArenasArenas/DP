@@ -114,6 +114,12 @@ public class TaskService {
 		return taskRepository.getTasksByCustomerId(customer.getId());
 
 	}
+	
+//	public Double[] tasksPerUserStatistics(){
+//		
+//		return taskRepository.tasksPerUserStatistics();
+//		
+//	}
 
 	public String tickerGenerator(){
 		String charactersL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
