@@ -28,21 +28,21 @@ public class FinderServiceTest extends AbstractTest {
         super.unauthenticate();
     }
 
-    @Test
+    /*@Test
     public void testGetFinderByWorkerId(){
         super.authenticate("admin");
         Finder finder;
         finder = finderService.getFinderByWorkerId();
         super.unauthenticate();
 
-    }
+    }*/
 
-    @Test
+    /*@Test
     public void testFindOne(){
         super.authenticate("admin");
         Finder finder = finderService.findOne();
         super.unauthenticate();
-    }
+    }*/
 
     @Test
     public void testCleanFinderCache(){

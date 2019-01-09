@@ -8,7 +8,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>    
 
-	<form:form action="worker/finder/edit.do"
+	<form:form action="finder/worker/edit.do"
 		modelAttribute="finder">
 		
 		<form:hidden path="finder.id" />
