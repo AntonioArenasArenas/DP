@@ -26,7 +26,6 @@
 	pagesize="5" name="messages" id="row"
 	requestURI="message/list.do" >
 	
-	
 	<display:column >
 		<strong>
 			<a href="message/show.do?messageId=${row.id}" >
@@ -36,14 +35,8 @@
 		</strong>
 		 <br/>	
 	</display:column>
-	<display:column >
-				<jstl:out value="${row.subject}" />
-		 <br/>	
-	</display:column>
-	<display:column >
-				<jstl:out value="${row.moment}" />
-		 <br/>	
-	</display:column>
+	<display:column property="subject" titleKey="mensaje.subject" sortable="true" />
+	<display:column property="moment" titleKey="mensaje.moment" sortable="true" />
 	<display:column >
 		<strong>
 			<a href="message/delete.do?messageId=${row.id}" >
