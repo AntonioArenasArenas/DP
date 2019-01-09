@@ -67,12 +67,6 @@
 					<li><a href="customer/create.do"><spring:message code="master.page.register.customer" /></a></li>
 					<li><a href="worker/create.do"><spring:message code="master.page.register.worker" /></a></li>
 				</ul>
-				</li>
-
-
-
-
-
 			</li>
 
 		</security:authorize>
@@ -86,7 +80,6 @@
 				<ul>
 					<li class="arrow"></li>
 					<li><a href="profile/list.do"><spring:message code="master.page.profiles" /></a></li>
-					<li><a href="profile/action-3.do"><spring:message code="master.page.profile.action.3" /></a></li>
 					<li><a href="j_spring_security_logout"><spring:message code="master.page.logout" /> </a></li>
 				</ul>
 				</li>

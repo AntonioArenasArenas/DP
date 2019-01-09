@@ -82,9 +82,6 @@
 		<security:intercept-url pattern="/profile/edit.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/profile/delete.do" access="isAuthenticated()" />
 		<security:intercept-url pattern="/profile/create.do" access="isAuthenticated()" />
-		<security:intercept-url pattern="*/welcome.do" access="isAuthenticated()" />
-
-		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:intercept-url pattern="/task/customer/list.do" access="hasRole('CUSTOMER')" />
 		<security:intercept-url pattern="/task/customer/create.do" access="hasRole('CUSTOMER')" />
@@ -96,7 +93,7 @@
 
 		<security:intercept-url pattern="/customer/worker/show.do" access="hasRole('WORKER')" />
 
-		
+		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 
 		<security:form-login
 
