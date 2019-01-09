@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.TaskRepository;
+import domain.Actor;
 import domain.Customer;
 import domain.Task;
 
@@ -25,6 +26,9 @@ public class TaskService {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -79,6 +83,11 @@ public class TaskService {
 		task.setMoment(new Date(System.currentTimeMillis() - 1));
 		
 		Assert.isTrue(task.getStartDate().before(task.getEndDate()));
+		
+		Actor logged = actorService.findByPrincipal();
+		if(task.getId() != 0) {
+			Assert.isTrue(task.getCustomer() == logged);
+		}
 		
 		result = taskRepository.save(task);
 		
