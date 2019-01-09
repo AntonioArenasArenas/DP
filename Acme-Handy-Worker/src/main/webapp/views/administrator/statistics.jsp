@@ -19,23 +19,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <h2>
-	<spring:message code="administrator.fixUpTasksPerUserStatistics" />
-</h2>
-
-<p>
-	<b><spring:message code="administrator.maximum" /> :</b> ${maximumpu}
-</p>
-<p>
-	<b><spring:message code="administrator.minimum" /> :</b> ${minimumpu}
-</p>
-<p>
-	<b><spring:message code="administrator.average" /> :</b> ${averagepu}
-</p>
-<p>
-	<b><spring:message code="administrator.stdev" /> :</b> ${stdevpu}
-</p>
-
-<h2>
 	<spring:message code="administrator.statisticsPerTask" />
 </h2>
 
