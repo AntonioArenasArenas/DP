@@ -19,6 +19,7 @@
 	<form:hidden path="applications" />
 	<form:hidden path="phases" />
 	<form:hidden path="complaints" />
+	<form:hidden path="customer" />
 
 	<form:label path="description">
 		<spring:message code="task.description" />:
@@ -27,17 +28,17 @@
 	<form:errors cssClass="error" path="description" />
 	<br />
 
-	<form:label path="startDate" placeholder="DD/MM/YYYY">
+	<form:label path="startDate">
 		<spring:message code="task.startDate" />:
 	</form:label>
-	<form:input path="startDate" />
+	<form:input path="startDate" placeholder="DD/MM/YYYY" />
 	<form:errors cssClass="error" path="startDate" />
 	<br />
 
-	<form:label path="endDate" placeholder="DD/MM/YYYY">
+	<form:label path="endDate">
 		<spring:message code="task.endDate" />:
 	</form:label>
-	<form:input path="endDate" />
+	<form:input path="endDate" placeholder="DD/MM/YYYY" />
 	<form:errors cssClass="error" path="endDate" />
 	<br />
 	
@@ -65,7 +66,7 @@
 		<form:options items="${warranties}" itemLabel="title" itemValue="id" />
 		<form:option value="0" label="----" />
 	</form:select>
-	<form:errors cssClass="error" path="category" />
+	<form:errors cssClass="error" path="warranty" />
 	<br />
 	
 	<form:label path="maxPrice">

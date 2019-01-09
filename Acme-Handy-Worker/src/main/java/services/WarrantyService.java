@@ -48,7 +48,7 @@ public class WarrantyService {
 			return result;
 		}
 
-		public Warranty createWarranty() {
+		public Warranty create() {
 			
 			Warranty warranty = new Warranty();
 			warranty.setDraftMode(true);
@@ -61,8 +61,6 @@ public class WarrantyService {
 			Assert.notNull(warranty);
 
 			Warranty result;
-
-			Assert.isTrue(warranty.getDraftMode()==true);
 			
 			result = warrantyRepository.save(warranty);
 
@@ -78,9 +76,12 @@ public class WarrantyService {
 			warrantyRepository.delete(warranty);
 		}
 		
-		
-	
-	
-	
+		// Other business methods -------------------------------------------------
+
+		public Collection<Warranty> getFinalWarranties(){
+			
+			return warrantyRepository.getFinalWarranties();
+
+		}
 	
 }

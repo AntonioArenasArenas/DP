@@ -1,25 +1,27 @@
 package converters;
 
-
+import javax.transaction.Transactional;
 
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Component;
-import org.springframework.transaction.annotation.Transactional;
 
 import domain.Application;
 
 @Component
 @Transactional
-public class ApplicationToStringConverter implements Converter<Application, String> {
+public class ApplicationToStringConverter implements
+		Converter<Application, String> {
 
 	@Override
-	public String convert(final Application application) {
+	public String convert(Application application) {
+
 		String result;
 
-		if (application == null)
+		if (application == null) {
 			result = null;
-		else
+		} else {
 			result = String.valueOf(application.getId());
+		}
 
 		return result;
 	}

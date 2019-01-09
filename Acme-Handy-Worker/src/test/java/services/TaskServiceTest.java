@@ -45,8 +45,8 @@ public class TaskServiceTest extends AbstractTest {
 	public void testCreateTask() {
 
 		Task task, saved;
-		super.authenticate("superguay");
-		task = taskService.createTask();
+		super.authenticate("superman");
+		task = taskService.create();
 		task.setStartDate(new Date(System.currentTimeMillis() + 360000));
 		task.setEndDate(new Date(System.currentTimeMillis() + 7200000));
 		task.setDescription("Hola");

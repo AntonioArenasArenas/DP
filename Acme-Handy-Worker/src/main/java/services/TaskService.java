@@ -55,13 +55,14 @@ public class TaskService {
 		return result;
 	}
 
-	public Task createTask() {
+	public Task create() {
 
 		Task result;
 
 		result = new Task();
 		
 		Customer customer = customerService.findByPrincipal();
+		
 		result.setCustomer(customer);
 
 		result.setTicker(tickerGenerator());
@@ -76,6 +77,8 @@ public class TaskService {
 		Task result;
 
 		task.setMoment(new Date(System.currentTimeMillis() - 1));
+		
+		Assert.isTrue(task.getStartDate().before(task.getEndDate()));
 		
 		result = taskRepository.save(task);
 		
@@ -97,6 +100,26 @@ public class TaskService {
 		return taskRepository.getTasksByCustomerId(id);
 
 	}
+	
+	public Collection<Task> getActiveTasks(){
+		
+		return taskRepository.getActiveTasks();
+
+	}
+	
+	public Collection<Task> getTasksByLogged(){
+		
+		Customer customer = customerService.findByPrincipal();
+		
+		return taskRepository.getTasksByCustomerId(customer.getId());
+
+	}
+	
+//	public Double[] tasksPerUserStatistics(){
+//		
+//		return taskRepository.tasksPerUserStatistics();
+//		
+//	}
 
 	public String tickerGenerator(){
 		String charactersL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

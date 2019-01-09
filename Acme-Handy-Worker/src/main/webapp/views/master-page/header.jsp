@@ -14,18 +14,18 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Sample Co., Inc." /></a>
+	<a href="#"><img src="images/logo.png" alt="Acme Co., Inc." /></a>
 </div>
 
 <div>
-	<ul id="jMenu">		<!-- Actualizar aqu� el men�, preguntar a patricia por el enlace caido, NO OLVIDAR CAMBIAR MESSAGES Y TILES EN CONSENCUENCIA -->
+	<ul id="jMenu">		<!-- Actualizar aqu� el men�, preguntar a patricia por el enlace caido, NO OLVIDAR CAMBIAR MESSAGES Y TILES EN CONSECUENCIA -->
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
-					<li><a href="administrator/action-1.do"><spring:message code="master.page.administrator.action.1" /></a></li>
-					<li><a href="administrator/action-2.do"><spring:message code="master.page.administrator.action.2" /></a></li>
+					<li><a href="warranty/administrator/list.do"><spring:message code="master.page.warranties" /></a></li>
+					<li><a href="administrator/statistics.do"><spring:message code="master.page.administrator.statistics" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -34,17 +34,23 @@
 			<li><a class="fNiv"><spring:message	code="master.page.customer" /></a>
 				<ul>
 					<li class="arrow"></li>
+
 					<li><a href="customer/edit.do"><spring:message code="master.page.personal.data" /></a></li>
-					
+					<li><a href="task/customer/list.do"><spring:message code="master.page.tasks" /></a></li>
+					<li><a href="application/customer/list.do"><spring:message code="master.page.applications" /></a></li>
+
 				</ul>
 			</li>
-		</security:authorize>
-		
+
 		<security:authorize access="hasRole('WORKER')">
 			<li><a class="fNiv"><spring:message	code="master.page.worker" /></a>
 				<ul>
 					<li class="arrow"></li>
+
 					<li><a href="worker/edit.do"><spring:message code="master.page.personal.data" /></a></li>
+					<li><a href="task/worker/list.do"><spring:message code="master.page.tasks" /></a></li>
+					<li><a href="application/worker/list.do"><spring:message code="master.page.applications" /></a></li>
+
 				</ul>
 			</li>
 		</security:authorize>
@@ -61,13 +67,13 @@
 					<li><a href="worker/create.do"><spring:message code="master.page.register.worker" /></a></li>
 				</ul>
 				</li>
-				
-				
-			
-			
-			
+
+
+
+
+
 			</li>
-			
+
 		</security:authorize>
 
 		<security:authorize access="isAuthenticated()">
@@ -92,7 +98,7 @@
 					<li><a href="box/list.do"><spring:message code="master.page.box.list" /></a></li>
 					<li><a href="box/create.do"><spring:message code="master.page.box.create" /></a></li>
 					<li><a href="message/create.do"><spring:message code="master.page.message.create" /></a></li>
-					
+
 				</ul>
 				</li>
 		</security:authorize>

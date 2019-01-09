@@ -34,11 +34,11 @@
 <br />
 
 <b><spring:message code="task.category" />:</b>
-<jstl:out value="${task.category}"/>
+<jstl:out value="${task.category.name}"/>
 <br />
 
 <b><spring:message code="task.warranty" />:</b>
-<jstl:out value="${task.warranty}"/>
+<jstl:out value="${task.warranty.title}"/>
 <br />
 
 <b><spring:message code="task.maxPrice" />:</b>

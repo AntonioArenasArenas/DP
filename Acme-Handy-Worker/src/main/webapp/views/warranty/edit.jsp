@@ -9,7 +9,7 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<form:form action="warranty/admin/edit.do" modelAttribute="warranty">
+<form:form action="warranty/administrator/edit.do" modelAttribute="warranty">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
@@ -42,7 +42,7 @@
 	<form:errors cssClass="error" path="draftMode" />
 	<br />
 	
-	<jstl:if test="${warranty.draftMode == True}">
+	<jstl:if test="${warranty.draftMode}">
 		<input type="submit" name="save"
 			value="<spring:message code="warranty.save" />" />&nbsp; 
 		<jstl:if test="${warranty.id != 0}">
@@ -54,7 +54,7 @@
 
 	<input type="button" name="cancel"
 		value="<spring:message code="warranty.cancel" />"
-		onclick="javascript: relativeRedir('warranty/admin/list.do');" />
+		onclick="javascript: relativeRedir('warranty/administrator/list.do');" />
 	<br />
 	
 </form:form>

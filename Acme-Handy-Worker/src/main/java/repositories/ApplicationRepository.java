@@ -2,7 +2,6 @@ package repositories;
 
 import java.util.Collection;
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -10,7 +9,8 @@ import org.springframework.stereotype.Repository;
 import domain.Application;
 
 @Repository
-public interface ApplicationRepository extends JpaRepository<Application, Integer>{
+public interface ApplicationRepository extends
+		JpaRepository<Application, Integer> {
 
 	@Query("select w.applications from Worker w where w.id=?1")
 	public Collection<Application> getApplicationsByWorkerId(int WorkerId);
@@ -24,7 +24,7 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	@Query("select avg(a.offeredPrize),min(a.offeredPrize), max(a.offeredPrize), stddev(a.offeredPrize) from Application a")
 	public Double[] getApplicationPriceStatistics();
 
-	@Query("select count(a)*1.00 / (select count(a) from Application a) from Application a where a.status='PENDING' AND a.task.endDate<CURRENT_DATE")
+	@Query("select count(a)*1.00 / (select count(a) from Application a where a.status='PENDING') from Application a where a.status='PENDING' AND a.task.endDate<CURRENT_DATE")
 	public Double getApplicationCantChange();
 
 	@Query("select avg(t.maxPrice), min(t.maxPrice), max(t.maxPrice), stddev(t.maxPrice) from Task t")
@@ -38,5 +38,9 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 
 	@Query("select count(a)*1.00 / (select count(a) from Application a) from Application a where a.status='REJECTED'")
 	public Double getRejectedApplications();
+
+	@Query("select w.applications from Worker w join w.applications a where w.id=?1 AND a.task.id=?2")
+	public Collection<Application> getWorkerApplicationsByTaskId(int WorkerId,
+			int TaskId);
 
 }
