@@ -26,6 +26,7 @@
 					<li class="arrow"></li>
 					<li><a href="warranty/administrator/list.do"><spring:message code="master.page.warranties" /></a></li>
 					<li><a href="administrator/statistics.do"><spring:message code="master.page.administrator.statistics" /></a></li>
+					<li><a href="systemData/administrator/edit.do"><spring:message code="master.page.systemData.administrator" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>

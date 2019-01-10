@@ -32,7 +32,7 @@ public class SystemDataController extends AbstractController {
 
 	// Listing ----------------------------------------------------------------
 
-	
+
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -49,7 +49,7 @@ public class SystemDataController extends AbstractController {
 	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
-	public ModelAndView edit(@RequestParam final int id) {
+	public ModelAndView edit() {
 		ModelAndView result;
 		SystemData systemData;
 
@@ -68,9 +68,9 @@ public class SystemDataController extends AbstractController {
 		else
 			try {
 				this.systemDataService.save(systemData);
-				result = new ModelAndView("redirect:list.do");
+				result = new ModelAndView("systemData/edit");
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(systemData, "task.commit.error");
+				result = this.createEditModelAndView(systemData, "systemData.commit.error");
 			}
 
 		return result;
@@ -82,27 +82,16 @@ public class SystemDataController extends AbstractController {
 
 		try {
 			this.systemDataService.delete(systemData);
-			result = new ModelAndView("redirect:list.do");
+			result = new ModelAndView("redirect:/");
 		} catch (final Throwable oops) {
-			result = this.createEditModelAndView(systemData, "task.commit.error");
+			result = this.createEditModelAndView(systemData, "systemData.commit.error");
 		}
 
 		return result;
 	}
-	
+
 	// Showing -----------------------------------------------------------------
-	
-	@RequestMapping(value = "/show", method = RequestMethod.GET)
-	public ModelAndView show(@RequestParam final int id) {
-		ModelAndView result;
-		SystemData systemData;
 
-		systemData = this.systemDataService.getSystemData();
-		Assert.notNull(systemData);
-		result = this.showModelAndView(systemData);
-
-		return result;
-	}
 
 	// Ancillary methods ------------------------------------------------------
 
@@ -126,13 +115,6 @@ public class SystemDataController extends AbstractController {
 
 		return result;
 	}
-	
-	protected ModelAndView showModelAndView(final SystemData systemData) {
-		ModelAndView result;
-		result = new ModelAndView("systemData/show");
-		result.addObject("systemData", systemData);
 
-		return result;
-	}
 
 }
