@@ -11,7 +11,7 @@
 
 	<!-- User accounts -->
 
-	<bean id="userAccount1" class="security.UserAccount">
+	<bean id="newUserAccount1" class="security.UserAccount">
 		<property name="username" value="admin" />
 		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
 		<property name="activated" value="True" />
@@ -24,7 +24,7 @@
 		</property>
 	</bean>
 
-	<bean id="userAccount2" class="security.UserAccount">
+	<bean id="newUserAccount2" class="security.UserAccount">
 		<property name="username" value="customer" />
 		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
 		<property name="activated" value="True" />
@@ -37,8 +37,8 @@
 		</property>
 	</bean>
 
-	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
+	<bean id="newUserAccount3" class="security.UserAccount">
+		<property name="username" value="worker" />
 		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
 		<property name="activated" value="True" />
 		<property name="authorities">
@@ -50,195 +50,44 @@
 		</property>
 	</bean>
 
-	<bean id="userAccount4" class="security.UserAccount">
-		<property name="username" value="supertroll" />
-		<property name="password" value="cd087133969fbbc72f10354904bdda60" />
+	<bean id="newUserAccount4" class="security.UserAccount">
+		<property name="username" value="referee" />
+		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="WORKER" />
+					<property name="authority" value="REFEREE" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="userAccount5" class="security.UserAccount">
-		<property name="username" value="superman" />
-		<property name="password" value="84d961568a65073a3bcf0eb216b2a576" />
+	<bean id="newUserAccount5" class="security.UserAccount">
+		<property name="username" value="sponsor" />
+		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
 		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="SPONSOR" />
 				</bean>
 			</list>
 		</property>
 	</bean>
 
-	<bean id="userAccount6" class="security.UserAccount">
-		<property name="username" value="superguay" />
-		<property name="password" value="f6964b92d99ed26c4c2115da7e4d816a" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
 
-	<bean id="userAccount7" class="security.UserAccount">
-		<property name="username" value="superfuerte" />
-		<property name="password" value="6eacff0ba4ceba28f90525930bcf0e80" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount8" class="security.UserAccount">
-		<property name="username" value="supercoool" />
-		<property name="password" value="f3209d2047b8b8700fbf566bf5614533" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount9" class="security.UserAccount">
-		<property name="username" value="TEGOCABEZON" />
-		<property name="password" value="c317174b7f9dba1c139c1f2468139439" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount10" class="security.UserAccount">
-		<property name="username" value="brawls" />
-		<property name="password" value="8e504d56fe58f40de679f058c14d0107" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount11" class="security.UserAccount">
-		<property name="username" value="maximo" />
-		<property name="password" value="d822eb65cbd84945f427dc08f4571694" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="WORKER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount12" class="security.UserAccount">
-		<property name="username" value="corchuelo" />
-		<property name="password" value="927efc84d9371bee98c6e6cf8b3e2f48" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount13" class="security.UserAccount">
-		<property name="username" value="daniel" />
-		<property name="password" value="aa47f8215c6f30a0dcdb2a36a9f4168e" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount14" class="security.UserAccount">
-		<property name="username" value="patricia" />
-		<property name="password" value="823fec7a2632ea7b498c1d0d11c11377" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount15" class="security.UserAccount">
-		<property name="username" value="antonio" />
-		<property name="password" value="4a181673429f0b6abbfd452f0f3b5950" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
 
 	<!-- Other domain beans come here -->
+
 
 	<!-- Box -->
 
 
 
-	<bean id="box1" class="domain.Box">
+	<bean id="inBox1" class="domain.Box">
 
-		<property name="name" value="INBOX" />
+		<property name="name" value="inBox1" />
 
 		<property name="isDefault" value="True" />
 
@@ -254,25 +103,9 @@
 
 
 
-	<bean id="box2" class="domain.Box">
+	<bean id="outBox1" class="domain.Box">
 
-		<property name="name" value="outBox" />
-
-		<property name="isDefault" value="True" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box3" class="domain.Box">
-
-		<property name="name" value="spamBox" />
+		<property name="name" value="outBox1" />
 
 		<property name="isDefault" value="True" />
 
@@ -286,9 +119,25 @@
 
 
 
-	<bean id="box4" class="domain.Box">
+	<bean id="spamBox1" class="domain.Box">
 
-		<property name="name" value="TRASHBOX" />
+		<property name="name" value="spamBox1" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+
+
+
+	<bean id="trashBox1" class="domain.Box">
+
+		<property name="name" value="trashBox1" />
 
 		<property name="isDefault" value="True" />
 
@@ -302,43 +151,9 @@
 
 	</bean>
 
+	<bean id="inBox2" class="domain.Box">
 
-
-	<bean id="box5" class="domain.Box">
-
-		<property name="name" value="Box 5" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box6" class="domain.Box">
-
-		<property name="name" value="Box 6" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box7" class="domain.Box">
-
-		<property name="name" value="OUTBOX" />
+		<property name="name" value="inBox2" />
 
 		<property name="isDefault" value="True" />
 
@@ -354,25 +169,9 @@
 
 
 
-	<bean id="box8" class="domain.Box">
+	<bean id="outBox2" class="domain.Box">
 
-		<property name="name" value="Box 8" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box9" class="domain.Box">
-
-		<property name="name" value="INBOX" />
+		<property name="name" value="outBox2" />
 
 		<property name="isDefault" value="True" />
 
@@ -386,101 +185,9 @@
 
 
 
-	<bean id="box10" class="domain.Box">
+	<bean id="spamBox2" class="domain.Box">
 
-		<property name="name" value="Box 10" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box11" class="domain.Box">
-
-		<property name="name" value="Box 11" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box12" class="domain.Box">
-
-		<property name="name" value="Box 12" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box13" class="domain.Box">
-
-		<property name="name" value="Box 13" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box14" class="domain.Box">
-
-		<property name="name" value="Box 14" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-	<bean id="box15" class="domain.Box">
-
-		<property name="name" value="TRASHBOX" />
-
-		<property name="isDefault" value="True" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-	<bean id="box16" class="domain.Box">
-
-		<property name="name" value="SPAMBOX" />
+		<property name="name" value="spamBox2" />
 
 		<property name="isDefault" value="True" />
 
@@ -494,9 +201,219 @@
 
 
 
+	<bean id="trashBox2" class="domain.Box">
+
+		<property name="name" value="trashBox2" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list>
+				<ref bean="message2" />
+			</list>
+
+		</property>
+
+	</bean>
+
+	<bean id="inBox3" class="domain.Box">
+
+		<property name="name" value="inBox3" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list>
+				<ref bean="message1" />
+			</list>
+
+		</property>
+
+	</bean>
 
 
 
+	<bean id="outBox3" class="domain.Box">
+
+		<property name="name" value="outBox3" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+
+
+
+	<bean id="spamBox3" class="domain.Box">
+
+		<property name="name" value="spamBox3" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+
+
+
+	<bean id="trashBox3" class="domain.Box">
+
+		<property name="name" value="trashBox3" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list>
+				<ref bean="message2" />
+			</list>
+
+		</property>
+
+	</bean>
+
+	<bean id="inBox4" class="domain.Box">
+
+		<property name="name" value="inBox4" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list>
+				<ref bean="message1" />
+			</list>
+
+		</property>
+
+	</bean>
+
+
+
+	<bean id="outBox4" class="domain.Box">
+
+		<property name="name" value="outBox4" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+
+
+
+	<bean id="spamBox4" class="domain.Box">
+
+		<property name="name" value="spamBox4" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+
+
+
+	<bean id="trashBox4" class="domain.Box">
+
+		<property name="name" value="trashBox4" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list>
+				<ref bean="message2" />
+			</list>
+
+		</property>
+
+	</bean>
+
+	<bean id="inBox5" class="domain.Box">
+
+		<property name="name" value="inBox1" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list>
+				<ref bean="message1" />
+			</list>
+
+		</property>
+
+	</bean>
+
+
+
+	<bean id="outBox5" class="domain.Box">
+
+		<property name="name" value="outBox1" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+
+
+
+	<bean id="spamBox5" class="domain.Box">
+
+		<property name="name" value="spamBox1" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+
+
+
+	<bean id="trashBox5" class="domain.Box">
+
+		<property name="name" value="trashBox1" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list>
+				<ref bean="message2" />
+			</list>
+
+		</property>
+
+	</bean>
 
 	<!-- PersonalRecord -->
 
@@ -710,19 +627,19 @@
 
 
 
-	<bean id="worker1" class="domain.Worker">
+	<bean id="worker" class="domain.Worker">
 
-		<property name="name" value="Antonio" />
+		<property name="name" value="Daniel" />
 
-		<property name="surname" value="Diaz" />
+		<property name="surname" value="Rueda" />
 
-		<property name="middleName" value="Panochete" />
+		<property name="middleName" value="López" />
 
 		<property name="photo" value="https://tumblr.wdf43" />
 
-		<property name="email" value="antonio.diaz@gmail.com" />
+		<property name="email" value="danruedalop@gmail.com" />
 
-		<property name="phoneNumber" value="+34 344 654 843" />
+		<property name="phoneNumber" value="+34 626 006 488" />
 
 		<property name="address" value="Avenida Ramon Resa" />
 
@@ -734,13 +651,16 @@
 
 			<list>
 
-				<ref bean="box5" />
+				<ref bean="inBox3" />
+				<ref bean="outBox3" />
+				<ref bean="spamBox3" />
+				<ref bean="trashBox3" />
 
 			</list>
 
 		</property>
 
-		<property name="userAccount" ref="userAccount11" />
+		<property name="userAccount" ref="newUserAccount3" />
 
 		<property name="sentMessages">
 
@@ -790,235 +710,6 @@
 
 
 
-	<bean id="worker2" class="domain.Worker">
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antonio.diaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount2" />
-
-		<property name="boxes">
-
-			<list>
-
-				<ref bean="box6" />
-
-			</list>
-
-		</property>
-
-		<property name="sentMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="profiles">
-
-			<list></list>
-
-		</property>
-
-		<property name="curricula" ref="curricula2" />
-
-		<property name="tutorials">
-
-			<list></list>
-
-		</property>
-
-		<property name="applications">
-
-			<list>
-				<ref bean="application2" />
-			</list>
-
-		</property>
-
-		<property name="endorsements">
-
-			<list></list>
-
-		</property>
-
-		<property name="make" value="Texto worker 2" />
-
-
-
-	</bean>
-
-
-
-	<bean id="worker3" class="domain.Worker">
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antonio.diaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount3" />
-
-		<property name="boxes">
-
-			<list>
-
-				<ref bean="box8" />
-
-			</list>
-
-		</property>
-
-		<property name="sentMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="profiles">
-
-			<list></list>
-
-		</property>
-
-		<property name="curricula" ref="curricula3" />
-
-		<property name="tutorials">
-
-			<list></list>
-
-		</property>
-
-		<property name="applications">
-
-			<list>
-				<ref bean="application3" />
-				<ref bean="application1" />
-			</list>
-
-		</property>
-
-		<property name="endorsements">
-
-			<list></list>
-
-		</property>
-
-		<property name="make" value="Texto worker 3" />
-
-
-
-	</bean>
-
-
-
-	<bean id="worker4" class="domain.Worker">
-
-		<property name="name" value="Botella" />
-
-		<property name="surname" value="De Cristal" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antonio.diaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Mesa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount4" />
-		<property name="boxes">
-
-			<list>
-
-				<ref bean="box14" />
-
-			</list>
-
-		</property>
-
-		<property name="sentMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="profiles">
-
-			<list></list>
-
-		</property>
-
-		<property name="curricula" ref="curricula4" />
-
-		<property name="tutorials">
-
-			<list></list>
-
-		</property>
-
-		<property name="applications">
-
-			<list></list>
-
-		</property>
-
-		<property name="endorsements">
-
-			<list></list>
-
-		</property>
-
-		<property name="make" value="Texto worker 4" />
-
-
-
-	</bean>
 
 
 	<!-- Profile -->
@@ -1032,17 +723,15 @@
 
 	</bean>
 
-	<!-- Customer -->
+	<!-- Sponsor -->
 
-
-
-	<bean id="customer1" class="domain.Customer">
+	<bean id="sponsor" class="domain.Sponsor">
 
 		<property name="name" value="Antonio" />
 
-		<property name="surname" value="Diaz" />
+		<property name="surname" value="Arenas" />
 
-		<property name="middleName" value="Panochete" />
+		<property name="middleName" value="Arenas" />
 
 		<property name="photo" value="https://tumblr.wdf43" />
 
@@ -1054,16 +743,82 @@
 
 		<property name="suspicious" value="False" />
 
-		<property name="userAccount" ref="userAccount5" />
+		<property name="userAccount" ref="newUserAccount5" />
 
 		<property name="boxes">
 
 			<list>
 
-				<ref bean="box7" />
-				<ref bean="box4" />
-				<ref bean="box15" />
-				<ref bean="box16" />
+				<ref bean="inBox5" />
+				<ref bean="outBox5" />
+				<ref bean="spamBox5" />
+				<ref bean="trashBox5" />
+
+			</list>
+
+		</property>
+
+		<property name="sentMessages">
+
+			<list></list>
+
+		</property>
+
+		<property name="receivedMessages">
+
+			<list></list>
+
+		</property>
+
+		<property name="profiles">
+
+			<list></list>
+
+		</property>
+
+		<property name="reports">
+
+			<list></list>
+
+		</property>
+
+
+	</bean>
+
+
+
+	<!-- Customer -->
+
+
+
+	<bean id="customer" class="domain.Customer">
+
+		<property name="name" value="Javier" />
+
+		<property name="surname" value="De Motta" />
+
+		<property name="middleName" value="Cabello" />
+
+		<property name="photo" value="https://tumblr.wdf43" />
+
+		<property name="email" value="antonio.diaz@gmail.com" />
+
+		<property name="phoneNumber" value="+34 344 654 843" />
+
+		<property name="address" value="Avenida Ramon Resa" />
+
+		<property name="suspicious" value="False" />
+
+		<property name="userAccount" ref="newUserAccount2" />
+
+		<property name="boxes">
+
+			<list>
+
+				<ref bean="inBox2" />
+				<ref bean="outBox2" />
+				<ref bean="spamBox2" />
+				<ref bean="trashBox2" />
 
 			</list>
 
@@ -1103,163 +858,18 @@
 
 
 
-	<bean id="customer2" class="domain.Customer">
-
-		<property name="name" value="David" />
-
-		<property name="surname" value="Loco" />
-
-		<property name="middleName" value="Loquete" />
-
-		<property name="photo" value="https://tumblr.esdf43" />
-
-		<property name="email" value="pruebaparamensajes1@gmail.com" />
-
-		<property name="phoneNumber" value="+34 654 653 841" />
-
-		<property name="address" value="Calle Luis Montoto" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount6" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box1" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-
-			<list>
-				<ref bean="message2" />
-			</list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list>
-				<ref bean="message1" />
-			</list>
-
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
-
-		<property name="endorsements">
-			<list></list>
-		</property>
-
-	</bean>
-
-
-
-	<bean id="customer3" class="domain.Customer">
-
-		<property name="name" value="Dani" />
-
-		<property name="surname" value="Es pollo" />
-
-		<property name="middleName" value="Si lee esto" />
-
-		<property name="photo" value="https://tumblr.kk69" />
-
-		<property name="email" value="pruebaparamensajes2@gmail.com" />
-
-		<property name="phoneNumber" value="+34 696 696 666" />
-
-		<property name="address" value="El puente triana wi pasa la reina" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount7" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box9" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-			<list></list>
-		</property>
-
-		<property name="receivedMessages">
-			<list></list>
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
-
-		<property name="endorsements">
-			<list></list>
-		</property>
-
-	</bean>
-
-
-
-	<bean id="customer4" class="domain.Customer">
-
-		<property name="name" value="Pepe" />
-
-		<property name="surname" value="Es pollo" />
-
-		<property name="middleName" value="Siempre" />
-
-		<property name="photo" value="https://tumblr.kk69" />
-
-		<property name="email" value="dani.elpollo@gmail.com" />
-
-		<property name="phoneNumber" value="+34 696 696 666" />
-
-		<property name="address" value="El puente triana wi pasa la reina" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount8" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box13" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-			<list></list>
-		</property>
-
-		<property name="receivedMessages">
-			<list></list>
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
-
-		<property name="endorsements">
-			<list></list>
-		</property>
-
-	</bean>
-
-
 
 	<!-- Referee -->
 
 
 
-	<bean id="referee1" class="domain.Referee">
+	<bean id="referee" class="domain.Referee">
 
-		<property name="name" value="Antonio" />
+		<property name="name" value="David" />
 
-		<property name="surname" value="Diaz" />
+		<property name="surname" value="Cuevas" />
 
-		<property name="middleName" value="Panochete" />
+		<property name="middleName" value="Carrasco" />
 
 		<property name="photo" value="https://tumblr.wdf43" />
 
@@ -1271,13 +881,16 @@
 
 		<property name="suspicious" value="False" />
 
-		<property name="userAccount" ref="userAccount9" />
+		<property name="userAccount" ref="newUserAccount4" />
 
 		<property name="boxes">
 
 			<list>
 
-				<ref bean="box10" />
+				<ref bean="inBox4" />
+				<ref bean="outBox4" />
+				<ref bean="spamBox4" />
+				<ref bean="trashBox4" />
 
 			</list>
 
@@ -1308,114 +921,13 @@
 		</property>
 
 
-
-
-
-
-
 	</bean>
 
 
 
-	<bean id="referee2" class="domain.Referee">
-
-		<property name="reports">
-			<list>
-				<ref bean="report1" />
-			</list>
-		</property>
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antonio.diaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount10" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box11" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-			<list></list>
-		</property>
-
-		<property name="receivedMessages">
-			<list></list>
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
 
 
 
-
-
-	</bean>
-
-
-
-	<bean id="referee3" class="domain.Referee">
-
-		<property name="reports">
-			<list>
-				<ref bean="report2" />
-			</list>
-		</property>
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antonio.diaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount1" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box12" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-			<list></list>
-		</property>
-
-		<property name="receivedMessages">
-			<list></list>
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
-
-
-
-	</bean>
 
 
 
@@ -1425,7 +937,7 @@
 
 	<bean id="task1" class="domain.Task">
 
-		<property name="customer" ref="customer2" />
+		<property name="customer" ref="customer" />
 
 		<property name="complaints">
 			<list>
@@ -1470,7 +982,7 @@
 
 	<bean id="task2" class="domain.Task">
 
-		<property name="customer" ref="customer1" />
+		<property name="customer" ref="customer" />
 
 		<property name="complaints">
 			<list></list>
@@ -1514,7 +1026,7 @@
 
 	<bean id="task3" class="domain.Task">
 
-		<property name="customer" ref="customer3" />
+		<property name="customer" ref="customer" />
 
 		<property name="complaints">
 			<list>
@@ -1624,7 +1136,7 @@
 
 	<bean id="category1" class="domain.Category">
 
-		<property name="name" value="Primer categoria" />
+		<property name="name" value="Primera categoria" />
 
 		<property name="nameEsp" value="Primera categoria pero en español" />
 
@@ -1686,7 +1198,7 @@
 
 	<bean id="application1" class="domain.Application">
 
-		<property name="worker" ref="worker3" />
+		<property name="worker" ref="worker" />
 
 		<property name="task" ref="task2" />
 
@@ -1709,7 +1221,7 @@
 
 	<bean id="application2" class="domain.Application">
 
-		<property name="worker" ref="worker2" />
+		<property name="worker" ref="worker" />
 
 		<property name="task" ref="task3" />
 
@@ -1731,7 +1243,7 @@
 
 	<bean id="application3" class="domain.Application">
 
-		<property name="worker" ref="worker3" />
+		<property name="worker" ref="worker" />
 
 		<property name="task" ref="task3" />
 
@@ -1750,7 +1262,7 @@
 
 	<bean id="application4" class="domain.Application">
 
-		<property name="worker" ref="worker4" />
+		<property name="worker" ref="worker" />
 
 		<property name="task" ref="task3" />
 
@@ -1774,7 +1286,7 @@
 
 
 
-	<!-- COmplaint -->
+	<!-- Complaint -->
 
 
 
@@ -1857,7 +1369,7 @@
 
 		<property name="complaint" ref="complaint2" />
 
-		<property name="referee" ref="referee2" />
+		<property name="referee" ref="referee" />
 
 		<property name="notes">
 			<list></list>
@@ -1883,7 +1395,7 @@
 
 		<property name="complaint" ref="complaint3" />
 
-		<property name="referee" ref="referee3" />
+		<property name="referee" ref="referee" />
 
 		<property name="notes">
 			<list>
@@ -2008,7 +1520,7 @@
 
 	<bean id="message1" class="domain.Message">
 
-		<property name="sender" ref="customer1" />
+		<property name="sender" ref="customer" />
 
 		<property name="recipients">
 			<list>
