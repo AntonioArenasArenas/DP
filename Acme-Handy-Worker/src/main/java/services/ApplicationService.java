@@ -185,5 +185,9 @@ public class ApplicationService {
 		Double result = applicationRepository.getRejectedApplications();
 		return result;
 	}
+	
+	public Collection<Application> getWorkerAcceptedApplicationsByTaskId(int workerId, int taskId) {
+		return applicationRepository.getWorkerAcceptedApplicationsByTaskId(workerId, taskId);
+	}
 
 }

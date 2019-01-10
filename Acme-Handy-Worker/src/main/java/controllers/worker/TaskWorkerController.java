@@ -54,7 +54,7 @@ public class TaskWorkerController extends AbstractController {
 		task = this.taskService.findOne(id);
 		Assert.notNull(task);
 		result = this.showModelAndView(task);
-
+		
 		return result;
 	}
 

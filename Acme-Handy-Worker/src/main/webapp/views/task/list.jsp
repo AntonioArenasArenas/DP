@@ -43,6 +43,11 @@
 				<spring:message code="task.createApplication" />
 			</a>
 		</display:column>
+		<display:column>
+			<a href="phase/worker/list.do?taskId=${row.id}">
+				<spring:message code="task.listPhases" />
+			</a>
+		</display:column>
 	</security:authorize>
 	
 </display:table>

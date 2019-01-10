@@ -1434,7 +1434,7 @@
 		</property>
 
 		<property name="phases">
-			<list></list>
+			<list><ref bean="phase1" /></list>
 		</property>
 
 		<property name="warranty" ref="warranty4" />
@@ -2090,6 +2090,20 @@
 		<property name="vatPercentage" value="22%" />
 		<property name="cache" value="3" />
 		<property name="maxPrice" value="22" />
+	</bean>
+	
+	<!-- Phase -->
+	
+	<bean id="phase1" class="domain.Phase">
+
+		<property name="title" value="Fase 1" />
+
+		<property name="description" value="Cjdfhgudf ygdfughdfi gsdi fuhf duyv ygdsu vfiud" />
+
+		<property name="startDate" value="01/02/2019 12:34" />
+		
+		<property name="endDate" value="01/04/2019 12:34" />
+
 	</bean>
 
 
