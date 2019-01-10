@@ -78,7 +78,7 @@
 	</jstl:if> --%>
 	<input type="button" name="cancel"
 		value="<spring:message code="mensaje.cancel" />"
-		onclick="javascript: relativeRedir('message/create.do');" />
+		onclick="javascript: relativeRedir('');" />
 	<br />
 
 

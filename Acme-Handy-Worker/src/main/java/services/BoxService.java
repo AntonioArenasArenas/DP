@@ -107,6 +107,9 @@ public class BoxService {
 		
 		Actor actor = actorService.findByPrincipal();
 		
+		if(box.getId()!=0 && !box.getIsDefault() ){
+			Assert.isTrue(actor.getBoxes().contains(box));
+		}
 		Box result;
 
 		result = boxRepository.save(box);
@@ -116,6 +119,8 @@ public class BoxService {
 		boxes.add(result);
 		actor.setBoxes(boxes);
 		}
+		
+		
 		return result;
 	}
 

@@ -86,13 +86,15 @@ public class MessageController extends AbstractController {
 		ModelAndView result;
 
 		if (binding.hasErrors()){
+			
 			result = this.createEditModelAndView(message);
 			System.out.println(binding.getAllErrors());}
+		
 		else
 			try {	
 				
 				this.messageService.save(message) ;
-				result = new ModelAndView("redirect:welcome.do");
+				result = new ModelAndView("redirect:/");
 				
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(message, "message.commit.error");
@@ -109,7 +111,7 @@ public class MessageController extends AbstractController {
 			
 			this.messageService.delete(message);
 			
-			result = new ModelAndView("redirect:welcome.do");
+			result = new ModelAndView("redirect:/");
 	
 			return result;
 	}

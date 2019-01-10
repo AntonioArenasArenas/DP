@@ -11,26 +11,20 @@
 
 
 
-<form:form action="worker/edit.do" modelAttribute="worker">
+<form:form action="admin/edit.do" modelAttribute="admin">
 
 	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="make" />
-	<form:hidden path="endorsements" />
 	<form:hidden path="sentMessages" />
 	<form:hidden path="receivedMessages" />
 	<form:hidden path="suspicious" />
 	<form:hidden path="profiles" />
 	<form:hidden path="boxes" />
-	<form:hidden path="tutorials" />
-	<form:hidden path="applications" />
-	<form:hidden path="make" />
 	<form:hidden path="userAccount"/>
-	<form:hidden path="userAccount.authorities" value="WORKER" />
+	<form:hidden path="userAccount.authorities" value="ADMIN" />
 	<form:hidden path="userAccount.activated" />
 	<form:hidden path="userAccount.id" />
-	<form:hidden path="userAccount.version" />
-	
+	<form:hidden path="userAccount.version" /> 
 	
 	
 	<form:label path="userAccount.username">
@@ -68,8 +62,6 @@
 	<form:input path="middleName" />
 	<form:errors cssClass="error" path="middleName" />
 	<br />
-	
-	
 
 	<form:label path="photo">
 		<spring:message code="actor.photo" />:
@@ -112,6 +104,6 @@
 </form:form>
 
 
-<jstl:if test="${worker.id !=0}">
+<jstl:if test="${admin.id !=0}">
 			<input type="button" value="<spring:message code="actor.Profiles" />" name="button" onClick="javascript: relativeRedir('profile/list.do');"/>
 </jstl:if> 

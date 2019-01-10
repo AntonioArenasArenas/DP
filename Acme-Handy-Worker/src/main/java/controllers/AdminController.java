@@ -1,17 +1,4 @@
-/*
- * CustomerController.java
- * 
- * Copyright (C) 2018 Universidad de Sevilla
- * 
- * The use of this project is hereby constrained to the conditions of the
- * TDG Licence, a copy of which you may download from
- * http://www.tdg-seville.info/License.html
- */
-
 package controllers;
-
-import java.util.Collection;
-
 
 import javax.validation.Valid;
 
@@ -22,24 +9,21 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import domain.Actor;
-import domain.Customer;
 
 import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
-import services.CustomerService;
+import services.AdminService;
+import domain.Admin;
 
 @Controller
-@RequestMapping("/customer")
-public class CustomerController extends AbstractController {
+@RequestMapping("/admin")
+public class AdminController extends AbstractController {
 
 	
 	@Autowired
-	private CustomerService customerService;
+	private AdminService adminService;
 	@Autowired
 	private UserAccountService userAccountService;
 	@Autowired
@@ -48,7 +32,7 @@ public class CustomerController extends AbstractController {
 	
 	// Constructors -----------------------------------------------------------
 
-	public CustomerController() {
+	public AdminController() {
 		super();
 	}
 	
@@ -57,10 +41,10 @@ public class CustomerController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Customer customer;
+		Admin admin;
 
-		customer = this.customerService.create() ;
-		result = this.createEditModelAndView(customer);
+		admin = this.adminService.create() ;
+		result = this.createEditModelAndView(admin);
 
 		return result;
 	}
@@ -69,38 +53,38 @@ public class CustomerController extends AbstractController {
 	public ModelAndView edit() {
 		ModelAndView result;
 	
-		Customer customer = customerService.findByPrincipal();
-		Assert.notNull(customer);
-		result = this.createEditModelAndView(customer);
+		Admin admin = adminService.findByPrincipal();
+		Assert.notNull(admin);
+		result = this.createEditModelAndView(admin);
 
 		return result;
 	}
 	
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Customer customer, final BindingResult binding) {
+	public ModelAndView save(@Valid final Admin admin, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()){
 			
-			result = this.createEditModelAndView(customer);
+			result = this.createEditModelAndView(admin);
 			System.out.println(binding.getAllErrors());
 			
 			}
 		else
 			try {	
 				
-				UserAccount userAccount = customer.getUserAccount();
+				UserAccount userAccount = admin.getUserAccount();
 				final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
 				userAccount.setPassword(password);
 				userAccount = this.userAccountService.save(userAccount);
-				customer.setUserAccount(userAccount);
+				admin.setUserAccount(userAccount);
 				
-				this.customerService.save(customer);
+				this.adminService.save(admin);
 				result = new ModelAndView("redirect:/");
 				
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(customer, "customer.commit.error");
+				result = this.createEditModelAndView(admin, "admin.commit.error");
 		}
 
 		return result;
@@ -108,20 +92,20 @@ public class CustomerController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-				protected ModelAndView createEditModelAndView(final Customer customer) {
+				protected ModelAndView createEditModelAndView(final Admin admin) {
 					ModelAndView result;
 
-					result = this.createEditModelAndView(customer, null);
+					result = this.createEditModelAndView(admin, null);
 
 					return result;
 				}
 
-				protected ModelAndView createEditModelAndView(final Customer customer, final String messageError) {
+				protected ModelAndView createEditModelAndView(final Admin admin, final String messageError) {
 					ModelAndView result;
 
-					result = new ModelAndView("customer/edit");
-					result = new ModelAndView("customer/create");
-					result.addObject("customer", customer);
+					result = new ModelAndView("admin/edit");
+					result = new ModelAndView("admin/create");
+					result.addObject("admin", admin);
 					result.addObject("message", messageError);
 
 					return result;
