@@ -49,6 +49,9 @@ public class ApplicationCustomerController extends AbstractController {
 		result = new ModelAndView("application/list");
 		result.addObject("applications", applications);
 		result.addObject("requestURI", "application/customer/list.do");
+		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
+		// pasarlo
+		result.addObject("VAT", 0.21);
 
 		return result;
 
@@ -83,6 +86,9 @@ public class ApplicationCustomerController extends AbstractController {
 		result = new ModelAndView("application/show");
 		result.addObject("application", application);
 		result.addObject("comentarios", comentarios);
+		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
+		// pasarlo
+		result.addObject("VAT", 0.21);
 
 		return result;
 
@@ -165,6 +171,8 @@ public class ApplicationCustomerController extends AbstractController {
 			String[] spliteado = application.getComments().split(";");
 			comentarios = Arrays.asList(spliteado);
 		}
+		
+		//TODO aqui coger los brandnamesF
 		Collection<String> brandnames = new LinkedList<String>();
 		brandnames.add("VISA");
 		brandnames.add("MASTERS");
@@ -177,6 +185,10 @@ public class ApplicationCustomerController extends AbstractController {
 		result.addObject("comentarios", comentarios);
 		result.addObject("brandnames", brandnames);
 		result.addObject("requestURI", "application/customer/edit.do");
+
+		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
+		// pasarlo
+		result.addObject("VAT", 0.21);
 
 		result.addObject("message", messageCode);
 

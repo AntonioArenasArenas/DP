@@ -30,7 +30,7 @@
 
 <p>
 	<b><spring:message code="applications.list.price" /></b>
-	${application.offeredPrize}
+	${application.offeredPrize} (${application.offeredPrize*VAT})
 </p>
 <security:authorize access="hasRole('CUSTOMER')">
 	<p>
