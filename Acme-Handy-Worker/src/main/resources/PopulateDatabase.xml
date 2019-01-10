@@ -149,7 +149,7 @@
 			</list>
 		</property>
 	</bean>
-
+<!-- no tocar maximo-->
 	<bean id="userAccount11" class="security.UserAccount">
 		<property name="username" value="maximo" />
 		<property name="password" value="d822eb65cbd84945f427dc08f4571694" />
@@ -162,7 +162,7 @@
 			</list>
 		</property>
 	</bean>
-
+<!-- no tocar corchuelo -->
 	<bean id="userAccount12" class="security.UserAccount">
 		<property name="username" value="corchuelo" />
 		<property name="password" value="927efc84d9371bee98c6e6cf8b3e2f48" />

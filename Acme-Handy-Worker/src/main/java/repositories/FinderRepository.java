@@ -30,6 +30,8 @@ public interface FinderRepository extends JpaRepository<Finder, Integer>{
     @Query("select t from Task t")
     public Collection<Task> getAllTasks();
 
+    @Query("")
+
     @Query("select t from Task t where t.description like '%?1%' ")
     public Collection<Task> filterTasksByKeyWordInDescription(String keyWord);
 

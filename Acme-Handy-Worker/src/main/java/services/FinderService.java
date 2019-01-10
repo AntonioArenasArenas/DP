@@ -51,7 +51,7 @@ public class FinderService {
         Date now = new Date();
         Finder result;
         finder.setLastUpdate(now);
-        finder.setTasks(finderService.getTasksByFinderFilter(category, warranty, maxPrice, keyWord));
+        finder.setTasks(this.getTasksByFinderFilter(category, warranty, maxPrice, keyWord));
         result = finderRepository.save(finder);
         return result;
     }
