@@ -120,15 +120,15 @@ public class PhaseWorkerController extends AbstractController {
 		if (binding.hasErrors()) {
 			result = createEditModelAndView(phase);
 		} else {
-//			try {
+			try {
 
 				phaseService.save(phase, taskService.findOne(taskId));
 				result = new ModelAndView("redirect:list.do?taskId=" + taskId);
-//			} catch (Throwable oops) {
-//				result = createEditModelAndView(phase,
-//						"phase.commit.error");
-//
-//			}
+			} catch (Throwable oops) {
+				result = createEditModelAndView(phase,
+						"phase.commit.error");
+
+			}
 		}
 
 		return result;
