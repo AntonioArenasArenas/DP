@@ -81,7 +81,7 @@ public class AdminController extends AbstractController {
 				admin.setUserAccount(userAccount);
 				
 				this.adminService.save(admin);
-				result = new ModelAndView("redirect:welcome.do");
+				result = new ModelAndView("redirect:/");
 				
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(admin, "admin.commit.error");

@@ -24,6 +24,7 @@
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
 				<ul>
 					<li class="arrow"></li>
+					<li><a href="admin/edit.do"><spring:message code="master.page.personal.data" /></a></li>
 					<li><a href="warranty/administrator/list.do"><spring:message code="master.page.warranties" /></a></li>
 					<li><a href="administrator/statistics.do"><spring:message code="master.page.administrator.statistics" /></a></li>
 					<li><a href="admin/create.do"><spring:message code="master.new.admin" /></a></li>

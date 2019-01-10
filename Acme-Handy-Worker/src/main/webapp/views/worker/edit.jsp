@@ -68,6 +68,8 @@
 	<form:input path="middleName" />
 	<form:errors cssClass="error" path="middleName" />
 	<br />
+	
+	
 
 	<form:label path="photo">
 		<spring:message code="actor.photo" />:
@@ -104,7 +106,7 @@
 		value="<spring:message code="actor.save" />" />&nbsp; 
 	<input type="button" name="cancel"
 		value="<spring:message code="actor.cancel" />"
-		onclick="javascript: relativeRedir('actor/create.do');" />
+		onclick="javascript: relativeRedir('');" />
 	<br />
 
 </form:form>

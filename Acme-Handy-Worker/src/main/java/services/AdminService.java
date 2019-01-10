@@ -76,10 +76,8 @@ public class AdminService {
 	
 	public Admin save(Admin Admin) {
 		Assert.notNull(Admin);
-		Actor actor = actorService.findByPrincipal();
-		if(Admin.getId()!=0){
-			Assert.isTrue(actor.equals(Admin));
-		}
+		
+		
 
 		Admin result;
 		

@@ -97,7 +97,7 @@ public class CustomerController extends AbstractController {
 				customer.setUserAccount(userAccount);
 				
 				this.customerService.save(customer);
-				result = new ModelAndView("redirect:welcome.do");
+				result = new ModelAndView("redirect:/");
 				
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(customer, "customer.commit.error");

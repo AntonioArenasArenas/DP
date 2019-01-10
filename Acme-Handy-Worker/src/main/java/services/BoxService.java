@@ -106,7 +106,8 @@ public class BoxService {
 		Assert.notNull(box);
 		
 		Actor actor = actorService.findByPrincipal();
-		if(box.getId()!=0){
+		
+		if(box.getId()!=0 && !box.getIsDefault() ){
 			Assert.isTrue(actor.getBoxes().contains(box));
 		}
 		Box result;

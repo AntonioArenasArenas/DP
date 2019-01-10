@@ -98,7 +98,7 @@
 		value="<spring:message code="actor.save" />" />&nbsp; 
 	<input type="button" name="cancel"
 		value="<spring:message code="actor.cancel" />"
-		onclick="javascript: relativeRedir('actor/create.do');" />
+		onclick="javascript: relativeRedir('');" />
 	<br />
 
 </form:form>
