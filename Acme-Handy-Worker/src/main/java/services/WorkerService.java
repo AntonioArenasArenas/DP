@@ -16,6 +16,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
+import domain.Actor;
 import domain.Application;
 import domain.Box;
 import domain.Endorsement;
@@ -37,6 +38,9 @@ public class WorkerService {
 	
 	@Autowired
 	private UserAccountService userAccountService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -100,6 +104,11 @@ public class WorkerService {
 
 	public Worker save(Worker worker) {
 		Assert.notNull(worker);
+		
+		if(worker.getId()!=0){
+			Actor actor = actorService.findByPrincipal();
+			Assert.isTrue(actor.equals(worker));
+		}
 
 		Worker result;
 		worker.setMake(worker.getName() + worker.getSurname());

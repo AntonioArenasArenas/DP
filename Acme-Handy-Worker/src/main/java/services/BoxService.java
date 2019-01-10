@@ -106,7 +106,9 @@ public class BoxService {
 		Assert.notNull(box);
 		
 		Actor actor = actorService.findByPrincipal();
-		
+		if(box.getId()!=0){
+			Assert.isTrue(actor.getBoxes().contains(box));
+		}
 		Box result;
 
 		result = boxRepository.save(box);
@@ -116,6 +118,8 @@ public class BoxService {
 		boxes.add(result);
 		actor.setBoxes(boxes);
 		}
+		
+		
 		return result;
 	}
 
