@@ -46,7 +46,9 @@
 	</security:authorize>
 	
 </display:table>
-	
-<input type="button" name="create"
-		value="<spring:message code="task.create" />"
-		onclick="javascript: relativeRedir('task/customer/create.do');" />
+
+<security:authorize access="hasRole('CUSTOMER')">	
+	<input type="button" name="create"
+			value="<spring:message code="task.create" />"
+			onclick="javascript: relativeRedir('task/customer/create.do');" />
+</security:authorize>
