@@ -51,6 +51,7 @@
 					<li><a href="worker/edit.do"><spring:message code="master.page.personal.data" /></a></li>
 					<li><a href="task/worker/list.do"><spring:message code="master.page.tasks" /></a></li>
 					<li><a href="application/worker/list.do"><spring:message code="master.page.applications" /></a></li>
+					<li><a href="finder/worker/edit.do"><spring:message code="master.page.finder" /></a></li>
 
 				</ul>
 			</li>

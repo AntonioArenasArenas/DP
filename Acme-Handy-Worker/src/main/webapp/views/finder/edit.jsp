@@ -11,56 +11,56 @@
 	<form:form action="finder/worker/edit.do"
 		modelAttribute="finder">
 		
-		<form:hidden path="finder.id" />
-		<form:hidden path="finder.version" />
-		<form:hidden path="finder.tasks" />
+		<form:hidden path="id" />
+		<form:hidden path="version" />
+		<form:hidden path="tasks" />
 		
 		<form:label path="keyWord">
 			<spring:message code="finder.keyWord" />
 		</form:label>
-		<form:input path="finder.keyWord" />
+		<form:input path="keyWord" />
 		<form:errors cssClass="error" path="keyWord" />
 		<br/>
 		
 		<form:label path="category">
 			<spring:message code="finder.category.name" />
 		</form:label>
-		<form:input path="finder.category.name" />
+		<form:input path="category" />
 		<form:errors cssClass="error" path="category" />
 		<br/>
 		
 		<form:label path="warranty">
 			<spring:message code="finder.warranty.title" />
 		</form:label>
-		<form:input path="finder.warranty.title" />
+		<form:input path="warranty" />
 		<form:errors cssClass="error" path="warranty" />
 		<br/>
 		
 		<form:label path="maxPrice">
 			<spring:message code="finder.maxPrice" />
 		</form:label>
-		<form:input path="finder.maxPrice" />
+		<form:input path="maxPrice" />
 		<form:errors cssClass="error" path="maxPrice" />
 		<br/>
 		
 		<form:label path="minPrice">
 			<spring:message code="finder.minPrice" />
 		</form:label>
-		<form:input path="finder.minPrice" />
+		<form:input path="minPrice" />
 		<form:errors cssClass="error" path="minPrice" />
 		<br/>
 		
 		<form:label path="startDate">
 			<spring:message code="finder.startDate" />
 		</form:label>
-		<form:input path="finder.startDate" />
+		<form:input path="startDate" />
 		<form:errors cssClass="error" path="startDate" />
 		<br/>
 		
 		<form:label path="endDate">
 			<spring:message code="finder.endDate" />
 		</form:label>
-		<form:input path="finder.endDate" />
+		<form:input path="endDate" />
 		<form:errors cssClass="error" path="endDate" />
 		<br/>
 		

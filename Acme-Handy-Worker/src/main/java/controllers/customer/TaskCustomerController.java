@@ -29,10 +29,10 @@ public class TaskCustomerController extends AbstractController {
 
 	@Autowired
 	private TaskService taskService;
-	
+
 	@Autowired
 	private WarrantyService warrantyService;
-	
+
 	@Autowired
 	private CategoryService categoryService;
 
@@ -50,6 +50,17 @@ public class TaskCustomerController extends AbstractController {
 		Collection<Task> tasks;
 
 		tasks = this.taskService.getTasksByLogged();
+		result = new ModelAndView("task/list");
+		result.addObject("requestURI", "task/customer/list.do");
+		result.addObject("tasks", tasks);
+
+		return result;
+	}
+
+	@RequestMapping(value = "/listFinder", method = RequestMethod.GET)
+	public ModelAndView listFinder(Collection<Task> tasks) {
+		ModelAndView result;
+
 		result = new ModelAndView("task/list");
 		result.addObject("requestURI", "task/customer/list.do");
 		result.addObject("tasks", tasks);
@@ -114,9 +125,9 @@ public class TaskCustomerController extends AbstractController {
 
 		return result;
 	}
-	
+
 	// Showing -----------------------------------------------------------------
-	
+
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int id) {
 		ModelAndView result;
@@ -155,7 +166,7 @@ public class TaskCustomerController extends AbstractController {
 
 		return result;
 	}
-	
+
 	protected ModelAndView showModelAndView(final Task task) {
 		ModelAndView result;
 		result = new ModelAndView("task/show");

@@ -45,13 +45,14 @@ public class FinderService {
         return result;
     }
 
-    public Finder save(Finder finder, String category, String warranty, Double maxPrice, String keyWord ){
+    public Finder save(Finder finder){
 
         Assert.notNull(finder);
         Date now = new Date();
         Finder result;
         finder.setLastUpdate(now);
-        finder.setTasks(this.getTasksByFinderFilter(category, warranty, maxPrice, keyWord));
+        finder.setTasks(this.getTasksByFinderFilter(finder.getCategory(), finder.getWarranty(), finder.getMaxPrice(),
+        finder.getMinPrice(), finder.getStartDate(), finder.getEndDate(), finder.getKeyWord()));
         result = finderRepository.save(finder);
         return result;
     }
@@ -105,16 +106,16 @@ public class FinderService {
 
     }
 
-    public Collection<Task> getTasksByFinderFilter(String category, String warranty, Double maxPrice, String keyWord){
+    public Collection<Task> getTasksByFinderFilter(String category, String warranty, Double maxPrice, Double minPrice, Date startDate, Date endDate, String keyWord){
     	Collection<Task> result;
 
-    	if(!category.equals("")) {
+    	if( !(category == null || category.isEmpty())) {
     		result = finderRepository.filterTasksByCategory(category);
     	} else {
     		result = finderRepository.getAllTasks();
     	}
 
-    	if(!warranty.equals("")) {
+    	if(!(warranty == null || warranty.isEmpty())) {
     		Collection<Task> tasksFilteredByWar = finderRepository.filterTasksByWarranty(warranty);
     		result.retainAll(tasksFilteredByWar);
     	}
@@ -122,7 +123,21 @@ public class FinderService {
     		Collection<Task> tasksFilteredByMaxPrice = finderRepository.filterTasksByMaxPrice(maxPrice);
     		result.retainAll(tasksFilteredByMaxPrice);
     	}
-    	if(!keyWord.equals("")){
+
+      if(minPrice != null){
+    		Collection<Task> tasksFilteredByMinPrice = finderRepository.filterTasksByMinPrice(minPrice);
+    		result.retainAll(tasksFilteredByMinPrice);
+    	}
+      if(startDate != null){
+    		Collection<Task> tasksFilteredByStartDate = finderRepository.filterTasksByStartDate(startDate);
+    		result.retainAll(tasksFilteredByStartDate);
+    	}
+      if(endDate != null){
+    		Collection<Task> tasksFilteredByEndDate = finderRepository.filterTasksByEndDate(endDate);
+    		result.retainAll(tasksFilteredByEndDate);
+    	}
+
+    	if(!(keyWord == null || keyWord.isEmpty())){
         Collection<Task> taskFilteredByKeyWordInDescription = finderRepository.filterTasksByKeyWordInDescription(keyWord);
         Collection<Task> taskFilteredByKeyWordInTicker = finderRepository.filterTasksByKeyWordInTicker(keyWord);
         Collection<Task> taskFilteredByKeyWordInAddress = finderRepository.filterTasksByKeyWordInAddress(keyWord);

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
+import controllers.customer.TaskCustomerController;
 import services.FinderService;
 import controllers.AbstractController;
 import domain.Finder;
@@ -23,6 +23,8 @@ public class FinderController extends AbstractController {
 
 	@Autowired
 	private FinderService finderService;
+	@Autowired
+	private TaskCustomerController taskCustomerController;
 
 	// Constructors -----------------------------------------------------------
 
@@ -63,12 +65,13 @@ public class FinderController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Finder finder, final BindingResult binding) {
 		ModelAndView result;
+		Finder finderDef;
 		if (binding.hasErrors())
 			result = this.createEditModelAndView(finder);
 		else
 			try {
-				this.finderService.save(finder);
-				result = new ModelAndView("redirect:list.do");
+				finderDef = this.finderService.save(finder);
+				result = this.taskCustomerController.listFinder(finderDef.getTasks());
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(finder, "task.commit.error");
 			}
@@ -76,7 +79,7 @@ public class FinderController extends AbstractController {
 		return result;
 	}
 
-	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	@RequestMapping(value = "/delete", method = RequestMethod.POST, params = "delete")
 	public ModelAndView delete(final Finder finder, final BindingResult binding) {
 		ModelAndView result;
 
@@ -129,7 +132,7 @@ public class FinderController extends AbstractController {
 
 	protected ModelAndView showModelAndView(final Finder finder) {
 		ModelAndView result;
-		result = new ModelAndView("finder/show");
+		result = new ModelAndView("finder/edit");
 		result.addObject("finder", finder);
 
 		return result;
