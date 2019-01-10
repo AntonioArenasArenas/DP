@@ -45,18 +45,19 @@ public class FinderService {
         return result;
     }
 
-    public Finder save(Finder finder){
+    public Finder save(Finder finder, String category, String warranty, Double maxPrice, String keyWord ){
 
         Assert.notNull(finder);
         Date now = new Date();
         Finder result;
         finder.setLastUpdate(now);
+        finder.setTasks(finderService.getTasksByFinderFilter(category, warranty, maxPrice, keyWord));
         result = finderRepository.save(finder);
         return result;
     }
     public void delete(Finder finder){
-    	
-    	Assert.notNull(finder);
+
+    	  Assert.notNull(finder);
         finderRepository.delete(finder);
         Assert.isNull(finder);
 
@@ -69,7 +70,7 @@ public class FinderService {
         return result;
     }
     public void cleanFinderCache() {
-    	
+
         Finder finder = getFinderByLoggedWorker();
         Long lastUpdate;
         Long now;
@@ -87,7 +88,7 @@ public class FinderService {
         }
     }
     public Finder getFinderByLoggedWorker(){
-    	
+
         Finder result;
         Worker logged;
         logged = workerService.findByPrincipal();
@@ -96,23 +97,23 @@ public class FinderService {
         return result;
     }
     public void setCache(int cache){
-    	
+
         SystemData s;
         s = this.systemDataService.getSystemData();
         s.setCache(cache);
         Assert.isTrue(s.getCache() == cache);
 
     }
-    
+
     public Collection<Task> getTasksByFinderFilter(String category, String warranty, Double maxPrice, String keyWord){
     	Collection<Task> result;
-  
+
     	if(!category.equals("")) {
     		result = finderRepository.filterTasksByCategory(category);
     	} else {
     		result = finderRepository.getAllTasks();
     	}
-    	
+
     	if(!warranty.equals("")) {
     		Collection<Task> tasksFilteredByWar = finderRepository.filterTasksByWarranty(warranty);
     		result.retainAll(tasksFilteredByWar);
@@ -121,11 +122,20 @@ public class FinderService {
     		Collection<Task> tasksFilteredByMaxPrice = finderRepository.filterTasksByMaxPrice(maxPrice);
     		result.retainAll(tasksFilteredByMaxPrice);
     	}
-    	if(keyWord.equals("")){
-    		Collection<Task> taskFilteredByKeyWord = finderRepository.filterTasksByKeyWordInDescription(keyWord);
-    		result.retainAll(taskFilteredByKeyWord);
+    	if(!keyWord.equals("")){
+        Collection<Task> taskFilteredByKeyWordInDescription = finderRepository.filterTasksByKeyWordInDescription(keyWord);
+        Collection<Task> taskFilteredByKeyWordInTicker = finderRepository.filterTasksByKeyWordInTicker(keyWord);
+        Collection<Task> taskFilteredByKeyWordInAddress = finderRepository.filterTasksByKeyWordInAddress(keyWord);
+
+        taskFilteredByKeyWordInTicker.removeAll(taskFilteredByKeyWordInDescription);
+        taskFilteredByKeyWordInDescription.addAll(taskFilteredByKeyWordInTicker);
+        taskFilteredByKeyWordInAddress.removeAll(taskFilteredByKeyWordInDescription);
+        taskFilteredByKeyWordInDescription.addAll(taskFilteredByKeyWordInAddress);
+
+        result.retainAll(taskFilteredByKeyWordInDescription);
+
     	}
-    	
+
     	return result;
     }
 }

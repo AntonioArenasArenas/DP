@@ -32,7 +32,7 @@ public class FinderController extends AbstractController {
 
 	// Listing ----------------------------------------------------------------
 
-	
+
 	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
@@ -89,9 +89,9 @@ public class FinderController extends AbstractController {
 
 		return result;
 	}
-	
+
 	// Showing -----------------------------------------------------------------
-	
+
 	@RequestMapping(value = "/show", method = RequestMethod.GET)
 	public ModelAndView show(@RequestParam final int id) {
 		ModelAndView result;
@@ -126,7 +126,7 @@ public class FinderController extends AbstractController {
 
 		return result;
 	}
-	
+
 	protected ModelAndView showModelAndView(final Finder finder) {
 		ModelAndView result;
 		result = new ModelAndView("finder/show");
