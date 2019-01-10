@@ -69,6 +69,11 @@ public class ProfileService {
 	public Profile save(Profile profile){
 		Assert.notNull(profile);
 		
+		if(profile.getId()!=0){
+			Actor logged = actorService.findByPrincipal();
+			Assert.isTrue(logged.getProfiles().contains(profile));
+		}
+		
 		Profile result = profileRepository.save(profile);
 		
 		if(profile.getId()==0){

@@ -97,7 +97,7 @@ public class WorkerController extends AbstractController {
 				worker.setUserAccount(userAccount);
 				
 				this.workerService.save(worker);
-				result = new ModelAndView("redirect:welcome.do");
+				result = new ModelAndView("redirect:/");
 				
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(worker, "worker.commit.error");

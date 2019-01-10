@@ -32,6 +32,9 @@
 
 		<bean class="converters.StringToActorConverter" />
 		<bean class="converters.ActorToStringConverter" />
+		
+		<bean class="converters.StringToAdminConverter" />
+		<bean class="converters.AdminToStringConverter" />
 
 		<bean class="converters.StringToCustomerConverter" />
 		<bean class="converters.CustomerToStringConverter" />

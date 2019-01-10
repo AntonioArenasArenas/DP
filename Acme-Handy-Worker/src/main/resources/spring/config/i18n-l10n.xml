@@ -36,6 +36,7 @@
 		<value>/views/task/messages</value>
 		<value>/views/application/messages</value>
 		<value>/views/phase/messages</value>
+		<value>/views/admin/messages</value>
 	</util:list>
 
 </beans>

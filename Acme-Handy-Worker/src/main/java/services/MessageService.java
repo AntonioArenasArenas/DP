@@ -90,7 +90,6 @@ public class MessageService {
 		actorService.save(actor);
 
 		for( Actor a : recipients){
-
 			Box InBox = boxService.findBoxByActor("INBOX", a.getId());
 			InBox.getMessages().add(result);
 			a.getReceivedMessages().add(result);

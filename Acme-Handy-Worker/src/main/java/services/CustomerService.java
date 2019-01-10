@@ -17,6 +17,7 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
+import domain.Actor;
 import domain.Box;
 import domain.Customer;
 import domain.Endorsement;
@@ -35,6 +36,9 @@ public class CustomerService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private BoxService boxService;
+	
+	@Autowired
+	private ActorService actorService;
 	
 	@Autowired
 	private UserAccountService userAccountService;
@@ -97,7 +101,14 @@ public class CustomerService {
 	}
 
 	public Customer save(Customer customer) {
+		
 		Assert.notNull(customer);
+		
+//		Actor actor = actorService.findByPrincipal();
+		
+//		if(customer.getId()!=0){
+//			Assert.isTrue(actor.getUserAccount().equals(customer.getUserAccount()));
+//		}
 
 		Customer result;
 
