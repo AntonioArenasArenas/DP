@@ -1,4 +1,4 @@
-package controllers;
+package controllers.administrator;
 
 import javax.validation.Valid;
 
@@ -10,6 +10,8 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import controllers.AbstractController;
 
 import security.UserAccount;
 import security.UserAccountService;

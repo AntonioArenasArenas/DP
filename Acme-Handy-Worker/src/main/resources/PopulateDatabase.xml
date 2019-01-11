@@ -452,9 +452,9 @@
 
 	<bean id="box14" class="domain.Box">
 
-		<property name="name" value="Box 14" />
+		<property name="name" value="INBOX" />
 
-		<property name="isDefault" value="False" />
+		<property name="isDefault" value="True" />
 
 		<property name="messages">
 
@@ -492,7 +492,19 @@
 
 	</bean>
 
+	<bean id="box17" class="domain.Box">
 
+		<property name="name" value="OUTBOX" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
 
 
 
@@ -1180,6 +1192,7 @@
 		<property name="boxes">
 			<list>
 				<ref bean="box9" />
+				<ref bean="box17" />
 			</list>
 		</property>
 

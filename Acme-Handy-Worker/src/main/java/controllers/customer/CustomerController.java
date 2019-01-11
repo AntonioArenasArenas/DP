@@ -1,5 +1,5 @@
 /*
- * WorkerController.java
+ * CustomerController.java
  * 
  * Copyright (C) 2018 Universidad de Sevilla
  * 
@@ -8,7 +8,7 @@
  * http://www.tdg-seville.info/License.html
  */
 
-package controllers;
+package controllers.customer;
 
 import java.util.Collection;
 
@@ -25,21 +25,23 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+
 import domain.Actor;
-import domain.Worker;
+import domain.Customer;
 
 import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
-import services.WorkerService;
+import services.CustomerService;
 
 @Controller
-@RequestMapping("/worker")
-public class WorkerController extends AbstractController {
+@RequestMapping("/customer")
+public class CustomerController extends AbstractController {
 
 	
 	@Autowired
-	private WorkerService workerService;
+	private CustomerService customerService;
 	@Autowired
 	private UserAccountService userAccountService;
 	@Autowired
@@ -48,7 +50,7 @@ public class WorkerController extends AbstractController {
 	
 	// Constructors -----------------------------------------------------------
 
-	public WorkerController() {
+	public CustomerController() {
 		super();
 	}
 	
@@ -57,10 +59,10 @@ public class WorkerController extends AbstractController {
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
-		Worker worker;
+		Customer customer;
 
-		worker = this.workerService.create() ;
-		result = this.createEditModelAndView(worker);
+		customer = this.customerService.create() ;
+		result = this.createEditModelAndView(customer);
 
 		return result;
 	}
@@ -69,38 +71,38 @@ public class WorkerController extends AbstractController {
 	public ModelAndView edit() {
 		ModelAndView result;
 	
-		Worker worker = workerService.findByPrincipal();
-		Assert.notNull(worker);
-		result = this.createEditModelAndView(worker);
+		Customer customer = customerService.findByPrincipal();
+		Assert.notNull(customer);
+		result = this.createEditModelAndView(customer);
 
 		return result;
 	}
 	
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Worker worker, final BindingResult binding) {
+	public ModelAndView save(@Valid final Customer customer, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()){
 			
-			result = this.createEditModelAndView(worker);
+			result = this.createEditModelAndView(customer);
 			System.out.println(binding.getAllErrors());
 			
 			}
 		else
 			try {	
 				
-				UserAccount userAccount = worker.getUserAccount();
+				UserAccount userAccount = customer.getUserAccount();
 				final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
 				userAccount.setPassword(password);
 				userAccount = this.userAccountService.save(userAccount);
-				worker.setUserAccount(userAccount);
+				customer.setUserAccount(userAccount);
 				
-				this.workerService.save(worker);
+				this.customerService.save(customer);
 				result = new ModelAndView("redirect:/");
 				
 			} catch (final Throwable oops) {
-				result = this.createEditModelAndView(worker, "worker.commit.error");
+				result = this.createEditModelAndView(customer, "customer.commit.error");
 		}
 
 		return result;
@@ -108,20 +110,20 @@ public class WorkerController extends AbstractController {
 
 	// Ancillary methods ------------------------------------------------------
 
-				protected ModelAndView createEditModelAndView(final Worker worker) {
+				protected ModelAndView createEditModelAndView(final Customer customer) {
 					ModelAndView result;
 
-					result = this.createEditModelAndView(worker, null);
+					result = this.createEditModelAndView(customer, null);
 
 					return result;
 				}
 
-				protected ModelAndView createEditModelAndView(final Worker worker, final String messageError) {
+				protected ModelAndView createEditModelAndView(final Customer customer, final String messageError) {
 					ModelAndView result;
 
-					result = new ModelAndView("worker/edit");
-					result = new ModelAndView("worker/create");
-					result.addObject("worker", worker);
+					result = new ModelAndView("customer/edit");
+					result = new ModelAndView("customer/create");
+					result.addObject("customer", customer);
 					result.addObject("message", messageError);
 
 					return result;
