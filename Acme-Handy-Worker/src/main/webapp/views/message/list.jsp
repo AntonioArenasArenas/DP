@@ -20,33 +20,27 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <!-- Listing grid -->
-<p><spring:message code="customer.action.1" /></p>
+
 
 <display:table
-	pagesize="5" name="maessage" id="row"
-	requestURI="box/list.do" >
-	
+	pagesize="5" name="messages" id="row"
+	requestURI="message/list.do" >
 	
 	<display:column >
 		<strong>
-			<a href="message/list.do?messageId=${row.id}" >
-				<jstl:out value="<spring:message code="message.open" />" />
+			<a href="message/show.do?messageId=${row.id}" >
+				<spring:message code="mensaje.open" />
+				
 			</a>
 		</strong>
 		 <br/>	
 	</display:column>
-	<display:column >
-				<jstl:out value="${row.subject}" />
-		 <br/>	
-	</display:column>
-	<display:column >
-				<jstl:out value="${row.momment}" />
-		 <br/>	
-	</display:column>
+	<display:column property="subject" titleKey="mensaje.subject" sortable="true" />
+	<display:column property="moment" titleKey="mensaje.moment" sortable="true" />
 	<display:column >
 		<strong>
 			<a href="message/delete.do?messageId=${row.id}" >
-				<jstl:out value="<spring:message code="message.delete" />" />
+				<spring:message code="mensaje.delete" />
 			</a>
 		</strong>
 		 <br/>	

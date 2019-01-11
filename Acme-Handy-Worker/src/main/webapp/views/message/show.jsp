@@ -10,23 +10,27 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <!-- Listing grid -->
-<p><spring:message code="customer.action.1" /></p>
 
 
 	
-	<p><spring:message code="message.sender" />:<jstl:out value="${row.sender.name}" />
+	<p><strong><spring:message code="mensaje.sender" /></strong>: <jstl:out value="${mensaje.sender.email}" /></p>
 	
-	<spring:message code="message.recipient" />:<jstl:out value="${row.recipient.name}" /></p>
+	<p><strong><spring:message code="mensaje.recipients" /></strong>:
+	<jstl:forEach var="recipient" items="${mensaje.recipients}">
+	<jstl:out value="${recipient.email}"></jstl:out>
+	</jstl:forEach>
+	
 	<br>
-	<spring:message code="message.priority" />:<strong><jstl:out value="${row.priority}" /></strong>
 	<br>
-	<p><spring:message code="message.subject" />:<jstl:out value="${row.subject}" /></p>
+	<strong><spring:message code="mensaje.priority" /></strong>: <jstl:out value="${mensaje.priority}" />
 	<br>
-	<p><spring:message code="message.cuerpo" />:<jstl:out value="${row.body}" /></p>
+	<p><strong><spring:message code="mensaje.subject" /></strong>: <jstl:out value="${mensaje.subject}" /></p>
 	<br>
-	<p><spring:message code="message.tag" />:<jstl:out value="${row.tag}" /></p>
+	<p><strong><spring:message code="mensaje.body" /></strong>: <jstl:out value="${mensaje.body}" /></p>
+	<br>
+	<p><strong><spring:message code="mensaje.tag" /></strong>: <jstl:out value="${mensaje.tags}" /></p>
 	
 	
-	<input type="button" value="<spring:message code="message.cancel" />" name="button" onClick="javascript: relativeRedir('message/list.do');"/>
+   <input type="button" value="<spring:message code="mensaje.back" />" name="button" onClick="javascript: relativeRedir('box/list.do');"/>
 		
-	
+	 

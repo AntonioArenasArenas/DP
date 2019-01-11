@@ -55,7 +55,7 @@ public class Task extends DomainEntity {
 	public Collection<Complaint> getComplaints() {
 		return this.complaints;
 	}
-	
+
 	@OneToMany
 	@Valid
 	@NotNull
@@ -79,7 +79,7 @@ public class Task extends DomainEntity {
 	public Collection<Application> getApplications() {
 		return this.applications;
 	}
-	
+
 	@Column(unique = true)
 	@NotBlank
 	@Pattern(regexp = "^[0-9]{6}-[A-Z0-9]{6}$")
@@ -101,17 +101,20 @@ public class Task extends DomainEntity {
 	public void setMoment(final Date moment) {
 		this.moment = moment;
 	}
+
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getStartDate() {
 		return this.startDate;
 	}
-	@Temporal(TemporalType.DATE)
-	@DateTimeFormat(pattern = "dd/MM/yyyy")
+
+
 	public void setStartDate(final Date startDate) {
 		this.startDate = startDate;
 	}
 
+	@NotNull
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "dd/MM/yyyy")
 	public Date getEndDate() {

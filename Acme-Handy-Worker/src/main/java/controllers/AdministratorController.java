@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
+import services.TaskService;
 
 @Controller
 @RequestMapping("/administrator")
@@ -24,6 +25,9 @@ public class AdministratorController extends AbstractController {
 
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
+	private TaskService taskService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -36,6 +40,8 @@ public class AdministratorController extends AbstractController {
 	@RequestMapping(value = "/statistics", method = RequestMethod.GET)
 	public ModelAndView statistics() {
 		ModelAndView result;
+		
+//		Double[] spuser = taskService.tasksPerUserStatistics();
 
 		Double[] sptask = applicationService.getAdminStatisticsPerTask();
 
@@ -45,6 +51,12 @@ public class AdministratorController extends AbstractController {
 		Double cantChange = applicationService.getAppliCantChange();
 
 		result = new ModelAndView("administrator/statistics");
+		
+//		result.addObject("maximumpu", spuser[2]);
+//		result.addObject("minimumpu", spuser[1]);
+//		result.addObject("averagepu", spuser[0]);
+//		result.addObject("stdevpu", spuser[3]);
+		
 		result.addObject("maximumpt", sptask[2]);
 		result.addObject("minimumpt", sptask[1]);
 		result.addObject("averagept", sptask[0]);

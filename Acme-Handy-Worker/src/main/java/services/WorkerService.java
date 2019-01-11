@@ -1,7 +1,9 @@
 package services;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -10,10 +12,17 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.WorkerRepository;
+import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountService;
+import domain.Actor;
+import domain.Application;
 import domain.Box;
+import domain.Endorsement;
 import domain.Message;
+import domain.Profile;
+import domain.Tutorial;
 import domain.Worker;
 
 @Service
@@ -26,6 +35,12 @@ public class WorkerService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private BoxService boxService;
+	
+	@Autowired
+	private UserAccountService userAccountService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -37,18 +52,34 @@ public class WorkerService {
 
 	public Worker create() {
 		Worker result;
+		result = new Worker();
 		UserAccount userAccount;
+		userAccount = new UserAccount();
+		Collection<Profile> profiles = new ArrayList<Profile>();
 		Collection<Box> box;
 		box = boxService.createDefault();
+		
+		
+		List<Authority> ls;
+		ls = new ArrayList<>();
+		Authority authority;
+		authority = new Authority();
+		authority.setAuthority(Authority.WORKER);
+		ls.add(authority);
+		
+		userAccount.setAuthorities(ls);	
+		UserAccount saved = userAccountService.save(userAccount);
 
-		result = new Worker();
-		userAccount = new UserAccount();
-
-		result.setUserAccount(userAccount);
+		result.setUserAccount(saved);
 		result.setBoxes(box);
-		result.setMake(result.getName() + result.getSurname());
+		result.setMake("");
+		result.setProfiles(profiles);
 		result.setReceivedMessages(new LinkedList<Message>());
 		result.setSentMessages(new LinkedList<Message>());
+		result.setEndorsements(new LinkedList<Endorsement>());
+		result.setApplications(new LinkedList<Application>());
+		result.setTutorials(new LinkedList<Tutorial>());
+		
 
 		return result;
 	}
@@ -71,13 +102,18 @@ public class WorkerService {
 		return result;
 	}
 
-	public Worker save(Worker Worker) {
-		Assert.notNull(Worker);
+	public Worker save(Worker worker) {
+		Assert.notNull(worker);
+		
+		if(worker.getId()!=0){
+			Actor actor = actorService.findByPrincipal();
+			Assert.isTrue(actor.equals(worker));
+		}
 
 		Worker result;
-
-		result = WorkerRepository.save(Worker);
-		result.setMake(result.getName() + result.getSurname());
+		worker.setMake(worker.getName() + worker.getSurname());
+		result = WorkerRepository.save(worker);
+		
 
 		return result;
 	}

@@ -40,11 +40,10 @@ public class BoxServiceTest extends AbstractTest {
 
 	@Test
 	public void testCreateDefaultBox() {
-		Collection<Box> defaults;
-
-		defaults = boxService.createDefault();
-		Assert.isTrue(!defaults.isEmpty());
-		Assert.isTrue(defaults.size() == 4);
+		Integer before = boxService.findAll().size();
+		boxService.createDefault();
+		Integer after= boxService.findAll().size();
+		Assert.isTrue(before<after);
 	}
 
 	@Test

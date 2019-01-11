@@ -40,8 +40,6 @@
 	<spring:message code="administrator.priceOfferedStatistics" />
 </h2>
 
-
-
 <p>
 	<b><spring:message code="administrator.maximum" /> :</b> ${maximumpo}
 </p>

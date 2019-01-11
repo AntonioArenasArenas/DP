@@ -20,7 +20,6 @@ public abstract class Endorser extends Actor {
 	
 	@Valid
 	@OneToMany
-	@NotNull
 	public Collection<Endorsement> getEndorsements() {
 		return this.endorsements;
 	}

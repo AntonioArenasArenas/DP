@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.TaskRepository;
+import domain.Actor;
 import domain.Customer;
 import domain.Task;
 
@@ -25,6 +26,9 @@ public class TaskService {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -55,13 +59,14 @@ public class TaskService {
 		return result;
 	}
 
-	public Task createTask() {
+	public Task create() {
 
 		Task result;
 
 		result = new Task();
 		
 		Customer customer = customerService.findByPrincipal();
+		
 		result.setCustomer(customer);
 
 		result.setTicker(tickerGenerator());
@@ -76,6 +81,13 @@ public class TaskService {
 		Task result;
 
 		task.setMoment(new Date(System.currentTimeMillis() - 1));
+		
+		Assert.isTrue(task.getStartDate().before(task.getEndDate()));
+		
+		Actor logged = actorService.findByPrincipal();
+		if(task.getId() != 0) {
+			Assert.isTrue(task.getCustomer() == logged);
+		}
 		
 		result = taskRepository.save(task);
 		
@@ -97,6 +109,26 @@ public class TaskService {
 		return taskRepository.getTasksByCustomerId(id);
 
 	}
+	
+	public Collection<Task> getActiveTasks(){
+		
+		return taskRepository.getActiveTasks();
+
+	}
+	
+	public Collection<Task> getTasksByLogged(){
+		
+		Customer customer = customerService.findByPrincipal();
+		
+		return taskRepository.getTasksByCustomerId(customer.getId());
+
+	}
+	
+//	public Double[] tasksPerUserStatistics(){
+//		
+//		return taskRepository.tasksPerUserStatistics();
+//		
+//	}
 
 	public String tickerGenerator(){
 		String charactersL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

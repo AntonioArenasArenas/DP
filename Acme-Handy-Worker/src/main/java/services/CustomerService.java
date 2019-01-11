@@ -4,17 +4,23 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
+import java.util.List;
+
 import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
+import security.UserAccountService;
+import domain.Actor;
 import domain.Box;
 import domain.Customer;
+import domain.Endorsement;
 import domain.Message;
 import domain.Profile;
 
@@ -30,6 +36,12 @@ public class CustomerService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private BoxService boxService;
+	
+	@Autowired
+	private ActorService actorService;
+	
+	@Autowired
+	private UserAccountService userAccountService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -41,24 +53,31 @@ public class CustomerService {
 
 	public Customer create() {
 		Customer result;
-		UserAccount userAccount;
-		Authority au = new Authority();
-		au.setAuthority(Authority.CUSTOMER);
-		Collection<Authority> authorities = new ArrayList<>();
-		authorities.add(au);
-		Collection<Box> box;
-		box = boxService.createDefault();
-
 		result = new Customer();
+		UserAccount userAccount;
 		userAccount = new UserAccount();
-
-		userAccount.setAuthorities(authorities);
-		Collection<Profile> profiles = new ArrayList<>();
+		Collection<Profile> profiles = new ArrayList<Profile>();
+		Collection<Endorsement> endorserments = new ArrayList<Endorsement>();
+		
+		List<Authority> ls;
+		ls = new ArrayList<>();
+		Authority authority;
+		authority = new Authority();
+		authority.setAuthority(Authority.CUSTOMER);
+		ls.add(authority);
+	
+		userAccount.setAuthorities(ls);	
+		UserAccount saved = userAccountService.save(userAccount);
+		
+		Collection<Box> boxes = boxService.createDefault();
+		
+		result.setUserAccount(saved);
+		result.setBoxes(boxes);
 		result.setProfiles(profiles);
-		result.setUserAccount(userAccount);
-		result.setBoxes(box);
 		result.setReceivedMessages(new LinkedList<Message>());
 		result.setSentMessages(new LinkedList<Message>());
+		result.setEndorsements(endorserments);
+		
 
 		return result;
 	}
@@ -82,7 +101,14 @@ public class CustomerService {
 	}
 
 	public Customer save(Customer customer) {
+		
 		Assert.notNull(customer);
+		
+//		Actor actor = actorService.findByPrincipal();
+		
+//		if(customer.getId()!=0){
+//			Assert.isTrue(actor.getUserAccount().equals(customer.getUserAccount()));
+//		}
 
 		Customer result;
 

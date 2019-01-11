@@ -25,9 +25,8 @@ public class Worker extends Endorser {
 	private Finder			        finder;
 	private String					make;
 
-	@OneToOne(optional=false)
+	@OneToOne(optional=true)
 	@Valid
-	@NotNull
 	public Curricula getCurricula() {
 		return this.curricula;
 	}
