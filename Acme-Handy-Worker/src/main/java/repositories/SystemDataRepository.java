@@ -9,6 +9,7 @@ import domain.SystemData;
 @Repository
 public interface SystemDataRepository extends JpaRepository<SystemData, Integer>{
 
-
+	@Query("select s from SystemData s")
+    public SystemData getSystemData();
 
 }

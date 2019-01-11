@@ -49,7 +49,13 @@ public class SystemDataService {
         
     }
     // Other business methods -------------------------------------------------
-
+    public SystemData getSystemData(){
+        
+        SystemData result;
+        result = systemDataRepository.getSystemData();
+        return result;
+    }
+    
    public Collection<SystemData> findAll(){
 	   Collection<SystemData> result;
 	   result = this.systemDataRepository.findAll();
