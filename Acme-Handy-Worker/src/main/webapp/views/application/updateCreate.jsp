@@ -176,16 +176,6 @@
 		}
 	});
 
-	/*	Aquí se puede detectar el idioma pero no se puede traducir algo que no será estático en tiempo de ejecución porque si se cambia ya no valdrá
-	
-	window.onload = function() {
-
-		var ln = x = window.navigator.language || navigator.browserLanguage;
-		if (ln == 'es') {
-			window.location.href = 'index_es.html'; // si es es va a español 
-		}
-	}; */
-
 	$("#estados").change(function() {
 
 		var val = $("#estados").val();
