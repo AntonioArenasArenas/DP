@@ -22,17 +22,18 @@ public class SystemData extends DomainEntity {
 	private String vatPercentage;
 	private int cache;
 	private int maxPrice;
-	private List<CreditCard> creditCards;
+	private List<String> makeCreditCards;
 
 
 
+	
 	@ElementCollection
-	public List<CreditCard> getCreditCards() {
-		return creditCards;
+	public List<String> getMakeCreditCards() {
+		return makeCreditCards;
 	}
 
-	public void setCreditCards(List<CreditCard> creditCards) {
-		this.creditCards = creditCards;
+	public void setMakeCreditCards(List<String> makeCreditCards) {
+		this.makeCreditCards = makeCreditCards;
 	}
 
 	public int getMaxPrice() {
