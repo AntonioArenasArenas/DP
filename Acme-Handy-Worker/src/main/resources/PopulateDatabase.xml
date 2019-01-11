@@ -1483,7 +1483,7 @@
 
 	<bean id="task2" class="domain.Task">
 
-		<property name="customer" ref="customer1" />
+		<property name="customer" ref="customer3" />
 
 		<property name="complaints">
 			<list></list>

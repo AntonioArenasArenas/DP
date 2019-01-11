@@ -90,25 +90,17 @@
 		$("table td:contains(RECHAZADA)").parents("tr").css("background-color",
 				"orange");
 
-		var dateCell = $(this).find("td:contains(PENDING)").parents("tr").find(
-				"td:eq(1)").html();
-		var date = new Date(dateCell);
-		var actual = new Date();
+		$("tr").each(function() {
+			var pending = $(this).find("td:contains(PENDIENTE)").html();
 
-		if (date < actual) {
-			$("table td:contains(PENDING)").parents("tr").css(
-					"background-color", "gainsboro");
-		}
+			if (typeof pending === "undefined") {
+				alert("he entrado null");
+				alert(pending);
+			} else {
+				alert("he entrado no null");
+			}
 
-		dateCell = $(this).find("td:contains(PENDIENTE)").parents("tr").find(
-				"td:eq(1)").html();
-		date = new Date(dateCell);
-		actual = new Date();
-
-		if (date < actual) {
-			$("table td:contains(PENDIENTE)").parents("tr").css(
-					"background-color", "gainsboro");
-		}
+		});
 
 	});
 </script>

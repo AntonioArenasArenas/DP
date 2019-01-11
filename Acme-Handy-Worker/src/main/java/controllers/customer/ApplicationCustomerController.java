@@ -3,6 +3,7 @@ package controllers.customer;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -14,15 +15,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.ApplicationService;
 import services.CreditCardService;
 import services.CustomerService;
 import services.TaskService;
+import controllers.AbstractController;
 import domain.Application;
 import domain.CreditCard;
 import domain.Customer;
+import domain.Task;
 
 @Controller
 @RequestMapping("/application/customer")
@@ -166,15 +167,26 @@ public class ApplicationCustomerController extends AbstractController {
 		ModelAndView result;
 		Collection<String> estados = new LinkedList<String>();
 		estados.add("PENDING");
-		estados.add("ACCEPTED");
 		estados.add("REJECTED");
+		Task t = application.getTask();
+		List<Application> applications = new LinkedList<Application>(
+				t.getApplications());
+		boolean isAccepted = false;
+		for (Application a : applications) {
+			if (a.getStatus().equals("ACCEPTED")) {
+				isAccepted = true;
+			}
+		}
+		if (!isAccepted) {
+			estados.add("ACCEPTED");
+		}
 		Collection<String> comentarios = new LinkedList<String>();
 		if (application.getComments() != null) {
 			String[] spliteado = application.getComments().split(";");
 			comentarios = Arrays.asList(spliteado);
 		}
-		
-		//TODO aqui coger los brandnamesF
+
+		// TODO aqui coger los brandnamesF
 		Collection<String> brandnames = new LinkedList<String>();
 		brandnames.add("VISA");
 		brandnames.add("MASTERS");
