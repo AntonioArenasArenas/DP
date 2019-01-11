@@ -16,6 +16,8 @@ import security.UserAccount;
 import domain.Actor;
 import domain.Box;
 import domain.Message;
+import domain.Task;
+import domain.Worker;
 
 @Service
 @Transactional
@@ -67,6 +69,7 @@ public class MessageService {
 		result.setSender(actor);
 		return result;
 	}
+	
 
 	public Message save(Message message) {
 		UserAccount userAccount;
@@ -151,7 +154,35 @@ public class MessageService {
 
 	}
 	
-	
+	public void applicationMessage(Task task,Worker worker){
+		Assert.notNull(task);
+		Assert.notNull(worker);
+		Actor logged = actorService.findByPrincipal();
+		Collection<Actor> recipients = new LinkedList<Actor>();
+		recipients.add(worker);
+		Assert.notNull(logged);
+		
+		Message message = this.createMessage();
+		message.setBody("Your application  of task:" + task.getTicker()+ "has been updated!" +
+						"Tu aplicación de la tarea" + task.getTicker()+ " ha sido actualizada!");
+		message.setPriority("HIGH");
+		message.setTags("Application");
+		message.setSubject("Application updated");
+		message.setSender(logged);
+		message.setRecipients(recipients);
+		Message saved = this.save(message);
+		Assert.notNull(saved);
+		
+		Box loggedInBox = boxService.findBoxByActor("INBOX", logged.getId());
+		Assert.notNull(loggedInBox);
+		loggedInBox.getMessages().add(saved);
+		boxService.save(loggedInBox);
+		Box workerInBox = boxService.findBoxByActor("INBOX", logged.getId());
+		Assert.notNull(workerInBox);
+		workerInBox.getMessages().add(saved);
+		boxService.save(workerInBox);
+		
+	}
 
 	public Collection<Message> findSentMessagesById() {
 		UserAccount userAccount = LoginService.getPrincipal();
