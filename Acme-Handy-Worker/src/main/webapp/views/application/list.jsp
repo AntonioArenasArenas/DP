@@ -91,13 +91,33 @@
 				"orange");
 
 		$("tr").each(function() {
-			var pending = $(this).find("td:contains(PENDIENTE)").html();
+			var pending = $(this).find("td:contains(PENDING)").html();
+			var pendingesp = $(this).find("td:contains(PENDIENTE)").html();
 
-			if (typeof pending === "undefined") {
-				alert("he entrado null");
-				alert(pending);
+			if (typeof pending !== "undefined") {
+
+				var dateCell = $(this).find("td:eq(1)").html();
+				var array = dateCell.split("/");
+				var date = new Date(array[2], array[1] - 1, array[0]);
+				var actual = new Date();
+				if (date < actual) {
+					$(this).css("background-color", "gainsboro");
+					$(this).find("td:contains(Update)").html("");
+				}
 			} else {
-				alert("he entrado no null");
+				if (typeof pendingesp !== "undefined") {
+
+					var dateCell = $(this).find("td:eq(1)").html();
+					var array = dateCell.split("/");
+
+					var date = new Date(array[2], array[1] - 1, array[0]);
+					var actual = new Date();
+
+					if (date < actual) {
+						$(this).css("background-color", "gainsboro");
+						$(this).find("td:contains(Actualizar)").html("");
+					}
+				}
 			}
 
 		});
