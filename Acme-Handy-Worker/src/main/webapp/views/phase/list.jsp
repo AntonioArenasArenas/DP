@@ -8,7 +8,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
     
 
-<display:table name="phases" id="row" requestURI="phase/list.do" pagesize="5" class="displaytag" >
+<display:table name="phases" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag" >
 	
 	<display:column property="title" titleKey="phase.title" sortable="true" />
 	<display:column property="description" titleKey="phase.description" sortable="true" />

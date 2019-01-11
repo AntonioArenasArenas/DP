@@ -8,7 +8,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
     
 
-<display:table name="tasks" id="row" requestURI="task/list.do" pagesize="5" class="displaytag" >
+<display:table name="tasks" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag" >
 	
 	<display:column property="ticker" titleKey="task.ticker" sortable="true" />
 	<display:column property="moment" titleKey="task.moment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
