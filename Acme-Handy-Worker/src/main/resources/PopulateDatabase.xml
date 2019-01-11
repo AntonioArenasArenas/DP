@@ -2085,9 +2085,27 @@
 			<list></list>
 		</property>
 		<property name="spamWords">
-			<list></list>
+			<list>
+				<value>Nigeria</value>
+				<value>sex</value>
+				<value>sexo</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>you’ve been selected</value>
+				<value>ha sido seleccionado</value>
+				<value>one million</value>
+				<value>un millón</value>	
+			</list>
 		</property>
-		<property name="vatPercentage" value="22%" />
+		<property name="makeCreditCards">
+			<list>
+				<value>VISA</value>
+				<value>MASTER</value>
+				<value>DINNERS</value>
+				<value>AMEX</value>	
+			</list>
+		</property>
+		<property name="vatPercentage" value="21%" />
 		<property name="cache" value="3" />
 		<property name="maxPrice" value="22" />
 	</bean>

@@ -41,8 +41,10 @@
 			titleKey="applications.list.worker" />
 	</security:authorize>
 
-	<display:column property="offeredPrize"
-		titleKey="applications.list.price" />
+	<display:column titleKey="applications.list.price">
+	${row.offeredPrize} (${row.offeredPrize*VAT})
+	
+	</display:column>
 
 	<display:column titleKey="applications.update.status">
 		<jstl:if test="${row.status=='ACCEPTED'}">
@@ -58,10 +60,10 @@
 
 	<security:authorize access="hasRole('CUSTOMER')">
 		<display:column>
-		<jstl:if test="${row.status=='PENDING'}">
-			<a href="application/customer/edit.do?applicationId=${row.id}"> <spring:message
-					code="applications.list.update" />
-			</a>
+			<jstl:if test="${row.status=='PENDING'}">
+				<a href="application/customer/edit.do?applicationId=${row.id}">
+					<spring:message code="applications.list.update" />
+				</a>
 			</jstl:if>
 		</display:column>
 	</security:authorize>
