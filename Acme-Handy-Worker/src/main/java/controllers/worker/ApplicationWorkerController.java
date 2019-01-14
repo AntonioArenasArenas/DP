@@ -1,4 +1,4 @@
-package controllers;
+package controllers.worker;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import controllers.AbstractController;
 
 import services.ApplicationService;
 import services.TaskService;
@@ -46,6 +48,10 @@ public class ApplicationWorkerController extends AbstractController {
 		result.addObject("applications", applications);
 		result.addObject("requestURI", "application/worker/list.do");
 
+		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
+		// pasarlo
+		result.addObject("VAT", 0.21);
+
 		return result;
 
 	}
@@ -76,6 +82,9 @@ public class ApplicationWorkerController extends AbstractController {
 		result.addObject("application", application);
 		result.addObject("comentarios", comentarios);
 
+		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
+		// pasarlo
+		result.addObject("VAT", 0.21);
 		return result;
 
 	}

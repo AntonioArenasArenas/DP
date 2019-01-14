@@ -449,9 +449,9 @@
 
 	<bean id="box14" class="domain.Box">
 
-		<property name="name" value="Box 14" />
+		<property name="name" value="INBOX" />
 
-		<property name="isDefault" value="False" />
+		<property name="isDefault" value="True" />
 
 		<property name="messages">
 
@@ -489,7 +489,19 @@
 
 	</bean>
 
+	<bean id="box17" class="domain.Box">
 
+		<property name="name" value="OUTBOX" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
 
 
 
@@ -1177,6 +1189,7 @@
 		<property name="boxes">
 			<list>
 				<ref bean="box9" />
+				<ref bean="box17" />
 			</list>
 		</property>
 
@@ -1467,7 +1480,7 @@
 
 	<bean id="task2" class="domain.Task">
 
-		<property name="customer" ref="customer1" />
+		<property name="customer" ref="customer3" />
 
 		<property name="complaints">
 			<list></list>
@@ -2082,9 +2095,27 @@
 			<list></list>
 		</property>
 		<property name="spamWords">
-			<list></list>
+			<list>
+				<value>Nigeria</value>
+				<value>sex</value>
+				<value>sexo</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>you’ve been selected</value>
+				<value>ha sido seleccionado</value>
+				<value>one million</value>
+				<value>un millón</value>	
+			</list>
 		</property>
-		<property name="vatPercentage" value="22%" />
+		<property name="makeCreditCards">
+			<list>
+				<value>VISA</value>
+				<value>MASTER</value>
+				<value>DINNERS</value>
+				<value>AMEX</value>	
+			</list>
+		</property>
+		<property name="vatPercentage" value="21%" />
 		<property name="cache" value="3" />
 		<property name="maxPrice" value="22" />
 	</bean>

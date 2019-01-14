@@ -1,14 +1,15 @@
 package services;
 
 import javax.transaction.Transactional;
+import java.util.Collection;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import repositories.SystemDataRepository;
 import domain.SystemData;
 
+import repositories.SystemDataRepository;
 
 @Service
 @Transactional
@@ -50,12 +51,17 @@ public class SystemDataService {
         
     }
     // Other business methods -------------------------------------------------
-
     public SystemData getSystemData(){
-    	
+        
         SystemData result;
         result = systemDataRepository.getSystemData();
         return result;
     }
+    
+   public Collection<SystemData> findAll(){
+	   Collection<SystemData> result;
+	   result = this.systemDataRepository.findAll();
+	   return result;
+   }
    
 }
