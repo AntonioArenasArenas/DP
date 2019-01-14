@@ -69,7 +69,6 @@ public class MessageService {
 		result.setSender(actor);
 		return result;
 	}
-	
 
 	public Message save(Message message) {
 		UserAccount userAccount;
@@ -92,14 +91,13 @@ public class MessageService {
 		boxService.save(outBox);
 		actorService.save(actor);
 
-		for( Actor a : recipients){
+		for (Actor a : recipients) {
 			Box InBox = boxService.findBoxByActor("INBOX", a.getId());
 			InBox.getMessages().add(result);
 			a.getReceivedMessages().add(result);
 			boxService.save(InBox);
 			actorService.save(a);
 		}
-	
 
 		return result;
 	}
@@ -108,63 +106,66 @@ public class MessageService {
 		Assert.notNull(message);
 		Assert.isTrue(message.getId() != 0);
 		Assert.isTrue(messageRepository.exists(message.getId()));
-	
+
 		UserAccount userAccount;
 		Actor logged;
 		userAccount = LoginService.getPrincipal();
 		logged = actorService.findByUserAccount(userAccount);
 		Box TrashBox = boxService.findBoxByActor("TRASHBOX", logged.getId());
-		
-		if( TrashBox.getMessages().contains(message)){
-			
-			Collection<Actor> actors = actorService.findAll();;
+
+		if (TrashBox.getMessages().contains(message)) {
+
+			Collection<Actor> actors = actorService.findAll();
+			;
 			Collection<Box> all = boxService.findAll();
-			
-			for(Box b: all){
-				if(b.getMessages().contains(message)){
+
+			for (Box b : all) {
+				if (b.getMessages().contains(message)) {
 					b.getMessages().remove(message);
 					boxService.save(b);
 				}
 			}
-				
-			for(Actor a: actors){
-				if(a.getSentMessages().contains(message)){
+
+			for (Actor a : actors) {
+				if (a.getSentMessages().contains(message)) {
 					a.getSentMessages().remove(message);
 					actorService.save(a);
 				}
-				if(a.getReceivedMessages().contains(message)){
+				if (a.getReceivedMessages().contains(message)) {
 					a.getReceivedMessages().remove(message);
 					actorService.save(a);
-					}
 				}
-			
+			}
+
 			messageRepository.delete(message);
-					
-			}else{
-				Collection<Box> loggedboxes = boxService.findBoxesByPrincipal();
-				for(Box b:loggedboxes){
-					if(b.getMessages().contains(message)){
-						b.getMessages().remove(message);
-						boxService.save(b);
-						TrashBox.getMessages().add(message);
-						boxService.save(TrashBox);
-					}
+
+		} else {
+			Collection<Box> loggedboxes = boxService.findBoxesByPrincipal();
+			for (Box b : loggedboxes) {
+				if (b.getMessages().contains(message)) {
+					b.getMessages().remove(message);
+					boxService.save(b);
+					TrashBox.getMessages().add(message);
+					boxService.save(TrashBox);
 				}
-			}	
+			}
+		}
 
 	}
-	
-	public void applicationMessage(Task task,Worker worker){
+
+	public void applicationMessage(Task task, Worker worker) {
 		Assert.notNull(task);
 		Assert.notNull(worker);
 		Actor logged = actorService.findByPrincipal();
 		Collection<Actor> recipients = new LinkedList<Actor>();
 		recipients.add(worker);
+		recipients.add(logged);
 		Assert.notNull(logged);
-		
+
 		Message message = this.createMessage();
-		message.setBody("Your application  of task:" + task.getTicker()+ "has been updated!" +
-						"Tu aplicación de la tarea" + task.getTicker()+ " ha sido actualizada!");
+		message.setBody("Your application  of task:" + task.getTicker()
+				+ "has been updated! " + " Tu aplicación de la tarea"
+				+ task.getTicker() + " ha sido actualizada!");
 		message.setPriority("HIGH");
 		message.setTags("Application");
 		message.setSubject("Application updated");
@@ -172,16 +173,7 @@ public class MessageService {
 		message.setRecipients(recipients);
 		Message saved = this.save(message);
 		Assert.notNull(saved);
-		
-		Box loggedInBox = boxService.findBoxByActor("INBOX", logged.getId());
-		Assert.notNull(loggedInBox);
-		loggedInBox.getMessages().add(saved);
-		boxService.save(loggedInBox);
-		Box workerInBox = boxService.findBoxByActor("INBOX", logged.getId());
-		Assert.notNull(workerInBox);
-		workerInBox.getMessages().add(saved);
-		boxService.save(workerInBox);
-		
+
 	}
 
 	public Collection<Message> findSentMessagesById() {
@@ -198,13 +190,10 @@ public class MessageService {
 
 		return messageRepository.getReceivedMessagesById(logged.getId());
 	}
-	
-	public Collection<Message> findMessagesByBoxId( Integer boxId ) {
-		
+
+	public Collection<Message> findMessagesByBoxId(Integer boxId) {
 
 		return messageRepository.getMessagesByBoxId(boxId);
 	}
-	
-	
 
 }

@@ -33,6 +33,9 @@ public class ApplicationService {
 	@Autowired
 	private CustomerService customerService;
 
+	@Autowired
+	private MessageService messageService;
+
 	// Constructors -----------------------------------------------------------
 
 	public ApplicationService() {
@@ -133,6 +136,9 @@ public class ApplicationService {
 		}
 
 		result = applicationRepository.save(application);
+		if (!application.getStatus().equals("PENDING")) {
+			messageService.applicationMessage(t, application.getWorker());
+		}
 
 		return result;
 	}
