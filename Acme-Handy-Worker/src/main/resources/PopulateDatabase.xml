@@ -1673,9 +1673,9 @@
 
 	<bean id="category3" class="domain.Category">
 
-		<property name="name" value="Tercera categoria" />
+		<property name="name" value="CATEGORY" />
 
-		<property name="nameEsp" value="Tercera categoria pero en español" />
+		<property name="nameEsp" value="Categoría" />
 
 		<property name="childrenCategories">
 			<list>

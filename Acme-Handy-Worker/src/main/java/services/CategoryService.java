@@ -12,18 +12,15 @@ import domain.Category;
 
 import repositories.CategoryRepository;
 
-
 @Service
 @Transactional
 public class CategoryService {
 
-
 	// Managed repository -----------------------------------------------------
 	@Autowired
-	private CategoryRepository		categoryRepository;
+	private CategoryRepository categoryRepository;
 
 	// Supporting services ----------------------------------------------------
-
 
 	// Constructors -----------------------------------------------------------
 
@@ -66,6 +63,33 @@ public class CategoryService {
 		Category result;
 
 		result = categoryRepository.save(category);
+
+		return result;
+	}
+
+	public Category saveSubCategory(Category parent, Category children) {
+
+		Assert.notNull(parent);
+
+		Assert.notNull(children);
+
+		Category result;
+
+		result = categoryRepository.save(children);
+
+		parent.getChildrenCategories().add(result);
+
+		categoryRepository.save(parent);
+
+		return result;
+
+	}
+
+	public Category getRootCategory() {
+
+		Category result;
+
+		result = categoryRepository.getRootCategory();
 
 		return result;
 	}

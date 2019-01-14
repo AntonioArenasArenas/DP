@@ -1,5 +1,7 @@
 package controllers.administrator;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,17 +11,18 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import controllers.AbstractController;
 
 import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
 import services.AdminService;
 import services.ApplicationService;
-import services.TaskService;
+import services.CategoryService;
+import controllers.AbstractController;
 import domain.Admin;
+import domain.Category;
 
 @Controller
 @RequestMapping("/admin")
@@ -33,6 +36,8 @@ public class AdminController extends AbstractController {
 	private ActorService actorService;
 	@Autowired
 	private ApplicationService applicationService;
+	@Autowired
+	private CategoryService categoryService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -75,6 +80,26 @@ public class AdminController extends AbstractController {
 		result.addObject("ratio", cantChange);
 
 		return result;
+	}
+
+	@RequestMapping(value = "/categoryList", method = RequestMethod.GET)
+	public ModelAndView categoryList(@RequestParam int categoryId) {
+		ModelAndView result;
+		Collection<Category> categories;
+		Category parent;
+
+		if (categoryId == 0) {
+			parent = categoryService.getRootCategory();
+
+		} else {
+			parent = categoryService.findOne(categoryId);
+		}
+		categories = parent.getChildrenCategories();
+		result = new ModelAndView("admin/categoryList");
+		result.addObject("categories", categories);
+		result.addObject("parentCategory", parent);
+		return result;
+
 	}
 
 	// Edit

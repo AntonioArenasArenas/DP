@@ -1,10 +1,10 @@
-
 package domain;
 
 import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
@@ -16,9 +16,9 @@ import org.hibernate.validator.constraints.NotBlank;
 @Access(AccessType.PROPERTY)
 public class Category extends DomainEntity {
 
-	private Collection<Category>	childrenCategories;
-	private String					name;
-	private String					nameEsp;
+	private Collection<Category> childrenCategories;
+	private String name;
+	private String nameEsp;
 
 	@Valid
 	@NotNull
@@ -26,8 +26,8 @@ public class Category extends DomainEntity {
 	public Collection<Category> getChildrenCategories() {
 		return this.childrenCategories;
 	}
-
-
+	
+	@Column(unique = true)
 	@NotBlank
 	public String getName() {
 		return this.name;
@@ -37,6 +37,7 @@ public class Category extends DomainEntity {
 		this.name = name;
 	}
 
+	@Column(unique = true)
 	@NotBlank
 	public String getNameEsp() {
 		return this.nameEsp;
@@ -46,10 +47,9 @@ public class Category extends DomainEntity {
 		this.nameEsp = nameEsp;
 	}
 
-	public void setChildrenCategories(final Collection<Category> childrenCategories) {
+	public void setChildrenCategories(
+			final Collection<Category> childrenCategories) {
 		this.childrenCategories = childrenCategories;
 	}
-
-	
 
 }

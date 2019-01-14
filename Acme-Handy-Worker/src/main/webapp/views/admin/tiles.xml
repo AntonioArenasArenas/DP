@@ -29,8 +29,12 @@
 
 	<definition name="admin/statistics" extends="master.page">
 		<put-attribute name="title" value="Statistics" />
-		<put-attribute name="body"
-			value="/views/admin/statistics.jsp" />
+		<put-attribute name="body" value="/views/admin/statistics.jsp" />
+	</definition>
+
+	<definition name="admin/categoryList" extends="master.page">
+		<put-attribute name="title" value="Category list" />
+		<put-attribute name="body" value="/views/admin/categoryList.jsp" />
 	</definition>
 
 
