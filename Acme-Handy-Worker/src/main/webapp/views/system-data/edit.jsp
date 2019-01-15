@@ -50,8 +50,8 @@
 		<form:errors cssClass="error" path="spamWords" />
 		<br/>
 		
-		<form:label path="creditCards">
-			<spring:message code="systemData.creditCards" />
+		<form:label path="makeCreditCards">
+			<spring:message code="systemData.makeCreditCards" />
 		</form:label>
 		<form:textarea path="spamWords" />
 		<form:errors cssClass="error" path="spamWords" />

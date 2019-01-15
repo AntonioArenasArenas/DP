@@ -2104,7 +2104,7 @@
 				<value>you’ve been selected</value>
 				<value>ha sido seleccionado</value>
 				<value>one million</value>
-				<value>un millón</value>	
+				<value>un millón</value>
 			</list>
 		</property>
 		<property name="makeCreditCards">
@@ -2112,7 +2112,7 @@
 				<value>VISA</value>
 				<value>MASTER</value>
 				<value>DINNERS</value>
-				<value>AMEX</value>	
+				<value>AMEX</value>
 			</list>
 		</property>
 		<property name="vatPercentage" value="21%" />
