@@ -1797,16 +1797,19 @@
 			<list></list>
 		</property>
 
-		<property name="report">
-			<ref bean="report1"></ref>
-		</property>
+		<property name="report" ref="report1" />
 
 
 		<property name="task" ref="task2" />
 
-
-
 	</bean>
+	<!-- private Report				report;
+	private String				ticker;
+	private Date				moment;
+	private String				description;
+	private Collection<String>	attachments;
+	private Referee				referee; 
+	private Task 				task;-->
 
 
 
@@ -1824,9 +1827,7 @@
 			<list></list>
 		</property>
 
-		<property name="report">
-			<ref bean="report2"></ref>
-		</property>
+		<property name="report" ref="report2" />
 
 		<property name="task" ref="task3" />
 
