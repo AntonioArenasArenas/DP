@@ -31,7 +31,7 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="WORKER" />
 				</bean>
 			</list>
 		</property>
@@ -83,9 +83,6 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
 					<property name="authority" value="CUSTOMER" />
 				</bean>
 			</list>
@@ -112,9 +109,6 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
 					<property name="authority" value="CUSTOMER" />
 				</bean>
 			</list>
@@ -128,10 +122,7 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="REFEREE" />
 				</bean>
 			</list>
 		</property>
@@ -144,10 +135,7 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="REFEREE" />
 				</bean>
 			</list>
 		</property>
@@ -173,10 +161,7 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
+					<property name="authority" value="REFEREE" />
 				</bean>
 			</list>
 		</property>
@@ -206,9 +191,6 @@
 			<list>
 				<bean class="security.Authority">
 					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
 				</bean>
 			</list>
 		</property>
@@ -1313,17 +1295,12 @@
 			<list></list>
 
 		</property>
+		
+		<property name="complaints">
 
-		<property name="reports">
-
-			<list></list>
+			<list><ref bean="complaint1" /></list>
 
 		</property>
-
-
-
-
-
 
 
 	</bean>
@@ -1332,11 +1309,6 @@
 
 	<bean id="referee2" class="domain.Referee">
 
-		<property name="reports">
-			<list>
-				<ref bean="report1" />
-			</list>
-		</property>
 
 		<property name="name" value="Antonio" />
 
@@ -1374,6 +1346,11 @@
 			<list></list>
 		</property>
 
+		<property name="complaints">
+
+			<list><ref bean="complaint2" /></list>
+
+		</property>
 
 
 
@@ -1384,11 +1361,6 @@
 
 	<bean id="referee3" class="domain.Referee">
 
-		<property name="reports">
-			<list>
-				<ref bean="report2" />
-			</list>
-		</property>
 
 		<property name="name" value="Antonio" />
 
@@ -1406,7 +1378,7 @@
 
 		<property name="suspicious" value="False" />
 
-		<property name="userAccount" ref="userAccount1" />
+		<property name="userAccount" ref="userAccount12" />
 
 		<property name="boxes">
 			<list>
@@ -1486,7 +1458,7 @@
 		<property name="customer" ref="customer3" />
 
 		<property name="complaints">
-			<list></list>
+			<list><ref bean="complaint2" /></list>
 		</property>
 
 		<property name="phases">
@@ -1531,7 +1503,6 @@
 
 		<property name="complaints">
 			<list>
-				<ref bean="complaint2" />
 				<ref bean="complaint3" />
 			</list>
 		</property>
@@ -1793,6 +1764,8 @@
 
 	<bean id="complaint1" class="domain.Complaint">
 
+		<property name="referee" ref="referee1" />
+		
 		<property name="ticker" value="181112-KJY6KI" />
 
 		<property name="moment" value="2016/12/22 09:00" />
@@ -1803,17 +1776,16 @@
 		<property name="attachments">
 			<list></list>
 		</property>
-
-
-
-
-
+		
+		<property name="task" ref="task1" />
+		
 	</bean>
 
 
 
 	<bean id="complaint2" class="domain.Complaint">
 
+		<property name="referee" ref="referee2" />
 		<property name="ticker" value="181112-KHF3PL" />
 
 		<property name="moment" value="2016/12/10 09:00" />
@@ -1830,6 +1802,7 @@
 		</property>
 
 
+		<property name="task" ref="task2" />
 
 
 
@@ -1839,6 +1812,7 @@
 
 	<bean id="complaint3" class="domain.Complaint">
 
+		
 		<property name="ticker" value="181112-HHY6AS" />
 
 		<property name="moment" value="2016/12/22 21:00" />
@@ -1854,7 +1828,7 @@
 			<ref bean="report2"></ref>
 		</property>
 
-
+		<property name="task" ref="task3" />
 
 
 
@@ -1869,8 +1843,6 @@
 	<bean id="report1" class="domain.Report">
 
 		<property name="complaint" ref="complaint2" />
-
-		<property name="referee" ref="referee2" />
 
 		<property name="notes">
 			<list></list>
@@ -1895,8 +1867,6 @@
 	<bean id="report2" class="domain.Report">
 
 		<property name="complaint" ref="complaint3" />
-
-		<property name="referee" ref="referee3" />
 
 		<property name="notes">
 			<list>

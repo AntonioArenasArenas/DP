@@ -14,18 +14,17 @@ import javax.validation.constraints.NotNull;
 @Access(AccessType.PROPERTY)
 public class Referee extends Actor {
 
-	private Collection<Report>	reports;
+	private Collection<Complaint> complaints;
 
 
 	@OneToMany(mappedBy = "referee")
 	@Valid
-	@NotNull
-	public Collection<Report> getReports() {
-		return this.reports;
+	public Collection<Complaint> getComplaints() {
+		return this.complaints;
 	}
 
-	public void setReports(final Collection<Report> reports) {
-		this.reports = reports;
+	public void setComplaints(final Collection<Complaint> complaints) {
+		this.complaints = complaints;
 	}
 
 }
