@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.PhaseRepository;
-import domain.Application;
 import domain.Phase;
 import domain.Task;
 import domain.Worker;
@@ -26,9 +25,6 @@ public class PhaseService {
 	
 	@Autowired
 	private ApplicationService applicationService;
-	
-	@Autowired
-	private TaskService taskService;
 
 	public Collection<Phase> findAll() {
 
@@ -71,6 +67,10 @@ public class PhaseService {
 		
 		Assert.isTrue(phase.getStartDate().before(phase.getEndDate()));
 		
+		Assert.isTrue(phase.getStartDate().after(task.getStartDate()) || phase.getStartDate().equals(task.getStartDate()));
+		
+		Assert.isTrue(phase.getEndDate().before(task.getEndDate()) || phase.getEndDate().equals(task.getEndDate()));
+		
 		Phase result;
 
 		result = phaseRepository.save(phase);
@@ -81,5 +81,19 @@ public class PhaseService {
 		}
 
 		return result;
+	}
+	
+	public void delete(Phase phase) {
+		Assert.notNull(phase);
+		Task task = getTaskByPhaseId(phase.getId());
+		task.getPhases().remove(phase);
+//		taskService.save(task);
+		phaseRepository.delete(phase);
+	}
+	
+	// Other business methods
+	
+	public Task getTaskByPhaseId(int phaseId) {
+		return phaseRepository.getTaskByPhaseId(phaseId);
 	}
 }

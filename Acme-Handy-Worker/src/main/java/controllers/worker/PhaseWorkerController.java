@@ -74,11 +74,6 @@ public class PhaseWorkerController extends AbstractController {
 		} catch (Exception e) {
 			return result = new ModelAndView("redirect:list.do");
 		}
-//		Worker worker = workerService.findByPrincipal();
-//
-//		if (!phase.getWorker().equals(worker)) {
-//			return result = new ModelAndView("redirect:list.do");
-//		}
 
 		result = new ModelAndView("phase/show");
 		result.addObject("phase", phase);
@@ -133,6 +128,20 @@ public class PhaseWorkerController extends AbstractController {
 
 		return result;
 
+	}
+	
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
+	public ModelAndView delete(final Phase phase, @RequestParam int taskId, final BindingResult binding) {
+		ModelAndView result;
+
+		try {
+			this.phaseService.delete(phase);
+			result = new ModelAndView("redirect:list.do?taskId=" + taskId);
+		} catch (final Throwable oops) {
+			result = this.createEditModelAndView(phase, "phase.commit.error");
+		}
+
+		return result;
 	}
 
 	protected ModelAndView createEditModelAndView(Phase phase) {
