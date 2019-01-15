@@ -34,7 +34,7 @@
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
-					<property name="authority" value="WORKER" />
+					<property name="authority" value="CUSTOMER" />
 				</bean>
 			</list>
 		</property>
@@ -1881,7 +1881,7 @@
 
 		<property name="moment" value="2017/07/10 01:41" />
 
-		<property name="description" value="Descripcion de report 1" />
+		<property name="description" value="Descripcion de report 2" />
 
 		<property name="attachments">
 			<list></list>

@@ -34,6 +34,26 @@
 	</display:column>
 	</security:authorize>
 	
+	<security:authorize access="hasRole('CUSTOMER')">
+
+		
+		<display:column>
+			<a href="complaint/customer/show.do?id=${row.id}">
+				<spring:message	code="complaint.show" />
+			</a>
+	</display:column>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('WORKER')">
+
+		
+		<display:column>
+			<a href="complaint/worker/show.do?id=${row.id}">
+				<spring:message	code="complaint.show" />
+			</a>
+	</display:column>
+	</security:authorize>
+	
 	<display:column property="ticker" titleKey="complaint.ticker" sortable="true" />
 	<display:column property="moment" titleKey="complaint.moment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
 	

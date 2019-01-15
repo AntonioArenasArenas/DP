@@ -9,42 +9,19 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<%-- <b><spring:message code="task.ticker" />:</b>
-<jstl:out value="${task.ticker}"/>
+
+ <b><spring:message code="report.moment" />:</b>
+<jstl:out value="${report.moment}"/>
 <br />
 
-<b><spring:message code="task.moment" />:</b>
-<jstl:out value="${task.moment}"/>
+<b><spring:message code="report.description" />:</b>
+<jstl:out value="${report.description}"/>
 <br />
 
-<b><spring:message code="task.description" />:</b>
-<jstl:out value="${task.description}"/>
+<b><spring:message code="report.attachments" />:</b>
+<jstl:out value="${report.attachments}"/>
 <br />
 
-<b><spring:message code="task.startDate" />:</b>
-<jstl:out value="${task.startDate}"/>
+<b><spring:message code="report.finalMode" />:</b>
+<jstl:out value="${report.finalMode}"/>
 <br />
-
-<b><spring:message code="task.endDate" />:</b>
-<jstl:out value="${task.endDate}"/>
-<br />
-
-<b><spring:message code="task.address" />:</b>
-<jstl:out value="${task.address}"/>
-<br />
-
-<b><spring:message code="task.category" />:</b>
-<jstl:out value="${task.category.name}"/>
-<br />
-
-<b><spring:message code="task.warranty" />:</b>
-<jstl:out value="${task.warranty.title}"/>
-<br />
-
-<b><spring:message code="task.maxPrice" />:</b>
-<jstl:out value="${task.maxPrice}"/>
-<br />
-
-<b><spring:message code="task.comments" />:</b>
-<jstl:out value="${task.comments}"/>
-<br /> --%>

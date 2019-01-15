@@ -25,24 +25,6 @@
 <jstl:out value="${complaint.attachments}"/>
 <br />
 
-<%-- <b><spring:message code="complaint.referee" />:</b>
-<jstl:out value="${complaint.referee}"/>
-<br />
 
- <b><spring:message code="report.moment" />:</b>
-<jstl:out value="${report.moment}"/>
-<br />
-
-<b><spring:message code="report.description" />:</b>
-<jstl:out value="${report.description}"/>
-<br />
-
-<b><spring:message code="report.attachments" />:</b>
-<jstl:out value="${report.attachments}"/>
-<br />
-
-<b><spring:message code="report.finalMode" />:</b>
-<jstl:out value="${report.finalMode}"/>
-<br />  --%>
 
 

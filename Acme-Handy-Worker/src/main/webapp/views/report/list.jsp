@@ -20,37 +20,32 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <!-- Listing grid -->
-<p><spring:message code="box.list" /></p>
+<p><spring:message code="report.list" /></p>
 
-<%-- <display:table
-	pagesize="5" name="boxes" id="row"
-	requestURI="box/list.do" >
+ <display:table pagesize="5" class="displaytag" name="reports" requestURI="${requestURI}" id="row">
 	
 	
-	<display:column >
-		<strong>
-			<a href="message/list.do?boxId=${row.id}" >
-				<jstl:out value="${row.name}" />
+	<security:authorize access="hasRole('CUSTOMER')">
+
+		
+		<display:column>
+			<a href="note/customer/create.do?id=${row.id}">
+				<spring:message	code="report.create.note" />
 			</a>
-		</strong>
-		 <br/>	
 	</display:column>
-	
-	<display:column >
-	<jstl:if test="${!row.isDefault}">
-			<a href="box/delete.do?boxId=${row.id}" >
-				<spring:message code="box.delete" />
+	<display:column>
+			<a href="note/customer/edit.do?id=${row.id}">
+				<spring:message	code="report.edit.note" />
 			</a>
-		</jstl:if>
 	</display:column>
+	</security:authorize>
 	
-	<display:column >
-	<jstl:if test="${!row.isDefault}">
-			<a href="box/edit.do?boxId=${row.id}" >
-				<spring:message code="box.edit" />
-			</a>
-		</jstl:if>
-	</display:column>
+	
+	<display:column property="description" titleKey="report.description" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
+	<display:column property="moment" titleKey="report.moment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
+	
+	
+	
 	
 </display:table>
- --%>
+

@@ -40,6 +40,8 @@
 					<li><a href="customer/edit.do"><spring:message code="master.page.personal.data" /></a></li>
 					<li><a href="task/customer/list.do"><spring:message code="master.page.tasks" /></a></li>
 					<li><a href="application/customer/list.do"><spring:message code="master.page.applications" /></a></li>
+					<li><a href="complaint/customer/list.do"><spring:message code="master.page.complaints" /></a></li>
+					<li><a href="report/customer/list.do"><spring:message code="master.page.reports" /></a></li>
 
 				</ul>
 			</li>
@@ -53,6 +55,7 @@
 					<li><a href="worker/edit.do"><spring:message code="master.page.personal.data" /></a></li>
 					<li><a href="task/worker/list.do"><spring:message code="master.page.tasks" /></a></li>
 					<li><a href="application/worker/list.do"><spring:message code="master.page.applications" /></a></li>
+					<li><a href="complaint/worker/list.do"><spring:message code="master.page.complaints" /></a></li>
 
 				</ul>
 			</li>
