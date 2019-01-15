@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.ComplaintRepository;
+import domain.Actor;
 import domain.Complaint;
 import domain.Customer;
 import domain.Referee;
@@ -31,6 +32,9 @@ public class ComplaintService {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private ActorService actorService;
 
 	@Autowired
 	private TaskService taskService;
@@ -66,37 +70,40 @@ public class ComplaintService {
 		return result;
 	}
 
-	public Complaint createComplaint(Task task) {
+	public Complaint createComplaint(final int taskId) {
 
+		Complaint result = new Complaint();
+		Task task = new Task();
+		Date moment;
+		task = taskService.findOne(taskId);
+		
 		Customer customer = customerService.findByPrincipal();
 		Assert.isTrue(taskService.getTasksByCustomerId(customer.getId()).contains(task));
 
-		Complaint result;
-		Date moment;
-
 		moment = new Date(System.currentTimeMillis() - 1);
-
-		result = new Complaint();
-
+		
+		
 		result.setTicker(taskService.tickerGenerator());
 		result.setMoment(moment);
 
 		return result;
 	}
 
-	public Complaint save(Complaint complaint, Task task) {
+	public Complaint save(final Complaint complaint) {
 
-		Customer customer = customerService.findByPrincipal();
-		Assert.isTrue(taskService.getTasksByCustomerId(customer.getId()).contains(task));
-
-		Assert.notNull(complaint);
 		Complaint result;
-
+		result = complaint;
+		Actor actor = actorService.findByPrincipal();
+		if (complaint.getId() == 0 && actor instanceof Customer) {  //Solo un customer puede crear complaints
+			//result.getTask().getComplaints().add(result);
+			this.complaintRepository.flush();
+			Task task = result.getTask();
+			this.taskService.save(task);
+			task.getComplaints().add(complaint);
+		}
+		
 		result = complaintRepository.save(complaint);
-
-		task.getComplaints().add(result);
-
-		taskService.save(task);
+		Assert.notNull(complaint);
 
 		return result;
 	}
@@ -136,11 +143,6 @@ public class ComplaintService {
 		return complaintRepository.getComplaintsWithNoReferee();
 
 	}
-
-	// Currently, according to our UML, the only way to assign a referee to a
-	// complaint is creating a report. As that is the purpose of the methods
-	// createReport and save in the reportService, I didn't create the method
-	// to fulfill the requirement 36.1b here.
 
 
 	public Collection<Complaint> getSelfAssignedComplaints() {

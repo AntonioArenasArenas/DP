@@ -38,7 +38,14 @@
 
 		<value>/views/warranty/tiles.xml</value>
 		<value>/views/task/tiles.xml</value>
+
+
+		<value>/views/report/tiles.xml</value>
+		<value>/views/complaint/tiles.xml</value>
+		<value>/views/note/tiles.xml</value>
+
 		<value>/views/phase/tiles.xml</value>
+
 
 	</util:list>
 

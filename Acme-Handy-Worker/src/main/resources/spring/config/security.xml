@@ -95,6 +95,33 @@
 		<security:intercept-url pattern="/phase/worker/show.do" access="hasRole('WORKER')" />
 
 		<security:intercept-url pattern="/customer/worker/show.do" access="hasRole('WORKER')" />
+		
+		<security:intercept-url pattern="/complaint/referee/list.do" access="hasRole('REFEREE')" />
+		<security:intercept-url pattern="/complaint/referee/show.do" access="hasRole('REFEREE')" />
+		<security:intercept-url pattern="/complaint/referee/edit.do" access="hasRole('REFEREE')" />
+		
+		<security:intercept-url pattern="/report/referee/create.do" access="hasRole('REFEREE')" />
+		
+		<security:intercept-url pattern="/note/referee/create.do" access="hasRole('REFEREE')" />
+		<security:intercept-url pattern="/note/referee/edit.do" access="hasRole('REFEREE')" />
+		
+		<security:intercept-url pattern="/complaint/customer/list.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/complaint/customer/show.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/complaint/customer/create.do" access="hasRole('CUSTOMER')" />
+		
+		<security:intercept-url pattern="/report/customer/list.do" access="hasRole('CUSTOMER')" />
+		
+		<security:intercept-url pattern="/note/customer/create.do" access="hasRole('CUSTOMER')" />
+		<security:intercept-url pattern="/note/customer/edit.do" access="hasRole('CUSTOMER')" />
+		
+		<security:intercept-url pattern="/complaint/worker/list.do" access="hasRole('WORKER')" />
+		<security:intercept-url pattern="/complaint/worker/show.do" access="hasRole('WORKER')" />
+		
+		<security:intercept-url pattern="/report/worker/list.do" access="hasRole('WORKER')" />
+		
+		<security:intercept-url pattern="/note/worker/create.do" access="hasRole('WORKER')" />
+		<security:intercept-url pattern="/note/worker/edit.do" access="hasRole('WORKER')" />
+		
 
 		<security:intercept-url pattern="/**" access="hasRole('NONE')" />
 

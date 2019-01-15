@@ -2,6 +2,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 import javax.transaction.Transactional;
 
@@ -13,6 +14,7 @@ import repositories.ReportRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Complaint;
+import domain.Note;
 import domain.Referee;
 import domain.Report;
 import domain.Customer;
@@ -31,6 +33,7 @@ public class ReportService {
 	
 	@Autowired
 	private CustomerService customerService;
+	
 
 	// Constructors -----------------------------------------------------------
 
@@ -61,8 +64,7 @@ public class ReportService {
 	}
 
 	public Report createReport(Complaint complaint) {
-
-		Referee referee = refereeService.findByPrincipal();
+		 Referee referee = refereeService.findByPrincipal();
 
 		Report result;
 		Date moment;
@@ -71,29 +73,24 @@ public class ReportService {
 
 		result = new Report();
 		
+		result.setNotes(new HashSet<Note>());
 		result.setMoment(moment);
 		result.setFinalReport(false);
 		result.setComplaint(complaint);
-		result.setReferee(referee);
+		result.getComplaint().setReferee(referee);
 
 		return result;
 	}
 
 	public Report save(Report report) {
-		
+		Report result = new Report();
 		UserAccount userAccount;
 
 		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(report.getReferee().getUserAccount()
-				.equals(userAccount));
-
+		if (report.getComplaint().getReferee().getUserAccount().equals(userAccount) && report.isFinalReport() == false){
+			result = reportRepository.save(report);
+		}
 		Assert.notNull(report);
-		
-		Assert.isTrue(report.isFinalReport() == false);
-
-		Report result;
-
-		result = reportRepository.save(report);
 
 		return result;
 	}
@@ -103,7 +100,7 @@ public class ReportService {
 		UserAccount userAccount;
 
 		userAccount = LoginService.getPrincipal();
-		Assert.isTrue(report.getReferee().getUserAccount()
+		Assert.isTrue(report.getComplaint().getReferee().getUserAccount()
 				.equals(userAccount));
 
 		Assert.notNull(report);
