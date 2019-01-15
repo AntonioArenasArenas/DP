@@ -88,6 +88,11 @@
 
 		<security:intercept-url pattern="/task/worker/list.do" access="hasRole('WORKER')" />
 		<security:intercept-url pattern="/task/worker/show.do" access="hasRole('WORKER')" />
+		
+		<security:intercept-url pattern="/phase/worker/list.do" access="hasRole('WORKER')" />
+		<security:intercept-url pattern="/phase/worker/create.do" access="hasRole('WORKER')" />
+		<security:intercept-url pattern="/phase/worker/edit.do" access="hasRole('WORKER')" />
+		<security:intercept-url pattern="/phase/worker/show.do" access="hasRole('WORKER')" />
 
 		<security:intercept-url pattern="/customer/worker/show.do" access="hasRole('WORKER')" />
 		

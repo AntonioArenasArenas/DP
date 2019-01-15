@@ -124,6 +124,10 @@ public class TaskService {
 
 	}
 	
+	public Collection<Task> getActiveTasksByCustomerId(Integer customerId) {
+		return taskRepository.getActiveTasksByCustomerId(customerId);
+	}
+	
 //	public Double[] tasksPerUserStatistics(){
 //		
 //		return taskRepository.tasksPerUserStatistics();

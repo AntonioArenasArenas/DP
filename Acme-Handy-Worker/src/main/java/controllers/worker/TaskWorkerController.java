@@ -32,11 +32,16 @@ public class TaskWorkerController extends AbstractController {
 	// Listing ----------------------------------------------------------------
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView list() {
+	public ModelAndView list(@RequestParam(defaultValue = "0", required=false) final Integer customerId) {
 		ModelAndView result;
 		Collection<Task> tasks;
 
-		tasks = this.taskService.getActiveTasks();
+		
+		if(customerId != 0) {
+			tasks = this.taskService.getActiveTasksByCustomerId(customerId);
+		} else {
+			tasks = this.taskService.getActiveTasks();
+		}
 		result = new ModelAndView("task/list");
 		result.addObject("requestURI", "task/worker/list.do");
 		result.addObject("tasks", tasks);
@@ -54,7 +59,7 @@ public class TaskWorkerController extends AbstractController {
 		task = this.taskService.findOne(id);
 		Assert.notNull(task);
 		result = this.showModelAndView(task);
-
+		
 		return result;
 	}
 
