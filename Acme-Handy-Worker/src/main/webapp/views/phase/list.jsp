@@ -27,9 +27,7 @@
 	
 </display:table>
 
-<jstl:if test="${showCreateButton}">
-	<br />
-	<input type="button" name="create"
-			value="<spring:message code="phase.create" />"
-			onclick="javascript: relativeRedir('phase/worker/create.do?taskId=${param['taskId']}');" />
-</jstl:if>
+<br />
+<input type="button" name="create"
+		value="<spring:message code="phase.create" />"
+		onclick="javascript: relativeRedir('phase/worker/create.do?taskId=${param['taskId']}');" />

@@ -39,14 +39,18 @@
 			</a>
 		</display:column>
 		<display:column>
-			<a href="application/worker/create.do?taskId=${row.id}">
-				<spring:message code="task.createApplication" />
-			</a>
+			<jstl:if test="${!tasksAlreadyApplied.contains(row)}">
+				<a href="application/worker/create.do?taskId=${row.id}">
+					<spring:message code="task.createApplication" />
+				</a>
+			</jstl:if>
 		</display:column>
 		<display:column>
-			<a href="phase/worker/list.do?taskId=${row.id}">
-				<spring:message code="task.listPhases" />
-			</a>
+			<jstl:if test="${acceptedTasks.contains(row)}">
+				<a href="phase/worker/list.do?taskId=${row.id}">
+					<spring:message code="task.listPhases" />
+				</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 	
