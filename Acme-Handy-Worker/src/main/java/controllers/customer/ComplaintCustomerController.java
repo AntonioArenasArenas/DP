@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ComplaintService;
-import services.RefereeService;
+import services.TaskService;
 import controllers.AbstractController;
 import domain.Complaint;
 
@@ -25,7 +25,8 @@ public class ComplaintCustomerController extends AbstractController {
 private ComplaintService	complaintService;
 
 @Autowired
-private RefereeService		refereeService;
+private TaskService	taskService;
+
 
 
 //Constructor -------------------------------------------------------------
@@ -50,20 +51,20 @@ public ComplaintCustomerController() {
 		return result;
 	}
 
-/*	// Creation ---------------------------------------------------------------
+	// Creation ---------------------------------------------------------------
 
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create() {
+	public ModelAndView create(@RequestParam int taskId) {
 		ModelAndView result;
-		Task task;
+		Complaint complaint;
 
-		task = this.taskService.create();
-		result = this.createEditModelAndView(task);
+		complaint = this.complaintService.createComplaint(taskService.findOne(taskId)); //TODO
+		result = this.createEditModelAndView(complaint);
 
 		return result;
 	}
 
-	// Edition ----------------------------------------------------------------
+	/*	// Edition ----------------------------------------------------------------
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit(@RequestParam final int id) {
@@ -124,30 +125,24 @@ public ComplaintCustomerController() {
 
 	// Ancillary methods ------------------------------------------------------
 
-/*	protected ModelAndView createEditModelAndView(final Task task) {
+	protected ModelAndView createEditModelAndView(final Complaint complaint) {
 		ModelAndView result;
 
-		result = this.createEditModelAndView(task, null);
+		result = this.createEditModelAndView(complaint, null);
 
 		return result;
 	}
 
-	protected ModelAndView createEditModelAndView(final Task task, final String message) {
+	protected ModelAndView createEditModelAndView(final Complaint complaint, final String message) {
 		ModelAndView result;
-		if(task.getId() == 0) {
-			result = new ModelAndView("task/create");
-		} else {
-			result = new ModelAndView("task/edit");
-		}
-		Collection<Warranty> warranties = this.warrantyService.getFinalWarranties();
-		Collection<Category> categories = this.categoryService.findAll();
-		result.addObject("warranties", warranties);
-		result.addObject("categories", categories);
-		result.addObject("task", task);
+		
+		result = new ModelAndView("complaint/create");
+		result.addObject("complaint", complaint);
 		result.addObject("message", message);
 
+
 		return result;
-	} */
+	} 
 	
 	protected ModelAndView showModelAndView(final Complaint complaint){
 		ModelAndView result;

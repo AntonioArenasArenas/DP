@@ -73,8 +73,7 @@
 		<bean class="converters.StringToReportConverter" />
 		<bean class="converters.NoteToStringConverter" />
 		<bean class="converters.StringToNoteConverter" />
-		<bean class="converters.ComplaintToStringConverter" />
-		<bean class="converters.StringToComplaintConverter" />
+		
 
 
 

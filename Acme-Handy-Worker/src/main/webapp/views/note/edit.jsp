@@ -10,37 +10,74 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<form:form action="box/edit.do" modelAttribute="box">
+<form:form action="note/edit.do" modelAttribute="note">
 
-	<%-- <form:hidden path="id" />
+	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="messages" />
-	<form:hidden path="isDefault" />
 	
 	
 	
-	<form:label path="name">
-		<spring:message code="box.name" />:
+	
+	<form:label path="moment">
+		<spring:message code="note.moment" />:
 	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
+	<form:input path="moment" />
+	<form:errors cssClass="error" path="moment" />
 	<br />
+
+	<security:authorize access="hasRole('WORKER')">
+	<form:label path="workerComment">
+		<spring:message code="note.workerComment" />:
+	</form:label>
+	<form:textarea path="workerComment" />
+	<form:errors cssClass="error" path="workerComment" />
+	<br />
+	</security:authorize>
 	
-
-
-
-
-	<input type="submit" name="save"
-		value="<spring:message code="box.save" />" />&nbsp; 
-	<jstl:if test="${box.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="box.delete" />"
-			onclick="return confirm('<spring:message code="box.confirm.delete" />')" />&nbsp;
-	</jstl:if>
-	<input type="button" name="cancel"
-		value="<spring:message code="box.cancel" />"
-		onclick="javascript: relativeRedir('box/list.do');" />
+	<security:authorize access="hasRole('CUSTOMER')">
+	<form:label path="customerComment">
+		<spring:message code="customerComment" />:
+	</form:label>
+	<form:textarea path="customerComment" />
+	<form:errors cssClass="error" path="customerComment" />
 	<br />
- --%>
+	</security:authorize>
+	
+	<security:authorize access="hasRole('REFEREE')">
+	<form:label path="refereeComment">
+		<spring:message code="refereeComment" />:
+	</form:label>
+	<form:textarea path="refereeComment" />
+	<form:errors cssClass="error" path="refereeComment" />
+	<br />
+	</security:authorize>
 
-</form:form>
+
+	
+	<input type="button" name="create"
+		value="<spring:message code="report.create" />" />&nbsp; 
+		
+	
+		
+	
+	<security:authorize access="hasRole('CUSTOMER')">
+	<input type="button" name="cancel"
+		value="<spring:message code="report.cancel" />"
+		onclick="javascript: relativeRedir('report/customer/list.do');" />
+	
+	</security:authorize>
+	
+	<security:authorize access="hasRole('REFEREE')">
+	<input type="button" name="cancel"
+		value="<spring:message code="report.cancel" />"
+		onclick="javascript: relativeRedir('report/referee/list.do');" />
+	
+	</security:authorize>
+	
+	<security:authorize access="hasRole('WORKER')">
+	<input type="button" name="cancel"
+		value="<spring:message code="report.cancel" />"
+		onclick="javascript: relativeRedir('report/worker/list.do');" />
+	
+	</security:authorize>
+	</form:form>

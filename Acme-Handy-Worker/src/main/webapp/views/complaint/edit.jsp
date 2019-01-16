@@ -10,40 +10,36 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<form:form action="box/edit.do" modelAttribute="box">
+<form:form action="complaint/edit.do" modelAttribute="complaint">
 
 
-	<form:label path="enDesarrollo" value="En desarrollo" />:
-	
-	<%-- <form:hidden path="id" />
+
+	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="messages" />
-	<form:hidden path="isDefault" />
-	
-	
-	
-	<form:label path="name">
-		<spring:message code="box.name" />:
+	<form:hidden path="moment" />
+	<form:hidden path="ticker" />
+	<form:hidden path="fixUpTask" />
+	<form:hidden path="customer" />
+
+	<form:label path="description">
+		<spring:message code="complaint.description" />:
 	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
+	<form:input path="description" />
+	<form:errors cssClass="error" path="description" />
+	<br />
+
+
+	<form:label path="attachments">
+		<spring:message code="complaint.attachments" />:
+	</form:label>
+	<form:textarea path="attachments" />
+	<form:errors cssClass="error" path="attachments" />
 	<br />
 	
-
-
-
-
 	<input type="submit" name="save"
-		value="<spring:message code="box.save" />" />&nbsp; 
-	<jstl:if test="${box.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="box.delete" />"
-			onclick="return confirm('<spring:message code="box.confirm.delete" />')" />&nbsp;
-	</jstl:if>
-	<input type="button" name="cancel"
-		value="<spring:message code="box.cancel" />"
-		onclick="javascript: relativeRedir('box/list.do');" />
-	<br />
- --%>
+		value="<spring:message code="complaint.save" />" />
+	<spring:message code="complaint.cancel" var="cancel"/>
+	<input type="button" name="cancel" value="${cancel}" onclick="javascript:relativeRedir('complaint/customer/list.do?customerId=${customerId}');" />
 
+	
 </form:form>

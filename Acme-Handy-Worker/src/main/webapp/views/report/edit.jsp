@@ -10,37 +10,70 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 
-<form:form action="box/edit.do" modelAttribute="box">
+<form:form action="report/edit.do" modelAttribute="report">
 
-	<%-- <form:hidden path="id" />
+	<form:hidden path="id" />
 	<form:hidden path="version" />
-	<form:hidden path="messages" />
-	<form:hidden path="isDefault" />
 	
 	
 	
-	<form:label path="name">
-		<spring:message code="box.name" />:
+	
+	<form:label path="moment">
+		<spring:message code="report.moment" />:
 	</form:label>
-	<form:input path="name" />
-	<form:errors cssClass="error" path="name" />
+	<form:input path="moment" />
+	<form:errors cssClass="error" path="moment" />
+	<br />
+
+	<form:label path="description">
+		<spring:message code="report.description" />:
+	</form:label>
+	<form:textarea path="description" />
+	<form:errors cssClass="error" path="description" />
 	<br />
 	
-
-
-
-
-	<input type="submit" name="save"
-		value="<spring:message code="box.save" />" />&nbsp; 
-	<jstl:if test="${box.id != 0}">
-		<input type="submit" name="delete"
-			value="<spring:message code="box.delete" />"
-			onclick="return confirm('<spring:message code="box.confirm.delete" />')" />&nbsp;
-	</jstl:if>
-	<input type="button" name="cancel"
-		value="<spring:message code="box.cancel" />"
-		onclick="javascript: relativeRedir('box/list.do');" />
+	<form:label path="attachments">
+		<spring:message code="report.attachments" />:
+	</form:label>
+	<form:textarea path="attachments" />
+	<form:errors cssClass="error" path="attachments" />
 	<br />
- --%>
+	
+	<security:authorize access="hasRole('REFEREE')">
+	<form:label path="finalMode">
+		<spring:message code="report.finalMode" />:
+	</form:label>
+	<form:checkbox path="finalMode" />
+	<form:errors cssClass="error" path="finalMode" />
+	<br />
+	</security:authorize>
 
-</form:form>
+
+	
+	<input type="button" name="create"
+		value="<spring:message code="report.create" />" />&nbsp; 
+		
+	
+		
+	
+	<security:authorize access="hasRole('CUSTOMER')">
+	<input type="button" name="cancel"
+		value="<spring:message code="report.cancel" />"
+		onclick="javascript: relativeRedir('report/customer/list.do');" />
+	
+	</security:authorize>
+	
+	<security:authorize access="hasRole('REFEREE')">
+	<input type="button" name="cancel"
+		value="<spring:message code="report.cancel" />"
+		onclick="javascript: relativeRedir('report/referee/list.do');" />
+	
+	</security:authorize>
+	
+	<security:authorize access="hasRole('WORKER')">
+	<input type="button" name="cancel"
+		value="<spring:message code="report.cancel" />"
+		onclick="javascript: relativeRedir('report/worker/list.do');" />
+	
+	</security:authorize>
+	</form:form>

@@ -20,63 +20,47 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <!-- Listing grid -->
-<p><spring:message code="report.list" /></p>
+<p><spring:message code="note.list" /></p>
  
   
   
  <display:table pagesize="5" class="displaytag" name="reports" requestURI="${requestURI}" id="row">
 	
-	<jstl:if test="${report.finalMode == true}">
+	
 	<security:authorize access="hasRole('CUSTOMER')">
 
-		
-		<display:column>
-			<a href="note/customer/create.do?id=${row.id}">
-				<spring:message	code="report.create.note" />
-			</a>
-	</display:column>
 	<display:column>
 			<a href="note/customer/edit.do?id=${row.id}">
 				<spring:message	code="report.edit.note" />
 			</a>
 	</display:column>
 	</security:authorize>
-	</jstl:if>
-	
-	<jstl:if test="${report.finalMode == true}">
+
 	<security:authorize access="hasRole('WORKER')">
 
-		
-		<display:column>
-			<a href="note/worker/create.do?id=${row.id}">
-				<spring:message	code="report.create.note" />
-			</a>
-	</display:column>
+	
 	<display:column>
 			<a href="note/worker/edit.do?id=${row.id}">
 				<spring:message	code="report.edit.note" />
 			</a>
 	</display:column>
 	</security:authorize>
-	</jstl:if>
+
 	
-	<jstl:if test="${report.finalMode == true}">
+
 	<security:authorize access="hasRole('REFEREE')">
 
-		<display:column>
-			<a href="note/referee/create.do?id=${row.id}">
-				<spring:message	code="report.create.note" />
-			</a>
-	</display:column>
 	<display:column>
 			<a href="note/referee/edit.do?id=${row.id}">
 				<spring:message	code="report.edit.note" />
 			</a>
 	</display:column>
 	</security:authorize>
-	</jstl:if>
 	
-	<display:column property="description" titleKey="report.description" sortable="true" />
+	
+	<display:column property="workerComment" titleKey="report.workerComment" sortable="true" />
+	<display:column property="customerComment" titleKey="report.customerComment" sortable="true" />
+	<display:column property="refereeComment" titleKey="report.refereeComment" sortable="true" />
 	<display:column property="moment" titleKey="report.moment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
 	
 	

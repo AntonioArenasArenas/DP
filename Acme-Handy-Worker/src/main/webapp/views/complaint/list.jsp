@@ -35,12 +35,15 @@
 	</security:authorize>
 	
 	<security:authorize access="hasRole('CUSTOMER')">
-
-		
 		<display:column>
 			<a href="complaint/customer/show.do?id=${row.id}">
 				<spring:message	code="complaint.show" />
 			</a>
+		</display:column>
+		<display:column>
+		<a href="report/customer/create.do?id=${row.id}&taskId=${param['taskId']}"> 
+			<spring:message code="complaint.create.report" />
+		</a>
 	</display:column>
 	</security:authorize>
 	
@@ -58,4 +61,14 @@
 	<display:column property="moment" titleKey="complaint.moment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
 	
 </display:table>
+
+<form:form>
+<input type="button" name="create"
+		value="<spring:message code="complaint.create" />" />&nbsp; 
+		
+		
+	<input type="button" name="cancel"
+		value="<spring:message code="complaint.cancel" />"
+		onclick="javascript: relativeRedir('complaint/customer/list.do');" />
 	
+	</form:form>

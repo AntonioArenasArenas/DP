@@ -70,12 +70,11 @@ public class ComplaintService {
 		return result;
 	}
 
-	public Complaint createComplaint(final int taskId) {
+	public Complaint createComplaint(Task task) {
 
 		Complaint result = new Complaint();
-		Task task = new Task();
+		
 		Date moment;
-		task = taskService.findOne(taskId);
 		
 		Customer customer = customerService.findByPrincipal();
 		Assert.isTrue(taskService.getTasksByCustomerId(customer.getId()).contains(task));
