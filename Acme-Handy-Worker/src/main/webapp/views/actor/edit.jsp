@@ -22,6 +22,8 @@
 	<form:hidden path="profiles" />
 	<form:hidden path="boxes" />
 	<form:hidden path="userAccount"/>
+	<form:hidden path="userAccount.authorities" value="CUSTOMER" />
+	
 	
 	
 	<jstl:if test="${customer.id!=0}">
