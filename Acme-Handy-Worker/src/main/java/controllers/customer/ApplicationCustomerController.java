@@ -1,14 +1,14 @@
-package controllers;
+package controllers.customer;
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -16,23 +16,30 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
+import services.CreditCardService;
+import services.CustomerService;
 import services.TaskService;
-import services.WorkerService;
+import controllers.AbstractController;
 import domain.Application;
-import domain.Worker;
+import domain.CreditCard;
+import domain.Customer;
+import domain.Task;
 
 @Controller
-@RequestMapping("/application/worker")
-public class ApplicationWorkerController extends AbstractController {
+@RequestMapping("/application/customer")
+public class ApplicationCustomerController extends AbstractController {
 
 	@Autowired
 	private ApplicationService applicationService;
 
 	@Autowired
+	private CustomerService customerService;
+
+	@Autowired
 	private TaskService taskService;
 
 	@Autowired
-	private WorkerService workerService;
+	private CreditCardService creditCardService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
@@ -40,12 +47,11 @@ public class ApplicationWorkerController extends AbstractController {
 
 		Collection<Application> applications;
 
-		applications = applicationService.findWorkerApplications();
+		applications = applicationService.findCustomerApplications();
 
 		result = new ModelAndView("application/list");
 		result.addObject("applications", applications);
-		result.addObject("requestURI", "application/worker/list.do");
-
+		result.addObject("requestURI", "application/customer/list.do");
 		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
 		// pasarlo
 		result.addObject("VAT", 0.21);
@@ -62,14 +68,18 @@ public class ApplicationWorkerController extends AbstractController {
 
 		try {
 			application = applicationService.findOne(applicationId);
+
 		} catch (Exception e) {
 			return result = new ModelAndView("redirect:list.do");
 		}
-		Worker worker = workerService.findByPrincipal();
 
-		if (!application.getWorker().equals(worker)) {
+		Customer c = customerService.findByPrincipal();
+
+		if (!taskService.getTasksByCustomerId(c.getId()).contains(
+				application.getTask())) {
 			return result = new ModelAndView("redirect:list.do");
 		}
+
 		Collection<String> comentarios = new LinkedList<String>();
 		if (application.getComments() != null) {
 			String[] spliteado = application.getComments().split(";");
@@ -79,30 +89,39 @@ public class ApplicationWorkerController extends AbstractController {
 		result = new ModelAndView("application/show");
 		result.addObject("application", application);
 		result.addObject("comentarios", comentarios);
-
 		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
 		// pasarlo
 		result.addObject("VAT", 0.21);
+
 		return result;
 
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
-	public ModelAndView create(@RequestParam int taskId) {
+	@RequestMapping(value = "/edit", method = RequestMethod.GET)
+	public ModelAndView edit(@RequestParam int applicationId) {
 		ModelAndView result;
 		Application application;
 
-		application = this.applicationService.createApplication(taskService
-				.findOne(taskId));
-		Assert.notNull(application);
-		result = null;
-		result = this.createEditModelAndView(application);
+		try {
+			application = applicationService.findOne(applicationId);
+
+		} catch (Exception e) {
+			return result = new ModelAndView("redirect:list.do");
+		}
+		Customer c = customerService.findByPrincipal();
+
+		if (!taskService.getTasksByCustomerId(c.getId()).contains(
+				application.getTask())) {
+			return result = new ModelAndView("redirect:list.do");
+		}
+
+		result = createEditModelAndView(application);
 
 		return result;
 
 	}
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST, params = "save")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid Application application,
 			BindingResult binding) {
 		ModelAndView result;
@@ -110,8 +129,21 @@ public class ApplicationWorkerController extends AbstractController {
 			result = createEditModelAndView(application);
 		} else {
 			try {
+				if (application.getStatus().equals("ACCEPTED")) {
+					CreditCard persisted = creditCardService.save(application
+							.getCreditCard());
+					application.setCreditCard(persisted);
+				}
+				Application actual = applicationService.findOne(application
+						.getId());
+				
+				if (!actual.getComments().equals(null)) {
+					applicationService.updateStatus(application,
+							actual.getComments());
+				} else {
+					applicationService.updateStatus(application, "");
+				}
 
-				applicationService.save(application);
 				result = new ModelAndView("redirect:list.do");
 			} catch (Throwable oops) {
 				result = createEditModelAndView(application,
@@ -134,11 +166,48 @@ public class ApplicationWorkerController extends AbstractController {
 	protected ModelAndView createEditModelAndView(Application application,
 			String messageCode) {
 		ModelAndView result;
+		Collection<String> estados = new LinkedList<String>();
+		estados.add("PENDING");
+		estados.add("REJECTED");
+		Task t = application.getTask();
+		List<Application> applications = new LinkedList<Application>(
+				t.getApplications());
+		boolean isAccepted = false;
+		for (Application a : applications) {
+			if (a.getStatus().equals("ACCEPTED")) {
+				isAccepted = true;
+			}
+		}
+		if (!isAccepted) {
+			estados.add("ACCEPTED");
+		}
+		Collection<String> comentarios = new LinkedList<String>();
+		if (application.getComments() != null) {
+			String[] spliteado = application.getComments().split(";");
+			comentarios = Arrays.asList(spliteado);
+		}
+
+		// TODO aqui coger los brandnamesF
+		Collection<String> brandnames = new LinkedList<String>();
+		brandnames.add("VISA");
+		brandnames.add("MASTERS");
+		brandnames.add("DINNERS");
+		brandnames.add("AMEX");
 
 		result = new ModelAndView("application/updateCreate");
 		result.addObject("application", application);
+		result.addObject("estados", estados);
+		result.addObject("comentarios", comentarios);
+		result.addObject("brandnames", brandnames);
+		result.addObject("requestURI", "application/customer/edit.do");
+
+		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
+		// pasarlo
+		result.addObject("VAT", 0.21);
+
 		result.addObject("message", messageCode);
 
 		return result;
 	}
+
 }

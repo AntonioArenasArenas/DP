@@ -108,6 +108,12 @@ public class WorkerService {
 			Actor actor = actorService.findByPrincipal();
 			Assert.isTrue(actor.equals(worker));
 		}
+		
+		String phoneNumber = worker.getPhoneNumber();
+		if(!phoneNumber.startsWith("+")) {
+			worker.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
+		}
+
 
 		Worker result;
 		worker.setMake(worker.getName() + worker.getSurname());

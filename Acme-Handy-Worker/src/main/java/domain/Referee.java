@@ -1,31 +1,37 @@
 
 package domain;
 
+
+
 import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
+
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class Referee extends Actor {
 
-	private Collection<Report>	reports;
+private Collection<Complaint> complaints;
 
 
-	@OneToMany(mappedBy = "referee")
-	@Valid
-	@NotNull
-	public Collection<Report> getReports() {
-		return this.reports;
-	}
+@Valid
+@OneToMany(mappedBy = "referee")
+public Collection<Complaint> getComplaints(){
+	return complaints;
+}
 
-	public void setReports(final Collection<Report> reports) {
-		this.reports = reports;
-	}
+public void setComplaints(Collection<Complaint> complaints){
+	this.complaints = complaints;
+}
+
+
+	
 
 }

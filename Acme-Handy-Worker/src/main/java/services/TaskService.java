@@ -1,5 +1,6 @@
 package services;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Random;
@@ -124,6 +125,18 @@ public class TaskService {
 
 	}
 	
+	public Collection<Task> getActiveTasksByCustomerId(Integer customerId) {
+		return taskRepository.getActiveTasksByCustomerId(customerId);
+	}
+	
+	public Collection<Task> getTasksWithAcceptedApplicationsByWorkerId(int workerId) {
+		return taskRepository.getTasksWithAcceptedApplicationsByWorkerId(workerId);
+	}
+	
+	public Collection<Task> getTasksByWorkerId(int workerId) {
+		return taskRepository.getTasksByWorkerId(workerId);
+	}
+	
 //	public Double[] tasksPerUserStatistics(){
 //		
 //		return taskRepository.tasksPerUserStatistics();
@@ -132,22 +145,14 @@ public class TaskService {
 
 	public String tickerGenerator(){
 		String charactersL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		String charactersN = "1234567890";
 		Random random = new Random();
-		String result1 = "";
 		String result2 = "";
 		int chars = 6;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		String result1 = sdf.format(new Date());
 
-		char[] part1 = new char[chars];
 		char[] part2 = new char[chars];
-
-		for (int i = 0 ; i < chars ; i++){
-			part1[i] = charactersN.charAt(random.nextInt(charactersN.length()));
-		}
-
-		for (int i = 0 ; i < chars ; i++){
-			result1 +=part1[i];
-		}
 
 		for (int i = 0 ; i < chars ; i++){
 			part2[i] = charactersL.charAt(random.nextInt(charactersL.length()));
@@ -160,18 +165,5 @@ public class TaskService {
 		return result1 + "-" + result2;
 
 	}
-
-//	public Collection<Task> activeTasks(Collection<Task> tasks){ //Para mostrarle al customer las task activas que puede elegir
-//		Collection<Task> result ;
-//		result = taskRepository.findAll();
-//		Date now = Calendar.getInstance().getTime();
-//		for (Task t: result){
-//			if(t.getEndDate().after(now)){
-//				result.remove(t);
-//			}
-//		}
-//		return result;
-//
-//	}
 
 }

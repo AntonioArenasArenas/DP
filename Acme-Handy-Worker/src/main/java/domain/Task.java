@@ -14,6 +14,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Pattern;
@@ -64,11 +65,15 @@ public class Task extends DomainEntity {
 	}
 
 	@ManyToOne(optional = false)
+	@Valid
+	@NotNull
 	public Warranty getWarranty() {
 		return this.warranty;
 	}
 
 	@ManyToOne(optional = false)
+	@Valid
+	@NotNull
 	public Category getCategory() {
 		return this.category;
 	}
@@ -140,7 +145,9 @@ public class Task extends DomainEntity {
 	public void setAddress(final String address) {
 		this.address = address;
 	}
+	
 	@Digits(fraction = 2, integer = 3)
+	@Min(value = 0)
 	public double getMaxPrice() {
 		return this.maxPrice;
 	}
@@ -148,6 +155,7 @@ public class Task extends DomainEntity {
 	public void setMaxPrice(final double maxPrice) {
 		this.maxPrice = maxPrice;
 	}
+	
 	@NotBlank
 	public String getComments() {
 		return this.comments;

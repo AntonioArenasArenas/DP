@@ -90,25 +90,37 @@
 		$("table td:contains(RECHAZADA)").parents("tr").css("background-color",
 				"orange");
 
-		var dateCell = $(this).find("td:contains(PENDING)").parents("tr").find(
-				"td:eq(1)").html();
-		var date = new Date(dateCell);
-		var actual = new Date();
+		$("tr").each(function() {
+			var pending = $(this).find("td:contains(PENDING)").html();
+			var pendingesp = $(this).find("td:contains(PENDIENTE)").html();
 
-		if (date < actual) {
-			$("table td:contains(PENDING)").parents("tr").css(
-					"background-color", "gainsboro");
-		}
+			if (typeof pending !== "undefined") {
 
-		dateCell = $(this).find("td:contains(PENDIENTE)").parents("tr").find(
-				"td:eq(1)").html();
-		date = new Date(dateCell);
-		actual = new Date();
+				var dateCell = $(this).find("td:eq(1)").html();
+				var array = dateCell.split("/");
+				var date = new Date(array[2], array[1] - 1, array[0]);
+				var actual = new Date();
+				if (date < actual) {
+					$(this).css("background-color", "gainsboro");
+					$(this).find("td:contains(Update)").html("");
+				}
+			} else {
+				if (typeof pendingesp !== "undefined") {
 
-		if (date < actual) {
-			$("table td:contains(PENDIENTE)").parents("tr").css(
-					"background-color", "gainsboro");
-		}
+					var dateCell = $(this).find("td:eq(1)").html();
+					var array = dateCell.split("/");
+
+					var date = new Date(array[2], array[1] - 1, array[0]);
+					var actual = new Date();
+
+					if (date < actual) {
+						$(this).css("background-color", "gainsboro");
+						$(this).find("td:contains(Actualizar)").html("");
+					}
+				}
+			}
+
+		});
 
 	});
 </script>

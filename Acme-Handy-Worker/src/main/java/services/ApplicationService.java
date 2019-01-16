@@ -32,7 +32,10 @@ public class ApplicationService {
 
 	@Autowired
 	private CustomerService customerService;
-	
+
+	@Autowired
+	private MessageService messageService;
+
 	@Autowired
 	private MessageService messageService;
 
@@ -121,10 +124,10 @@ public class ApplicationService {
 		Customer c = customerService.findByPrincipal();
 
 		// Ver los tasks que devuelve el findByPrincipal, puede que no devuelva
-		// todas o devuelva null, si es así, hacer un método específico que
+		// todas o devuelva null, si es asï¿½, hacer un mï¿½todo especï¿½fico que
 		// devuelva las task de un customer
 
-		// Dependiendo de la implementación se puede hacer con Ajax el
+		// Dependiendo de la implementaciï¿½n se puede hacer con Ajax el
 		// updateStatus o no
 
 		Assert.isTrue(taskService.getTasksByCustomerId(c.getId()).contains(t));
@@ -134,10 +137,11 @@ public class ApplicationService {
 		} else {
 			application.setComments(comments);
 		}
-		
+
 		result = applicationRepository.save(application);
-		
-		messageService.applicationMessage(t, application.getWorker());
+		if (!application.getStatus().equals("PENDING")) {
+			messageService.applicationMessage(t, application.getWorker());
+		}
 
 		return result;
 	}
@@ -189,6 +193,10 @@ public class ApplicationService {
 
 		Double result = applicationRepository.getRejectedApplications();
 		return result;
+	}
+
+	public Collection<Application> getWorkerAcceptedApplicationsByTaskId(int workerId, int taskId) {
+		return applicationRepository.getWorkerAcceptedApplicationsByTaskId(workerId, taskId);
 	}
 
 }

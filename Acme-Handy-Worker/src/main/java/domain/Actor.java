@@ -13,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
@@ -131,7 +130,8 @@ public abstract class Actor extends DomainEntity {
 	public void setEmail(final String email) {
 		this.email = email;
 	}
-	@Pattern(regexp = "^\\+[1-9][0-9 ]+$")
+	
+	@NotBlank
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}

@@ -8,7 +8,7 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
     
 
-<display:table name="tasks" id="row" requestURI="task/list.do" pagesize="5" class="displaytag" >
+<display:table name="tasks" id="row" requestURI="${requestURI}" pagesize="5" class="displaytag" >
 	
 	<display:column property="ticker" titleKey="task.ticker" sortable="true" />
 	<display:column property="moment" titleKey="task.moment" sortable="true" format="{0,date,dd/MM/yyyy HH:mm}" />
@@ -39,9 +39,18 @@
 			</a>
 		</display:column>
 		<display:column>
-			<a href="application/worker/create.do?taskId=${row.id}">
-				<spring:message code="task.createApplication" />
-			</a>
+			<jstl:if test="${!tasksAlreadyApplied.contains(row)}">
+				<a href="application/worker/create.do?taskId=${row.id}">
+					<spring:message code="task.createApplication" />
+				</a>
+			</jstl:if>
+		</display:column>
+		<display:column>
+			<jstl:if test="${acceptedTasks.contains(row)}">
+				<a href="phase/worker/list.do?taskId=${row.id}">
+					<spring:message code="task.listPhases" />
+				</a>
+			</jstl:if>
 		</display:column>
 	</security:authorize>
 	

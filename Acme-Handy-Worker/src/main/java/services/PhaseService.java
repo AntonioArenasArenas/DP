@@ -9,8 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.PhaseRepository;
-import domain.Application;
 import domain.Phase;
+import domain.Task;
 import domain.Worker;
 
 @Service
@@ -22,6 +22,12 @@ public class PhaseService {
 
 	@Autowired
 	private WorkerService workerService;
+	
+	@Autowired
+	private ApplicationService applicationService;
+	
+	@Autowired
+	private TaskService taskService;
 
 	public Collection<Phase> findAll() {
 
@@ -31,33 +37,68 @@ public class PhaseService {
 		
 		return result;
 	}
-
-	public Phase createPhase(Application a) {
+	
+	public Phase findOne(int phaseId) {
+		Assert.isTrue(phaseId != 0);
 
 		Phase result;
 
-		Worker worker = workerService.findByPrincipal();
+		result = phaseRepository.findOne(phaseId);
+		Assert.notNull(result);
 
-		Assert.isTrue(a.getStatus().equals("ACCEPTED"));
+		return result;
+	}
 
-		Assert.isTrue(a.getWorker().equals(worker));
+	public Phase createPhase() {
+
+		Phase result;
 
 		result = new Phase();
 
 		return result;
 	}
 
-	public Phase save(Phase phase) {
+	public Phase save(Phase phase, Task task) {
 
 		Assert.notNull(phase);
+		
+		Assert.notNull(task);
+		
+		Worker worker = workerService.findByPrincipal();
 
+		Assert.isTrue(!applicationService.getWorkerAcceptedApplicationsByTaskId(worker.getId(), task.getId()).isEmpty()); // This checks if the worker attempting to make a phase for a task has an accepted application for that task
+		
+		Assert.isTrue(phase.getStartDate().before(phase.getEndDate()));
+		
+		Assert.isTrue(phase.getStartDate().after(task.getStartDate()) || phase.getStartDate().equals(task.getStartDate()));
+		
+		Assert.isTrue(phase.getEndDate().before(task.getEndDate()) || phase.getEndDate().equals(task.getEndDate()));
+		
 		Phase result;
 
-		// En el controlador se tendrá en cuenta el hecho de que las fechas no
-		// puede ser menor ni mayor que la de la task
-
 		result = phaseRepository.save(phase);
+		
+		if(phase.getId() == 0) {
+			task.getPhases().add(result);
+		}
 
 		return result;
+	}
+	
+	public void delete(Phase phase) {
+		Assert.notNull(phase);
+		Task task = getTaskByPhaseId(phase.getId());
+		
+		Worker worker = workerService.findByPrincipal();
+		Assert.isTrue(taskService.getTasksByWorkerId(worker.getId()).contains(task));
+		
+		task.getPhases().remove(phase);
+		phaseRepository.delete(phase);
+	}
+	
+	// Other business methods
+	
+	public Task getTaskByPhaseId(int phaseId) {
+		return phaseRepository.getTaskByPhaseId(phaseId);
 	}
 }

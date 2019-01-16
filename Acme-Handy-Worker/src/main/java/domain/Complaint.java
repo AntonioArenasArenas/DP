@@ -6,9 +6,11 @@ import java.util.Date;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -27,8 +29,14 @@ public class Complaint extends DomainEntity {
 	private Date				moment;
 	private String				description;
 	private Collection<String>	attachments;
+	private Referee				referee;
 
-
+	
+	@ManyToOne(optional=true)
+	public Referee getReferee() {
+		return this.referee;
+	}
+	
 	@OneToOne(mappedBy = "complaint", optional = true)
 	public Report getReport() {
 		return this.report;
@@ -75,6 +83,21 @@ public class Complaint extends DomainEntity {
 
 	public void setReport(final Report report) {
 		this.report = report;
+	}
+	
+	public void setReferee(final Referee referee) {
+		this.referee = referee;
+	}
+	
+	// Complaint -> Task
+	 private Task task;
+	
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+	public Task getTask() {
+		return this.task;
+	}
+	public void setTask(final Task task) {
+		this.task = task;
 	}
 
 }

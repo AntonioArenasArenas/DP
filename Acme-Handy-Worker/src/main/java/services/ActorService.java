@@ -18,7 +18,7 @@ import domain.Actor;
 @Service
 @Transactional
 public class ActorService {
-	
+
 	// Managed repository -----------------------------------------------------
 
 	@Autowired
@@ -56,11 +56,16 @@ public class ActorService {
 	}
 
 	public Actor save(Actor actor) {
-		
-		
+
+
 		Assert.notNull(actor);
 
 		Actor result;
+
+		String phoneNumber = actor.getPhoneNumber();
+		if(!phoneNumber.startsWith("+")) {
+			actor.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
+		}
 
 		result = actorRepository.save(actor);
 
@@ -68,7 +73,7 @@ public class ActorService {
 	}
 
 	// Other business methods -------------------------------------------------
-	
+
 	public Actor findByPrincipal() {
 		Actor result;
 		UserAccount userAccount;
@@ -90,38 +95,38 @@ public class ActorService {
 
 		return result;
 	}
-	
+
 	public Collection<Actor> getSuspiciousActors() {
-		
+
 		return actorRepository.getSuspiciousActors();
-		
+
 	}
-	
+
 	public Actor banActor(Actor actor) {
-		
+
 		Assert.notNull(actor);
-		
+
 		Assert.isTrue(actor.isSuspicious() == true);
-		
+
 		actor.getUserAccount().setActivated(false);
-		
+
 		Actor result = actorRepository.save(actor);
 
 		return result;
-		
+
 	}
-	
+
 	public Actor unbanActor(Actor actor) {
-		
+
 		Assert.notNull(actor);
-		
+
 		actor.getUserAccount().setActivated(true);
-		
+
 		Actor result = actorRepository.save(actor);
 
 		return result;
-		
+
 	}
-	
+
 
 }

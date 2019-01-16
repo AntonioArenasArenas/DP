@@ -14,11 +14,11 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 
 <div>
-	<a href="#"><img src="images/logo.png" alt="Acme Co., Inc." /></a>
+	<a href="#"><img src="images/logo.jpg" alt="Acme Co., Inc." /></a>
 </div>
 
 <div>
-	<ul id="jMenu">		<!-- Actualizar aqu� el men�, preguntar a patricia por el enlace caido, NO OLVIDAR CAMBIAR MESSAGES Y TILES EN CONSECUENCIA -->
+	<ul id="jMenu">
 		<!-- Do not forget the "fNiv" class for the first level links !! -->
 		<security:authorize access="hasRole('ADMIN')">
 			<li><a class="fNiv"><spring:message	code="master.page.administrator" /></a>
@@ -57,6 +57,21 @@
 				</ul>
 			</li>
 		</security:authorize>
+		
+		
+
+		 <security:authorize access="hasRole('REFEREE')">
+			<li><a class="fNiv"><spring:message	code="master.page.referee" /></a>
+				<ul>
+					<li class="arrow"></li>
+
+					
+					<li><a href="complaint/referee/list.do"><spring:message code="master.page.complaints" /></a></li>
+					
+
+				</ul>
+			</li>
+		</security:authorize> 
 
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a>

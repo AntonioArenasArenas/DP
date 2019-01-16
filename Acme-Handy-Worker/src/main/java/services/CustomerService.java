@@ -97,11 +97,10 @@ public class CustomerService {
 		
 		Assert.notNull(customer);
 		
-//		Actor actor = actorService.findByPrincipal();
-		
-//		if(customer.getId()!=0){
-//			Assert.isTrue(actor.getUserAccount().equals(customer.getUserAccount()));
-//		}
+		String phoneNumber = customer.getPhoneNumber();
+		if(!phoneNumber.startsWith("+")) {
+			customer.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
+		}
 
 		Customer result;
 

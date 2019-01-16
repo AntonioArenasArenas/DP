@@ -9,7 +9,6 @@ import javax.persistence.AccessType;
 import javax.persistence.CascadeType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
-import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
@@ -26,7 +25,6 @@ import org.springframework.format.annotation.DateTimeFormat;
 public class Report extends DomainEntity {
 
 	private Complaint			complaint;
-	private Referee				referee;
 	private Collection<Note>	notes;
 	private Date				moment;
 	private String				description;
@@ -48,10 +46,6 @@ public class Report extends DomainEntity {
 		return this.complaint;
 	}
 
-	@ManyToOne(optional=false)
-	public Referee getReferee() {
-		return this.referee;
-	}
 	
 	@OneToMany(cascade = CascadeType.ALL)
 	@Valid
@@ -83,9 +77,6 @@ public class Report extends DomainEntity {
 		this.complaint = complaint;
 	}
 
-	public void setReferee(final Referee referee) {
-		this.referee = referee;
-	}
 
 	public void setNotes(final Collection<Note> notes) {
 		this.notes = notes;

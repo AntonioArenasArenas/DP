@@ -8,10 +8,7 @@
  * http://www.tdg-seville.info/License.html
  */
 
-package controllers;
-
-import java.util.Collection;
-
+package controllers.customer;
 
 import javax.validation.Valid;
 
@@ -22,16 +19,14 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import domain.Actor;
-import domain.Customer;
 
 import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
 import services.CustomerService;
+import controllers.AbstractController;
+import domain.Customer;
 
 @Controller
 @RequestMapping("/customer")
