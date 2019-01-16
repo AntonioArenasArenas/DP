@@ -56,9 +56,9 @@ public abstract class Actor extends DomainEntity {
 		return this.profiles;
 	}
 	
-	
+	@Valid
 	@NotNull
-	@OneToOne(optional=false)
+	@OneToOne
 	public UserAccount getUserAccount() {
 		return userAccount;
 	}

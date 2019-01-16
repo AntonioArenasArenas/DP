@@ -62,6 +62,7 @@ public class CustomerController extends AbstractController {
 		ModelAndView result;
 	
 		Customer customer = customerService.findByPrincipal();
+		
 		Assert.notNull(customer);
 		result = this.createEditModelAndView(customer);
 
@@ -72,7 +73,7 @@ public class CustomerController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Customer customer, final BindingResult binding) {
 		ModelAndView result;
-
+		System.out.println(binding.getFieldErrors());
 		if (binding.hasErrors()){
 			
 			result = this.createEditModelAndView(customer);
@@ -80,11 +81,14 @@ public class CustomerController extends AbstractController {
 			
 			}
 		else
-			try {	
+			try {
 				
 				UserAccount userAccount = customer.getUserAccount();
-				final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
-				userAccount.setPassword(password);
+				if(customer.getId()==0){
+					final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
+					userAccount.setPassword(password);
+				}
+				
 				userAccount = this.userAccountService.save(userAccount);
 				customer.setUserAccount(userAccount);
 				

@@ -17,5 +17,7 @@ public interface ProfileRepository extends JpaRepository<Profile, Integer> {
 	@Query("select a.profiles from Actor a where a.id=?1")
 	public Collection<Profile> getActorProfiles(int ActorId);
 	
+	
+	
 
 }

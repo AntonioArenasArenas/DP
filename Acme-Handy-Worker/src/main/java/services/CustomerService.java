@@ -61,11 +61,10 @@ public class CustomerService {
 		ls.add(authority);
 	
 		userAccount.setAuthorities(ls);	
-		UserAccount saved = userAccountService.save(userAccount);
 		
 		Collection<Box> boxes = boxService.createDefault();
 		
-		result.setUserAccount(saved);
+		result.setUserAccount(userAccount);
 		result.setBoxes(boxes);
 		result.setProfiles(profiles);
 		result.setReceivedMessages(new LinkedList<Message>());

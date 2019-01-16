@@ -23,10 +23,12 @@
 	<form:hidden path="boxes" />
 	<form:hidden path="userAccount"/>
 	<form:hidden path="userAccount.authorities" value="CUSTOMER" />
-	<form:hidden path="userAccount.activated" />
-	<form:hidden path="userAccount.id" />
-	<form:hidden path="userAccount.version" /> 
 	
+	
+	
+	<jstl:if test="${customer.id!=0}">
+	<form:hidden path="userAccount.password" /> 
+	</jstl:if>
 	
 	<form:label path="userAccount.username">
 		<spring:message code="actor.username" />:
@@ -35,13 +37,14 @@
 	<form:errors cssClass="error" path="userAccount.username" />
 	<br />
 	
+	<jstl:if test="${customer.id==0}">
 	<form:label path="userAccount.password">
 		<spring:message code="actor.password" />:
 	</form:label>
 	<form:input type="password" path="userAccount.password" />
 	<form:errors cssClass="error" path="userAccount.password" />
 	<br /> 
-	
+	</jstl:if>
 
 	<form:label path="name">
 		<spring:message code="actor.name" />:

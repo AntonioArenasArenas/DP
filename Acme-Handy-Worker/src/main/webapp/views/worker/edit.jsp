@@ -31,6 +31,12 @@
 	<form:hidden path="userAccount.id" />
 	<form:hidden path="userAccount.version" />
 	
+	<jstl:if test="${worker.id!=0}">
+	<form:hidden path="userAccount.password" /> 
+	</jstl:if>
+	<jstl:if test="${worker.id==0}">
+	<form:hidden path="make" /> 
+	</jstl:if>
 	
 	
 	<form:label path="userAccount.username">
@@ -40,13 +46,14 @@
 	<form:errors cssClass="error" path="userAccount.username" />
 	<br />
 	
+	<jstl:if test="${worker.id==0}">
 	<form:label path="userAccount.password">
 		<spring:message code="actor.password" />:
 	</form:label>
 	<form:input type="password" path="userAccount.password" />
 	<form:errors cssClass="error" path="userAccount.password" />
 	<br /> 
-	
+	</jstl:if>
 
 	<form:label path="name">
 		<spring:message code="actor.name" />:
@@ -54,6 +61,15 @@
 	<form:input path="name" />
 	<form:errors cssClass="error" path="name" />
 	<br />
+	
+	<jstl:if test="${worker.id!=0}">
+	<form:label path="make">
+		<spring:message code="actor.make" />:
+	</form:label>
+	<form:input  path="make" />
+	<form:errors cssClass="error" path="make" />
+	<br /> 
+	</jstl:if>
 
 	<form:label path="surname">
 		<spring:message code="actor.surname" />:
