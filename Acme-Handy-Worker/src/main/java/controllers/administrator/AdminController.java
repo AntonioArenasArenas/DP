@@ -43,13 +43,21 @@ public class AdminController extends AbstractController {
 	@RequestMapping(value = "/statistics", method = RequestMethod.GET)
 	public ModelAndView statistics() {
 		ModelAndView result;
+		
+		Double[] spuser = new Double[4];
 
-		Double[] spuser = taskService.tasksPerUserStatistics();
+		Double[] sptask = new Double[4];
 
-		Double[] sptask = applicationService.getAdminStatisticsPerTask();
+		Double[] spoffered = new Double[4];
+		
+		if(!taskService.findAll().isEmpty()) {
+			spuser = taskService.tasksPerUserStatistics();
 
-		Double[] spoffered = applicationService
-				.getAdminStatisticsPriceOffered();
+			sptask = applicationService.getAdminStatisticsPerTask();
+
+			spoffered = applicationService
+					.getAdminStatisticsPriceOffered();
+		}
 
 		Double cantChange = applicationService.getAppliCantChange();
 
