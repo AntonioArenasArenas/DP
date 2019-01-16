@@ -2,6 +2,7 @@ package services;
 
 import java.util.Collection;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.Random;
 
 import javax.transaction.Transactional;
@@ -11,7 +12,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.TaskRepository;
+import security.Authority;
 import domain.Actor;
+import domain.Application;
 import domain.Customer;
 import domain.Task;
 
@@ -26,7 +29,7 @@ public class TaskService {
 
 	@Autowired
 	private CustomerService customerService;
-	
+
 	@Autowired
 	private ActorService actorService;
 
@@ -55,7 +58,6 @@ public class TaskService {
 		result = taskRepository.findOne(taskId);
 		Assert.notNull(result);
 
-
 		return result;
 	}
 
@@ -64,12 +66,14 @@ public class TaskService {
 		Task result;
 
 		result = new Task();
-		
+
 		Customer customer = customerService.findByPrincipal();
-		
+
 		result.setCustomer(customer);
 
 		result.setTicker(tickerGenerator());
+
+		result.setApplications(new LinkedList<Application>());
 
 		return result;
 	}
@@ -80,17 +84,23 @@ public class TaskService {
 
 		Task result;
 
-		task.setMoment(new Date(System.currentTimeMillis() - 1));
-		
 		Assert.isTrue(task.getStartDate().before(task.getEndDate()));
-		
+
 		Actor logged = actorService.findByPrincipal();
-		if(task.getId() != 0) {
-			Assert.isTrue(task.getCustomer() == logged);
+		boolean correct = false;
+		if (task.getId() != 0) {
+			task.setMoment(new Date(System.currentTimeMillis() - 1));
+			LinkedList<Authority> auths = new LinkedList<Authority>(logged
+					.getUserAccount().getAuthorities());
+			if (task.getCustomer() == logged
+					|| auths.get(0).getAuthority().equals("ADMIN")) {
+				correct = true;
+			}
+			Assert.isTrue(correct);
 		}
-		
+
 		result = taskRepository.save(task);
-		
+
 		return result;
 	}
 
@@ -104,33 +114,33 @@ public class TaskService {
 
 	// Other business methods -------------------------------------------------
 
-	public Collection<Task> getTasksByCustomerId(Integer id){
-		
+	public Collection<Task> getTasksByCustomerId(Integer id) {
+
 		return taskRepository.getTasksByCustomerId(id);
 
 	}
-	
-	public Collection<Task> getActiveTasks(){
-		
+
+	public Collection<Task> getActiveTasks() {
+
 		return taskRepository.getActiveTasks();
 
 	}
-	
-	public Collection<Task> getTasksByLogged(){
-		
+
+	public Collection<Task> getTasksByLogged() {
+
 		Customer customer = customerService.findByPrincipal();
-		
+
 		return taskRepository.getTasksByCustomerId(customer.getId());
 
 	}
-	
-//	public Double[] tasksPerUserStatistics(){
-//		
-//		return taskRepository.tasksPerUserStatistics();
-//		
-//	}
 
-	public String tickerGenerator(){
+	// public Double[] tasksPerUserStatistics(){
+	//
+	// return taskRepository.tasksPerUserStatistics();
+	//
+	// }
+
+	public String tickerGenerator() {
 		String charactersL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		String charactersN = "1234567890";
 		Random random = new Random();
@@ -141,37 +151,38 @@ public class TaskService {
 		char[] part1 = new char[chars];
 		char[] part2 = new char[chars];
 
-		for (int i = 0 ; i < chars ; i++){
+		for (int i = 0; i < chars; i++) {
 			part1[i] = charactersN.charAt(random.nextInt(charactersN.length()));
 		}
 
-		for (int i = 0 ; i < chars ; i++){
-			result1 +=part1[i];
+		for (int i = 0; i < chars; i++) {
+			result1 += part1[i];
 		}
 
-		for (int i = 0 ; i < chars ; i++){
+		for (int i = 0; i < chars; i++) {
 			part2[i] = charactersL.charAt(random.nextInt(charactersL.length()));
 		}
 
-		for (int i = 0 ; i < chars ; i++){
-			result2 +=part2[i];
+		for (int i = 0; i < chars; i++) {
+			result2 += part2[i];
 		}
 
 		return result1 + "-" + result2;
 
 	}
 
-//	public Collection<Task> activeTasks(Collection<Task> tasks){ //Para mostrarle al customer las task activas que puede elegir
-//		Collection<Task> result ;
-//		result = taskRepository.findAll();
-//		Date now = Calendar.getInstance().getTime();
-//		for (Task t: result){
-//			if(t.getEndDate().after(now)){
-//				result.remove(t);
-//			}
-//		}
-//		return result;
-//
-//	}
+	// public Collection<Task> activeTasks(Collection<Task> tasks){ //Para
+	// mostrarle al customer las task activas que puede elegir
+	// Collection<Task> result ;
+	// result = taskRepository.findAll();
+	// Date now = Calendar.getInstance().getTime();
+	// for (Task t: result){
+	// if(t.getEndDate().after(now)){
+	// result.remove(t);
+	// }
+	// }
+	// return result;
+	//
+	// }
 
 }

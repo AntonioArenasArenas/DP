@@ -21,19 +21,30 @@
 
 <!-- Otros taglib utiles son tiles para textos en tiles y fmt para fechas -->
 
-<h3>Parent category:${parentCategory}</h3>
+<h3>
+	<jstl:if test="${language=='en'}">
+		${parentCategory.name}
+	</jstl:if>
+	<jstl:if test="${language=='es'}">
+		${parentCategory.nameEsp}
+	</jstl:if>
+</h3>
+
 
 <display:table name="categories" id="row"
-	requestURI="admin/categoryList" pagesize="5" class="displaytag">
+	requestURI="category/administrator/list.do" pagesize="5"
+	class="displaytag">
 
-	<display:column property="name" titleKey="administrator.categoryName" />
-
-	<display:column property="nameEsp"
-		titleKey="administrator.categoryNameEsp" />
-
+	<jstl:if test="${language=='en'}">
+		<display:column property="name" titleKey="administrator.categoryName" />
+	</jstl:if>
+	<jstl:if test="${language=='es'}">
+		<display:column property="nameEsp"
+			titleKey="administrator.categoryName" />
+	</jstl:if>
 	<display:column>
-		<jstl:if test="${row.childrenCategories.size()!=0;}">
-			<a href="admin/categoryList.do?categoryId=${row.id}"> <spring:message
+		<jstl:if test="${row.childrenCategories.size()!=0}">
+			<a href="category/administrator/list.do?categoryId=${row.id}"> <spring:message
 					code="administrator.showSubCategories" />
 			</a>
 		</jstl:if>
@@ -41,14 +52,27 @@
 
 
 	<display:column>
-		<a href="admin/showCategory.do?categoryId=${row.id}"> <spring:message
+		<a href="category/administrator/show.do?categoryId=${row.id}"> <spring:message
 				code="administrator.showCategory" />
+		</a>
+	</display:column>
+
+	<display:column>
+		<a href="category/administrator/edit.do?categoryId=${row.id}"> <spring:message
+				code="administrator.editCategory" />
+		</a>
+	</display:column>
+
+	<display:column>
+		<a href="category/administrator/delete.do?categoryId=${row.id}"> <spring:message
+				code="administrator.deleteCategory" />
 		</a>
 	</display:column>
 
 </display:table>
 
-<a href="admin/createCategory.do?categoryId=${row.id}"> <spring:message
-		code="administrator.showCategory" />
+<a href="category/administrator/create.do"> <spring:message
+		code="administrator.newCategory" />
 </a>
+
 

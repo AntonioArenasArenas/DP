@@ -53,8 +53,34 @@
 	<b><spring:message code="administrator.stdev" /> :</b> ${stdevpo}
 </p>
 
-	<h2><spring:message code="administrator.pendingexpired" /></h2>
-		${ratio}
+<h2>
+	<spring:message code="administrator.pending" />
+</h2>
+${pending}
+
+<h2>
+	<spring:message code="administrator.accepted" />
+</h2>
+${accepted}
+
+<h2>
+	<spring:message code="administrator.rejected" />
+</h2>
+${rejected}
+
+<h2>
+	<spring:message code="administrator.pendingexpired" />
+</h2>
+${ratio}
+
+<h2>
+	<spring:message code="administrator.workersavg" />
+</h2>
+<jstl:forEach var="w" items="${workers}">
+
+${w.name} ${w.surname} ${w.middleName}
+<br>
+</jstl:forEach>
 
 
 

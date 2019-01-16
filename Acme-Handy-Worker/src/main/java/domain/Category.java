@@ -6,6 +6,7 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -19,14 +20,25 @@ public class Category extends DomainEntity {
 	private Collection<Category> childrenCategories;
 	private String name;
 	private String nameEsp;
+	private Category parent;
 
 	@Valid
 	@NotNull
-	@OneToMany
+	@OneToMany(mappedBy = "parent")
 	public Collection<Category> getChildrenCategories() {
 		return this.childrenCategories;
 	}
-	
+
+	@Valid
+	@ManyToOne(optional = true)
+	public Category getParent() {
+		return parent;
+	}
+
+	public void setParent(Category parent) {
+		this.parent = parent;
+	}
+
 	@Column(unique = true)
 	@NotBlank
 	public String getName() {

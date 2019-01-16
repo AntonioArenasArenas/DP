@@ -11,7 +11,6 @@ import org.springframework.util.Assert;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import security.UserAccount;
@@ -22,7 +21,7 @@ import services.ApplicationService;
 import services.CategoryService;
 import controllers.AbstractController;
 import domain.Admin;
-import domain.Category;
+import domain.Worker;
 
 @Controller
 @RequestMapping("/admin")
@@ -60,6 +59,15 @@ public class AdminController extends AbstractController {
 
 		Double cantChange = applicationService.getAppliCantChange();
 
+		Double pending = applicationService.getPendApplications();
+
+		Double accepted = applicationService.getAcepApplications();
+
+		Double rejected = applicationService.getRejecApplications();
+
+		Collection<Worker> workersAVG = applicationService
+				.getWorkersAcceptedMAvgApplications();
+
 		result = new ModelAndView("admin/statistics");
 
 		// result.addObject("maximumpu", spuser[2]);
@@ -78,28 +86,13 @@ public class AdminController extends AbstractController {
 		result.addObject("stdevpo", spoffered[3]);
 
 		result.addObject("ratio", cantChange);
+		result.addObject("pending", pending);
+		result.addObject("accepted", accepted);
+		result.addObject("rejected", rejected);
+
+		result.addObject("workers", workersAVG);
 
 		return result;
-	}
-
-	@RequestMapping(value = "/categoryList", method = RequestMethod.GET)
-	public ModelAndView categoryList(@RequestParam int categoryId) {
-		ModelAndView result;
-		Collection<Category> categories;
-		Category parent;
-
-		if (categoryId == 0) {
-			parent = categoryService.getRootCategory();
-
-		} else {
-			parent = categoryService.findOne(categoryId);
-		}
-		categories = parent.getChildrenCategories();
-		result = new ModelAndView("admin/categoryList");
-		result.addObject("categories", categories);
-		result.addObject("parentCategory", parent);
-		return result;
-
 	}
 
 	// Edit

@@ -32,9 +32,19 @@
 		<put-attribute name="body" value="/views/admin/statistics.jsp" />
 	</definition>
 
-	<definition name="admin/categoryList" extends="master.page">
+	<definition name="category/list" extends="master.page">
 		<put-attribute name="title" value="Category list" />
 		<put-attribute name="body" value="/views/admin/categoryList.jsp" />
+	</definition>
+
+	<definition name="category/show" extends="master.page">
+		<put-attribute name="title" value="Category" />
+		<put-attribute name="body" value="/views/admin/showCategory.jsp" />
+	</definition>
+
+	<definition name="category/create" extends="master.page">
+		<put-attribute name="title" value="Category" />
+		<put-attribute name="body" value="/views/admin/createCategory.jsp" />
 	</definition>
 
 

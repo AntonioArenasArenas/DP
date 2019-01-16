@@ -3,6 +3,7 @@ package controllers.worker;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -15,12 +16,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import services.ApplicationService;
+import services.SystemDataService;
 import services.TaskService;
 import services.WorkerService;
+import controllers.AbstractController;
 import domain.Application;
+import domain.SystemData;
+import domain.Task;
 import domain.Worker;
 
 @Controller
@@ -36,6 +39,9 @@ public class ApplicationWorkerController extends AbstractController {
 	@Autowired
 	private WorkerService workerService;
 
+	@Autowired
+	private SystemDataService systemDataService;
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -48,9 +54,10 @@ public class ApplicationWorkerController extends AbstractController {
 		result.addObject("applications", applications);
 		result.addObject("requestURI", "application/worker/list.do");
 
-		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
-		// pasarlo
-		result.addObject("VAT", 0.21);
+		LinkedList<SystemData> systemData = new LinkedList<SystemData>(
+				systemDataService.findAll());
+		SystemData sistema = systemData.get(0);
+		result.addObject("VAT", sistema.getVatPercentage() / 100);
 
 		return result;
 
@@ -82,9 +89,10 @@ public class ApplicationWorkerController extends AbstractController {
 		result.addObject("application", application);
 		result.addObject("comentarios", comentarios);
 
-		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
-		// pasarlo
-		result.addObject("VAT", 0.21);
+		LinkedList<SystemData> systemData = new LinkedList<SystemData>(
+				systemDataService.findAll());
+		SystemData sistema = systemData.get(0);
+		result.addObject("VAT", sistema.getVatPercentage() / 100);
 		return result;
 
 	}
@@ -93,11 +101,34 @@ public class ApplicationWorkerController extends AbstractController {
 	public ModelAndView create(@RequestParam int taskId) {
 		ModelAndView result;
 		Application application;
+		Task t;
+		try {
+			// Probamos que el id exista y que no esta la task ya aceptada.
+			t = taskService.findOne(taskId);
+			boolean accepted = false;
+			if (!t.getApplications().isEmpty()) {
+				List<Application> applications = new LinkedList<Application>(
+						t.getApplications());
 
-		application = this.applicationService.createApplication(taskService
-				.findOne(taskId));
+				for (Application a : applications) {
+					if (a.getStatus().equals("ACCEPTED")) {
+						accepted = true;
+					}
+				}
+
+			}
+
+			if (!taskService.getActiveTasks().contains(t) || accepted) {
+				return result = new ModelAndView("redirect:list.do");
+			}
+
+			application = this.applicationService.createApplication(taskService
+					.findOne(taskId));
+		} catch (Exception e) {
+			return result = new ModelAndView("redirect:list.do");
+		}
+
 		Assert.notNull(application);
-		result = null;
 		result = this.createEditModelAndView(application);
 
 		return result;
@@ -140,6 +171,7 @@ public class ApplicationWorkerController extends AbstractController {
 		result = new ModelAndView("application/updateCreate");
 		result.addObject("application", application);
 		result.addObject("message", messageCode);
+		result.addObject("requestURI", "application/worker/create.do");
 
 		return result;
 	}

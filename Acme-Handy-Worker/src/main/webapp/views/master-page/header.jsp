@@ -28,6 +28,7 @@
 					<li><a href="warranty/administrator/list.do"><spring:message code="master.page.warranties" /></a></li>
 					<li><a href="admin/statistics.do"><spring:message code="master.page.administrator.statistics" /></a></li>
 					<li><a href="admin/create.do"><spring:message code="master.new.admin" /></a></li>
+					<li><a href="category/administrator/list.do?categoryId=0"><spring:message code="master.page.category.list" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
