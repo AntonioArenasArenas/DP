@@ -42,7 +42,7 @@
 
 		<property name="photo" value="https://tumblr.wdf43" />
 
-		<property name="email" value="Antonio <antonio@>" />
+		<property name="email" value="antonio@" />
 
 		<property name="phoneNumber" value="+34 344 654 843" />
 

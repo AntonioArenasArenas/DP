@@ -36,8 +36,6 @@ public class ApplicationService {
 	@Autowired
 	private MessageService messageService;
 
-	@Autowired
-	private MessageService messageService;
 
 	// Constructors -----------------------------------------------------------
 
