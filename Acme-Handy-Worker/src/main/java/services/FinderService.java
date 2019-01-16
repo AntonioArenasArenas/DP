@@ -42,6 +42,8 @@ public class FinderService {
 
         Finder result;
         result = new Finder();
+        Collection<Task> voidLisOfTasks = new ArrayList<>();
+        result.setTasks(voidLisOfTasks);
         return result;
     }
 
@@ -55,6 +57,11 @@ public class FinderService {
         finder.getMinPrice(), finder.getStartDate(), finder.getEndDate(), finder.getKeyWord()));
         result = finderRepository.save(finder);
         return result;
+    }
+    public Finder save2(Finder finder){
+        Assert.notNull(finder);
+        Finder finderSaved = this.finderRepository.save(finder);
+        return finderSaved;
     }
     public void delete(Finder finder){
 

@@ -20,6 +20,7 @@ import domain.Actor;
 import domain.Application;
 import domain.Box;
 import domain.Endorsement;
+import domain.Finder;
 import domain.Message;
 import domain.Profile;
 import domain.Tutorial;
@@ -35,12 +36,15 @@ public class WorkerService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private BoxService boxService;
-	
+
 	@Autowired
 	private UserAccountService userAccountService;
-	
+
 	@Autowired
 	private ActorService actorService;
+
+	@Autowired
+	private FinderService finderService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -58,16 +62,16 @@ public class WorkerService {
 		Collection<Profile> profiles = new ArrayList<Profile>();
 		Collection<Box> box;
 		box = boxService.createDefault();
-		
-		
+
+
 		List<Authority> ls;
 		ls = new ArrayList<>();
 		Authority authority;
 		authority = new Authority();
 		authority.setAuthority(Authority.WORKER);
 		ls.add(authority);
-		
-		userAccount.setAuthorities(ls);	
+
+		userAccount.setAuthorities(ls);
 
 		result.setUserAccount(userAccount);
 		result.setBoxes(box);
@@ -78,7 +82,6 @@ public class WorkerService {
 		result.setEndorsements(new LinkedList<Endorsement>());
 		result.setApplications(new LinkedList<Application>());
 		result.setTutorials(new LinkedList<Tutorial>());
-		
 
 		return result;
 	}
@@ -103,14 +106,20 @@ public class WorkerService {
 
 	public Worker save(Worker worker) {
 		Assert.notNull(worker);
-		
+
 		Assert.isTrue(worker.getEmail().matches("^([A-z0-9 ]{1,}<[A-z0-9]{1,}@[A-z0-9.]{1,}>|[A-z0-9]{1,}@[A-z0-9.]{1,})$")); // I do this here because admins can also have an email without domain (abcdef@) but the rest of users can't
-		
+
 		if(worker.getId()!=0){
 			Actor actor = actorService.findByPrincipal();
 			Assert.isTrue(actor.equals(worker));
+		}else{
+			Finder finder = finderService.create();
+			Finder finderSaved;
+			worker.setFinder(finder);
+			finderSaved = finderService.save2(finder);
+			worker.setFinder(finderSaved);
 		}
-		
+
 		String phoneNumber = worker.getPhoneNumber();
 		if(!phoneNumber.startsWith("+")) {
 			worker.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
@@ -120,7 +129,7 @@ public class WorkerService {
 		Worker result;
 		worker.setMake(worker.getName() + worker.getSurname());
 		result = WorkerRepository.save(worker);
-		
+
 
 		return result;
 	}
