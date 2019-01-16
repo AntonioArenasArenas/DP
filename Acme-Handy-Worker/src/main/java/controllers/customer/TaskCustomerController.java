@@ -14,10 +14,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CategoryService;
+import services.CustomerService;
 import services.TaskService;
 import services.WarrantyService;
 import controllers.AbstractController;
 import domain.Category;
+import domain.Customer;
 import domain.Task;
 import domain.Warranty;
 
@@ -35,6 +37,9 @@ public class TaskCustomerController extends AbstractController {
 	
 	@Autowired
 	private CategoryService categoryService;
+	
+	@Autowired
+	private CustomerService customerService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -79,8 +84,14 @@ public class TaskCustomerController extends AbstractController {
 
 		task = this.taskService.findOne(id);
 		Assert.notNull(task);
-		result = this.createEditModelAndView(task);
-
+		
+		Customer loggedCustomer = customerService.findByPrincipal();
+		if(task.getCustomer() != loggedCustomer) {
+			result = new ModelAndView("redirect:list.do");
+		} else {
+			result = this.createEditModelAndView(task);
+		}
+		
 		return result;
 	}
 
@@ -124,7 +135,13 @@ public class TaskCustomerController extends AbstractController {
 
 		task = this.taskService.findOne(id);
 		Assert.notNull(task);
-		result = this.showModelAndView(task);
+
+		Customer loggedCustomer = customerService.findByPrincipal();
+		if(task.getCustomer() != loggedCustomer) {
+			result = new ModelAndView("redirect:list.do");
+		} else {
+			result = this.showModelAndView(task);
+		}
 
 		return result;
 	}

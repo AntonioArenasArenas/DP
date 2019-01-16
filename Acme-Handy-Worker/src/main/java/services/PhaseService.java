@@ -25,6 +25,9 @@ public class PhaseService {
 	
 	@Autowired
 	private ApplicationService applicationService;
+	
+	@Autowired
+	private TaskService taskService;
 
 	public Collection<Phase> findAll() {
 
@@ -77,7 +80,6 @@ public class PhaseService {
 		
 		if(phase.getId() == 0) {
 			task.getPhases().add(result);
-//			taskService.save(task);
 		}
 
 		return result;
@@ -86,8 +88,11 @@ public class PhaseService {
 	public void delete(Phase phase) {
 		Assert.notNull(phase);
 		Task task = getTaskByPhaseId(phase.getId());
+		
+		Worker worker = workerService.findByPrincipal();
+		Assert.isTrue(taskService.getTasksByWorkerId(worker.getId()).contains(task));
+		
 		task.getPhases().remove(phase);
-//		taskService.save(task);
 		phaseRepository.delete(phase);
 	}
 	

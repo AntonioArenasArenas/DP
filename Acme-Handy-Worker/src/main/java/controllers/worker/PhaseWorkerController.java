@@ -49,16 +49,14 @@ public class PhaseWorkerController extends AbstractController {
 		
 		Worker worker = workerService.findByPrincipal();
 		
-		boolean showCreateButton = false;
-		if(!applicationService.getWorkerAcceptedApplicationsByTaskId(worker.getId(), task.getId()).isEmpty()) {
-			showCreateButton = true;
+		if(applicationService.getWorkerAcceptedApplicationsByTaskId(worker.getId(), task.getId()).isEmpty()){
+			result = new ModelAndView("redirect:/");
+		} else {
+			result = new ModelAndView("phase/list");
+			result.addObject("phases", phases);
+			result.addObject("requestURI", "phase/worker/list.do");
 		}
 		
-		result = new ModelAndView("phase/list");
-		result.addObject("phases", phases);
-		result.addObject("showCreateButton", showCreateButton);
-		result.addObject("requestURI", "phase/worker/list.do");
-
 		return result;
 
 	}
@@ -74,9 +72,15 @@ public class PhaseWorkerController extends AbstractController {
 		} catch (Exception e) {
 			return result = new ModelAndView("redirect:list.do");
 		}
-
-		result = new ModelAndView("phase/show");
-		result.addObject("phase", phase);
+		
+		Worker loggedWorker = workerService.findByPrincipal();
+		Task task = phaseService.getTaskByPhaseId(id);
+		if(!taskService.getTasksWithAcceptedApplicationsByWorkerId(loggedWorker.getId()).contains(task)) {
+			result = new ModelAndView("redirect:/");
+		} else {
+			result = new ModelAndView("phase/show");
+			result.addObject("phase", phase);
+		}
 
 		return result;
 
@@ -103,26 +107,30 @@ public class PhaseWorkerController extends AbstractController {
 
 		phase = this.phaseService.findOne(id);
 		Assert.notNull(phase);
-		result = this.createEditModelAndView(phase);
+		
+		Worker loggedWorker = workerService.findByPrincipal();
+		Task task = phaseService.getTaskByPhaseId(id);
+		if(!taskService.getTasksWithAcceptedApplicationsByWorkerId(loggedWorker.getId()).contains(task)) {
+			result = new ModelAndView("redirect:/");
+		} else {
+			result = this.createEditModelAndView(phase);
+		}
 
 		return result;
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid Phase phase, @RequestParam int taskId,
-			BindingResult binding) {
+	public ModelAndView save(@Valid final Phase phase, @RequestParam int taskId,
+			final BindingResult binding) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
-			result = createEditModelAndView(phase);
+			result = this.createEditModelAndView(phase);
 		} else {
 			try {
-
-				phaseService.save(phase, taskService.findOne(taskId));
+				this.phaseService.save(phase, taskService.findOne(taskId));
 				result = new ModelAndView("redirect:list.do?taskId=" + taskId);
-			} catch (Throwable oops) {
-				result = createEditModelAndView(phase,
-						"phase.commit.error");
-
+			} catch (final Throwable oops) {
+				result = this.createEditModelAndView(phase, "phase.commit.error");
 			}
 		}
 
@@ -146,7 +154,7 @@ public class PhaseWorkerController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(Phase phase) {
 		ModelAndView result;
-		result = createEditModelAndView(phase, null);
+		result = this.createEditModelAndView(phase, null);
 
 		return result;
 	}
