@@ -32,4 +32,148 @@
 	
 	<!-- Other domain beans come here -->	
 	
+	<bean id="admin" class="domain.Worker">
+
+		<property name="name" value="Antonio" />
+
+		<property name="surname" value="Diaz" />
+
+		<property name="middleName" value="Panochete" />
+
+		<property name="photo" value="https://tumblr.wdf43" />
+
+		<property name="email" value="Antonio <antonio@>" />
+
+		<property name="phoneNumber" value="+34 344 654 843" />
+
+		<property name="address" value="Avenida Ramon Resa" />
+
+		<property name="suspicious" value="False" />
+
+		<property name="boxes">
+
+			<list>
+				<ref bean="box1" />
+				<ref bean="box2" />
+				<ref bean="box3" />
+				<ref bean="box4" />
+
+			</list>
+
+		</property>
+
+		<property name="userAccount" ref="userAccount1" />
+
+		<property name="sentMessages">
+
+			<list></list>
+
+		</property>
+
+		<property name="receivedMessages">
+
+			<list></list>
+
+		</property>
+
+		<property name="profiles">
+
+			<list></list>
+
+		</property>
+
+
+	</bean>
+	
+	<bean id="box1" class="domain.Box">
+
+		<property name="name" value="OUTBOX" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+	
+	<bean id="box2" class="domain.Box">
+
+		<property name="name" value="INBOX" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+	
+	<bean id="box3" class="domain.Box">
+
+		<property name="name" value="SPAMBOX" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+	
+	<bean id="box4" class="domain.Box">
+
+		<property name="name" value="TRASHBOX" />
+
+		<property name="isDefault" value="True" />
+
+		<property name="messages">
+
+			<list></list>
+
+		</property>
+
+	</bean>
+	
+	<bean id="systemData" class="domain.SystemData">
+
+		<property name="name" value="nombre" />
+		<property name="banner" value="hola" />
+		<property name="bannerHeader" value="hola2" />
+		<property name="welcomePageMsg" value="bienvenido de veulta" />
+		<property name="phoneCode">
+			<list></list>
+		</property>
+		<property name="spamWords">
+			<list>
+				<value>Nigeria</value>
+				<value>sex</value>
+				<value>sexo</value>
+				<value>viagra</value>
+				<value>cialis</value>
+				<value>you’ve been selected</value>
+				<value>ha sido seleccionado</value>
+				<value>one million</value>
+				<value>un millón</value>	
+			</list>
+		</property>
+		<property name="makeCreditCards">
+			<list>
+				<value>VISA</value>
+				<value>MASTER</value>
+				<value>DINNERS</value>
+				<value>AMEX</value>	
+			</list>
+		</property>
+		<property name="vatPercentage" value="21%" />
+		<property name="cache" value="3" />
+		<property name="maxPrice" value="22" />
+	</bean>
+	
 </beans>

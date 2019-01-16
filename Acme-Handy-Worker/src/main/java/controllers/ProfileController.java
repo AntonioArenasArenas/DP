@@ -95,7 +95,7 @@ public class ProfileController extends AbstractController {
 		@RequestMapping(value = "/edit", method = RequestMethod.GET)
 		public ModelAndView edit(@RequestParam final int profileId) {
 			ModelAndView result;
-			
+	
 			Profile profile = this.profileService.findOne(profileId);
 			Assert.notNull(profile);
 			result = this.createEditModelAndView(profile);

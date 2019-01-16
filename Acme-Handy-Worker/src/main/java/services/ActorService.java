@@ -11,7 +11,6 @@ import org.springframework.util.Assert;
 import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
-
 import domain.Actor;
 
 
@@ -27,8 +26,6 @@ public class ActorService {
 
 	// Supporting services ----------------------------------------------------
 
-	@Autowired
-	private LoginService loginService;
 
 	// Constructors -----------------------------------------------------------
 

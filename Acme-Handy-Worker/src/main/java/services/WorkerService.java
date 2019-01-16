@@ -68,9 +68,8 @@ public class WorkerService {
 		ls.add(authority);
 		
 		userAccount.setAuthorities(ls);	
-		UserAccount saved = userAccountService.save(userAccount);
 
-		result.setUserAccount(saved);
+		result.setUserAccount(userAccount);
 		result.setBoxes(box);
 		result.setMake("");
 		result.setProfiles(profiles);

@@ -15,7 +15,6 @@ import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
-import domain.Actor;
 import domain.Admin;
 import domain.Box;
 import domain.Message;
@@ -39,8 +38,7 @@ public class AdminService {
 	@Autowired
 	private UserAccountService userAccountService;
 	
-	@Autowired
-	private ActorService actorService;
+	
 	
 	//CRU
 	
@@ -62,9 +60,8 @@ public class AdminService {
 		ls.add(authority);
 		
 		userAccount.setAuthorities(ls);	
-		UserAccount saved = userAccountService.save(userAccount);
 
-		result.setUserAccount(saved);
+		result.setUserAccount(userAccount);
 		result.setBoxes(box);
 		result.setProfiles(profiles);
 		result.setReceivedMessages(new LinkedList<Message>());

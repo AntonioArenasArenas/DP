@@ -32,6 +32,9 @@ public class ApplicationService {
 
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private MessageService messageService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -131,8 +134,10 @@ public class ApplicationService {
 		} else {
 			application.setComments(comments);
 		}
-
+		
 		result = applicationRepository.save(application);
+		
+		messageService.applicationMessage(t, application.getWorker());
 
 		return result;
 	}

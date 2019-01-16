@@ -16,6 +16,7 @@ import security.UserAccount;
 import domain.Actor;
 import domain.Box;
 import domain.Message;
+import domain.SystemData;
 import domain.Task;
 import domain.Worker;
 
@@ -25,6 +26,10 @@ public class MessageService {
 
 	@Autowired
 	private MessageRepository messageRepository;
+	
+	//Supported services
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -51,10 +56,13 @@ public class MessageService {
 
 	public Message findOne(int MessageId) {
 		Assert.isTrue(MessageId != 0);
-
+		Actor logged = actorService.findByPrincipal();
 		Message result;
 
 		result = messageRepository.findOne(MessageId);
+		
+		Assert.isTrue(logged.getReceivedMessages().contains(result)||
+				logged.getSentMessages().contains(result));
 		Assert.notNull(result);
 
 		return result;
@@ -78,27 +86,55 @@ public class MessageService {
 		Message result = message;
 		Box outBox = boxService.findBoxByActor("OUTBOX", actor.getId());
 		Collection<Actor> recipients = result.getRecipients();
-
 		Assert.notNull(message);
 		userAccount = LoginService.getPrincipal();
 		Assert.isTrue(message.getSender().getUserAccount().equals(userAccount));
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		Collection<String> spamwords = data.getSpamWords();
 
 		result.setMoment(moment);
 
 		result = messageRepository.save(message);
-
+		
+		for(String word : spamwords){
+			
+			if(message.getBody().contains(word)||message.getTags().contains(word)
+					||message.getSubject().contains(word)){
+				
+				actor.setSuspicious(true);
+				
+				for( Actor a : recipients){
+					
+					Box InBox = boxService.findBoxByActor("SPAMBOX", a.getId());
+					InBox.getMessages().add(result);
+					a.getReceivedMessages().add(result);
+					boxService.save(InBox);
+					actorService.save(a);
+					break;
+					}
+				
+			  }else{
+				  for( Actor a : recipients){
+			  
+					Box InBox = boxService.findBoxByActor("INBOX", a.getId());
+					InBox.getMessages().add(result);
+					a.getReceivedMessages().add(result);
+					boxService.save(InBox);
+					actorService.save(a);
+					break;
+				}
+			  }
+		break;
+		}
+		
+		
+		
 		actor.getSentMessages().add(result);
 		outBox.getMessages().add(result);
 		boxService.save(outBox);
 		actorService.save(actor);
 
-		for( Actor a : recipients){
-			Box InBox = boxService.findBoxByActor("INBOX", a.getId());
-			InBox.getMessages().add(result);
-			a.getReceivedMessages().add(result);
-			boxService.save(InBox);
-			actorService.save(a);
-		}
+		
 	
 
 		return result;
@@ -113,6 +149,8 @@ public class MessageService {
 		Actor logged;
 		userAccount = LoginService.getPrincipal();
 		logged = actorService.findByUserAccount(userAccount);
+		Assert.isTrue(logged.getReceivedMessages().contains(message)||
+				logged.getSentMessages().contains(message));
 		Box TrashBox = boxService.findBoxByActor("TRASHBOX", logged.getId());
 		
 		if( TrashBox.getMessages().contains(message)){
@@ -158,9 +196,10 @@ public class MessageService {
 		Assert.notNull(task);
 		Assert.notNull(worker);
 		Actor logged = actorService.findByPrincipal();
+		Assert.notNull(logged);
 		Collection<Actor> recipients = new LinkedList<Actor>();
 		recipients.add(worker);
-		Assert.notNull(logged);
+		
 		
 		Message message = this.createMessage();
 		message.setBody("Your application  of task:" + task.getTicker()+ "has been updated!" +

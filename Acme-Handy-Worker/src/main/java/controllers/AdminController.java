@@ -113,9 +113,10 @@ public class AdminController extends AbstractController {
 			try {
 
 				UserAccount userAccount = admin.getUserAccount();
-				final String password = new Md5PasswordEncoder()
-						.encodePassword(userAccount.getPassword(), null);
-				userAccount.setPassword(password);
+				if(admin.getId()==0){
+					final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
+					userAccount.setPassword(password);
+				}
 				userAccount = this.userAccountService.save(userAccount);
 				admin.setUserAccount(userAccount);
 

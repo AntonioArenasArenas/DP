@@ -8,14 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
-import domain.Actor;
-import domain.Profile;
-import domain.Report;
-
-
 import repositories.ProfileRepository;
 import security.LoginService;
 import security.UserAccount;
+import domain.Actor;
+import domain.Profile;
 
 @Service
 @Transactional
@@ -39,12 +36,12 @@ public class ProfileService {
 
 	public Profile findOne(int profileId) {
 		Assert.isTrue(profileId != 0);
-
+		Actor logged = actorService.findByPrincipal();
 		Profile result;
 
 		result = profileRepository.findOne(profileId);
 		Assert.notNull(result);
-
+		Assert.isTrue(logged.getProfiles().contains(result));
 		return result;
 	}
 	

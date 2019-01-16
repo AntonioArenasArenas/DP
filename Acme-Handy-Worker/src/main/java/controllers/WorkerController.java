@@ -91,8 +91,10 @@ public class WorkerController extends AbstractController {
 			try {	
 				
 				UserAccount userAccount = worker.getUserAccount();
-				final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
-				userAccount.setPassword(password);
+				if(worker.getId()==0){
+					final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
+					userAccount.setPassword(password);
+				}
 				userAccount = this.userAccountService.save(userAccount);
 				worker.setUserAccount(userAccount);
 				
