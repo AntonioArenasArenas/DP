@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.FinderRepository;
+import domain.Actor;
 import domain.Finder;
 import domain.SystemData;
 import domain.Task;
@@ -28,8 +29,13 @@ public class FinderService {
 
     @Autowired
     private SystemDataService systemDataService;
+
     @Autowired
-    WorkerService workerService;
+    private WorkerService workerService;
+
+    
+
+
     // Constructors --------------------------------------------------------------------------
 
     public FinderService(){
@@ -74,6 +80,8 @@ public class FinderService {
 
         Finder result;
         result = getFinderByLoggedWorker();
+        Worker logged = workerService.findByPrincipal();
+        Assert.isTrue(logged.getFinder()== result);
         cleanFinderCache();
         return result;
     }
