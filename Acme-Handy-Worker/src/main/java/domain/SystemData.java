@@ -6,6 +6,8 @@ import javax.persistence.Access;
 import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Min;
 
 import org.hibernate.validator.constraints.NotBlank;
 
@@ -19,14 +21,11 @@ public class SystemData extends DomainEntity {
 	private String welcomePageMsg;
 	private List<String> phoneCode;
 	private List<String> spamWords;
-	private String vatPercentage;
+	private double vatPercentage;
 	private int cache;
 	private int maxPrice;
 	private List<String> makeCreditCards;
 
-
-
-	
 	@ElementCollection
 	public List<String> getMakeCreditCards() {
 		return makeCreditCards;
@@ -106,12 +105,13 @@ public class SystemData extends DomainEntity {
 		this.spamWords = spamWords;
 	}
 
-	@NotBlank
-	public String getVatPercentage() {
+	@Digits(fraction = 2, integer = 2)
+	@Min(value = 0)
+	public double getVatPercentage() {
 		return this.vatPercentage;
 	}
 
-	public void setVatPercentage(final String vatPercentage) {
+	public void setVatPercentage(final double vatPercentage) {
 		this.vatPercentage = vatPercentage;
 	}
 

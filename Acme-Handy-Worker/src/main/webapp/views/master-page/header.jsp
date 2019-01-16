@@ -28,6 +28,7 @@
 					<li><a href="warranty/administrator/list.do"><spring:message code="master.page.warranties" /></a></li>
 					<li><a href="admin/statistics.do"><spring:message code="master.page.administrator.statistics" /></a></li>
 					<li><a href="admin/create.do"><spring:message code="master.new.admin" /></a></li>
+					<li><a href="category/administrator/list.do?categoryId=0"><spring:message code="master.page.category.list" /></a></li>
 					<li><a href="systemData/administrator/edit.do"><spring:message code="master.page.systemData.administrator" /></a></li>
 				</ul>
 			</li>
@@ -59,21 +60,21 @@
 				</ul>
 			</li>
 		</security:authorize>
-		
-		
+
+
 
 		 <security:authorize access="hasRole('REFEREE')">
 			<li><a class="fNiv"><spring:message	code="master.page.referee" /></a>
 				<ul>
 					<li class="arrow"></li>
 
-					
+
 					<li><a href="complaint/referee/list.do"><spring:message code="master.page.complaints" /></a></li>
-					
+
 
 				</ul>
 			</li>
-		</security:authorize> 
+		</security:authorize>
 
 		<security:authorize access="isAnonymous()">
 			<li><a class="fNiv" href="security/login.do"><spring:message code="master.page.login" /></a>
