@@ -41,6 +41,7 @@
 		<value>/views/report/messages</value>
 		<value>/views/note/messages</value>
 		<value>/views/complaint/messages</value>
+		<value>/views/system-data/messages</value>
 	</util:list>
 
 </beans>

@@ -43,7 +43,7 @@ public interface FinderRepository extends JpaRepository<Finder, Integer>{
     @Query("select t from Task t where t.startDate>=?1 ")
     public Collection<Task> filterTasksByStartDate(Date startDate);
 
-    @Query("select t from Task t where t.endDate<=?1 ")
+    @Query("select t from Task t where t.endDate<=?1 and t.endDate>CURRENT_DATE ")
     public Collection<Task> filterTasksByEndDate(Date endDate);
 
 
