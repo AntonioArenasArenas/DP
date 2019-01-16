@@ -36,3 +36,8 @@
 <b><spring:message code="customer.address" />:</b><br />
 <jstl:out value="${customer.address}"/>
 <br />
+
+<br />
+<input type="button" name="create"
+			value="<spring:message code="customer.viewTasksOfCustomer" />"
+			onclick="javascript: relativeRedir('task/worker/list.do?customerId=${customer.id}');" />

@@ -92,10 +92,11 @@ public class BoxService {
 
 	public Box findOne(int boxId) {
 		Assert.isTrue(boxId != 0);
-
+		Actor logged = actorService.findByPrincipal();
 		Box result;
 
 		result = boxRepository.findOne(boxId);
+		Assert.isTrue(logged.getBoxes().contains(result));
 		Assert.notNull(result);
 
 		return result;
@@ -125,7 +126,7 @@ public class BoxService {
 	}
 
 	public void delete(Box box) {
-
+		
 		Actor actor;
 
 		Assert.notNull(box);

@@ -23,10 +23,12 @@
 	<form:hidden path="boxes" />
 	<form:hidden path="userAccount"/>
 	<form:hidden path="userAccount.authorities" value="CUSTOMER" />
-	<form:hidden path="userAccount.activated" />
-	<form:hidden path="userAccount.id" />
-	<form:hidden path="userAccount.version" /> 
 	
+	
+	
+	<jstl:if test="${customer.id!=0}">
+	<form:hidden path="userAccount.password" /> 
+	</jstl:if>
 	
 	<form:label path="userAccount.username">
 		<spring:message code="actor.username" />:
@@ -35,13 +37,14 @@
 	<form:errors cssClass="error" path="userAccount.username" />
 	<br />
 	
+	<jstl:if test="${customer.id==0}">
 	<form:label path="userAccount.password">
 		<spring:message code="actor.password" />:
 	</form:label>
 	<form:input type="password" path="userAccount.password" />
 	<form:errors cssClass="error" path="userAccount.password" />
 	<br /> 
-	
+	</jstl:if>
 
 	<form:label path="name">
 		<spring:message code="actor.name" />:
@@ -96,7 +99,8 @@
 
 
 	<input type="submit" name="save"
-		value="<spring:message code="actor.save" />" />&nbsp; 
+		value="<spring:message code="actor.save" />" onclick="if(!/^(\+[0-9]{1,3}[ ]{0,1}(\([0-9]{1,3}\)[ ]{0,1}){0,1}){0,1}[0-9]{1}[0-9 ]{3,}$/.test(document.getElementById('phoneNumber').value)) { return confirm('<spring:message code="task.confirm.phoneNumber" />')}"
+	/>&nbsp; 
 	<input type="button" name="cancel"
 		value="<spring:message code="actor.cancel" />"
 		onclick="javascript: relativeRedir('');" />

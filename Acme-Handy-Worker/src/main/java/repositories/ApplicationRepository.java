@@ -40,4 +40,7 @@ public interface ApplicationRepository extends
 	@Query("select count(a)*1.00 / (select count(a) from Application a) from Application a where a.status='REJECTED'")
 	public Double getRejectedApplications();
 
+	@Query("select a from Worker w join w.applications a where w.id=?1 AND a.task.id=?2 AND a.status='ACCEPTED'")
+	public Collection<Application> getWorkerAcceptedApplicationsByTaskId(int workerId, int taskId);
+
 }

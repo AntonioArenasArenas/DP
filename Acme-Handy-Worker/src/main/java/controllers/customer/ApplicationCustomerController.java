@@ -158,6 +158,7 @@ public class ApplicationCustomerController extends AbstractController {
 				}
 				Application actual = applicationService.findOne(application
 						.getId());
+				
 				if (!actual.getComments().equals(null)) {
 					applicationService.updateStatus(application,
 							actual.getComments());

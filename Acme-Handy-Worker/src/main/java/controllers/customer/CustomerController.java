@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.UserAccount;
 import security.UserAccountService;
-import services.ActorService;
 import services.CustomerService;
 import controllers.AbstractController;
 import domain.Customer;
@@ -37,8 +36,6 @@ public class CustomerController extends AbstractController {
 	private CustomerService customerService;
 	@Autowired
 	private UserAccountService userAccountService;
-	@Autowired
-	private ActorService actorService;
 
 	
 	// Constructors -----------------------------------------------------------
@@ -65,6 +62,7 @@ public class CustomerController extends AbstractController {
 		ModelAndView result;
 	
 		Customer customer = customerService.findByPrincipal();
+		
 		Assert.notNull(customer);
 		result = this.createEditModelAndView(customer);
 
@@ -75,7 +73,7 @@ public class CustomerController extends AbstractController {
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Customer customer, final BindingResult binding) {
 		ModelAndView result;
-
+		System.out.println(binding.getFieldErrors());
 		if (binding.hasErrors()){
 			
 			result = this.createEditModelAndView(customer);
@@ -83,11 +81,14 @@ public class CustomerController extends AbstractController {
 			
 			}
 		else
-			try {	
+			try {
 				
 				UserAccount userAccount = customer.getUserAccount();
-				final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
-				userAccount.setPassword(password);
+				if(customer.getId()==0){
+					final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
+					userAccount.setPassword(password);
+				}
+				
 				userAccount = this.userAccountService.save(userAccount);
 				customer.setUserAccount(userAccount);
 				

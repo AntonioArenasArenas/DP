@@ -22,7 +22,7 @@ public interface ComplaintRepository extends JpaRepository<Complaint, Integer>{
 	@Query("select c from Complaint c where c.report is empty") // If the complaint doesn't have a report then it doesn't have a referee
 	public Collection<Complaint> getComplaintsWithNoReferee();
 
-	@Query("select rep.complaint from Referee ref join ref.reports rep where ref.id=?1")
+	@Query("select c from Complaint c where c.referee.id=?1")
 	public Collection<Complaint> getComplaintsByRefereeId(int refereeId);
 
 	@Query("select avg(t.complaints.size), min(t.complaints.size), max(t.complaints.size), stddev(t.complaints.size) from Task t")

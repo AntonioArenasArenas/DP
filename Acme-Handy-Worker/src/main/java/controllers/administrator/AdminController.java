@@ -15,10 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.UserAccount;
 import security.UserAccountService;
-import services.ActorService;
 import services.AdminService;
 import services.ApplicationService;
 import services.CategoryService;
+import services.TaskService;
 import controllers.AbstractController;
 import domain.Admin;
 import domain.Worker;
@@ -32,7 +32,7 @@ public class AdminController extends AbstractController {
 	@Autowired
 	private UserAccountService userAccountService;
 	@Autowired
-	private ActorService actorService;
+	private TaskService taskService;
 	@Autowired
 	private ApplicationService applicationService;
 	@Autowired
@@ -49,13 +49,21 @@ public class AdminController extends AbstractController {
 	@RequestMapping(value = "/statistics", method = RequestMethod.GET)
 	public ModelAndView statistics() {
 		ModelAndView result;
+		
+		Double[] spuser = new Double[4];
 
-		// Double[] spuser = taskService.tasksPerUserStatistics();
+		Double[] sptask = new Double[4];
 
-		Double[] sptask = applicationService.getAdminStatisticsPerTask();
+		Double[] spoffered = new Double[4];
+		
+		if(!taskService.findAll().isEmpty()) {
+			spuser = taskService.tasksPerUserStatistics();
 
-		Double[] spoffered = applicationService
-				.getAdminStatisticsPriceOffered();
+			sptask = applicationService.getAdminStatisticsPerTask();
+
+			spoffered = applicationService
+					.getAdminStatisticsPriceOffered();
+		}
 
 		Double cantChange = applicationService.getAppliCantChange();
 
@@ -70,10 +78,10 @@ public class AdminController extends AbstractController {
 
 		result = new ModelAndView("admin/statistics");
 
-		// result.addObject("maximumpu", spuser[2]);
-		// result.addObject("minimumpu", spuser[1]);
-		// result.addObject("averagepu", spuser[0]);
-		// result.addObject("stdevpu", spuser[3]);
+		 result.addObject("maximumpu", spuser[2]);
+		 result.addObject("minimumpu", spuser[1]);
+		 result.addObject("averagepu", spuser[0]);
+		 result.addObject("stdevpu", spuser[3]);
 
 		result.addObject("maximumpt", sptask[2]);
 		result.addObject("minimumpt", sptask[1]);
@@ -133,9 +141,10 @@ public class AdminController extends AbstractController {
 			try {
 
 				UserAccount userAccount = admin.getUserAccount();
-				final String password = new Md5PasswordEncoder()
-						.encodePassword(userAccount.getPassword(), null);
-				userAccount.setPassword(password);
+				if(admin.getId()==0){
+					final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
+					userAccount.setPassword(password);
+				}
 				userAccount = this.userAccountService.save(userAccount);
 				admin.setUserAccount(userAccount);
 
