@@ -3,21 +3,18 @@ package services;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
-import java.util.List;
-
 import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
 import security.UserAccountService;
-import domain.Actor;
 import domain.Box;
 import domain.Customer;
 import domain.Endorsement;
@@ -36,9 +33,6 @@ public class CustomerService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private BoxService boxService;
-	
-	@Autowired
-	private ActorService actorService;
 	
 	@Autowired
 	private UserAccountService userAccountService;
@@ -104,11 +98,10 @@ public class CustomerService {
 		
 		Assert.notNull(customer);
 		
-//		Actor actor = actorService.findByPrincipal();
-		
-//		if(customer.getId()!=0){
-//			Assert.isTrue(actor.getUserAccount().equals(customer.getUserAccount()));
-//		}
+		String phoneNumber = customer.getPhoneNumber();
+		if(!phoneNumber.startsWith("+")) {
+			customer.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
+		}
 
 		Customer result;
 

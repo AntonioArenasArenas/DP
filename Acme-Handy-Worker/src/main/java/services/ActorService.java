@@ -26,9 +26,7 @@ public class ActorService {
 	private ActorRepository		actorRepository;
 
 	// Supporting services ----------------------------------------------------
-
-	@Autowired
-	private LoginService loginService;
+	
 
 	// Constructors -----------------------------------------------------------
 
@@ -64,6 +62,11 @@ public class ActorService {
 		Assert.notNull(actor);
 
 		Actor result;
+		
+		String phoneNumber = actor.getPhoneNumber();
+		if(!phoneNumber.startsWith("+")) {
+			actor.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
+		}
 
 		result = actorRepository.save(actor);
 
