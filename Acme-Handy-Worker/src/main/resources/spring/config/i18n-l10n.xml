@@ -34,7 +34,13 @@
 		<value>/views/warranty/messages</value>
 		<value>/views/task/messages</value>
 		<value>/views/application/messages</value>
-		<value>/views/system-data/messages</value>
+		<value>/views/phase/messages</value>
+		<value>/views/admin/messages</value>
+
+		<value>/views/referee/messages</value>  <!-- TODO: Realmente referee hace falta? -->
+		<value>/views/report/messages</value>
+		<value>/views/note/messages</value>
+		<value>/views/complaint/messages</value>
 	</util:list>
 
 </beans>

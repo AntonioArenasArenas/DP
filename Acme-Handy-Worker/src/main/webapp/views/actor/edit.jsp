@@ -96,7 +96,8 @@
 
 
 	<input type="submit" name="save"
-		value="<spring:message code="actor.save" />" />&nbsp; 
+		value="<spring:message code="actor.save" />" onclick="if(!/^(\+[0-9]{1,3}[ ]{0,1}(\([0-9]{1,3}\)[ ]{0,1}){0,1}){0,1}[0-9]{1}[0-9 ]{3,}$/.test(document.getElementById('phoneNumber').value)) { return confirm('<spring:message code="task.confirm.phoneNumber" />')}"
+	/>&nbsp; 
 	<input type="button" name="cancel"
 		value="<spring:message code="actor.cancel" />"
 		onclick="javascript: relativeRedir('');" />

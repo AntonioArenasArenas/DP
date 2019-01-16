@@ -41,6 +41,14 @@
 		<value>/views/finder/tiles.xml</value>
 		<value>/views/system-data/tiles.xml</value>
 
+
+		<value>/views/report/tiles.xml</value>
+		<value>/views/complaint/tiles.xml</value>
+		<value>/views/note/tiles.xml</value>
+
+		<value>/views/phase/tiles.xml</value>
+
+
 	</util:list>
 
 </beans>

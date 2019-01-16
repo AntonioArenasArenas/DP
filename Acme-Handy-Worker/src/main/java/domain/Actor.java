@@ -123,15 +123,16 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@NotBlank
-	@Email
+	@Pattern(regexp = "^([A-z0-9 ]{1,}<[A-z0-9]{1,}@[A-z0-9.]{0,}>|[A-z0-9]{1,}@[A-z0-9.]{0,})$")
 	public String getEmail() {
 		return this.email;
 	}
-
+	
 	public void setEmail(final String email) {
 		this.email = email;
 	}
-	@Pattern(regexp = "^\\+[1-9][0-9 ]+$")
+	
+	@NotBlank
 	public String getPhoneNumber() {
 		return this.phoneNumber;
 	}

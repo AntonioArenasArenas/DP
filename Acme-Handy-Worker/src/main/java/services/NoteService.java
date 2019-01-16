@@ -34,8 +34,6 @@ public class NoteService {
 	@Autowired
 	private ComplaintService complaintService;
 	
-	@Autowired
-	private ReportService reportService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -74,7 +72,7 @@ public class NoteService {
 		} else if(actor instanceof Worker) {
 			Assert.isTrue(complaintService.findWorkerComplaints().contains(report.getComplaint()));
 		} else if(actor instanceof Referee) {
-			Assert.isTrue(report.getReferee().getUserAccount().equals(userAccount));
+			Assert.isTrue(report.getComplaint().getReferee().getUserAccount().equals(userAccount));
 		} else {
 			Assert.isTrue(false);
 		}
@@ -102,21 +100,21 @@ public class NoteService {
 		} else if(actor instanceof Worker) {
 			Assert.isTrue(complaintService.findWorkerComplaints().contains(report.getComplaint()));
 		} else if(actor instanceof Referee) {
-			Assert.isTrue(report.getReferee().getUserAccount().equals(userAccount));
+			Assert.isTrue(report.getComplaint().getReferee().getUserAccount().equals(userAccount));
 		} else {
 			Assert.isTrue(false);
 		}
 		
 		Assert.isTrue(report.isFinalReport());
-
-		Assert.notNull(note);
 		Note result;
-		
+		if(note.getId() == 0){
+			result = noteRepository.save(note);
+			report.getNotes().add(note);
+		}
 		result = noteRepository.save(note);
 
 		report.getNotes().add(result);
-		reportService.save(report);
-
+		
 		return result;
 	}
 
@@ -129,7 +127,7 @@ public class NoteService {
 		} else if(actor instanceof Worker) {
 			Assert.isTrue(complaintService.findWorkerComplaints().contains(report.getComplaint()));
 		} else if(actor instanceof Referee) {
-			Assert.isTrue(report.getReferee().getUserAccount().equals(userAccount));
+			Assert.isTrue(report.getComplaint().getReferee().getUserAccount().equals(userAccount));
 		} else {
 			Assert.isTrue(false);
 		}
@@ -156,13 +154,14 @@ public class NoteService {
 			Assert.isTrue(complaintService.findWorkerComplaints().contains(report.getComplaint()));
 			note.setWorkerComment(comment);
 		} else if(actor instanceof Referee) {
-			Assert.isTrue(report.getReferee().getUserAccount().equals(userAccount));
+			Assert.isTrue(report.getComplaint().getReferee().getUserAccount().equals(userAccount));
 			note.setRefereeComment(comment);
 		} else {
 			Assert.isTrue(false);
 		}
 		
 		Note result;
+		
 		
 		result = noteRepository.save(note);
 

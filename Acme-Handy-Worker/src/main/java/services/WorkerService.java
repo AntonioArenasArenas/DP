@@ -105,10 +105,18 @@ public class WorkerService {
 	public Worker save(Worker worker) {
 		Assert.notNull(worker);
 		
+		Assert.isTrue(worker.getEmail().matches("^([A-z0-9 ]{1,}<[A-z0-9]{1,}@[A-z0-9.]{1,}>|[A-z0-9]{1,}@[A-z0-9.]{1,})$")); // I do this here because admins can also have an email without domain (abcdef@) but the rest of users can't
+		
 		if(worker.getId()!=0){
 			Actor actor = actorService.findByPrincipal();
 			Assert.isTrue(actor.equals(worker));
 		}
+		
+		String phoneNumber = worker.getPhoneNumber();
+		if(!phoneNumber.startsWith("+")) {
+			worker.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
+		}
+
 
 		Worker result;
 		worker.setMake(worker.getName() + worker.getSurname());

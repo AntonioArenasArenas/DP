@@ -22,7 +22,7 @@
 <jstl:out value="${actor.surname}"/>
 <br />
 
-<b><spring:message code="actor.middlename" />:</b>
+<b><spring:message code="actor.middleName" />:</b>
 <jstl:out value="${actor.middleName}"/>
 <br />
 

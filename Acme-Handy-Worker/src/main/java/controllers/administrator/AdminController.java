@@ -11,14 +11,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
 import security.UserAccount;
 import security.UserAccountService;
-import services.ActorService;
 import services.AdminService;
 import services.ApplicationService;
 import services.TaskService;
+import controllers.AbstractController;
 import domain.Admin;
 
 @Controller
@@ -30,7 +28,7 @@ public class AdminController extends AbstractController {
 	@Autowired
 	private UserAccountService userAccountService;
 	@Autowired
-	private ActorService actorService;
+	private TaskService taskService;
 	@Autowired
 	private ApplicationService applicationService;
 
@@ -46,7 +44,7 @@ public class AdminController extends AbstractController {
 	public ModelAndView statistics() {
 		ModelAndView result;
 
-		// Double[] spuser = taskService.tasksPerUserStatistics();
+		Double[] spuser = taskService.tasksPerUserStatistics();
 
 		Double[] sptask = applicationService.getAdminStatisticsPerTask();
 
@@ -57,10 +55,10 @@ public class AdminController extends AbstractController {
 
 		result = new ModelAndView("admin/statistics");
 
-		// result.addObject("maximumpu", spuser[2]);
-		// result.addObject("minimumpu", spuser[1]);
-		// result.addObject("averagepu", spuser[0]);
-		// result.addObject("stdevpu", spuser[3]);
+		 result.addObject("maximumpu", spuser[2]);
+		 result.addObject("minimumpu", spuser[1]);
+		 result.addObject("averagepu", spuser[0]);
+		 result.addObject("stdevpu", spuser[3]);
 
 		result.addObject("maximumpt", sptask[2]);
 		result.addObject("minimumpt", sptask[1]);

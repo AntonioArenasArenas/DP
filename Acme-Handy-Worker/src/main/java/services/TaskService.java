@@ -1,6 +1,8 @@
 package services;
 
+import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Random;
 
@@ -79,14 +81,14 @@ public class TaskService {
 		Assert.notNull(task);
 
 		Task result;
-
-		task.setMoment(new Date(System.currentTimeMillis() - 1));
 		
 		Assert.isTrue(task.getStartDate().before(task.getEndDate()));
 		
 		Actor logged = actorService.findByPrincipal();
 		if(task.getId() != 0) {
 			Assert.isTrue(task.getCustomer() == logged);
+		} else {
+			task.setMoment(new Date(System.currentTimeMillis() - 1));
 		}
 		
 		result = taskRepository.save(task);
@@ -124,30 +126,56 @@ public class TaskService {
 
 	}
 	
-//	public Double[] tasksPerUserStatistics(){
-//		
-//		return taskRepository.tasksPerUserStatistics();
-//		
-//	}
+	public Collection<Task> getActiveTasksByCustomerId(Integer customerId) {
+		return taskRepository.getActiveTasksByCustomerId(customerId);
+	}
+	
+	public Collection<Task> getTasksWithAcceptedApplicationsByWorkerId(int workerId) {
+		return taskRepository.getTasksWithAcceptedApplicationsByWorkerId(workerId);
+	}
+	
+	public Collection<Task> getTasksByWorkerId(int workerId) {
+		return taskRepository.getTasksByWorkerId(workerId);
+	}
+	
+	public Double[] tasksPerUserStatistics(){
+		
+		Double[] res = new Double[4];
+		
+		Collection<Long> numTasksPerCust = taskRepository.numberOfTasksPerCustomer();
+		
+		Double sum = 0.0;
+		for(Long n : numTasksPerCust) {
+			sum += n;
+		}
+		res[0] = sum.doubleValue()/numTasksPerCust.size(); // Average
+		
+		res[1] = Collections.min(numTasksPerCust).doubleValue();
+		
+		res[2] = Collections.max(numTasksPerCust).doubleValue();
+		
+		Double num = 0.0;
+		Double numi = 0.0;
+		for(Long n : numTasksPerCust) {
+			numi = Math.pow(n - res[0], 2);
+			num += numi;
+		}
+		res[3] = Math.sqrt(num/numTasksPerCust.size()); // Standard deviation
+		
+		return res;
+		
+	}
 
 	public String tickerGenerator(){
 		String charactersL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-		String charactersN = "1234567890";
 		Random random = new Random();
-		String result1 = "";
 		String result2 = "";
 		int chars = 6;
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyMMdd");
+		String result1 = sdf.format(new Date());
 
-		char[] part1 = new char[chars];
 		char[] part2 = new char[chars];
-
-		for (int i = 0 ; i < chars ; i++){
-			part1[i] = charactersN.charAt(random.nextInt(charactersN.length()));
-		}
-
-		for (int i = 0 ; i < chars ; i++){
-			result1 +=part1[i];
-		}
 
 		for (int i = 0 ; i < chars ; i++){
 			part2[i] = charactersL.charAt(random.nextInt(charactersL.length()));
@@ -160,18 +188,5 @@ public class TaskService {
 		return result1 + "-" + result2;
 
 	}
-
-//	public Collection<Task> activeTasks(Collection<Task> tasks){ //Para mostrarle al customer las task activas que puede elegir
-//		Collection<Task> result ;
-//		result = taskRepository.findAll();
-//		Date now = Calendar.getInstance().getTime();
-//		for (Task t: result){
-//			if(t.getEndDate().after(now)){
-//				result.remove(t);
-//			}
-//		}
-//		return result;
-//
-//	}
 
 }
