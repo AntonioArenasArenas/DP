@@ -2,6 +2,7 @@ package services;
 
 import java.text.SimpleDateFormat;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Random;
 
@@ -80,14 +81,14 @@ public class TaskService {
 		Assert.notNull(task);
 
 		Task result;
-
-		task.setMoment(new Date(System.currentTimeMillis() - 1));
 		
 		Assert.isTrue(task.getStartDate().before(task.getEndDate()));
 		
 		Actor logged = actorService.findByPrincipal();
 		if(task.getId() != 0) {
 			Assert.isTrue(task.getCustomer() == logged);
+		} else {
+			task.setMoment(new Date(System.currentTimeMillis() - 1));
 		}
 		
 		result = taskRepository.save(task);
@@ -137,11 +138,33 @@ public class TaskService {
 		return taskRepository.getTasksByWorkerId(workerId);
 	}
 	
-//	public Double[] tasksPerUserStatistics(){
-//		
-//		return taskRepository.tasksPerUserStatistics();
-//		
-//	}
+	public Double[] tasksPerUserStatistics(){
+		
+		Double[] res = new Double[4];
+		
+		Collection<Long> numTasksPerCust = taskRepository.numberOfTasksPerCustomer();
+		
+		Double sum = 0.0;
+		for(Long n : numTasksPerCust) {
+			sum += n;
+		}
+		res[0] = sum.doubleValue()/numTasksPerCust.size(); // Average
+		
+		res[1] = Collections.min(numTasksPerCust).doubleValue();
+		
+		res[2] = Collections.max(numTasksPerCust).doubleValue();
+		
+		Double num = 0.0;
+		Double numi = 0.0;
+		for(Long n : numTasksPerCust) {
+			numi = Math.pow(n - res[0], 2);
+			num += numi;
+		}
+		res[3] = Math.sqrt(num/numTasksPerCust.size()); // Standard deviation
+		
+		return res;
+		
+	}
 
 	public String tickerGenerator(){
 		String charactersL = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

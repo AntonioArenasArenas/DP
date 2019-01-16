@@ -23,7 +23,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import security.UserAccount;
 import security.UserAccountService;
-import services.ActorService;
 import services.CustomerService;
 import controllers.AbstractController;
 import domain.Customer;
@@ -37,8 +36,6 @@ public class CustomerController extends AbstractController {
 	private CustomerService customerService;
 	@Autowired
 	private UserAccountService userAccountService;
-	@Autowired
-	private ActorService actorService;
 
 	
 	// Constructors -----------------------------------------------------------
