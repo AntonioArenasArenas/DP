@@ -98,6 +98,8 @@ public class CustomerService {
 		
 		Assert.notNull(customer);
 		
+		Assert.isTrue(customer.getEmail().matches("^([A-z0-9 ]{1,}<[A-z0-9]{1,}@[A-z0-9.]{1,}>|[A-z0-9]{1,}@[A-z0-9.]{1,})$")); // I do this here because admins can also have an email without domain (abcdef@) but the rest of users can't
+		
 		String phoneNumber = customer.getPhoneNumber();
 		if(!phoneNumber.startsWith("+")) {
 			customer.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData

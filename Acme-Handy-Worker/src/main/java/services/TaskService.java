@@ -80,14 +80,14 @@ public class TaskService {
 		Assert.notNull(task);
 
 		Task result;
-
-		task.setMoment(new Date(System.currentTimeMillis() - 1));
 		
 		Assert.isTrue(task.getStartDate().before(task.getEndDate()));
 		
 		Actor logged = actorService.findByPrincipal();
 		if(task.getId() != 0) {
 			Assert.isTrue(task.getCustomer() == logged);
+		} else {
+			task.setMoment(new Date(System.currentTimeMillis() - 1));
 		}
 		
 		result = taskRepository.save(task);
