@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
-	* * The use of this project is hereby constrained to the conditions of the 
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla
+	* * The use of this project is hereby constrained to the conditions of the
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -138,15 +138,10 @@
 	<bean id="systemData" class="domain.SystemData">
 
 		<property name="name" value="Acme Handy Worker" />
-		<property name="banner"
-			value="https://irp-cdn.multiscreensite.com/3737b2b6/dms3rep/multi/desktop/4-2000x889.jpg" />
-		<property name="bannerHeader"
-			value="¡Bienvenidos a Acme Handy Worker! Precio, calidad y confianza en el mismo sitio" />
-		<property name="welcomePageMsg"
-			value="Welcome to Acme Handy Worker! Price, quality and trust in a single place" />
-		<property name="phoneCode">
-			<list></list>
-		</property>
+		<property name="bannerHeader" value="https://irp-cdn.multiscreensite.com/3737b2b6/dms3rep/multi/desktop/4-2000x889.jpg" />
+		<property name="welcomePageMsgESP" value="¡Bienvenidos a Acme Handy Worker! Precio, calidad y confianza en el mismo sitio" />
+		<property name="welcomePageMsg" value="Welcome to Acme Handy Worker! Price, quality and trust in a single place" />
+		<property name="phoneCode" value="+34" />
 		<property name="spamWords">
 			<list>
 				<value>Nigeria</value>

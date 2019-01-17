@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import controllers.customer.TaskCustomerController;
 import services.FinderService;
+import services.SystemDataService;
 import controllers.AbstractController;
 import domain.Finder;
+import domain.SystemData;
 @Controller
 @RequestMapping("/finder/worker")
 public class FinderController extends AbstractController {
@@ -25,6 +27,8 @@ public class FinderController extends AbstractController {
 	private FinderService finderService;
 	@Autowired
 	private TaskCustomerController taskCustomerController;
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -119,6 +123,7 @@ public class FinderController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Finder finder, final String message) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		if(finder.getId() == 0) {
 			result = new ModelAndView("finder/create");
 		} else {
@@ -126,14 +131,17 @@ public class FinderController extends AbstractController {
 		}
 		result.addObject("finder", finder);
 		result.addObject("message", message);
+		result.addObject("data", data);
 
 		return result;
 	}
 
 	protected ModelAndView showModelAndView(final Finder finder) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		result = new ModelAndView("finder/edit");
 		result.addObject("finder", finder);
+		result.addObject("data", data);
 
 		return result;
 	}

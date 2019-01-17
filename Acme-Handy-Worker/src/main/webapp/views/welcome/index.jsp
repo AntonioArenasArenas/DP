@@ -16,6 +16,43 @@
 <%@taglib prefix="security" uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="welcome.greeting" /></p>
+<p id="en" >
+${data.welcomePageMsg}
+</p>
+
+<p id="es" >
+${data.welcomePageMsgESP}
+</p>
 
 <p><spring:message code="welcome.greeting.current.time" /> ${moment}</p> 
+
+<script >
+function getCookie(cname) {
+	  var name = cname + "=";
+	  var decodedCookie = decodeURIComponent(document.cookie);
+	  var ca = decodedCookie.split(';');
+	  for(var i = 0; i <ca.length; i++) {
+	    var c = ca[i];
+	    while (c.charAt(0) == ' ') {
+	      c = c.substring(1);
+	    }
+	    if (c.indexOf(name) == 0) {
+	      return c.substring(name.length, c.length);
+	    }
+	  }
+	  return "";
+	}
+	
+	function checkCookie() {
+	  var language = getCookie("language");
+	  if (language == 'es' ) {
+		  $("#en").remove();
+		  
+	  } else {
+	      $("#es").remove();
+	      
+	  }
+	}
+	
+	$(function(){checkCookie(); } );
+</script>

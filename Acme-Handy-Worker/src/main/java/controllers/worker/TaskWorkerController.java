@@ -10,9 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.SystemDataService;
 import services.TaskService;
 import services.WorkerService;
 import controllers.AbstractController;
+import domain.SystemData;
 import domain.Task;
 import domain.Worker;
 
@@ -27,6 +29,9 @@ public class TaskWorkerController extends AbstractController {
 	
 	@Autowired
 	private WorkerService workerService;
+	
+	@Autowired
+	private SystemDataService systemDataService;
 	
 //	@Autowired
 //	private ApplicationService applicationService;
@@ -58,6 +63,9 @@ public class TaskWorkerController extends AbstractController {
 		Collection<Task> acceptedTasks = taskService.getTasksWithAcceptedApplicationsByWorkerId(loggedWorker.getId());
 		result.addObject("tasksAlreadyApplied", tasksAlreadyApplied);
 		result.addObject("acceptedTasks", acceptedTasks);
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 		
 		result.addObject("tasks", tasks);
 
@@ -82,8 +90,10 @@ public class TaskWorkerController extends AbstractController {
 	
 	protected ModelAndView showModelAndView(final Task task) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		result = new ModelAndView("task/show");
 		result.addObject("task", task);
+		result.addObject("data", data);
 
 		return result;
 	}

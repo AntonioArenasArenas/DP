@@ -39,6 +39,7 @@ public class SystemDataController extends AbstractController {
 	public ModelAndView create() {
 		ModelAndView result;
 		SystemData systemData;
+		
 
 		systemData = this.systemDataService.create();
 		result = this.createEditModelAndView(systemData);
@@ -105,6 +106,7 @@ public class SystemDataController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final SystemData systemData, final String message) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		if(systemData.getId() == 0) {
 			result = new ModelAndView("systemData/create");
 		} else {
@@ -112,6 +114,8 @@ public class SystemDataController extends AbstractController {
 		}
 		result.addObject("systemData", systemData);
 		result.addObject("message", message);
+		result.addObject("data", data);
+		
 
 		return result;
 	}

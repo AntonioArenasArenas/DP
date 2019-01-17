@@ -1,8 +1,8 @@
 /*
  * WorkerController.java
- * 
+ *
  * Copyright (C) 2018 Universidad de Sevilla
- * 
+ *
  * The use of this project is hereby constrained to the conditions of the
  * TDG Licence, a copy of which you may download from
  * http://www.tdg-seville.info/License.html
@@ -21,9 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import controllers.AbstractController;
+
+import domain.Actor;
+import domain.SystemData;
+import domain.Worker;
+
 import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
+import services.SystemDataService;
 import services.WorkerService;
 import controllers.AbstractController;
 import domain.Worker;
@@ -32,7 +39,7 @@ import domain.Worker;
 @RequestMapping("/worker")
 public class WorkerController extends AbstractController {
 
-	
+
 	@Autowired
 	private WorkerService workerService;
 	@Autowired
@@ -40,15 +47,18 @@ public class WorkerController extends AbstractController {
 	@Autowired
 	private ActorService actorService;
 
-	
+	@Autowired
+	private SystemDataService systemDataService;
+
+
 	// Constructors -----------------------------------------------------------
 
 	public WorkerController() {
 		super();
 	}
-	
+
 	// Edit
-	
+
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	public ModelAndView create() {
 		ModelAndView result;
@@ -59,32 +69,32 @@ public class WorkerController extends AbstractController {
 
 		return result;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	public ModelAndView edit() {
 		ModelAndView result;
-	
+
 		Worker worker = workerService.findByPrincipal();
 		Assert.notNull(worker);
 		result = this.createEditModelAndView(worker);
 
 		return result;
 	}
-	
-	
+
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
 	public ModelAndView save(@Valid final Worker worker, final BindingResult binding) {
 		ModelAndView result;
 
 		if (binding.hasErrors()){
-			
+
 			result = this.createEditModelAndView(worker);
 			System.out.println(binding.getAllErrors());
-			
+
 			}
 		else
-			try {	
-				
+			try {
+
 				UserAccount userAccount = worker.getUserAccount();
 				if(worker.getId()==0){
 					final String password = new Md5PasswordEncoder().encodePassword(userAccount.getPassword(), null);
@@ -92,10 +102,10 @@ public class WorkerController extends AbstractController {
 				}
 				userAccount = this.userAccountService.save(userAccount);
 				worker.setUserAccount(userAccount);
-				
+
 				this.workerService.save(worker);
 				result = new ModelAndView("redirect:/");
-				
+
 			} catch (final Throwable oops) {
 				result = this.createEditModelAndView(worker, "worker.commit.error");
 		}
@@ -115,11 +125,13 @@ public class WorkerController extends AbstractController {
 
 				protected ModelAndView createEditModelAndView(final Worker worker, final String messageError) {
 					ModelAndView result;
+					SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 
 					result = new ModelAndView("worker/edit");
 					result = new ModelAndView("worker/create");
 					result.addObject("worker", worker);
 					result.addObject("message", messageError);
+					result.addObject("data", data);
 
 					return result;
 				}

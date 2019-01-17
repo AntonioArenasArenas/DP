@@ -26,9 +26,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import domain.Actor;
 import domain.Profile;
+import domain.SystemData;
 
 import services.ActorService;
 import services.ProfileService;
+import services.SystemDataService;
 
 
 
@@ -44,6 +46,9 @@ public class ProfileController extends AbstractController {
 	@Autowired
 	private ActorService actorService;
 	
+	@Autowired
+	private SystemDataService systemDataService;
+	
 	// Constructors -----------------------------------------------------------
 
 		public ProfileController() {
@@ -58,6 +63,9 @@ public class ProfileController extends AbstractController {
 		Collection<Profile> profiles = profileService.findProfiles(); ;
 		
 		result = new ModelAndView("profile/list");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 		result.addObject("requestURI", "profile/list.do");
 		result.addObject("profiles", profiles);
 
@@ -138,11 +146,12 @@ public class ProfileController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Profile profile, final String messageError) {
 		ModelAndView result;
-
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 
 		result = new ModelAndView("profile/edit");
 		result.addObject("profile", profile);
 		result.addObject("message", messageError);
+		result.addObject("data", data);
 
 		return result;
 	}
