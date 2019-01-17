@@ -2,13 +2,10 @@ package controllers;
 
 import java.util.Collection;
 
-
 import javax.validation.Valid;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,13 +15,9 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ActorService;
 import services.MessageService;
 import services.SystemDataService;
-
-import controllers.AbstractController;
 import domain.Actor;
-import domain.Box;
-import domain.SystemData;
-
 import domain.Message;
+import domain.SystemData;
 
 
 @Controller

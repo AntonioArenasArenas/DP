@@ -21,18 +21,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import controllers.AbstractController;
-
-import domain.Actor;
-import domain.SystemData;
-import domain.Worker;
-
 import security.UserAccount;
 import security.UserAccountService;
-import services.ActorService;
 import services.SystemDataService;
 import services.WorkerService;
 import controllers.AbstractController;
+import domain.SystemData;
 import domain.Worker;
 
 @Controller
@@ -44,8 +38,6 @@ public class WorkerController extends AbstractController {
 	private WorkerService workerService;
 	@Autowired
 	private UserAccountService userAccountService;
-	@Autowired
-	private ActorService actorService;
 
 	@Autowired
 	private SystemDataService systemDataService;

@@ -17,7 +17,6 @@ import security.UserAccount;
 import security.UserAccountService;
 import services.AdminService;
 import services.ApplicationService;
-import services.CategoryService;
 import services.SystemDataService;
 import services.TaskService;
 import controllers.AbstractController;
@@ -37,8 +36,6 @@ public class AdminController extends AbstractController {
 	private TaskService taskService;
 	@Autowired
 	private ApplicationService applicationService;
-	@Autowired
-	private CategoryService categoryService;
 	@Autowired
 	private SystemDataService systemDataService;
 
