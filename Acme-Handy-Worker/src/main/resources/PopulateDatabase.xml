@@ -1,215 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla 
-	* * The use of this project is hereby constrained to the conditions of the 
+<!-- * PopulateDatabase.xml * * Copyright (C) 2018 Universidad de Sevilla
+	* * The use of this project is hereby constrained to the conditions of the
 	* TDG Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans
-                    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+	">
 
 	<!-- User accounts -->
-
-
-
 
 	<bean id="userAccount1" class="security.UserAccount">
 		<property name="username" value="admin" />
 		<property name="password" value="21232f297a57a5a743894a0e4a801fc3" />
-		<property name="activated" value="True" />
 		<property name="authorities">
 			<list>
 				<bean class="security.Authority">
 					<property name="authority" value="ADMIN" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount2" class="security.UserAccount">
-		<property name="username" value="customer" />
-		<property name="password" value="91ec1f9324753048c0096d036a694f86" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="WORKER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount3" class="security.UserAccount">
-		<property name="username" value="super" />
-		<property name="password" value="1b3231655cebb7a1f783eddf27d254ca" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="WORKER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount4" class="security.UserAccount">
-		<property name="username" value="supertroll" />
-		<property name="password" value="cd087133969fbbc72f10354904bdda60" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="WORKER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount5" class="security.UserAccount">
-		<property name="username" value="superman" />
-		<property name="password" value="84d961568a65073a3bcf0eb216b2a576" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount6" class="security.UserAccount">
-		<property name="username" value="superguay" />
-		<property name="password" value="f6964b92d99ed26c4c2115da7e4d816a" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount7" class="security.UserAccount">
-		<property name="username" value="superfuerte" />
-		<property name="password" value="6eacff0ba4ceba28f90525930bcf0e80" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount8" class="security.UserAccount">
-		<property name="username" value="supercoool" />
-		<property name="password" value="f3209d2047b8b8700fbf566bf5614533" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount9" class="security.UserAccount">
-		<property name="username" value="TEGOCABEZON" />
-		<property name="password" value="c317174b7f9dba1c139c1f2468139439" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="REFEREE" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount10" class="security.UserAccount">
-		<property name="username" value="brawls" />
-		<property name="password" value="8e504d56fe58f40de679f058c14d0107" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="REFEREE" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount11" class="security.UserAccount">
-		<property name="username" value="maximo" />
-		<property name="password" value="d822eb65cbd84945f427dc08f4571694" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="WORKER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount12" class="security.UserAccount">
-		<property name="username" value="corchuelo" />
-		<property name="password" value="927efc84d9371bee98c6e6cf8b3e2f48" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="REFEREE" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount13" class="security.UserAccount">
-		<property name="username" value="daniel" />
-		<property name="password" value="aa47f8215c6f30a0dcdb2a36a9f4168e" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount14" class="security.UserAccount">
-		<property name="username" value="patricia" />
-		<property name="password" value="823fec7a2632ea7b498c1d0d11c11377" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="userAccount15" class="security.UserAccount">
-		<property name="username" value="antonio" />
-		<property name="password" value="4a181673429f0b6abbfd452f0f3b5950" />
-		<property name="activated" value="True" />
-		<property name="authorities">
-			<list>
-				<bean class="security.Authority">
-					<property name="authority" value="ADMIN" />
-				</bean>
-				<bean class="security.Authority">
-					<property name="authority" value="CUSTOMER" />
 				</bean>
 			</list>
 		</property>
@@ -217,111 +26,60 @@
 
 	<!-- Other domain beans come here -->
 
-	<!-- Box -->
+	<bean id="admin" class="domain.Admin">
+
+		<property name="name" value="Antonio" />
+
+		<property name="surname" value="Diaz" />
+
+		<property name="middleName" value="Panochete" />
+
+		<property name="photo" value="https://tumblr.wdf43" />
+
+		<property name="email" value="antonio@acme.com" />
+
+		<property name="phoneNumber" value="+34 344 654 843" />
+
+		<property name="address" value="Avenida Ramon Resa" />
+
+		<property name="suspicious" value="False" />
+
+		<property name="boxes">
+
+			<list>
+				<ref bean="box1" />
+				<ref bean="box2" />
+				<ref bean="box3" />
+				<ref bean="box4" />
+
+			</list>
+
+		</property>
+
+		<property name="userAccount" ref="userAccount1" />
+
+		<property name="sentMessages">
+
+			<list></list>
+
+		</property>
+
+		<property name="receivedMessages">
+
+			<list></list>
+
+		</property>
+
+		<property name="profiles">
+
+			<list></list>
+
+		</property>
 
 
+	</bean>
 
 	<bean id="box1" class="domain.Box">
-
-		<property name="name" value="INBOX" />
-
-		<property name="isDefault" value="True" />
-
-		<property name="messages">
-
-			<list>
-				<ref bean="message1" />
-			</list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box2" class="domain.Box">
-
-		<property name="name" value="outBox" />
-
-		<property name="isDefault" value="True" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box3" class="domain.Box">
-
-		<property name="name" value="spamBox" />
-
-		<property name="isDefault" value="True" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box4" class="domain.Box">
-
-		<property name="name" value="TRASHBOX" />
-
-		<property name="isDefault" value="True" />
-
-		<property name="messages">
-
-			<list>
-				<ref bean="message2" />
-			</list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box5" class="domain.Box">
-
-		<property name="name" value="Box 5" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box6" class="domain.Box">
-
-		<property name="name" value="Box 6" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box7" class="domain.Box">
 
 		<property name="name" value="OUTBOX" />
 
@@ -329,33 +87,13 @@
 
 		<property name="messages">
 
-			<list>
-				<ref bean="message1" />
-			</list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box8" class="domain.Box">
-
-		<property name="name" value="Box 8" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
 			<list></list>
 
 		</property>
 
 	</bean>
 
-
-
-	<bean id="box9" class="domain.Box">
+	<bean id="box2" class="domain.Box">
 
 		<property name="name" value="INBOX" />
 
@@ -369,101 +107,7 @@
 
 	</bean>
 
-
-
-	<bean id="box10" class="domain.Box">
-
-		<property name="name" value="Box 10" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box11" class="domain.Box">
-
-		<property name="name" value="Box 11" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box12" class="domain.Box">
-
-		<property name="name" value="Box 12" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box13" class="domain.Box">
-
-		<property name="name" value="Box 13" />
-
-		<property name="isDefault" value="False" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="box14" class="domain.Box">
-
-		<property name="name" value="INBOX" />
-
-		<property name="isDefault" value="True" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-	<bean id="box15" class="domain.Box">
-
-		<property name="name" value="INBOX" />
-
-		<property name="isDefault" value="True" />
-
-		<property name="messages">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-	<bean id="box16" class="domain.Box">
+	<bean id="box3" class="domain.Box">
 
 		<property name="name" value="SPAMBOX" />
 
@@ -477,9 +121,9 @@
 
 	</bean>
 
-	<bean id="box17" class="domain.Box">
+	<bean id="box4" class="domain.Box">
 
-		<property name="name" value="OUTBOX" />
+		<property name="name" value="TRASHBOX" />
 
 		<property name="isDefault" value="True" />
 
@@ -491,1894 +135,13 @@
 
 	</bean>
 
-
-
-
-
-	<!-- PersonalRecord -->
-
-
-
-	<bean id="personalRecord1" class="domain.PersonalRecord">
-
-		<property name="fullName" value="Fullname para personal record 1" />
-
-		<property name="photo" value="https://tumblr.imagenpersonalrecord1" />
-
-		<property name="email" value="personalRecord1@gmail.com" />
-
-		<property name="phone" value="+34 663 644 950" />
-
-		<property name="link" value="https://paginadp.com/personalRecord1" />
-
-	</bean>
-
-
-
-	<bean id="personalRecord2" class="domain.PersonalRecord">
-
-		<property name="fullName" value="Fullname para personal record 1" />
-
-		<property name="photo" value="https://tumblr.imagenpersonalrecord1" />
-
-		<property name="email" value="personalRecord1@gmail.com" />
-
-		<property name="phone" value="+34 663 644 950" />
-
-		<property name="link" value="https://paginadp.com/personalRecord1" />
-
-	</bean>
-
-
-
-	<bean id="personalRecord3" class="domain.PersonalRecord">
-
-		<property name="fullName" value="Fullname para personal record 1" />
-
-		<property name="photo" value="https://tumblr.imagenpersonalrecord1" />
-
-		<property name="email" value="personalRecord1@gmail.com" />
-
-		<property name="phone" value="+34 663 644 950" />
-
-		<property name="link" value="https://paginadp.com/personalRecord1" />
-
-	</bean>
-
-
-
-	<bean id="personalRecord4" class="domain.PersonalRecord">
-
-		<property name="fullName" value="Fullname para personal record 1" />
-
-		<property name="photo" value="https://tumblr.imagenpersonalrecord1" />
-
-		<property name="email" value="personalRecord1@gmail.com" />
-
-		<property name="phone" value="+34 663 644 950" />
-
-		<property name="link" value="https://paginadp.com/personalRecord1" />
-
-	</bean>
-
-
-
-	<!-- Curricula -->
-
-
-
-	<bean id="curricula1" class="domain.Curricula">
-
-		<property name="endorsementRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="educationalRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="miscellaneousRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="personalRecord" ref="personalRecord1" />
-
-		<property name="professionalRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="ticker" value="181112-KOI6B9" />
-
-	</bean>
-
-
-
-	<bean id="curricula2" class="domain.Curricula">
-
-		<property name="endorsementRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="educationalRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="miscellaneousRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="personalRecord" ref="personalRecord2" />
-
-		<property name="professionalRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="ticker" value="181215-5289LK" />
-
-	</bean>
-
-
-
-	<bean id="curricula3" class="domain.Curricula">
-
-		<property name="endorsementRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="educationalRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="miscellaneousRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="personalRecord" ref="personalRecord3" />
-
-		<property name="professionalRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="ticker" value="190512-KHY698" />
-
-	</bean>
-
-
-
-	<bean id="curricula4" class="domain.Curricula">
-
-		<property name="endorsementRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="educationalRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="miscellaneousRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="personalRecord" ref="personalRecord4" />
-
-		<property name="professionalRecords">
-
-			<list></list>
-
-		</property>
-
-		<property name="ticker" value="181112-UIO5G9" />
-
-	</bean>
-
-
-
-	<!-- Worker -->
-
-
-
-	<bean id="worker1" class="domain.Worker">
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antoniodiaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="finder" ref="finder1" />
-
-		<property name="boxes">
-
-			<list>
-
-				<ref bean="box5" />
-
-			</list>
-
-		</property>
-
-		<property name="userAccount" ref="userAccount11" />
-
-		<property name="sentMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="profiles">
-
-			<list></list>
-
-		</property>
-
-		<property name="curricula" ref="curricula1" />
-
-		<property name="tutorials">
-
-			<list></list>
-
-		</property>
-
-		<property name="applications">
-
-			<list>
-				<ref bean="application1" />
-			</list>
-
-		</property>
-
-		<property name="endorsements">
-
-			<list></list>
-
-		</property>
-
-		<property name="make" value="Texto worker 1" />
-
-
-
-	</bean>
-
-
-
-	<bean id="worker2" class="domain.Worker">
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antoniodiaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount2" />
-
-		<property name="boxes">
-
-			<list>
-
-				<ref bean="box6" />
-
-			</list>
-
-		</property>
-
-		<property name="sentMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="profiles">
-
-			<list></list>
-
-		</property>
-
-		<property name="curricula" ref="curricula2" />
-
-		<property name="tutorials">
-
-			<list></list>
-
-		</property>
-
-		<property name="applications">
-
-			<list>
-				<ref bean="application2" />
-			</list>
-
-		</property>
-
-		<property name="endorsements">
-
-			<list></list>
-
-		</property>
-
-		<property name="make" value="Texto worker 2" />
-
-
-
-	</bean>
-
-
-
-	<bean id="worker3" class="domain.Worker">
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antoniodiaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount3" />
-
-		<property name="boxes">
-
-			<list>
-
-				<ref bean="box8" />
-
-			</list>
-
-		</property>
-
-		<property name="sentMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="profiles">
-
-			<list></list>
-
-		</property>
-
-		<property name="curricula" ref="curricula3" />
-
-		<property name="tutorials">
-
-			<list></list>
-
-		</property>
-
-		<property name="applications">
-
-			<list>
-				<ref bean="application3" />
-				<ref bean="application1" />
-			</list>
-
-		</property>
-
-		<property name="endorsements">
-
-			<list></list>
-
-		</property>
-
-		<property name="make" value="Texto worker 3" />
-
-
-
-	</bean>
-
-
-
-	<bean id="worker4" class="domain.Worker">
-
-		<property name="name" value="Botella" />
-
-		<property name="surname" value="De Cristal" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antoniodiaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Mesa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount4" />
-		<property name="boxes">
-
-			<list>
-
-				<ref bean="box14" />
-
-			</list>
-
-		</property>
-
-		<property name="sentMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="profiles">
-
-			<list></list>
-
-		</property>
-
-		<property name="curricula" ref="curricula4" />
-
-		<property name="tutorials">
-
-			<list></list>
-
-		</property>
-
-		<property name="applications">
-
-			<list></list>
-
-		</property>
-
-		<property name="endorsements">
-
-			<list></list>
-
-		</property>
-
-		<property name="make" value="Texto worker 4" />
-
-
-
-	</bean>
-
-
-	<!-- Profile -->
-
-	<bean id="profile1" class="domain.Profile">
-
-		<property name="nick" value="AntonioGlobber" />
-		<property name="socialNetwork" value="Globoo" />
-		<property name="link" value="https://globoo.com" />
-
-
-	</bean>
-
-	<!-- Customer -->
-
-
-
-	<bean id="customer1" class="domain.Customer">
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antoniodiaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount5" />
-
-		<property name="boxes">
-
-			<list>
-
-				<ref bean="box7" />
-				<ref bean="box4" />
-				<ref bean="box15" />
-				<ref bean="box16" />
-
-			</list>
-
-		</property>
-
-		<property name="sentMessages">
-
-			<list>
-				<ref bean="message1" />
-			</list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list>
-				<ref bean="message2" />
-			</list>
-
-		</property>
-
-		<property name="profiles">
-
-			<list>
-				<ref bean="profile1" />
-			</list>
-
-		</property>
-
-		<property name="endorsements">
-
-			<list></list>
-
-		</property>
-
-	</bean>
-
-
-
-	<bean id="customer2" class="domain.Customer">
-
-		<property name="name" value="David" />
-
-		<property name="surname" value="Loco" />
-
-		<property name="middleName" value="Loquete" />
-
-		<property name="photo" value="https://tumblr.esdf43" />
-
-		<property name="email" value="pruebaparamensajes1@gmail.com" />
-
-		<property name="phoneNumber" value="+34 654 653 841" />
-
-		<property name="address" value="Calle Luis Montoto" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount6" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box1" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-
-			<list>
-				<ref bean="message2" />
-			</list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list>
-				<ref bean="message1" />
-			</list>
-
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
-
-		<property name="endorsements">
-			<list></list>
-		</property>
-
-	</bean>
-
-
-
-	<bean id="customer3" class="domain.Customer">
-
-		<property name="name" value="Dani" />
-
-		<property name="surname" value="Es pollo" />
-
-		<property name="middleName" value="Si lee esto" />
-
-		<property name="photo" value="https://tumblr.kk69" />
-
-		<property name="email" value="pruebaparamensajes2@gmail.com" />
-
-		<property name="phoneNumber" value="+34 696 696 666" />
-
-		<property name="address" value="El puente triana wi pasa la reina" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount7" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box9" />
-				<ref bean="box17" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-			<list></list>
-		</property>
-
-		<property name="receivedMessages">
-			<list></list>
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
-
-		<property name="endorsements">
-			<list></list>
-		</property>
-
-	</bean>
-
-
-
-	<bean id="customer4" class="domain.Customer">
-
-		<property name="name" value="Pepe" />
-
-		<property name="surname" value="Es pollo" />
-
-		<property name="middleName" value="Siempre" />
-
-		<property name="photo" value="https://tumblr.kk69" />
-
-		<property name="email" value="danielpollo@gmail.com" />
-
-		<property name="phoneNumber" value="+34 696 696 666" />
-
-		<property name="address" value="El puente triana wi pasa la reina" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount8" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box13" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-			<list></list>
-		</property>
-
-		<property name="receivedMessages">
-			<list></list>
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
-
-		<property name="endorsements">
-			<list></list>
-		</property>
-
-	</bean>
-
-
-
-	<!-- Referee -->
-
-
-
-	<bean id="referee1" class="domain.Referee">
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antoniodiaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount9" />
-
-		<property name="boxes">
-
-			<list>
-
-				<ref bean="box10" />
-
-			</list>
-
-		</property>
-
-		<property name="sentMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="receivedMessages">
-
-			<list></list>
-
-		</property>
-
-		<property name="profiles">
-
-			<list></list>
-
-		</property>
-		
-		<property name="complaints">
-
-			<list><ref bean="complaint1" /></list>
-
-		</property>
-
-
-	</bean>
-
-
-
-	<bean id="referee2" class="domain.Referee">
-
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antoniodiaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount10" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box11" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-			<list></list>
-		</property>
-
-		<property name="receivedMessages">
-			<list></list>
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
-
-		<property name="complaints">
-
-			<list><ref bean="complaint2" /></list>
-
-		</property>
-
-
-
-
-	</bean>
-
-
-
-	<bean id="referee3" class="domain.Referee">
-
-
-		<property name="name" value="Antonio" />
-
-		<property name="surname" value="Diaz" />
-
-		<property name="middleName" value="Panochete" />
-
-		<property name="photo" value="https://tumblr.wdf43" />
-
-		<property name="email" value="antoniodiaz@gmail.com" />
-
-		<property name="phoneNumber" value="+34 344 654 843" />
-
-		<property name="address" value="Avenida Ramon Resa" />
-
-		<property name="suspicious" value="False" />
-
-		<property name="userAccount" ref="userAccount12" />
-
-		<property name="boxes">
-			<list>
-				<ref bean="box12" />
-			</list>
-		</property>
-
-		<property name="sentMessages">
-			<list></list>
-		</property>
-
-		<property name="receivedMessages">
-			<list></list>
-		</property>
-
-		<property name="profiles">
-			<list></list>
-		</property>
-
-
-
-	</bean>
-
-
-
-	<!-- Tasks -->
-
-
-
-	<bean id="task1" class="domain.Task">
-
-		<property name="customer" ref="customer2" />
-
-		<property name="complaints">
-			<list>
-				<ref bean="complaint1" />
-			</list>
-		</property>
-
-		<property name="phases">
-			<list><ref bean="phase1" /></list>
-		</property>
-
-		<property name="warranty" ref="warranty4" />
-
-		<property name="category" ref="category1" />
-
-		<property name="applications">
-			<list>
-			</list>
-		</property>
-
-		<property name="ticker" value="181112-KHY698" />
-
-		<property name="moment" value="2017/07/10 01:41" />
-
-		<property name="startDate" value="2017/08/10 01:41" />
-
-		<property name="endDate" value="2017/08/16 01:41" />
-
-		<property name="description" value="Esto es la descripcion del task1" />
-
-		<property name="address" value="Direccion task1" />
-
-		<property name="maxPrice" value="153.26" />
-
-		<property name="comments" value="Comentario task1" />
-
-
-
-	</bean>
-
-
-
-	<bean id="task2" class="domain.Task">
-
-		<property name="customer" ref="customer3" />
-
-		<property name="complaints">
-			<list><ref bean="complaint2" /></list>
-		</property>
-
-		<property name="phases">
-			<list></list>
-		</property>
-
-		<property name="warranty" ref="warranty3" />
-
-		<property name="category" ref="category2" />
-
-		<property name="applications">
-			<list>
-				<ref bean="application1" />
-			</list>
-		</property>
-
-		<property name="ticker" value="181112-LOTH90" />
-
-		<property name="moment" value="2016/09/26 02:41" />
-
-		<property name="startDate" value="2016/12/22 08:41" />
-
-		<property name="endDate" value="2017/01/03 10:41" />
-
-		<property name="description" value="Esto es la descripcion del task2" />
-
-		<property name="address" value="Direccion task2" />
-
-		<property name="maxPrice" value="456.25" />
-
-		<property name="comments" value="Comentario task2" />
-
-
-
-	</bean>
-
-
-
-	<bean id="task3" class="domain.Task">
-
-		<property name="customer" ref="customer3" />
-
-		<property name="complaints">
-			<list>
-				<ref bean="complaint3" />
-			</list>
-		</property>
-
-		<property name="phases">
-			<list></list>
-		</property>
-
-		<property name="warranty" ref="warranty3" />
-
-		<property name="category" ref="category3" />
-
-		<property name="applications">
-			<list>
-				<ref bean="application2" />
-				<ref bean="application3" />
-				<ref bean="application4" />
-			</list>
-		</property>
-
-		<property name="ticker" value="181112-896Y67" />
-
-		<property name="moment" value="2018/09/22 22:28" />
-
-		<property name="startDate" value="2018/11/22 01:41" />
-
-		<property name="endDate" value="2019/04/16 01:41" />
-
-		<property name="description" value="Esto es la descripcion del task3" />
-
-		<property name="address" value="Direccion task3" />
-
-		<property name="maxPrice" value="456.58" />
-
-		<property name="comments" value="Comentario task3" />
-
-
-
-	</bean>
-
-
-
-	<!-- Warranty -->
-
-
-
-	<bean id="warranty1" class="domain.Warranty">
-
-		<property name="title" value="Titulo de la garantia 1" />
-
-		<property name="terms" value="Terminos de la garantia 1" />
-
-		<property name="laws" value="leyes escritas separadas por algun simbolo" />
-
-		<property name="draftMode" value="True" />
-
-	</bean>
-
-	<bean id="warranty2" class="domain.Warranty">
-
-		<property name="title" value="Titulo de la garantia 2" />
-
-		<property name="terms" value="Terminos de la garantia 2" />
-
-		<property name="laws"
-			value="leyes escritas separadas por algun simbolo para la garantia 2" />
-
-		<property name="draftMode" value="True" />
-
-	</bean>
-
-	<bean id="warranty3" class="domain.Warranty">
-
-		<property name="title" value="Titulo de la garantia 3" />
-
-		<property name="terms" value="Terminos de la garantia 3" />
-
-		<property name="laws"
-			value="leyes escritas separadas por algun simbolo para la garantia 3" />
-
-		<property name="draftMode" value="False" />
-
-	</bean>
-
-	<bean id="warranty4" class="domain.Warranty">
-
-		<property name="title" value="Titulo de la garantia 4" />
-
-		<property name="terms" value="Terminos de la garantia 4" />
-
-		<property name="laws"
-			value="leyes escritas separadas por algun simbolo para la garantia 4" />
-
-		<property name="draftMode" value="False" />
-
-	</bean>
-
-
-
-	<!-- Category -->
-
-
-
-	<bean id="category1" class="domain.Category">
-
-		<property name="name" value="Primer categoria" />
-
-		<property name="nameEsp" value="Primera categoria pero en español" />
-
-		<property name="childrenCategories">
-			<list>
-				<ref bean="category4" />
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-
-
-
-
-
-
-	</bean>
-
-
-
-	<bean id="category2" class="domain.Category">
-
-		<property name="name" value="Segunda categoria" />
-
-		<property name="nameEsp" value="Segundacategoria pero en español" />
-
-		<property name="childrenCategories">
-			<list></list>
-		</property>
-
-		<property name="parent" ref="category3" />
-
-
-
-	</bean>
-
-
-
-	<bean id="category3" class="domain.Category">
-
-		<property name="name" value="CATEGORY" />
-
-		<property name="nameEsp" value="Categoría" />
-
-		<property name="childrenCategories">
-			<list>
-				<ref bean="category1" />
-				<ref bean="category2" />
-			</list>
-		</property>
-
-
-
-	</bean>
-
-	<bean id="category4" class="domain.Category">
-
-		<property name="name" value="Child category" />
-
-		<property name="nameEsp" value="Categoría hija" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category1" />
-	</bean>
-
-	<bean id="category5" class="domain.Category">
-
-		<property name="name" value="Carpentry" />
-
-		<property name="nameEsp" value="Carpintería" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category6" class="domain.Category">
-
-		<property name="name" value="Ceiling repair" />
-
-		<property name="nameEsp" value="Reparación de techos" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category7" class="domain.Category">
-
-		<property name="name" value="Cleaning" />
-
-		<property name="nameEsp" value="Limpieza" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category8" class="domain.Category">
-
-		<property name="name" value="Concrete work" />
-
-		<property name="nameEsp" value="Trabajos de hormigón" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category9" class="domain.Category">
-
-		<property name="name" value="Doors" />
-
-		<property name="nameEsp" value="Puertas" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category10" class="domain.Category">
-
-		<property name="name" value="Electrical wiring" />
-
-		<property name="nameEsp" value="Cableado eléctrico" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category11" class="domain.Category">
-
-		<property name="name" value="Fan installation" />
-
-		<property name="nameEsp" value="Instalación de ventiladores" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category12" class="domain.Category">
-
-		<property name="name" value="Fence fixing" />
-
-		<property name="nameEsp" value="Fijación de cercas" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category13" class="domain.Category">
-
-		<property name="name" value="Home security systems" />
-
-		<property name="nameEsp" value="Sistemas de seguridad en el hogar" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category14" class="domain.Category">
-
-		<property name="name" value="Insulation installation" />
-
-		<property name="nameEsp" value="Instalación de aislamientos" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category15" class="domain.Category">
-
-		<property name="name" value="Lamp repairs" />
-
-		<property name="nameEsp" value="Reparación de lámparas" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category16" class="domain.Category">
-
-		<property name="name" value="Moving" />
-
-		<property name="nameEsp" value="Mudanzas" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category17" class="domain.Category">
-
-		<property name="name" value="Painting" />
-
-		<property name="nameEsp" value="Pintura" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category18" class="domain.Category">
-
-		<property name="name" value="Pest control" />
-
-		<property name="nameEsp" value="Control de plagas" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category19" class="domain.Category">
-
-		<property name="name" value="Plumbing repairs" />
-
-		<property name="nameEsp" value="Fontanería" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category20" class="domain.Category">
-
-		<property name="name" value="Roofing" />
-
-		<property name="nameEsp" value="Techos" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category21" class="domain.Category">
-
-		<property name="name" value="Shelf installation" />
-
-		<property name="nameEsp" value="Instalación de estanterías" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category22" class="domain.Category">
-
-		<property name="name" value="Solar panels" />
-
-		<property name="nameEsp" value="Paneles solares" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category23" class="domain.Category">
-
-		<property name="name" value="Soundproofing" />
-
-		<property name="nameEsp" value="Insonorización" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category24" class="domain.Category">
-
-		<property name="name" value="Sprinkler repair" />
-
-		<property name="nameEsp" value="Reparación de aspersores" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<bean id="category25" class="domain.Category">
-
-		<property name="name" value="Window repair" />
-
-		<property name="nameEsp" value="Reparación de ventanas" />
-
-		<property name="childrenCategories">
-			<list>
-			</list>
-		</property>
-
-		<property name="parent" ref="category3" />
-	</bean>
-
-	<!-- Application -->
-
-
-
-	<bean id="application1" class="domain.Application">
-
-		<property name="worker" ref="worker3" />
-
-		<property name="task" ref="task2" />
-
-		<property name="moment" value="2015/02/10 10:00" />
-
-		<property name="status" value="PENDING" />
-
-		<property name="offeredPrize" value="151.23" />
-
-		<property name="comments" value="Comentario que se me ha ocurrido" />
-
-
-
-
-
-
-	</bean>
-
-
-
-	<bean id="application2" class="domain.Application">
-
-		<property name="worker" ref="worker2" />
-
-		<property name="task" ref="task3" />
-
-		<property name="moment" value="2015/10/23 16:00" />
-
-		<property name="status" value="REJECTED" />
-
-		<property name="offeredPrize" value="21.1" />
-
-		<property name="comments" value="Comentario original 2" />
-
-
-
-
-
-	</bean>
-
-
-
-	<bean id="application3" class="domain.Application">
-
-		<property name="worker" ref="worker3" />
-
-		<property name="task" ref="task3" />
-
-		<property name="moment" value="2016/12/11 01:00" />
-
-		<property name="status" value="ACCEPTED" />
-
-		<property name="offeredPrize" value="0.99" />
-
-		<property name="comments" value="Originalidad ven a mi" />
-
-
-
-
-	</bean>
-
-	<bean id="application4" class="domain.Application">
-
-		<property name="worker" ref="worker4" />
-
-		<property name="task" ref="task3" />
-
-		<property name="moment" value="2015/02/10 10:00" />
-
-		<property name="status" value="PENDING" />
-
-		<property name="offeredPrize" value="151.23" />
-
-		<property name="comments" value="Comentario que se me ha ocurrido" />
-
-		<property name="creditCard">
-			<null />
-		</property>
-
-
-
-	</bean>
-
-
-
-
-
-	<!-- COmplaint -->
-
-
-
-	<bean id="complaint1" class="domain.Complaint">
-
-		<property name="referee" ref="referee1" />
-		
-		<property name="ticker" value="181112-KJY6KI" />
-
-		<property name="moment" value="2016/12/22 09:00" />
-
-		<property name="description"
-			value="Esto es una descripcion para que no sea Blank" />
-
-		<property name="attachments">
-			<list></list>
-		</property>
-		
-		<property name="task" ref="task1" />
-		
-	</bean>
-
-
-
-	<bean id="complaint2" class="domain.Complaint">
-
-		<property name="referee" ref="referee2" />
-		<property name="ticker" value="181112-KHF3PL" />
-
-		<property name="moment" value="2016/12/10 09:00" />
-
-		<property name="description"
-			value="Esto es una descripcion para que no sea Blank" />
-
-		<property name="attachments">
-			<list></list>
-		</property>
-
-		<property name="report" ref="report1" />
-
-
-		<property name="task" ref="task2" />
-
-	</bean>
-	<!-- private Report				report;
-	private String				ticker;
-	private Date				moment;
-	private String				description;
-	private Collection<String>	attachments;
-	private Referee				referee; 
-	private Task 				task;-->
-
-
-
-	<bean id="complaint3" class="domain.Complaint">
-
-		
-		<property name="ticker" value="181112-HHY6AS" />
-
-		<property name="moment" value="2016/12/22 21:00" />
-
-		<property name="description"
-			value="Esto es una descripcion para que no sea Blank" />
-
-		<property name="attachments">
-			<list></list>
-		</property>
-
-		<property name="report" ref="report2" />
-
-		<property name="task" ref="task3" />
-
-
-
-	</bean>
-
-
-
-	<!-- Report -->
-
-
-
-	<bean id="report1" class="domain.Report">
-
-		<property name="complaint" ref="complaint2" />
-
-		<property name="notes">
-			<list></list>
-		</property>
-
-		<property name="moment" value="2017/07/10 01:41" />
-
-		<property name="description" value="Descripcion de report 1" />
-
-		<property name="attachments">
-			<list></list>
-		</property>
-
-		<property name="finalReport" value="True" />
-
-
-
-	</bean>
-
-
-
-	<bean id="report2" class="domain.Report">
-
-		<property name="complaint" ref="complaint3" />
-
-		<property name="notes">
-			<list>
-				<ref bean="note1" />
-				<ref bean="note2" />
-			</list>
-		</property>
-
-		<property name="moment" value="2017/07/10 01:41" />
-
-		<property name="description" value="Descripcion de report 1" />
-
-		<property name="attachments">
-			<list></list>
-		</property>
-
-		<property name="finalReport" value="False" />
-
-
-
-	</bean>
-
-
-
-	<!-- Note -->
-
-
-
-	<bean id="note1" class="domain.Note">
-
-		<property name="moment" value="2018/08/22 22:22" />
-
-		<property name="comment" value="Comentario para el note 1" />
-
-		<property name="workerComment" value="WorkerComment de note 1" />
-
-		<property name="refereeComment" value="RefereeComment de note 1" />
-
-		<property name="customerComment" value="CustomerComment de note 1" />
-
-
-
-	</bean>
-
-
-
-	<bean id="note2" class="domain.Note">
-
-		<property name="moment" value="2011/11/11 22:22" />
-
-		<property name="comment" value="Comentario para el note 2" />
-
-		<property name="workerComment" value="WorkerComment de note 2" />
-
-		<property name="refereeComment" value="RefereeComment de note 2" />
-
-		<property name="customerComment" value="CustomerComment de note 2" />
-
-
-
-	</bean>
-
-
-
-	<!-- CreditCard -->
-
-
-
-	<bean id="creditCard1" class="domain.CreditCard">
-
-		<property name="holderName" value="Fulanito" />
-
-		<property name="brandName" value="Tarjeta Master" />
-
-		<property name="number" value="ES0000000000000000000000" />
-
-		<property name="cvv" value="101" />
-
-		<property name="expirationDate" value="2019/12/11" />
-
-
-
-	</bean>
-
-
-
-	<bean id="creditCard2" class="domain.CreditCard">
-
-		<property name="holderName" value="Mengano" />
-
-		<property name="brandName" value="Tarjeta Paypal" />
-
-		<property name="number" value="ES0000000000000000000000" />
-
-		<property name="cvv" value="198" />
-
-		<property name="expirationDate" value="2020/02/01" />
-
-
-
-	</bean>
-
-
-
-	<bean id="creditCard3" class="domain.CreditCard">
-
-		<property name="holderName" value="Filemon" />
-
-		<property name="brandName" value="Steam money" />
-
-		<property name="number" value="ES0000000000000000000000" />
-
-		<property name="cvv" value="100" />
-
-		<property name="expirationDate" value="2034/12/01" />
-
-
-
-	</bean>
-
-	<!-- Message -->
-
-	<bean id="message1" class="domain.Message">
-
-		<property name="sender" ref="customer1" />
-
-		<property name="recipients">
-			<list>
-				<ref bean="customer2" />
-			</list>
-		</property>
-
-		<property name="moment" value="2016/12/22 08:41" />
-
-		<property name="subject" value="IMPORTANTE" />
-
-		<property name="body" value="Esto es importante" />
-
-		<property name="priority" value="HIGH" />
-
-		<property name="tags" value="important" />
-	</bean>
-
-
-	<bean id="message2" class="domain.Message">
-
-		<property name="sender" ref="customer2" />
-
-		<property name="recipients">
-			<list>
-				<ref bean="customer1" />
-			</list>
-		</property>
-
-		<property name="moment" value="2016/12/22 08:42" />
-
-		<property name="subject" value="IMPORTANTE" />
-
-		<property name="body" value="Esto es importante" />
-
-		<property name="priority" value="HIGH" />
-
-		<property name="tags" value="important" />
-
-	</bean>
-
-	<!-- Finder -->
-
-
-
-	<bean id="finder1" class="domain.Finder">
-
-		<property name="tasks">
-			<list>
-				<ref bean="task2" />
-			</list>
-		</property>
-		<property name="keyWord" value="Patata" />
-		<property name="category" value="category1" />
-		<property name="warranty" value="warranty4" />
-		<property name="maxPrice" value="5.0" />
-		<property name="minPrice" value="2.0" />
-		<property name="startDate" value="2017/07/10 01:41" />
-		<property name="endDate" value="2018/08/10 01:41" />
-		<property name="lastUpdate" value="2018/8/10 00:42" />
-
-	</bean>
-
-	<!-- SystemData -->
-
-
 	<bean id="systemData" class="domain.SystemData">
 
-		<property name="name" value="nombre" />
-		<property name="banner" value="hola" />
-		<property name="bannerHeader" value="hola2" />
-		<property name="welcomePageMsg" value="bienvenido de veulta" />
-		<property name="phoneCode">
-			<list></list>
-		</property>
+		<property name="name" value="Acme Handy Worker" />
+		<property name="bannerHeader" value="https://irp-cdn.multiscreensite.com/3737b2b6/dms3rep/multi/desktop/4-2000x889.jpg" />
+		<property name="welcomePageMsgESP" value="¡Bienvenidos a Acme Handy Worker! Precio, calidad y confianza en el mismo sitio" />
+		<property name="welcomePageMsg" value="Welcome to Acme Handy Worker! Price, quality and trust in a single place" />
+		<property name="phoneCode" value="+34" />
 		<property name="spamWords">
 			<list>
 				<value>Nigeria</value>
@@ -2404,20 +167,323 @@
 		<property name="cache" value="3" />
 		<property name="maxPrice" value="22" />
 	</bean>
-	
-	<!-- Phase -->
-	
-	<bean id="phase1" class="domain.Phase">
 
-		<property name="title" value="Fase 1" />
+	<bean id="warranty1" class="domain.Warranty">
 
-		<property name="description" value="Cjdfhgudf ygdfughdfi gsdi fuhf duyv ygdsu vfiud" />
+		<property name="title" value="Default" />
 
-		<property name="startDate" value="01/02/2019 12:34" />
-		
-		<property name="endDate" value="01/04/2019 12:34" />
+		<property name="terms" value="Default" />
+
+		<property name="laws" value="Default" />
+
+		<property name="draftMode" value="False" />
 
 	</bean>
 
+	<bean id="category1" class="domain.Category">
+
+		<property name="name" value="CATEGORY" />
+
+		<property name="nameEsp" value="Categoría" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="category2" class="domain.Category">
+
+		<property name="name" value="Carpentry" />
+
+		<property name="nameEsp" value="Carpintería" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category3" class="domain.Category">
+
+		<property name="name" value="Ceiling repair" />
+
+		<property name="nameEsp" value="Reparación de techos" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category4" class="domain.Category">
+
+		<property name="name" value="Cleaning" />
+
+		<property name="nameEsp" value="Limpieza" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category5" class="domain.Category">
+
+		<property name="name" value="Concrete work" />
+
+		<property name="nameEsp" value="Trabajos de hormigón" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category6" class="domain.Category">
+
+		<property name="name" value="Doors" />
+
+		<property name="nameEsp" value="Puertas" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category7" class="domain.Category">
+
+		<property name="name" value="Electrical wiring" />
+
+		<property name="nameEsp" value="Cableado eléctrico" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category8" class="domain.Category">
+
+		<property name="name" value="Fan installation" />
+
+		<property name="nameEsp" value="Instalación de ventiladores" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category9" class="domain.Category">
+
+		<property name="name" value="Fence fixing" />
+
+		<property name="nameEsp" value="Fijación de cercas" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category10" class="domain.Category">
+
+		<property name="name" value="Home security systems" />
+
+		<property name="nameEsp" value="Sistemas de seguridad en el hogar" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category11" class="domain.Category">
+
+		<property name="name" value="Insulation installation" />
+
+		<property name="nameEsp" value="Instalación de aislamientos" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category12" class="domain.Category">
+
+		<property name="name" value="Lamp repairs" />
+
+		<property name="nameEsp" value="Reparación de lámparas" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category13" class="domain.Category">
+
+		<property name="name" value="Moving" />
+
+		<property name="nameEsp" value="Mudanzas" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category14" class="domain.Category">
+
+		<property name="name" value="Painting" />
+
+		<property name="nameEsp" value="Pintura" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category15" class="domain.Category">
+
+		<property name="name" value="Pest control" />
+
+		<property name="nameEsp" value="Control de plagas" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category16" class="domain.Category">
+
+		<property name="name" value="Plumbing repairs" />
+
+		<property name="nameEsp" value="Fontanería" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category17" class="domain.Category">
+
+		<property name="name" value="Roofing" />
+
+		<property name="nameEsp" value="Techos" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category18" class="domain.Category">
+
+		<property name="name" value="Shelf installation" />
+
+		<property name="nameEsp" value="Instalación de estanterías" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category19" class="domain.Category">
+
+		<property name="name" value="Solar panels" />
+
+		<property name="nameEsp" value="Paneles solares" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category20" class="domain.Category">
+
+		<property name="name" value="Soundproofing" />
+
+		<property name="nameEsp" value="Insonorización" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category21" class="domain.Category">
+
+		<property name="name" value="Sprinkler repair" />
+
+		<property name="nameEsp" value="Reparación de aspersores" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
+
+	<bean id="category22" class="domain.Category">
+
+		<property name="name" value="Window repair" />
+
+		<property name="nameEsp" value="Reparación de ventanas" />
+
+		<property name="childrenCategories">
+			<list>
+			</list>
+		</property>
+
+		<property name="parent" ref="category1" />
+	</bean>
 
 </beans>
