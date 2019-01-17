@@ -17,9 +17,12 @@ import security.UserAccount;
 import security.UserAccountService;
 import services.AdminService;
 import services.ApplicationService;
+import services.CategoryService;
+import services.SystemDataService;
 import services.TaskService;
 import controllers.AbstractController;
 import domain.Admin;
+import domain.SystemData;
 import domain.Worker;
 
 @Controller
@@ -34,6 +37,10 @@ public class AdminController extends AbstractController {
 	private TaskService taskService;
 	@Autowired
 	private ApplicationService applicationService;
+	@Autowired
+	private CategoryService categoryService;
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -46,18 +53,18 @@ public class AdminController extends AbstractController {
 	@RequestMapping(value = "/statistics", method = RequestMethod.GET)
 	public ModelAndView statistics() {
 		ModelAndView result;
-		
+
 		Double[] spuser = new Double[4];
 
 		Double[] sptask = new Double[4];
-		
+
 		Double[] spriceptask = new Double[4];
 
 		Double[] spoffered = new Double[4];
-		
+
 		if(!taskService.findAll().isEmpty()) {
 			spuser = taskService.tasksPerUserStatistics();
-			
+
 			spriceptask = taskService.maxPricePerTaskStatistics();
 
 			sptask = applicationService.getAdminStatisticsPerTask();
@@ -78,6 +85,10 @@ public class AdminController extends AbstractController {
 
 		result = new ModelAndView("admin/statistics");
 
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
+
 		 result.addObject("maximumpu", spuser[2]);
 		 result.addObject("minimumpu", spuser[1]);
 		 result.addObject("averagepu", spuser[0]);
@@ -87,7 +98,7 @@ public class AdminController extends AbstractController {
 		result.addObject("minimumpt", sptask[1]);
 		result.addObject("averagept", sptask[0]);
 		result.addObject("stdevpt", sptask[3]);
-		
+
 		result.addObject("maximumpricept", spriceptask[2]);
 		result.addObject("minimumpricept", spriceptask[1]);
 		result.addObject("averagepricept", spriceptask[0]);
@@ -102,7 +113,7 @@ public class AdminController extends AbstractController {
 		result.addObject("pending", pending);
 		result.addObject("accepted", accepted);
 		result.addObject("rejected", rejected);
-		
+
 		result.addObject("workers", workersAVG);
 
 		return result;
@@ -177,11 +188,14 @@ public class AdminController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Admin admin,
 			final String messageError) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 
 		result = new ModelAndView("admin/edit");
 		result = new ModelAndView("admin/create");
 		result.addObject("admin", admin);
 		result.addObject("message", messageError);
+		result.addObject("data", data);
+
 
 		return result;
 	}

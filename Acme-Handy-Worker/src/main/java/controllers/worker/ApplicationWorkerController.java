@@ -35,6 +35,7 @@ public class ApplicationWorkerController extends AbstractController {
 
 	@Autowired
 	private TaskService taskService;
+	
 
 	@Autowired
 	private WorkerService workerService;
@@ -51,6 +52,9 @@ public class ApplicationWorkerController extends AbstractController {
 		applications = applicationService.findWorkerApplications();
 
 		result = new ModelAndView("application/list");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 		result.addObject("applications", applications);
 		result.addObject("requestURI", "application/worker/list.do");
 
@@ -73,6 +77,7 @@ public class ApplicationWorkerController extends AbstractController {
 			application = applicationService.findOne(applicationId);
 		} catch (Exception e) {
 			return result = new ModelAndView("redirect:list.do");
+			
 		}
 		Worker worker = workerService.findByPrincipal();
 
@@ -86,6 +91,9 @@ public class ApplicationWorkerController extends AbstractController {
 		}
 
 		result = new ModelAndView("application/show");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 		result.addObject("application", application);
 		result.addObject("comentarios", comentarios);
 
@@ -167,11 +175,13 @@ public class ApplicationWorkerController extends AbstractController {
 	protected ModelAndView createEditModelAndView(Application application,
 			String messageCode) {
 		ModelAndView result;
-
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		
 		result = new ModelAndView("application/updateCreate");
 		result.addObject("application", application);
 		result.addObject("message", messageCode);
 		result.addObject("requestURI", "application/worker/create.do");
+		result.addObject("data", data);
 
 		return result;
 	}

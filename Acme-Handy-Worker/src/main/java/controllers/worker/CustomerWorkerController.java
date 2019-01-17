@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CustomerService;
+import services.SystemDataService;
 import controllers.AbstractController;
 import domain.Customer;
+import domain.SystemData;
 
 @Controller
 @RequestMapping("/customer/worker")
@@ -20,6 +22,8 @@ public class CustomerWorkerController extends AbstractController {
 
 	@Autowired
 	private CustomerService		customerService;
+	@Autowired
+	private SystemDataService systemDataService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -38,6 +42,9 @@ public class CustomerWorkerController extends AbstractController {
 		customer = this.customerService.findOne(id);
 		Assert.notNull(customer);
 		result = this.showModelAndView(customer);
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 
 		return result;
 	}
@@ -46,8 +53,10 @@ public class CustomerWorkerController extends AbstractController {
 	
 	protected ModelAndView showModelAndView(final Customer customer) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		result = new ModelAndView("customer/show");
 		result.addObject("customer", customer);
+		result.addObject("data", data);
 
 		return result;
 	}

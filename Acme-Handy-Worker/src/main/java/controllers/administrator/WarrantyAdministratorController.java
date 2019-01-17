@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.SystemDataService;
 import services.WarrantyService;
 import controllers.AbstractController;
+import domain.SystemData;
 import domain.Warranty;
 
 @Controller
@@ -25,6 +27,8 @@ public class WarrantyAdministratorController extends AbstractController {
 
 	@Autowired
 	private WarrantyService		warrantyService;
+	@Autowired
+	private SystemDataService systemDataService;
 
 
 	// Constructors -----------------------------------------------------------
@@ -42,6 +46,8 @@ public class WarrantyAdministratorController extends AbstractController {
 
 		warranties = this.warrantyService.findAll();
 		result = new ModelAndView("warranty/list");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
 		result.addObject("requestURI", "warranty/administrator/list.do");
 		result.addObject("warranties", warranties);
 
@@ -145,8 +151,10 @@ public class WarrantyAdministratorController extends AbstractController {
 	
 	protected ModelAndView showModelAndView(final Warranty warranty) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		result = new ModelAndView("warranty/show");
 		result.addObject("warranty", warranty);
+		result.addObject("data", data);
 
 		return result;
 	}

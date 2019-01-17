@@ -20,7 +20,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import services.SystemDataService;
+
 import controllers.AbstractController;
+import domain.SystemData;
 
 @Controller
 @RequestMapping("/security")
@@ -30,6 +33,9 @@ public class LoginController extends AbstractController {
 
 	@Autowired
 	LoginService	service;
+	@Autowired
+	SystemDataService	systemDataService;
+	
 
 
 	// Constructors -----------------------------------------------------------
@@ -50,6 +56,9 @@ public class LoginController extends AbstractController {
 		result = new ModelAndView("security/login");
 		result.addObject("credentials", credentials);
 		result.addObject("showError", showError);
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 
 		return result;
 	}

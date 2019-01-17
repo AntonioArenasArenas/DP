@@ -13,7 +13,6 @@
 		
 		<form:hidden path="id"/>
 		<form:hidden path="version"/>
-		<form:hidden path="banner" />
 		
 		<form:label path="name">
 			<spring:message code="systemData.name" />
@@ -34,6 +33,13 @@
 		</form:label>
 		<form:textarea path="welcomePageMsg" />
 		<form:errors cssClass="error" path="welcomePageMsg" />
+		<br/>
+		
+		<form:label path="welcomePageMsgESP">
+			<spring:message code="systemData.welcomePageMsgESP" />
+		</form:label>
+		<form:textarea path="welcomePageMsgESP" />
+		<form:errors cssClass="error" path="welcomePageMsgESP" />
 		<br/>
 		
 		<form:label path="phoneCode">

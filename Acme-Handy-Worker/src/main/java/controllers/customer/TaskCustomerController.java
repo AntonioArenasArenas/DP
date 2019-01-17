@@ -15,11 +15,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.CategoryService;
 import services.CustomerService;
+import services.SystemDataService;
 import services.TaskService;
 import services.WarrantyService;
 import controllers.AbstractController;
 import domain.Category;
 import domain.Customer;
+import domain.SystemData;
 import domain.Task;
 import domain.Warranty;
 
@@ -40,6 +42,9 @@ public class TaskCustomerController extends AbstractController {
 	
 	@Autowired
 	private CustomerService customerService;
+	
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -56,6 +61,9 @@ public class TaskCustomerController extends AbstractController {
 
 		tasks = this.taskService.getTasksByLogged();
 		result = new ModelAndView("task/list");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 		result.addObject("requestURI", "task/customer/list.do");
 		result.addObject("tasks", tasks);
 
@@ -67,6 +75,9 @@ public class TaskCustomerController extends AbstractController {
 		ModelAndView result;
 
 		result = new ModelAndView("task/list");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 		result.addObject("requestURI", "task/customer/list.do");
 		result.addObject("tasks", tasks);
 
@@ -169,6 +180,7 @@ public class TaskCustomerController extends AbstractController {
 
 	protected ModelAndView createEditModelAndView(final Task task, final String message) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		if(task.getId() == 0) {
 			result = new ModelAndView("task/create");
 		} else {
@@ -180,7 +192,7 @@ public class TaskCustomerController extends AbstractController {
 		result.addObject("categories", categories);
 		result.addObject("task", task);
 		result.addObject("message", message);
-
+		result.addObject("data", data);
 		return result;
 	}
 	

@@ -15,10 +15,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ApplicationService;
 import services.PhaseService;
+import services.SystemDataService;
 import services.TaskService;
 import services.WorkerService;
 import controllers.AbstractController;
 import domain.Phase;
+import domain.SystemData;
 import domain.Task;
 import domain.Worker;
 
@@ -37,6 +39,9 @@ public class PhaseWorkerController extends AbstractController {
 	
 	@Autowired
 	private WorkerService workerService;
+	
+	@Autowired
+	private SystemDataService systemDataService;
 
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list(@RequestParam int taskId) {
@@ -54,6 +59,9 @@ public class PhaseWorkerController extends AbstractController {
 		} else {
 			result = new ModelAndView("phase/list");
 			result.addObject("phases", phases);
+			SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+			result.addObject("data", data);
+
 			result.addObject("requestURI", "phase/worker/list.do");
 		}
 		
@@ -161,6 +169,7 @@ public class PhaseWorkerController extends AbstractController {
 	protected ModelAndView createEditModelAndView(Phase phase,
 			String messageCode) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		if(phase.getId() == 0) {
 			result = new ModelAndView("phase/create");
 		} else {
@@ -168,6 +177,7 @@ public class PhaseWorkerController extends AbstractController {
 		}
 		result.addObject("phase", phase);
 		result.addObject("message", messageCode);
+		result.addObject("data", data);
 
 		return result;
 	}
