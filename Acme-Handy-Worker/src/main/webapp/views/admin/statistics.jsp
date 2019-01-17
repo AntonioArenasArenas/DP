@@ -108,6 +108,15 @@ ${rejected}
 ${ratio}
 
 <h2>
+	<spring:message code="administrator.customersavg" />
+</h2>
+<jstl:forEach var="c" items="${customers}">
+
+${c.name} ${c.middleName} ${c.surname}
+<br>
+</jstl:forEach>
+
+<h2>
 	<spring:message code="administrator.workersavg" />
 </h2>
 <jstl:forEach var="w" items="${workers}">

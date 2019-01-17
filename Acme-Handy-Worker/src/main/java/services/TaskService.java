@@ -4,8 +4,10 @@ import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.Random;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -34,7 +36,7 @@ public class TaskService {
 
 	@Autowired
 	private ActorService actorService;
-
+	
 	// Constructors -----------------------------------------------------------
 
 	public TaskService() {
@@ -183,6 +185,28 @@ public class TaskService {
 
 		return taskRepository.maxPricePerTaskStatistics();
 
+	}
+	
+	public Collection<Customer> getCustomersMAvgTasks() {
+		
+		Set<Customer> result = new HashSet<Customer>();
+		
+		Collection<Long> numTasksPerCust = taskRepository.numberOfTasksPerCustomer();
+		Double sum = 0.0;
+		for(Long n : numTasksPerCust) {
+			sum += n;
+		}
+		Double tenPercentMoreThanAvg = 1.1*sum/numTasksPerCust.size();
+
+		Collection<Customer> allCustomers = customerService.findAll();
+		
+		for(Customer c : allCustomers) {
+			if(taskRepository.getTasksByCustomerId(c.getId()).size() > tenPercentMoreThanAvg) {
+				result.add(c);
+			}
+		}
+		
+		return result;
 	}
 
 	public String tickerGenerator(){

@@ -21,6 +21,7 @@ import services.SystemDataService;
 import services.TaskService;
 import controllers.AbstractController;
 import domain.Admin;
+import domain.Customer;
 import domain.SystemData;
 import domain.Worker;
 
@@ -77,6 +78,8 @@ public class AdminController extends AbstractController {
 		Double accepted = applicationService.getAcepApplications();
 
 		Double rejected = applicationService.getRejecApplications();
+		
+		Collection<Customer> customersAVG = taskService.getCustomersMAvgTasks();
 
 		Collection<Worker> workersAVG = applicationService.getWorkersAcceptedMAvgApplications();
 
@@ -111,6 +114,7 @@ public class AdminController extends AbstractController {
 		result.addObject("accepted", accepted);
 		result.addObject("rejected", rejected);
 
+		result.addObject("customers", customersAVG);
 		result.addObject("workers", workersAVG);
 
 		return result;
