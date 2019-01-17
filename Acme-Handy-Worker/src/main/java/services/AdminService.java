@@ -14,7 +14,6 @@ import repositories.AdminRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import security.UserAccountService;
 import domain.Admin;
 import domain.Box;
 import domain.Message;
@@ -34,9 +33,6 @@ public class AdminService {
 	// Supporting services ----------------------------------------------------
 	@Autowired
 	private BoxService boxService;
-	
-	@Autowired
-	private UserAccountService userAccountService;
 	
 	
 	

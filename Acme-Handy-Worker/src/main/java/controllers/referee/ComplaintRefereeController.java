@@ -11,11 +11,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.ComplaintService;
-import services.RefereeService;
 import controllers.AbstractController;
 import domain.Complaint;
-import domain.Referee;
-import domain.Task;
 
 
 	
@@ -27,9 +24,6 @@ import domain.Task;
 
 	@Autowired
 	private ComplaintService	complaintService;
-
-	@Autowired
-	private RefereeService		refereeService;
 
 
 	//Constructor -------------------------------------------------------------
