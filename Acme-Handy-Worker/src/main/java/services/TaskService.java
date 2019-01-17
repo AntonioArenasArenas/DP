@@ -89,6 +89,8 @@ public class TaskService {
 		Task result;
 
 		Assert.isTrue(task.getStartDate().before(task.getEndDate()));
+		
+		Assert.isTrue(!task.getEndDate().before(new Date()));
 
 		Actor logged = actorService.findByPrincipal();
 

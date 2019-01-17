@@ -5,6 +5,7 @@ import java.util.Collection;
 
 import javax.persistence.Access;
 import javax.persistence.AccessType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
@@ -122,6 +123,7 @@ public abstract class Actor extends DomainEntity {
 	}
 
 	@NotBlank
+	@Column(unique = true)
 	@Pattern(regexp = "^([A-z0-9 ]{1,}<[A-z0-9]{1,}@[A-z0-9.]{0,}>|[A-z0-9]{1,}@[A-z0-9.]{0,})$")
 	public String getEmail() {
 		return this.email;
