@@ -18,6 +18,7 @@ import domain.Admin;
 import domain.Box;
 import domain.Message;
 import domain.Profile;
+import domain.SystemData;
 
 
 
@@ -31,8 +32,12 @@ public class AdminService {
 	
 
 	// Supporting services ----------------------------------------------------
+	
 	@Autowired
 	private BoxService boxService;
+	
+	@Autowired
+	private SystemDataService systemDataService;
 	
 	
 	
@@ -67,14 +72,17 @@ public class AdminService {
 		return result;
 	}
 	
-	public Admin save(Admin Admin) {
-		Assert.notNull(Admin);
+	public Admin save(Admin admin) {
+		Assert.notNull(admin);
 		
-		
+		String phoneNumber = admin.getPhoneNumber();
+		if(!phoneNumber.startsWith("+")) {
+			admin.setPhoneNumber(((SystemData) systemDataService.findAll().toArray()[0]).getPhoneCode() + phoneNumber);
+		}
 
 		Admin result;
 		
-		result = adminRepository.save(Admin);
+		result = adminRepository.save(admin);
 		
 
 		return result;
