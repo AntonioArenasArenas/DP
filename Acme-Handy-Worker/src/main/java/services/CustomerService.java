@@ -14,12 +14,12 @@ import repositories.CustomerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import security.UserAccountService;
 import domain.Box;
 import domain.Customer;
 import domain.Endorsement;
 import domain.Message;
 import domain.Profile;
+import domain.SystemData;
 
 @Service
 @Transactional
@@ -31,11 +31,12 @@ public class CustomerService {
 	private CustomerRepository customerRepository;
 
 	// Supporting services ----------------------------------------------------
+	
 	@Autowired
 	private BoxService boxService;
 	
 	@Autowired
-	private UserAccountService userAccountService;
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -101,7 +102,7 @@ public class CustomerService {
 		
 		String phoneNumber = customer.getPhoneNumber();
 		if(!phoneNumber.startsWith("+")) {
-			customer.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
+			customer.setPhoneNumber(((SystemData) systemDataService.findAll().toArray()[0]).getPhoneCode() + phoneNumber);
 		}
 
 		Customer result;

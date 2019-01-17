@@ -22,6 +22,7 @@ import domain.Endorsement;
 import domain.Finder;
 import domain.Message;
 import domain.Profile;
+import domain.SystemData;
 import domain.Tutorial;
 import domain.Worker;
 
@@ -33,6 +34,7 @@ public class WorkerService {
 	private WorkerRepository WorkerRepository;
 
 	// Supporting services ----------------------------------------------------
+	
 	@Autowired
 	private BoxService boxService;
 	
@@ -41,6 +43,9 @@ public class WorkerService {
 	
 	@Autowired
 	private FinderService finderService;
+	
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -119,7 +124,7 @@ public class WorkerService {
 		
 		String phoneNumber = worker.getPhoneNumber();
 		if(!phoneNumber.startsWith("+")) {
-			worker.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
+			worker.setPhoneNumber(((SystemData) systemDataService.findAll().toArray()[0]).getPhoneCode() + phoneNumber);
 		}
 
 

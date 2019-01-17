@@ -52,6 +52,23 @@
 	<b><spring:message code="administrator.stdev" /> :</b> ${stdevpt}
 </p>
 
+<h2>
+	<spring:message code="administrator.statisticsPricePerTask" />
+</h2>
+
+<p>
+	<b><spring:message code="administrator.maximum" /> :</b> ${maximumpricept}
+</p>
+<p>
+	<b><spring:message code="administrator.minimum" /> :</b> ${minimumpricept}
+</p>
+<p>
+	<b><spring:message code="administrator.average" /> :</b> ${averagepricept}
+</p>
+<p>
+	<b><spring:message code="administrator.stdev" /> :</b> ${stdevpricept}
+</p>
+
 
 <h2>
 	<spring:message code="administrator.priceOfferedStatistics" />
@@ -95,7 +112,7 @@ ${ratio}
 </h2>
 <jstl:forEach var="w" items="${workers}">
 
-${w.name} ${w.surname} ${w.middleName}
+${w.name} ${w.middleName} ${w.surname}
 <br>
 </jstl:forEach>
 

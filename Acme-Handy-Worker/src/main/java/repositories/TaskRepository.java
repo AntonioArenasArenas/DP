@@ -29,7 +29,7 @@ public interface TaskRepository extends JpaRepository<Task, Integer>{
 	@Query("select count(t) from Task t group by t.customer")
 	public Collection<Long> numberOfTasksPerCustomer();
 	
-//	@Query("select avg(c.tasks.size), min(c.tasks.size), max(c.tasks.size), stddev(c.tasks.size) from Customer c")
-//	public Double[] tasksPerUserStatistics();
+	@Query("select avg(t.maxPrice), min(t.maxPrice), max(t.maxPrice), stddev(t.maxPrice) from Task t")
+	public Double[] maxPricePerTaskStatistics();
 	
 }

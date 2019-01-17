@@ -53,15 +53,19 @@ public class AdminController extends AbstractController {
 	@RequestMapping(value = "/statistics", method = RequestMethod.GET)
 	public ModelAndView statistics() {
 		ModelAndView result;
-		
+
 		Double[] spuser = new Double[4];
 
 		Double[] sptask = new Double[4];
 
+		Double[] spriceptask = new Double[4];
+
 		Double[] spoffered = new Double[4];
-		
+
 		if(!taskService.findAll().isEmpty()) {
 			spuser = taskService.tasksPerUserStatistics();
+
+			spriceptask = taskService.maxPricePerTaskStatistics();
 
 			sptask = applicationService.getAdminStatisticsPerTask();
 
@@ -77,11 +81,10 @@ public class AdminController extends AbstractController {
 
 		Double rejected = applicationService.getRejecApplications();
 
-		Collection<Worker> workersAVG = applicationService
-				.getWorkersAcceptedMAvgApplications();
+		Collection<Worker> workersAVG = applicationService.getWorkersAcceptedMAvgApplications();
 
 		result = new ModelAndView("admin/statistics");
-		
+
 		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		result.addObject("data", data);
 
@@ -95,6 +98,11 @@ public class AdminController extends AbstractController {
 		result.addObject("minimumpt", sptask[1]);
 		result.addObject("averagept", sptask[0]);
 		result.addObject("stdevpt", sptask[3]);
+
+		result.addObject("maximumpricept", spriceptask[2]);
+		result.addObject("minimumpricept", spriceptask[1]);
+		result.addObject("averagepricept", spriceptask[0]);
+		result.addObject("stdevpricept", spriceptask[3]);
 
 		result.addObject("maximumpo", spoffered[2]);
 		result.addObject("minimumpo", spoffered[1]);
@@ -181,13 +189,13 @@ public class AdminController extends AbstractController {
 			final String messageError) {
 		ModelAndView result;
 		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
-		
+
 		result = new ModelAndView("admin/edit");
 		result = new ModelAndView("admin/create");
 		result.addObject("admin", admin);
 		result.addObject("message", messageError);
 		result.addObject("data", data);
-		
+
 
 		return result;
 	}

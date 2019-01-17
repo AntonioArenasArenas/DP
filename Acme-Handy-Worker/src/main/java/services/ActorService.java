@@ -12,6 +12,7 @@ import repositories.ActorRepository;
 import security.LoginService;
 import security.UserAccount;
 import domain.Actor;
+import domain.SystemData;
 
 
 
@@ -26,6 +27,8 @@ public class ActorService {
 
 	// Supporting services ----------------------------------------------------
 
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -64,7 +67,7 @@ public class ActorService {
 
 		String phoneNumber = actor.getPhoneNumber();
 		if(!phoneNumber.startsWith("+")) {
-			actor.setPhoneNumber("+34" + phoneNumber);  // TODO: Coger prefijo de systemData
+			actor.setPhoneNumber(((SystemData) systemDataService.findAll().toArray()[0]).getPhoneCode() + phoneNumber);
 		}
 
 		result = actorRepository.save(actor);
