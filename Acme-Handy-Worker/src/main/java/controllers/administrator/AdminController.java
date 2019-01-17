@@ -17,7 +17,6 @@ import security.UserAccount;
 import security.UserAccountService;
 import services.AdminService;
 import services.ApplicationService;
-import services.CategoryService;
 import services.TaskService;
 import controllers.AbstractController;
 import domain.Admin;
@@ -35,8 +34,6 @@ public class AdminController extends AbstractController {
 	private TaskService taskService;
 	@Autowired
 	private ApplicationService applicationService;
-	@Autowired
-	private CategoryService categoryService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -53,11 +50,15 @@ public class AdminController extends AbstractController {
 		Double[] spuser = new Double[4];
 
 		Double[] sptask = new Double[4];
+		
+		Double[] spriceptask = new Double[4];
 
 		Double[] spoffered = new Double[4];
 		
 		if(!taskService.findAll().isEmpty()) {
 			spuser = taskService.tasksPerUserStatistics();
+			
+			spriceptask = taskService.maxPricePerTaskStatistics();
 
 			sptask = applicationService.getAdminStatisticsPerTask();
 
@@ -73,8 +74,7 @@ public class AdminController extends AbstractController {
 
 		Double rejected = applicationService.getRejecApplications();
 
-		Collection<Worker> workersAVG = applicationService
-				.getWorkersAcceptedMAvgApplications();
+		Collection<Worker> workersAVG = applicationService.getWorkersAcceptedMAvgApplications();
 
 		result = new ModelAndView("admin/statistics");
 
@@ -87,6 +87,11 @@ public class AdminController extends AbstractController {
 		result.addObject("minimumpt", sptask[1]);
 		result.addObject("averagept", sptask[0]);
 		result.addObject("stdevpt", sptask[3]);
+		
+		result.addObject("maximumpricept", spriceptask[2]);
+		result.addObject("minimumpricept", spriceptask[1]);
+		result.addObject("averagepricept", spriceptask[0]);
+		result.addObject("stdevpricept", spriceptask[3]);
 
 		result.addObject("maximumpo", spoffered[2]);
 		result.addObject("minimumpo", spoffered[1]);
@@ -97,7 +102,7 @@ public class AdminController extends AbstractController {
 		result.addObject("pending", pending);
 		result.addObject("accepted", accepted);
 		result.addObject("rejected", rejected);
-
+		
 		result.addObject("workers", workersAVG);
 
 		return result;

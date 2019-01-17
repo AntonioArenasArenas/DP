@@ -161,7 +161,7 @@ public class TaskService {
 		for(Long n : numTasksPerCust) {
 			sum += n;
 		}
-		res[0] = sum.doubleValue()/numTasksPerCust.size(); // Average
+		res[0] = sum/numTasksPerCust.size(); // Average
 		
 		res[1] = Collections.min(numTasksPerCust).doubleValue();
 		
@@ -177,6 +177,12 @@ public class TaskService {
 		
 		return res;
 		
+	}
+	
+	public Double[] maxPricePerTaskStatistics() {
+
+		return taskRepository.maxPricePerTaskStatistics();
+
 	}
 
 	public String tickerGenerator(){
