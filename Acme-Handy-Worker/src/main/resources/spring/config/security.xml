@@ -159,6 +159,10 @@
 		
 		<security:intercept-url pattern="/note/worker/create.do" access="hasRole('WORKER')" />
 		<security:intercept-url pattern="/note/worker/edit.do" access="hasRole('WORKER')" />
+		
+		<security:intercept-url pattern="/finder/worker/edit.do" access="hasRole('WORKER')" />
+		
+		<security:intercept-url pattern="/systemData/administrator/edit.do" access="hasRole('ADMIN')" />
 
 		<security:intercept-url pattern="/**"
 			access="hasRole('NONE')" />

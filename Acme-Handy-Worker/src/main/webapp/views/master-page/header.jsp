@@ -29,6 +29,7 @@
 					<li><a href="admin/statistics.do"><spring:message code="master.page.administrator.statistics" /></a></li>
 					<li><a href="admin/create.do"><spring:message code="master.new.admin" /></a></li>
 					<li><a href="category/administrator/list.do?categoryId=0"><spring:message code="master.page.category.list" /></a></li>
+					<li><a href="systemData/administrator/edit.do"><spring:message code="master.page.systemData.administrator" /></a></li>
 				</ul>
 			</li>
 		</security:authorize>
@@ -54,6 +55,7 @@
 					<li><a href="worker/edit.do"><spring:message code="master.page.personal.data" /></a></li>
 					<li><a href="task/worker/list.do"><spring:message code="master.page.tasks" /></a></li>
 					<li><a href="application/worker/list.do"><spring:message code="master.page.applications" /></a></li>
+					<li><a href="finder/worker/edit.do"><spring:message code="master.page.finder" /></a></li>
 
 				</ul>
 			</li>

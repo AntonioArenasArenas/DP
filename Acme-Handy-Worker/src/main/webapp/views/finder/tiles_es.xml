@@ -18,12 +18,8 @@
 
 	<definition name="finder/edit" extends="master.page">
 		<put-attribute name="title" value="Editar filtros del buscador" />
-		<put-attribute name="body" value="/views/finder/edit-finder.jsp" />
+		<put-attribute name="body" value="/views/finder/edit.jsp" />
 	</definition>
 	
-	<definition name="finder/display" extends="master.page">
-		<put-attribute name="title" value="Lista de tareas" />
-		<put-attribute name="body" value="/views/finder/display-task.jsp" />
-	</definition>
 
 </tiles-definitions>

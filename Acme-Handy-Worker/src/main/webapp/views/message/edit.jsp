@@ -9,8 +9,6 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
-<p><spring:message code="mensaje.new" /></p>
-
 <form:form action="message/edit.do" modelAttribute="messaged">
 
 	<form:hidden path="id" />

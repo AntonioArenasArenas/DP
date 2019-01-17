@@ -8,79 +8,71 @@
 <%@taglib prefix="security"	uri="http://www.springframework.org/security/tags"%>
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%> 
 
-<form:form action="systemData/edit.do"
+<form:form action="systemData/administrator/edit.do"
 		modelAttribute="systemData">
 		
-		<form:hidden path="systemData.banner" />
+		<form:hidden path="id"/>
+		<form:hidden path="version"/>
+		<form:hidden path="banner" />
 		
 		<form:label path="name">
 			<spring:message code="systemData.name" />
 		</form:label>
-		<form:input path="systemData.name" />
+		<form:input path="name" />
 		<form:errors cssClass="error" path="name" />
 		<br/>
 		
 		<form:label path="bannerHeader">
 			<spring:message code="systemData.bannerHeader" />
 		</form:label>
-		<form:input path="systemData.bannerHeader" />
+		<form:input path="bannerHeader" />
 		<form:errors cssClass="error" path="bannerHeader" />
 		<br/>
 		
 		<form:label path="welcomePageMsg">
 			<spring:message code="systemData.welcomePageMsg" />
 		</form:label>
-		<form:textarea path="systemData.welcomePageMsg" />
+		<form:textarea path="welcomePageMsg" />
 		<form:errors cssClass="error" path="welcomePageMsg" />
 		<br/>
 		
 		<form:label path="phoneCode">
 			<spring:message code="systemData.phoneCode" />
 		</form:label>
-		<form:textarea path="systemData.phoneCode" />
+		<form:input path="phoneCode" />
 		<form:errors cssClass="error" path="phoneCode" />
 		<br/>
 		
 		<form:label path="spamWords">
 			<spring:message code="systemData.spamWords" />
 		</form:label>
-		<form:textarea path="systemData.spamWords" />
+		<form:textarea path="spamWords" />
 		<form:errors cssClass="error" path="spamWords" />
 		<br/>
 		
-		<form:label path="creditCards">
-			<spring:message code="systemData.creditCards" />
+		<form:label path="makeCreditCards">
+			<spring:message code="systemData.makeCreditCards" />
 		</form:label>
-		<form:textarea path="systemData.spamWords" />
-		<form:errors cssClass="error" path="spamWords" />
+		<form:textarea path="makeCreditCards" />
+		<form:errors cssClass="error" path="makeCreditCards" />
 		<br/>
 		
 		<form:label path="vatPercentage">
 			<spring:message code="systemData.vatPercentage" />
 		</form:label>
-		<form:input path="systemData.vatPercentage" />
+		<form:input path="vatPercentage" />
 		<form:errors cssClass="error" path="vatPercentage" />
 		<br/>
 		
 		<form:label path="cache">
 			<spring:message code="systemData.cache" />
 		</form:label>
-		<form:input path="systemData.cache" />
+		<form:input path="cache" />
 		<form:errors cssClass="error" path="cache" />
-		<br/>
-		
-		<form:label path="maxPrice">
-			<spring:message code="systemData.maxPrice" />
-		</form:label>
-		<form:input path="systemData.maxPrice" />
-		<form:errors cssClass="error" path="maxPrice" />
 		<br/>
 		
 		
 		<input type="submit" name="save"
 		value="<spring:message code="systemData.save" />" />&nbsp;
-		<input type="submit" name="delete"
-			value="<spring:message code="systemData.delete" />"
-			onclick="return confirm('<spring:message code="systemData.confirm.delete" />')" />&nbsp;
 		
 	</form:form>

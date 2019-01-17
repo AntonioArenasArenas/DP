@@ -20,7 +20,6 @@
 <%@taglib prefix="display" uri="http://displaytag.sf.net"%>
 
 <!-- Listing grid -->
-<p><spring:message code="box.list" /></p>
 
 <display:table
 	pagesize="5" name="boxes" id="row"
