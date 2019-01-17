@@ -120,8 +120,7 @@ public class PhaseWorkerController extends AbstractController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "save")
-	public ModelAndView save(@Valid final Phase phase, @RequestParam int taskId,
-			final BindingResult binding) {
+	public ModelAndView save(@Valid final Phase phase, final BindingResult binding, @RequestParam int taskId) {
 		ModelAndView result;
 		if (binding.hasErrors()) {
 			result = this.createEditModelAndView(phase);
@@ -139,7 +138,7 @@ public class PhaseWorkerController extends AbstractController {
 	}
 	
 	@RequestMapping(value = "/edit", method = RequestMethod.POST, params = "delete")
-	public ModelAndView delete(final Phase phase, @RequestParam int taskId, final BindingResult binding) {
+	public ModelAndView delete(final Phase phase, final BindingResult binding, @RequestParam int taskId) {
 		ModelAndView result;
 
 		try {
