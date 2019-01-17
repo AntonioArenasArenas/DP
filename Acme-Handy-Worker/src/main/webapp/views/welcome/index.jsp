@@ -28,6 +28,7 @@ ${data.welcomePageMsgESP}
 
 <script >
 function getCookie(cname) {
+	try {
 	  var name = cname + "=";
 	  var decodedCookie = decodeURIComponent(document.cookie);
 	  var ca = decodedCookie.split(';');
@@ -40,8 +41,12 @@ function getCookie(cname) {
 	      return c.substring(name.length, c.length);
 	    }
 	  }
-	  return "";
+	  return "en";
 	}
+	catch (err) {
+		return "en";
+	}
+}
 	
 	function checkCookie() {
 	  var language = getCookie("language");

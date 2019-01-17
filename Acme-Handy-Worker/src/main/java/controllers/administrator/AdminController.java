@@ -190,9 +190,12 @@ public class AdminController extends AbstractController {
 			final String messageError) {
 		ModelAndView result;
 		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
-
-		result = new ModelAndView("admin/edit");
-		result = new ModelAndView("admin/create");
+		
+		if(admin.getId() == 0) {
+			result = new ModelAndView("admin/create");
+		} else {
+			result = new ModelAndView("admin/edit");
+		}
 		result.addObject("admin", admin);
 		result.addObject("message", messageError);
 		result.addObject("data", data);
