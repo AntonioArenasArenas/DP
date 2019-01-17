@@ -61,6 +61,17 @@ public class TaskCustomerController extends AbstractController {
 
 		return result;
 	}
+	
+	@RequestMapping(value = "/listFinder", method = RequestMethod.GET)
+	public ModelAndView listFinder(Collection<Task> tasks) {
+		ModelAndView result;
+
+		result = new ModelAndView("task/list");
+		result.addObject("requestURI", "task/customer/list.do");
+		result.addObject("tasks", tasks);
+
+		return result;
+	}
 
 	// Creation ---------------------------------------------------------------
 

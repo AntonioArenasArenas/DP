@@ -15,11 +15,11 @@ import repositories.WorkerRepository;
 import security.Authority;
 import security.LoginService;
 import security.UserAccount;
-import security.UserAccountService;
 import domain.Actor;
 import domain.Application;
 import domain.Box;
 import domain.Endorsement;
+import domain.Finder;
 import domain.Message;
 import domain.Profile;
 import domain.Tutorial;
@@ -37,10 +37,10 @@ public class WorkerService {
 	private BoxService boxService;
 	
 	@Autowired
-	private UserAccountService userAccountService;
+	private ActorService actorService;
 	
 	@Autowired
-	private ActorService actorService;
+	private FinderService finderService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -109,6 +109,12 @@ public class WorkerService {
 		if(worker.getId()!=0){
 			Actor actor = actorService.findByPrincipal();
 			Assert.isTrue(actor.equals(worker));
+		} else {
+			Finder finder = finderService.create();
+			Finder finderSaved;
+			worker.setFinder(finder);
+			finderSaved = finderService.save2(finder);
+			worker.setFinder(finderSaved);
 		}
 		
 		String phoneNumber = worker.getPhoneNumber();
