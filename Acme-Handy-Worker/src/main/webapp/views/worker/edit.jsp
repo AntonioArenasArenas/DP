@@ -33,18 +33,14 @@
 	
 	<jstl:if test="${worker.id!=0}">
 	<form:hidden path="userAccount.password" /> 
+	<form:hidden path="userAccount.username" /> 
 	</jstl:if>
 	<jstl:if test="${worker.id==0}">
 	<form:hidden path="make" /> 
 	</jstl:if>
 	
 	
-	<form:label path="userAccount.username">
-		<spring:message code="actor.username" />:
-	</form:label>
-	<form:input  path="userAccount.username" />
-	<form:errors cssClass="error" path="userAccount.username" />
-	<br />
+	
 	
 	<jstl:if test="${worker.id==0}">
 	<form:label path="userAccount.password">
@@ -53,6 +49,12 @@
 	<form:input type="password" path="userAccount.password" />
 	<form:errors cssClass="error" path="userAccount.password" />
 	<br /> 
+	<form:label path="userAccount.username">
+		<spring:message code="actor.username" />:
+	</form:label>
+	<form:input  path="userAccount.username" />
+	<form:errors cssClass="error" path="userAccount.username" />
+	<br />
 	</jstl:if>
 
 	<form:label path="name">
