@@ -18,11 +18,13 @@ import org.springframework.web.servlet.ModelAndView;
 import services.ApplicationService;
 import services.CreditCardService;
 import services.CustomerService;
+import services.SystemDataService;
 import services.TaskService;
 import controllers.AbstractController;
 import domain.Application;
 import domain.CreditCard;
 import domain.Customer;
+import domain.SystemData;
 import domain.Task;
 
 @Controller
@@ -41,6 +43,9 @@ public class ApplicationCustomerController extends AbstractController {
 	@Autowired
 	private CreditCardService creditCardService;
 
+	@Autowired
+	private SystemDataService systemDataService;
+
 	@RequestMapping(value = "/list", method = RequestMethod.GET)
 	public ModelAndView list() {
 		ModelAndView result;
@@ -52,9 +57,11 @@ public class ApplicationCustomerController extends AbstractController {
 		result = new ModelAndView("application/list");
 		result.addObject("applications", applications);
 		result.addObject("requestURI", "application/customer/list.do");
-		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
-		// pasarlo
-		result.addObject("VAT", 0.21);
+
+		LinkedList<SystemData> systemData = new LinkedList<SystemData>(
+				systemDataService.findAll());
+		SystemData sistema = systemData.get(0);
+		result.addObject("VAT", sistema.getVatPercentage() / 100);
 
 		return result;
 
@@ -89,9 +96,11 @@ public class ApplicationCustomerController extends AbstractController {
 		result = new ModelAndView("application/show");
 		result.addObject("application", application);
 		result.addObject("comentarios", comentarios);
-		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
-		// pasarlo
-		result.addObject("VAT", 0.21);
+
+		LinkedList<SystemData> systemData = new LinkedList<SystemData>(
+				systemDataService.findAll());
+		SystemData sistema = systemData.get(0);
+		result.addObject("VAT", sistema.getVatPercentage() / 100);
 
 		return result;
 
@@ -110,8 +119,21 @@ public class ApplicationCustomerController extends AbstractController {
 		}
 		Customer c = customerService.findByPrincipal();
 
+		boolean denied = false;
+
+		if (application.getStatus().equals("ACCEPTED")
+				|| application.getStatus().equals("REJECTED")) {
+			denied = true;
+
+		}
+
+		if (!taskService.getActiveTasks().contains(application.getTask())) {
+			denied = true;
+		}
+
 		if (!taskService.getTasksByCustomerId(c.getId()).contains(
-				application.getTask())) {
+				application.getTask())
+				|| denied) {
 			return result = new ModelAndView("redirect:list.do");
 		}
 
@@ -170,15 +192,21 @@ public class ApplicationCustomerController extends AbstractController {
 		estados.add("PENDING");
 		estados.add("REJECTED");
 		Task t = application.getTask();
-		List<Application> applications = new LinkedList<Application>(
-				t.getApplications());
-		boolean isAccepted = false;
-		for (Application a : applications) {
-			if (a.getStatus().equals("ACCEPTED")) {
-				isAccepted = true;
+
+		if (!t.getApplications().equals(null)) {
+			List<Application> applications = new LinkedList<Application>(
+					t.getApplications());
+
+			boolean isAccepted = false;
+			for (Application a : applications) {
+				if (a.getStatus().equals("ACCEPTED")) {
+					isAccepted = true;
+				}
 			}
-		}
-		if (!isAccepted) {
+			if (!isAccepted) {
+				estados.add("ACCEPTED");
+			}
+		} else {
 			estados.add("ACCEPTED");
 		}
 		Collection<String> comentarios = new LinkedList<String>();
@@ -187,12 +215,13 @@ public class ApplicationCustomerController extends AbstractController {
 			comentarios = Arrays.asList(spliteado);
 		}
 
-		// TODO aqui coger los brandnamesF
-		Collection<String> brandnames = new LinkedList<String>();
-		brandnames.add("VISA");
-		brandnames.add("MASTERS");
-		brandnames.add("DINNERS");
-		brandnames.add("AMEX");
+		// Al ser una clase única podemos hacer un findAll y obtener el primero
+		LinkedList<SystemData> systemData = new LinkedList<SystemData>(
+				systemDataService.findAll());
+		SystemData sistema = systemData.get(0);
+
+		Collection<String> brandnames = new LinkedList<String>(
+				sistema.getMakeCreditCards());
 
 		result = new ModelAndView("application/updateCreate");
 		result.addObject("application", application);
@@ -201,9 +230,7 @@ public class ApplicationCustomerController extends AbstractController {
 		result.addObject("brandnames", brandnames);
 		result.addObject("requestURI", "application/customer/edit.do");
 
-		// TODO Aquí hacer tratamiento de dividir lo recibido entre 100 y
-		// pasarlo
-		result.addObject("VAT", 0.21);
+		result.addObject("VAT", sistema.getVatPercentage() / 100);
 
 		result.addObject("message", messageCode);
 

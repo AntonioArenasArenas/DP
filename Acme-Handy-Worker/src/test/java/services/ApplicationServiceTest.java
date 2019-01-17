@@ -161,17 +161,6 @@ public class ApplicationServiceTest extends AbstractTest {
 	}
 
 	@Test
-	public void testApplicationMaximumPriceStatistics() {
-
-		Double[] result;
-		result = applicationService.getAdminStatisticsMaximumPrice();
-		Assert.isTrue(result[0].equals(355.3633333333333));
-		Assert.isTrue(result[1].equals(153.26));
-		Assert.isTrue(result[2].equals(456.58));
-		Assert.isTrue(result[3].equals(142.90870100250098));
-	}
-
-	@Test
 	public void testPendingApplications() {
 
 		Double result;

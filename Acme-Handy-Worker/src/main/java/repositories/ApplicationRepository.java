@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import domain.Application;
+import domain.Worker;
 
 @Repository
 public interface ApplicationRepository extends
@@ -27,8 +28,8 @@ public interface ApplicationRepository extends
 	@Query("select count(a)*1.00 / (select count(a) from Application a where a.status='PENDING') from Application a where a.status='PENDING' AND a.task.endDate<CURRENT_DATE")
 	public Double getApplicationCantChange();
 
-	@Query("select avg(t.maxPrice), min(t.maxPrice), max(t.maxPrice), stddev(t.maxPrice) from Task t")
-	public Double[] getApplicationMaximumPriceStatistics();
+	@Query("select w from Worker w join w.applications a where a.status='ACCEPTED' group by w having  w.applications.size >= ( select avg(w1.applications.size) from Worker w1) order by w.applications.size")
+	public Collection<Worker> getWorkersAcceptedMAvg();
 
 	@Query("select count(a)*1.00 / (select count(a) from Application a) from Application a where a.status='PENDING'")
 	public Double getPendingApplications();

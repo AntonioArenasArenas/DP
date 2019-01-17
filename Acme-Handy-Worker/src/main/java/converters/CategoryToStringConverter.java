@@ -21,7 +21,7 @@ import domain.Category;
 public class CategoryToStringConverter implements Converter<Category, String> {
 
 	@Override
-	public String convert(final Category category) {
+	public String convert(Category category) {
 		String result;
 
 		if (category == null)

@@ -2,6 +2,7 @@ package services;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 
 import javax.transaction.Transactional;
@@ -11,6 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import repositories.FinderRepository;
+import domain.Actor;
 import domain.Finder;
 import domain.SystemData;
 import domain.Task;
@@ -27,8 +29,13 @@ public class FinderService {
 
     @Autowired
     private SystemDataService systemDataService;
+
     @Autowired
-    WorkerService workerService;
+    private WorkerService workerService;
+
+    
+
+
     // Constructors --------------------------------------------------------------------------
 
     public FinderService(){
@@ -41,6 +48,8 @@ public class FinderService {
 
         Finder result;
         result = new Finder();
+        Collection<Task> voidLisOfTasks = new ArrayList<>();
+        result.setTasks(voidLisOfTasks);
         return result;
     }
 
@@ -50,25 +59,35 @@ public class FinderService {
         Date now = new Date();
         Finder result;
         finder.setLastUpdate(now);
+        finder.setTasks(this.getTasksByFinderFilter(finder.getCategory(), finder.getWarranty(), finder.getMaxPrice(),
+        finder.getMinPrice(), finder.getStartDate(), finder.getEndDate(), finder.getKeyWord()));
         result = finderRepository.save(finder);
         return result;
     }
+    public Finder save2(Finder finder){
+        Assert.notNull(finder);
+        Finder finderSaved = this.finderRepository.save(finder);
+        return finderSaved;
+    }
     public void delete(Finder finder){
-    	
-    	Assert.notNull(finder);
+
+    	  Assert.notNull(finder);
         finderRepository.delete(finder);
+        Assert.isNull(finder);
 
     }
-    public Finder findOne() {
+    public Finder getFinderOfLogged() {
 
         Finder result;
-        result = getFinderByWorkerId();
+        result = getFinderByLoggedWorker();
+        Worker logged = workerService.findByPrincipal();
+        Assert.isTrue(logged.getFinder()== result);
         cleanFinderCache();
         return result;
     }
     public void cleanFinderCache() {
-    	
-        Finder finder = getFinderByWorkerId();
+
+        Finder finder = getFinderByLoggedWorker();
         Long lastUpdate;
         Long now;
         SystemData s;
@@ -84,19 +103,69 @@ public class FinderService {
             finder.setTasks(cleaned);
         }
     }
-    public Finder getFinderByWorkerId(){
-    	
+    public Finder getFinderByLoggedWorker(){
+
         Finder result;
         Worker logged;
         logged = workerService.findByPrincipal();
-        result = finderRepository.getFinderByWorkerId(logged.getId());
+        result = finderRepository.getFinderByLoggedWorker(logged.getId());
         Assert.notNull(result);
         return result;
     }
     public void setCache(int cache){
+
         SystemData s;
         s = this.systemDataService.getSystemData();
         s.setCache(cache);
+        Assert.isTrue(s.getCache() == cache);
 
+    }
+
+    public Collection<Task> getTasksByFinderFilter(String category, String warranty, Double maxPrice, Double minPrice, Date startDate, Date endDate, String keyWord){
+    	Collection<Task> result;
+
+    	if( !(category == null || category.isEmpty())) {
+    		result = finderRepository.filterTasksByCategory(category);
+    	} else {
+    		result = finderRepository.getAllTasks();
+    	}
+
+    	if(!(warranty == null || warranty.isEmpty())) {
+    		Collection<Task> tasksFilteredByWar = finderRepository.filterTasksByWarranty(warranty);
+    		result.retainAll(tasksFilteredByWar);
+    	}
+    	if(maxPrice != null){
+    		Collection<Task> tasksFilteredByMaxPrice = finderRepository.filterTasksByMaxPrice(maxPrice);
+    		result.retainAll(tasksFilteredByMaxPrice);
+    	}
+
+      if(minPrice != null){
+    		Collection<Task> tasksFilteredByMinPrice = finderRepository.filterTasksByMinPrice(minPrice);
+    		result.retainAll(tasksFilteredByMinPrice);
+    	}
+      if(startDate != null){
+    		Collection<Task> tasksFilteredByStartDate = finderRepository.filterTasksByStartDate(startDate);
+    		result.retainAll(tasksFilteredByStartDate);
+    	}
+      if(endDate != null){
+    		Collection<Task> tasksFilteredByEndDate = finderRepository.filterTasksByEndDate(endDate);
+    		result.retainAll(tasksFilteredByEndDate);
+    	}
+
+    	if(!(keyWord == null || keyWord.isEmpty())){
+        Collection<Task> taskFilteredByKeyWordInDescription = finderRepository.filterTasksByKeyWordInDescription(keyWord);
+        Collection<Task> taskFilteredByKeyWordInTicker = finderRepository.filterTasksByKeyWordInTicker(keyWord);
+        Collection<Task> taskFilteredByKeyWordInAddress = finderRepository.filterTasksByKeyWordInAddress(keyWord);
+
+        taskFilteredByKeyWordInTicker.removeAll(taskFilteredByKeyWordInDescription);
+        taskFilteredByKeyWordInDescription.addAll(taskFilteredByKeyWordInTicker);
+        taskFilteredByKeyWordInAddress.removeAll(taskFilteredByKeyWordInDescription);
+        taskFilteredByKeyWordInDescription.addAll(taskFilteredByKeyWordInAddress);
+
+        result.retainAll(taskFilteredByKeyWordInDescription);
+
+    	}
+
+    	return result;
     }
 }

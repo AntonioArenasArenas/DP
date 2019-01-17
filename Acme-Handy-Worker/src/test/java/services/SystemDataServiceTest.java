@@ -37,13 +37,13 @@ public class SystemDataServiceTest extends AbstractTest {
 
     }
 
-    @Test
-    public void testDeleteSystemData(){
-        super.authenticate("admin");
-        SystemData systemData = systemDataService.create();
-        systemDataService.delete(systemData);
-        super.unauthenticate();
-    }
+//    @Test
+//    public void testDeleteSystemData(){
+//        super.authenticate("admin");
+//        SystemData systemData = systemDataService.create();
+//        systemDataService.delete(systemData);
+//        super.unauthenticate();
+//    }
 
     @Test
     public void testGetSystemData(){

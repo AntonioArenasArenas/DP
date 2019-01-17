@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!-- * converters.xml * * Copyright (C) 2018 Universidad de Sevilla * * The
-	use of this project is hereby constrained to the conditions of the * TDG
+<!-- * converters.xml * * Copyright (C) 2018 Universidad de Sevilla * * The 
+	use of this project is hereby constrained to the conditions of the * TDG 
 	Licence, a copy of which you may download from * http://www.tdg-seville.info/License.html -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
@@ -11,7 +11,7 @@
 		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
 	">
 
-	<!-- Add your own converters using entries of the following form: <bean
+	<!-- Add your own converters using entries of the following form: <bean 
 		class="converters.Class1ToClass2" /> -->
 
 	<util:list id="converters">
@@ -32,7 +32,7 @@
 
 		<bean class="converters.StringToActorConverter" />
 		<bean class="converters.ActorToStringConverter" />
-		
+
 		<bean class="converters.StringToAdminConverter" />
 		<bean class="converters.AdminToStringConverter" />
 
@@ -53,16 +53,22 @@
 
 		<bean class="converters.StringToWarrantyConverter" />
 		<bean class="converters.WarrantyToStringConverter" />
+
 		<bean class="converters.StringToCategoryConverter" />
 		<bean class="converters.CategoryToStringConverter" />
+
 		<bean class="converters.StringToApplicationConverter" />
 		<bean class="converters.ApplicationToStringConverter" />
+
 		<bean class="converters.StringToComplaintConverter" />
 		<bean class="converters.ComplaintToStringConverter" />
+
 		<bean class="converters.StringToPhaseConverter" />
 		<bean class="converters.PhaseToStringConverter" />
+
 		<bean class="converters.CreditCardToStringConverter" />
 		<bean class="converters.StringToCreditCardConverter" />
+
 		<bean class="converters.TaskToStringConverter" />
 		<bean class="converters.StringToTaskConverter" />
 		

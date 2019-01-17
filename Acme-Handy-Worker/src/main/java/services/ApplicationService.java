@@ -168,10 +168,10 @@ public class ApplicationService {
 
 	}
 
-	public Double[] getAdminStatisticsMaximumPrice() {
+	public Collection<Worker> getWorkersAcceptedMAvgApplications() {
 
-		Double[] result = applicationRepository
-				.getApplicationMaximumPriceStatistics();
+		Collection<Worker> result = applicationRepository
+				.getWorkersAcceptedMAvg();
 		return result;
 	}
 

@@ -1,5 +1,7 @@
 package controllers.administrator;
 
+import java.util.Collection;
+
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,9 +17,11 @@ import security.UserAccount;
 import security.UserAccountService;
 import services.AdminService;
 import services.ApplicationService;
+import services.CategoryService;
 import services.TaskService;
 import controllers.AbstractController;
 import domain.Admin;
+import domain.Worker;
 
 @Controller
 @RequestMapping("/admin")
@@ -31,6 +35,8 @@ public class AdminController extends AbstractController {
 	private TaskService taskService;
 	@Autowired
 	private ApplicationService applicationService;
+	@Autowired
+	private CategoryService categoryService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -61,6 +67,15 @@ public class AdminController extends AbstractController {
 
 		Double cantChange = applicationService.getAppliCantChange();
 
+		Double pending = applicationService.getPendApplications();
+
+		Double accepted = applicationService.getAcepApplications();
+
+		Double rejected = applicationService.getRejecApplications();
+
+		Collection<Worker> workersAVG = applicationService
+				.getWorkersAcceptedMAvgApplications();
+
 		result = new ModelAndView("admin/statistics");
 
 		 result.addObject("maximumpu", spuser[2]);
@@ -79,6 +94,11 @@ public class AdminController extends AbstractController {
 		result.addObject("stdevpo", spoffered[3]);
 
 		result.addObject("ratio", cantChange);
+		result.addObject("pending", pending);
+		result.addObject("accepted", accepted);
+		result.addObject("rejected", rejected);
+
+		result.addObject("workers", workersAVG);
 
 		return result;
 	}
