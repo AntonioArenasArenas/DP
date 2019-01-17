@@ -17,10 +17,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.MessageService;
+import services.SystemDataService;
 
 import controllers.AbstractController;
 import domain.Actor;
 import domain.Box;
+import domain.SystemData;
 
 import domain.Message;
 
@@ -35,6 +37,8 @@ public class MessageController extends AbstractController {
 	private MessageService messageService;
 	@Autowired
 	private ActorService actorService;
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -50,6 +54,9 @@ public class MessageController extends AbstractController {
 		Collection<Message> messages = this.messageService.findMessagesByBoxId(boxId) ;
 
 		result = new ModelAndView("message/list");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 		result.addObject("requestURI", "message/list.do");
 		result.addObject("messages", messages);
 
@@ -132,12 +139,13 @@ public class MessageController extends AbstractController {
 			protected ModelAndView createEditModelAndView(final Message message, final String messageError) {
 				ModelAndView result;
 				Collection<Actor> recipients = actorService.findAll();
-
+				SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 
 				result = new ModelAndView("message/edit");
 				result.addObject("messaged", message);
 				result.addObject("recipients", recipients);
 				result.addObject("message", messageError);
+				result.addObject("data", data);
 
 				return result;
 			}

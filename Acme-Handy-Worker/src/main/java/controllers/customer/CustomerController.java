@@ -24,8 +24,10 @@ import org.springframework.web.servlet.ModelAndView;
 import security.UserAccount;
 import security.UserAccountService;
 import services.CustomerService;
+import services.SystemDataService;
 import controllers.AbstractController;
 import domain.Customer;
+import domain.SystemData;
 
 @Controller
 @RequestMapping("/customer")
@@ -36,6 +38,8 @@ public class CustomerController extends AbstractController {
 	private CustomerService customerService;
 	@Autowired
 	private UserAccountService userAccountService;
+	@Autowired
+	private SystemDataService systemDataService;
 
 	
 	// Constructors -----------------------------------------------------------
@@ -114,11 +118,13 @@ public class CustomerController extends AbstractController {
 
 				protected ModelAndView createEditModelAndView(final Customer customer, final String messageError) {
 					ModelAndView result;
-
+					SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 					result = new ModelAndView("customer/edit");
 					result = new ModelAndView("customer/create");
 					result.addObject("customer", customer);
 					result.addObject("message", messageError);
+					result.addObject("data", data);
+
 
 					return result;
 				}

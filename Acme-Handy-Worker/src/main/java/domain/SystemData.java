@@ -7,24 +7,47 @@ import javax.persistence.AccessType;
 import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.validation.constraints.Digits;
+import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 
 import org.hibernate.validator.constraints.NotBlank;
+import org.hibernate.validator.constraints.URL;
 
 @Entity
 @Access(AccessType.PROPERTY)
 public class SystemData extends DomainEntity {
 
 	private String name;
-	private String banner;
 	private String bannerHeader;
 	private String welcomePageMsg;
-	private List<String> phoneCode;
+	private String welcomePageMsgESP;
+	private String phoneCode;
 	private List<String> spamWords;
 	private double vatPercentage;
-	private int cache;
 	private int maxPrice;
 	private List<String> makeCreditCards;
+	private Integer cache;
+	
+	
+	@Min(value = 1)
+	@Max(value = 2048)
+	public Integer getCache() {
+		return cache;
+	}
+
+	public void setCache(Integer cache) {
+		this.cache = cache;
+	}
+
+	@NotBlank
+	public String getWelcomePageMsgESP() {
+		return welcomePageMsgESP;
+	}
+
+	public void setWelcomePageMsgESP(String welcomePageMsgESP) {
+		this.welcomePageMsgESP = welcomePageMsgESP;
+	}
 
 	@ElementCollection
 	public List<String> getMakeCreditCards() {
@@ -34,7 +57,8 @@ public class SystemData extends DomainEntity {
 	public void setMakeCreditCards(List<String> makeCreditCards) {
 		this.makeCreditCards = makeCreditCards;
 	}
-
+	
+	
 	public int getMaxPrice() {
 		return maxPrice;
 	}
@@ -43,13 +67,6 @@ public class SystemData extends DomainEntity {
 		this.maxPrice = maxPrice;
 	}
 
-	public int getCache() {
-		return this.cache;
-	}
-
-	public void setCache(final int cache) {
-		this.cache = cache;
-	}
 
 	@NotBlank
 	public String getName() {
@@ -60,16 +77,7 @@ public class SystemData extends DomainEntity {
 		this.name = name;
 	}
 
-	@NotBlank
-	public String getBanner() {
-		return this.banner;
-	}
-
-	public void setBanner(final String banner) {
-		this.banner = banner;
-	}
-
-	@NotBlank
+	@URL
 	public String getBannerHeader() {
 		return this.bannerHeader;
 	}
@@ -87,12 +95,13 @@ public class SystemData extends DomainEntity {
 		this.welcomePageMsg = welcomePageMsg;
 	}
 
-	@ElementCollection
-	public List<String> getPhoneCode() {
+	@NotBlank
+	@Pattern(regexp = "^\\+[0-9]{1,3}$" )
+	public String getPhoneCode() {
 		return this.phoneCode;
 	}
 
-	public void setPhoneCode(final List<String> phoneCode) {
+	public void setPhoneCode(final String phoneCode) {
 		this.phoneCode = phoneCode;
 	}
 

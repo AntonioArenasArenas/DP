@@ -15,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import services.CategoryService;
+import services.SystemDataService;
 import controllers.AbstractController;
 import domain.Category;
+import domain.SystemData;
 
 @Controller
 @RequestMapping("/category/administrator")
@@ -26,6 +28,8 @@ public class CategoryAdministratorController extends AbstractController {
 
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -53,6 +57,8 @@ public class CategoryAdministratorController extends AbstractController {
 		}
 		categories = parent.getChildrenCategories();
 		result = new ModelAndView("category/list");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
 		result.addObject("categories", categories);
 		result.addObject("parentCategory", parent);
 		result.addObject("language", lang);
@@ -211,6 +217,7 @@ public class CategoryAdministratorController extends AbstractController {
 	protected ModelAndView createEditModelAndView(Category category,
 			String messageCode) {
 		ModelAndView result;
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 		Collection<Category> categories = this.categoryService.findAll();
 		if (category.getId() == 0) {
 			result = new ModelAndView("category/create");
@@ -221,6 +228,7 @@ public class CategoryAdministratorController extends AbstractController {
 		}
 		result.addObject("category", category);
 		result.addObject("categories", categories);
+		result.addObject("data", data);
 		return result;
 	}
 

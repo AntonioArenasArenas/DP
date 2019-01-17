@@ -16,9 +16,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import services.ActorService;
 import services.BoxService;
+import services.SystemDataService;
 
 import domain.Actor;
 import domain.Box;
+import domain.SystemData;
 
 
 @Controller
@@ -32,6 +34,9 @@ public class BoxController extends AbstractController {
 	
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -47,6 +52,9 @@ public class BoxController extends AbstractController {
 		Collection<Box> boxes = this.boxService.findBoxesByPrincipal() ;
 
 		result = new ModelAndView("box/list");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 		result.addObject("requestURI", "box/list.do");
 		result.addObject("boxes", boxes);
 
@@ -125,12 +133,13 @@ public class BoxController extends AbstractController {
 
 				protected ModelAndView createEditModelAndView(final Box box, final String messageError) {
 					ModelAndView result;
-
+					SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 
 					result = new ModelAndView("box/edit");
 					result = new ModelAndView("box/create");
 					result.addObject("box", box);
 					result.addObject("message", messageError);
+					result.addObject("data", data);
 
 					return result;
 				}

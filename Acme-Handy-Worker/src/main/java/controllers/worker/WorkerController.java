@@ -28,11 +28,13 @@ import org.springframework.web.servlet.ModelAndView;
 import controllers.AbstractController;
 
 import domain.Actor;
+import domain.SystemData;
 import domain.Worker;
 
 import security.UserAccount;
 import security.UserAccountService;
 import services.ActorService;
+import services.SystemDataService;
 import services.WorkerService;
 
 @Controller
@@ -46,6 +48,9 @@ public class WorkerController extends AbstractController {
 	private UserAccountService userAccountService;
 	@Autowired
 	private ActorService actorService;
+	
+	@Autowired
+	private SystemDataService systemDataService;
 
 	
 	// Constructors -----------------------------------------------------------
@@ -122,11 +127,13 @@ public class WorkerController extends AbstractController {
 
 				protected ModelAndView createEditModelAndView(final Worker worker, final String messageError) {
 					ModelAndView result;
+					SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
 
 					result = new ModelAndView("worker/edit");
 					result = new ModelAndView("worker/create");
 					result.addObject("worker", worker);
 					result.addObject("message", messageError);
+					result.addObject("data", data);
 
 					return result;
 				}

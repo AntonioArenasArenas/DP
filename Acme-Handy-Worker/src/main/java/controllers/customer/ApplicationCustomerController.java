@@ -55,6 +55,9 @@ public class ApplicationCustomerController extends AbstractController {
 		applications = applicationService.findCustomerApplications();
 
 		result = new ModelAndView("application/list");
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 		result.addObject("applications", applications);
 		result.addObject("requestURI", "application/customer/list.do");
 
@@ -229,6 +232,8 @@ public class ApplicationCustomerController extends AbstractController {
 		result.addObject("comentarios", comentarios);
 		result.addObject("brandnames", brandnames);
 		result.addObject("requestURI", "application/customer/edit.do");
+		result.addObject("data", sistema);
+
 
 		result.addObject("VAT", sistema.getVatPercentage() / 100);
 

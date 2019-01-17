@@ -18,9 +18,11 @@ import security.UserAccountService;
 import services.AdminService;
 import services.ApplicationService;
 import services.CategoryService;
+import services.SystemDataService;
 import services.TaskService;
 import controllers.AbstractController;
 import domain.Admin;
+import domain.SystemData;
 import domain.Worker;
 
 @Controller
@@ -37,6 +39,8 @@ public class AdminController extends AbstractController {
 	private ApplicationService applicationService;
 	@Autowired
 	private CategoryService categoryService;
+	@Autowired
+	private SystemDataService systemDataService;
 
 	// Constructors -----------------------------------------------------------
 
@@ -77,6 +81,10 @@ public class AdminController extends AbstractController {
 				.getWorkersAcceptedMAvgApplications();
 
 		result = new ModelAndView("admin/statistics");
+		
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		result.addObject("data", data);
+
 
 		 result.addObject("maximumpu", spuser[2]);
 		 result.addObject("minimumpu", spuser[1]);
@@ -172,11 +180,14 @@ public class AdminController extends AbstractController {
 	protected ModelAndView createEditModelAndView(final Admin admin,
 			final String messageError) {
 		ModelAndView result;
-
+		SystemData data = (SystemData) systemDataService.findAll().toArray()[0];
+		
 		result = new ModelAndView("admin/edit");
 		result = new ModelAndView("admin/create");
 		result.addObject("admin", admin);
 		result.addObject("message", messageError);
+		result.addObject("data", data);
+		
 
 		return result;
 	}
